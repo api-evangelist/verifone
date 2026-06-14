@@ -1,0 +1,54 @@
+name: Verifone API Rate Limits
+description: >-
+  Verifone does not publish specific rate limit thresholds in public
+  documentation for its payment APIs. Rate limits are enforced at the
+  environment level (sandbox vs production) and may differ by API type and
+  merchant plan. Sandbox environments are intended for integration testing and
+  carry lower effective throughput than production. Contact Verifone support
+  for production rate limit specifics applicable to your integration.
+provider: verifone
+url: https://docs.verifone.com
+rate-limits:
+  - name: Sandbox Environment
+    description: >-
+      Sandbox API environments at cst.test-gsc.vfims.com (global) and
+      uscst-gb.gsc.vficloud.net (US) are throttled for testing purposes.
+      Specific thresholds are not published but are lower than production.
+      Use separate sandbox API keys from production keys.
+    environment: sandbox
+    scope: all APIs
+    limit: Not publicly specified
+    window: N/A
+    notes: >-
+      Use distinct sandbox API keys. Do not use production credentials in
+      sandbox. Sandbox is for integration testing only.
+
+  - name: Production Environment
+    description: >-
+      Production API environments across EMEA (emea.gsc.verifone.cloud),
+      US (us.gsc.verifone.cloud), and NZ (nz.gsc.verifone.cloud) support
+      live payment processing. Specific rate limits are not published and
+      are set based on merchant agreement and plan tier.
+    environment: production
+    scope: all APIs
+    limit: Not publicly specified
+    window: N/A
+    notes: >-
+      Rate limits are governed by merchant agreement. High-volume merchants
+      should negotiate throughput requirements with Verifone sales before
+      going live. Server-to-server API processing requires SAQ D PCI
+      accreditation.
+
+  - name: VHQ Device Management API
+    description: >-
+      The VHQ REST API for device management has version-specific endpoints
+      (v1.6+) and supports geo-location features as of February 2026.
+      Rate limits are not publicly documented and are governed by the
+      enterprise agreement.
+    environment: production
+    scope: VHQ API
+    limit: Not publicly specified
+    window: N/A
+    notes: >-
+      VHQ API access requires enterprise agreement. Contact Verifone for
+      throughput specifications applicable to your terminal estate size.

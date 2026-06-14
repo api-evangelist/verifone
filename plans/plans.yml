@@ -1,0 +1,82 @@
+name: Verifone API Plans
+description: >-
+  Verifone offers transaction-based pricing through its 2Checkout platform
+  with no monthly fees — merchants pay a percentage of each successful sale.
+  Plans are tiered by business type from small retailers to enterprise-level
+  operations. Custom enterprise pricing is available for high-volume merchants.
+  In-person and device management APIs are available through enterprise
+  agreements with Verifone sales.
+provider: verifone
+url: https://www.verifone.com/en/us/verifone-api
+plans:
+  - name: 2Sell
+    description: >-
+      Entry-level plan for small to mid-sized online retailers. Includes global
+      payments across 100+ currencies, hosted checkout, and basic fraud
+      protection. No monthly fee — pay per transaction only.
+    url: https://www.verifone.com/en-us/verifone-api
+    pricing:
+      model: per-transaction
+      fee: '3.5% + $0.35 per sale'
+      monthly: 0
+    features:
+      - Global payments in 100+ currencies
+      - Hosted checkout page
+      - Basic fraud protection
+      - API access
+      - Sandbox environment
+
+  - name: 2Subscribe
+    description: >-
+      Plan for SaaS and subscription-based businesses. Adds recurring billing,
+      dunning management, subscription analytics, and a customer self-service
+      portal on top of 2Sell features.
+    url: https://www.verifone.com/en-us/verifone-api
+    pricing:
+      model: per-transaction
+      fee: '4.5% + $0.45 per sale'
+      monthly: 0
+    features:
+      - Everything in 2Sell
+      - Recurring billing
+      - Dunning management
+      - Subscription analytics
+      - Customer self-service portal
+
+  - name: 2Monetize
+    description: >-
+      Enterprise-level plan for complex global operations. Adds global tax
+      compliance, advanced reporting, and partner management tools on top of
+      2Subscribe features.
+    url: https://www.verifone.com/en-us/verifone-api
+    pricing:
+      model: per-transaction
+      fee: '6.0% + $0.60 per sale'
+      monthly: 0
+    features:
+      - Everything in 2Subscribe
+      - Global tax compliance
+      - Advanced reporting
+      - Partner management tools
+      - 2Partner affiliate distribution
+
+  - name: Enterprise
+    description: >-
+      Custom pricing negotiated based on sales volume and specific business
+      requirements. Includes dedicated support, professional services, and
+      access to in-person payment APIs, VHQ device management, and Order
+      Service API for hardware provisioning.
+    url: https://www.verifone.com/en-us/verifone-api
+    pricing:
+      model: custom
+      fee: Contact sales
+      monthly: 0
+    features:
+      - Custom transaction rates
+      - Dedicated account management
+      - Professional services
+      - VHQ Device Management API access
+      - Order Service API (hardware provisioning)
+      - In-person payment terminal integration
+      - SLA guarantees
+      - Priority support

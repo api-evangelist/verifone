@@ -1,0 +1,75 @@
+name: Verifone API FinOps
+description: >-
+  Verifone uses a transaction-based pricing model for its online payment APIs
+  with no monthly subscription fees. Costs are incurred per successful
+  transaction processed through the platform. In-person payment terminal
+  solutions and device management APIs are priced through enterprise agreements.
+  There are no published API call volume charges separate from transaction fees.
+provider: verifone
+url: https://www.verifone.com/en-us/verifone-api
+finops:
+  - name: Transaction Fee Model
+    description: >-
+      Verifone's primary cost model is a per-transaction percentage fee plus
+      a fixed per-sale amount. No monthly or annual subscription fees apply
+      to the online payment API tiers. Merchants only pay when transactions
+      succeed, making cost directly proportional to revenue processed.
+    type: per-transaction
+    details:
+      - plan: 2Sell
+        fee: '3.5% + $0.35 per successful sale'
+        monthly_minimum: none
+      - plan: 2Subscribe
+        fee: '4.5% + $0.45 per successful sale'
+        monthly_minimum: none
+      - plan: 2Monetize
+        fee: '6.0% + $0.60 per successful sale'
+        monthly_minimum: none
+      - plan: Enterprise
+        fee: Custom (negotiated)
+        monthly_minimum: varies by contract
+
+  - name: Sandbox Usage
+    description: >-
+      Sandbox environments (cst.test-gsc.vfims.com for global,
+      uscst-gb.gsc.vficloud.net for US) are available for integration
+      testing. Sandbox usage does not incur transaction fees. Separate
+      sandbox API keys are required and must not be used in production.
+    type: free
+    cost: $0
+    notes: >-
+      No charges apply for sandbox testing. Sandbox keys are provisioned
+      separately from production keys through the Verifone dashboard.
+
+  - name: Add-On Modules
+    description: >-
+      Verifone offers optional enhancement modules with separate pricing.
+      These extend the core platform with subscription management, payment
+      recovery, affiliate distribution, and premium support capabilities.
+    type: add-on
+    modules:
+      - name: 2Bill
+        description: Enhanced subscription management
+        pricing: Contact sales
+      - name: 2Recover
+        description: Payment recovery / dunning automation
+        pricing: Contact sales
+      - name: 2Partner
+        description: Affiliate and partner distribution management
+        pricing: Contact sales
+      - name: 2Service
+        description: Premium technical support tier
+        pricing: Contact sales
+
+  - name: In-Person and Device Management
+    description: >-
+      VHQ device management API, in-person payment terminal integrations,
+      PSDK, XPI, and Order Service API for hardware provisioning are priced
+      through enterprise agreements. Contact Verifone sales for hardware
+      and device management pricing.
+    type: enterprise
+    cost: Contact sales
+    notes: >-
+      Enterprise agreements cover terminal hardware, software licensing,
+      device management subscriptions, and support SLAs for in-person
+      payment deployments.
