@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-shipping.json",
+  "title": "shipping",
+  "description": "Shipping details",
+  "type": "object",
+  "properties": {
+    "address": {
+      "$ref": "#/components/schemas/billingAddress"
+    },
+    "fullName": {
+      "type": "string",
+      "description": "Full Name"
+    }
+  }
+}

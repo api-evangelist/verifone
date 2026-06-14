@@ -1,0 +1,12 @@
+{
+  "operationId": "get_the_list_of_all_reports_get",
+  "summary": "Get the list of all reports",
+  "method": "GET",
+  "path": "/reports",
+  "responseExample": {
+    "totals": 0,
+    "reports": [
+      {}
+    ]
+  }
+}

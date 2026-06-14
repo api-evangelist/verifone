@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-threedsecure.json",
+  "title": "ThreeDSecure",
+  "description": "ThreeDSecure from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "eci_flag": {
+      "type": "string",
+      "title": "Electronic Commerce Indicator.",
+      "enum": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07"
+      ]
+    },
+    "enrolled": {
+      "type": "string",
+      "title": "The enrolment response status of Authentication eligibility from the Directory Server.",
+      "description": "Possible Values:\n    Y - Yes, Bank is participating in 3-D Secure protocol and will return the ACSUrl.\n    N - No, Bank is not participating in 3-D Secure protocol.\n    U - Unavailable, the DS or ACS is not available for authentication at the time of the request.\n    B - Bypass, merchant authentication rule is triggered to bypass authentication in this use case.\n    NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+    },
+    "cavv": {
+      "type": "string",
+      "maxLength": 48,
+      "title": "Cardholder Authentication Verification Value (CAVV)",
+      "description": "Base64-encoded values of 28 or 32 characters. Hex-encoded values of 40 or 48 characters."
+    },
+    "cavv_algorithm": {
+      "type": "string",
+      "description": "Indicates the algorithm used to generate the CAVV value.Please refer to the integration guide for information on its usage."
+    },
+    "pares_status": {
+      "type": "string",
+      "title": "Authentication response code.",
+      "description": "Possible Values:\n      Y - Successful Authentication.\n      U - Unable to Complete Authentication\n      A - Successful Attempts Transaction."
+    },
+    "xid": {
+      "type": "string",
+      "description": "Transaction identifier resulting from authentication processing.Please refer to the integration guide for information on its usage."
+    },
+    "ds_transaction_id": {
+      "type": "string",
+      "title": "The unique transaction identifier",
+      "description": "The unique transaction identifier assigned by the Directory Server. Supported for 3D Secure v2 only."
+    },
+    "threeds_version": {
+      "type": "string",
+      "title": "The 3DS version used to process the transaction.",
+      "enum": [
+        "1.0.2",
+        "2.1.0",
+        "2.2.0"
+      ]
+    }
+  }
+}

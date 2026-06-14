@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-billinginfooutstandingbalance.json",
+  "title": "billingInfoOutstandingBalance",
+  "description": "billingInfoOutstandingBalance from PayPal eComm API",
+  "required": [
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "replace"
+      ]
+    },
+    "value": {
+      "$ref": "#/components/schemas/outstandingBalance"
+    }
+  }
+}

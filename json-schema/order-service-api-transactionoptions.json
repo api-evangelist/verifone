@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-transactionoptions.json",
+  "title": "TransactionOptions",
+  "description": "TransactionOptions from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "purchaseEnabled": {
+      "description": "Enable Purchase for this merchant.",
+      "type": "boolean"
+    },
+    "purchaseWithCashoutEnabled": {
+      "description": "Enable Purchase with Cashout for this merchant.",
+      "type": "boolean"
+    },
+    "cashoutEnabled": {
+      "description": "Enable standalone Cashout for this merchant.",
+      "type": "boolean"
+    },
+    "refundEnabled": {
+      "description": "Enable Refund for this merchant.",
+      "type": "boolean"
+    },
+    "preauthEnabled": {
+      "description": "Enable PreAuth for this merchant.",
+      "type": "boolean"
+    },
+    "balanceEnquiryEnabled": {
+      "description": "Enable Balance Enquiry for this merchant.",
+      "type": "boolean"
+    },
+    "motoPaymentEnabled": {
+      "description": "Enable mail and telephone order (MOTO) payments.",
+      "type": "boolean"
+    },
+    "motoTipEnabled": {
+      "description": "Enable tip for moto payments for this merchant.",
+      "type": "boolean"
+    },
+    "motoRefundEnabled": {
+      "description": "Enable mail and telephone order (MOTO) payments.",
+      "type": "boolean"
+    },
+    "motoPreauthEnabled": {
+      "description": "Enable mail and telephone order (MOTO) payments.",
+      "type": "boolean"
+    },
+    "motoSeparationEnabled": {
+      "description": "If enabled, separate options for telephone and mail order will be presented to the user.",
+      "type": "boolean"
+    },
+    "cashoutAmounts": {
+      "description": "Predefined Cashout amounts that user can select from. Comma separated amount e.g. 10.00,20.00,40.00. This is in the currency supported by the terminal. All currency format represents a decimal number. Maximum 3 values will be allowed.",
+      "type": "string",
+      "pattern": "[0-9]+(,[0-9]+)+",
+      "maxLength": 150
+    }
+  }
+}

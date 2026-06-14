@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-lastfailedpayment.json",
+  "title": "lastFailedPayment",
+  "description": "The details for the last failed payment of the subscription",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "$ref": "#/components/schemas/Model15"
+    },
+    "time": {
+      "type": "string",
+      "description": "The date and time when the failed payment was made",
+      "format": "date"
+    },
+    "reasonCode": {
+      "type": "string",
+      "description": "The reason code for the payment failure",
+      "enum": [
+        "CURRENCY_MISMATCH",
+        "INTERNAL_SERVER_ERROR",
+        "PAYEE_ACCOUNT_RESTRICTED",
+        "PAYER_ACCOUNT_RESTRICTED",
+        "PAYER_CANNOT_PAY",
+        "PAYMENT_DENIED",
+        "TRANSACTION_RECEIVING_LIMIT_EXCEEDED",
+        "SENDING_LIMIT_EXCEEDED"
+      ]
+    },
+    "nextPaymentRetryTime": {
+      "type": "string",
+      "description": "The time when the retry attempt for the failed payment occurs",
+      "format": "date"
+    }
+  }
+}

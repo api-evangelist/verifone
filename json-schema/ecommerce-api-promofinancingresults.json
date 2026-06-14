@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-promofinancingresults.json",
+  "title": "Promo Financing Results",
+  "description": "Details of the special financing offer returned from the issuer.",
+  "type": "object",
+  "properties": {
+    "promoFinancingType": {
+      "description": "Type of special financing information provided. * `PROMO_APR\u00a0` - APR information provided only for the duration of the promo period; * `PROMO_AND_AFTER_APR\u00a0` - APR information provided for the duration of and after the promo period; * `PROMO_AND_AFTER_APR\u00a0` - No promotional financing available; * `ERROR\u00a0` - error.",
+      "type": "string",
+      "enum": [
+        "PROMO_APR",
+        "PROMO_AND_AFTER_APR",
+        "NO_PROMO",
+        "ERROR"
+      ]
+    },
+    "promoAnnualPercentageRateType": {
+      "description": "The type of APR applicable during promo period.",
+      "type": "string",
+      "enum": [
+        "FIXED",
+        "VARIABLE"
+      ]
+    },
+    "promoAnnualPercentageRate": {
+      "description": "The interest rate expressed in Annual Percentage Rate (APR), applicable during the promo period.",
+      "type": "number",
+      "format": "float"
+    },
+    "annualPercentageRateType": {
+      "description": "The type of APR applicable after promo period.",
+      "type": "string",
+      "enum": [
+        "FIXED",
+        "VARIABLE"
+      ]
+    },
+    "annualPercentageRate": {
+      "description": "The interest rate expressed in Annual Percentage Rate (APR).",
+      "type": "number",
+      "format": "float"
+    },
+    "promoDurationDescription": {
+      "description": "Information or description of the promo period duration, e.g.\u00a06 months",
+      "type": "string"
+    },
+    "promoDescription": {
+      "description": "Description of the promotional financing plan.",
+      "type": "string"
+    }
+  }
+}

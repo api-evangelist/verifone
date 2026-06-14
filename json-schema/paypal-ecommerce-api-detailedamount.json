@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-detailedamount.json",
+  "title": "detailedAmount",
+  "description": "Detailed amount",
+  "type": "object",
+  "properties": {
+    "discount": {
+      "$ref": "#/components/schemas/discount"
+    },
+    "shippingDiscount": {
+      "$ref": "#/components/schemas/shippingDiscount"
+    },
+    "insurance": {
+      "$ref": "#/components/schemas/insurance"
+    },
+    "handling": {
+      "$ref": "#/components/schemas/handling"
+    },
+    "shipping": {
+      "$ref": "#/components/schemas/Model25"
+    }
+  }
+}

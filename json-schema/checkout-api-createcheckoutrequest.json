@@ -1,0 +1,355 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-createcheckoutrequest.json",
+  "title": "StandardRequest",
+  "description": "CreateCheckoutRequest from Checkout API",
+  "required": [
+    "amount",
+    "configurations",
+    "currency_code",
+    "entity_id"
+  ],
+  "type": "object",
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "description": "Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)"
+    },
+    "currency_code": {
+      "type": "string",
+      "description": "Currency code",
+      "enum": [
+        "AED",
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LVL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XTS",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMK",
+        "ZMW",
+        "BTC"
+      ]
+    },
+    "amount": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Transaction amount - Transaction with zero amount value will be considered as account verification  and by default implicitly capture will be set to false for AV transaction"
+    },
+    "customer": {
+      "type": "string",
+      "description": "<p>ID of a Customer created via the <a target='_blank' href=\"https://docs.verifone.com/api-reference/open-api-references/customer\">Customer API</a>. A customer object can be created and attached to a Checkout. The customer object can store relevant customer details. Some of these details might be required, depending on the payment method and/or authentication mechanisms (e.g., 3DS) used in the Checkout</p>"
+    },
+    "configurations": {
+      "$ref": "#/components/schemas/PaymentConfigurations"
+    },
+    "expiry_time": {
+      "type": "string",
+      "description": "Expiry time of the Checkout page. Defaults to 15 min from creation time. If a user tries to visit or use an expired Checkout, an error will be shown. Maximum value is 30 days.",
+      "format": "date"
+    },
+    "merchant_reference": {
+      "maxLength": 50,
+      "pattern": "^[^=+\\-@].*",
+      "type": "string",
+      "description": "Reference provided by Merchant to identify the Checkout and the transaction initiated from it"
+    },
+    "return_url": {
+      "type": "string",
+      "description": "URL belonging to the Merchant website, where the Customer would be redirected after the Checkout has been completed. If this parameter is used, the customer will be redirected after spending 10 seconds on the payment confirmation page provided by Verifone in case of HPP and PAYMENT LINK transactions. For IFRAME transaction the redirect is performed right after the checkout page without passing through the payment confirmation page.   <br /> <b>Note 1:</b> The return_url accepts only securely connected URLs i.e., via https protocol. <br /> <b>Note 2:</b> The time after which redirection happens can be customized using redirect_method."
+    },
+    "shop_url": {
+      "type": "string",
+      "description": "URL belonging to the Merchant website, where the Customer would be redirected in case of cancelled Checkout. <br /> <b>Note:</b> Only applicable to HPP or PAYMENT_LINK interaction type."
+    },
+    "i18n": {
+      "$ref": "#/components/schemas/I18nConfiguration"
+    },
+    "interaction_type": {
+      "type": "string",
+      "description": "Type of checkout. Allows for distinguishing payments accepted via different channels. <br /> Possible Values: <br />  * HPP - For payments done as Hosted Payments Page integration.<br />  * IFRAME - For payments done as an Iframe integration.<br /> * PAYMENT_LINK - For payments done through the Payment link feature in the merchant portal.",
+      "default": "HPP",
+      "enum": [
+        "HPP",
+        "IFRAME",
+        "PAYMENT_LINK"
+      ]
+    },
+    "notification_methods": {
+      "$ref": "#/components/schemas/notification_methods"
+    },
+    "display_line_items": {
+      "type": "boolean",
+      "description": "Indicates whether line items should be displayed on the page. Defaults to true",
+      "default": true
+    },
+    "line_items": {
+      "description": "List of shopping cart items to be displayed on the page.\n \nIMPORTANT: Please read the <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/line-items\">Line items</a> documentation for required parameters depending on your payment methods.",
+      "title": "Ecommerce basket line items",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LineItem"
+      }
+    },
+    "theme_id": {
+      "type": "string",
+      "description": "Parameter that was created within the create theme API call that applies the customizations upon the checkout interface. Read <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/theming\">Theming</a> for details."
+    },
+    "receipt_type": {
+      "type": "string",
+      "description": "Can be used to send different invoices to the customer. <br /> Possible Values: <br />  * INVOICE <br />  * FULL_RECEIPT <br />  * SIMPLE_RECEIPT <br />  * INVOICE_RECEIPT <br />",
+      "enum": [
+        "INVOICE",
+        "FULL_RECEIPT",
+        "SIMPLE_RECEIPT",
+        "INVOICE_RECEIPT"
+      ]
+    },
+    "sales_description": {
+      "maxLength": 200,
+      "type": "string",
+      "description": "General description of the document"
+    },
+    "sales_channel": {
+      "type": "string",
+      "description": "Channel used to process transactions. <br /> Possible Values: <br />  * ECOMMERCE <br/>  * MOTO <br /> For sales_channel MOTO, no card.shopper_interaction is needed to be sent for this option.",
+      "enum": [
+        "ECOMMERCE",
+        "MOTO"
+      ]
+    },
+    "customer_details": {
+      "$ref": "#/components/schemas/customer_details"
+    },
+    "purchase_order_number": {
+      "type": "string",
+      "description": "Reference number that facilitates card acceptor/corporation communication and record keeping."
+    },
+    "tax_indicator": {
+      "type": "string",
+      "description": "Flag that indicates whether an order is taxable.",
+      "enum": [
+        "TAX_NOT_PROVIDED",
+        "TAX_PROVIDED",
+        "NON_TAXABLE"
+      ]
+    },
+    "tax_amount": {
+      "type": "number",
+      "description": "Total tax amount for all the items offers."
+    },
+    "promo_code": {
+      "type": "string",
+      "description": "A code defined by the merchant that affects the calculation of the total amount."
+    },
+    "invoice_number": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The invoice number to track this payment. <br /> <b>Note:</b> Valid for card payments only."
+    },
+    "transaction_type": {
+      "type": "string",
+      "description": "this field is only applicable for virtual terminal. Supported value for this field is UNMATCHED_REFUND."
+    },
+    "allow_customer_inputs": {
+      "type": "boolean",
+      "default": false,
+      "description": "Allows customer to enter or update their billing/shipping information on the hosted payments page.Only applicable for HPP and PAYMENT_LINK interaction types."
+    },
+    "checkout_template_id": {
+      "type": "string",
+      "description": "Checkout template UUID  \n**WARNING**: Only active template allowed.\n"
+    },
+    "redirect_method": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "HEADER_REDIRECT"
+      ],
+      "description": "Configures the redirect behaviour for return_url on successful payment when interaction type is either HPP or PAYMENT_LINK </br>\n     * DEFAULT: The customer will be redirected after spending 10 seconds on the payment confirmation page provided by Verifone. </br>\n     * HEADER_REDIRECT: The payment confirmation page is skipped and the customer is redirected immediately. <br /> \n    <b>Note:</b> This parameter does not have any effect when interaction type is IFRAME. "
+    },
+    "handle_order_confirmation": {
+      "type": "boolean",
+      "description": "This change will remove the payment confirmation page from the user interface. Payment actions will now be managed through postMessage events.<br /> Checkout Events: <br /> * CHECKOUT_RENDERED: Indicates successful iFrame loading. <br /> * CHECKOUT_RENDERED_FAILED: Signals iFrame loading failure. <br /> * CARD_DETAILS_ENTERED: Triggered after the cardholder inputs card details. <br /> * CHECKOUT_FAILED: Occurs when the checkout process encounters an error. <br /> Payment Action listerer events: <br /> * CONTINUE: Initiates the payment process. <br /> **Note:** This parameter has no effect when the interaction type is HPP or PAYMENT_LINK.",
+      "default": false
+    },
+    "show_confirmation_page": {
+      "type": "boolean",
+      "description": "This change will remove the payment confirmation page from the user interface. Payment actions will now be managed through postMessage events.<br /> Checkout Events: <br /> * CARD_CAPTURE_SUCCESS: Indicates successful card capture. <br /> * CHECKOUT_COMPLETED: Signals successful completion of the checkout process. <br /> * CHECKOUT_FAILED: Occurs when the checkout process encounters an error. <br /> **Note:** This parameter has no effect when the interaction type is HPP or PAYMENT_LINK.",
+      "default": true
+    },
+    "promo_financing_details": {
+      "$ref": "#/components/schemas/promo_financing_details"
+    }
+  }
+}

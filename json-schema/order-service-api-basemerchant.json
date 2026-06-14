@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-basemerchant.json",
+  "title": "BaseMerchant",
+  "description": "details of the merchant",
+  "type": "object",
+  "properties": {
+    "merchantType": {
+      "type": "string"
+    },
+    "merchantName": {
+      "$ref": "#/components/schemas/MerchantName"
+    },
+    "merchantId": {
+      "maxLength": 75,
+      "pattern": "^[a-zA-Z0-9]+$",
+      "type": "string",
+      "description": "The identifier assigned to this Merchant Entity."
+    },
+    "merchantLogoUrl": {
+      "pattern": "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]",
+      "type": "string",
+      "description": "Valid merchant logo url"
+    },
+    "altVfiEntityId": {
+      "$ref": "#/components/schemas/AltVfiEntityId"
+    },
+    "parentEntityUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "If specified this will add the merchant company or site under a specific entity within Verifone systems."
+    },
+    "industry": {
+      "$ref": "#/components/schemas/Industry"
+    },
+    "primaryContact": {
+      "$ref": "#/components/schemas/ContactType"
+    },
+    "requestedDateOfShipment": {
+      "$ref": "#/components/schemas/RequestedDateOfShipment"
+    },
+    "mcc": {
+      "$ref": "#/components/schemas/MCC"
+    },
+    "parameters": {
+      "$ref": "#/components/schemas/TerminalParameters"
+    },
+    "paymentAppParameters": {
+      "$ref": "#/components/schemas/PaymentAppParameters"
+    },
+    "settlement": {
+      "$ref": "#/components/schemas/SettlementDetails"
+    },
+    "entityUid": {
+      "$ref": "#/components/schemas/EntityUidDeprecated"
+    },
+    "tradingAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "billingAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "companyLabels": {
+      "type": "array",
+      "description": "Free form labels/tags that can be attached to an entity to enable grouping and searching",
+      "maxLength": 10,
+      "items": {
+        "type": "string",
+        "description": "Logical grouping of companies. A tag or label which is meaningful to the customer which groups merchant company legal entities, e.g Restaurants, Retail, Timezone etc.",
+        "maxLength": 30
+      }
+    },
+    "siteLabels": {
+      "type": "array",
+      "description": "Free form labels/tags that can be attached to an entity to enable grouping and searching",
+      "maxLength": 10,
+      "items": {
+        "type": "string",
+        "description": "Logical grouping of sites. A tag or label which is meaningful to the customer which groups merchant sites, e.g Area, Timezone etc.",
+        "maxLength": 30
+      }
+    }
+  },
+  "discriminator": {
+    "propertyName": "merchantType",
+    "mapping": {
+      "NewCompanyAndSite": "#/components/schemas/SmallMerchant",
+      "ExistingCompanyNewSite": "#/components/schemas/ExistingCompanyNewSite",
+      "SmallMerchant": "#/components/schemas/SmallMerchant"
+    }
+  },
+  "required": [
+    "contacts",
+    "mcc",
+    "merchantType",
+    "tradingAddress",
+    "primaryContact"
+  ]
+}

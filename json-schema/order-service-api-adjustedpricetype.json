@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-adjustedpricetype.json",
+  "title": "AdjustedPriceType",
+  "description": "AdjustedPriceType from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "priceModel": {
+      "type": "string",
+      "description": "Pricing Model",
+      "enum": [
+        "MONTHLY_FEE",
+        "MONTHLY_FEE_PER_DEVICE",
+        "MINIMUM_AMT_PER_TRX",
+        "AMT_PER_TRX",
+        "PERC_PER_TRX",
+        "ONE_TIME",
+        "YEARLY_FEE",
+        "QUARTERLY_FEE"
+      ]
+    },
+    "price": {
+      "$ref": "#/components/schemas/AmountSimple"
+    }
+  }
+}

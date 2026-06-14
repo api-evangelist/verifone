@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-klarnapaymentcompletionresponse_authorized_payment_method.json",
+  "title": "klarnaPaymentCompletionResponse_authorized_payment_method",
+  "description": "klarnaPaymentCompletionResponse_authorized_payment_method from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "days": {
+      "type": "integer",
+      "description": "Indicates whether the transaction would be automatically captured upon authorisation."
+    },
+    "no_of_installments": {
+      "type": "integer",
+      "description": "No of instalments"
+    },
+    "payment_type": {
+      "type": "string",
+      "description": "Define the type of payment",
+      "enum": [
+        "INVOICE",
+        "FIXED_AMOUNT",
+        "PIX",
+        "BASE_ACCOUNT",
+        "DEFERRED_INTEREST",
+        "DIRECT_DEBIT",
+        "DIRECT_BANK_TRANSFER",
+        "B2B_INVOICE",
+        "CARD",
+        "SLICE_IT_BY_CARD",
+        "PAY_LATER_BY_CARD"
+      ]
+    }
+  }
+}

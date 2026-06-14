@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-patchdto.json",
+  "title": "PatchDto",
+  "description": "PatchDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "encrypted_card": {
+      "type": "string",
+      "title": "Client encrypted cardholder data",
+      "description": "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+    },
+    "cvv": {
+      "type": "string",
+      "description": "The CVV (Card Verification Value) as it appears on the card.",
+      "maxLength": 30
+    },
+    "card_holder_name": {
+      "type": "string",
+      "description": "The Card holder name as it appears on the card.",
+      "maxLength": 30
+    },
+    "card_holder_email": {
+      "type": "string",
+      "title": "Email Address",
+      "minLength": 3,
+      "maxLength": 254,
+      "format": "email",
+      "description": "A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1."
+    },
+    "expiry_month": {
+      "type": "integer",
+      "description": "Card expiry month. A 2 digit value as shown on card. ISO8583 - DE 14.",
+      "maximum": 12,
+      "minimum": 1
+    },
+    "expiry_year": {
+      "type": "integer",
+      "description": "Card expiry year. A 4 digit value as shown on the card.",
+      "maximum": 9999
+    },
+    "token_expiry_date": {
+      "type": "string",
+      "description": "When this Token will expire.",
+      "format": "date"
+    },
+    "public_key_alias": {
+      "type": "string"
+    },
+    "scheme_token_action": {
+      "description": "Indicates if the scheme tokens should be created / deleted / suspended. Scheme tokens will be created only if token scope has PAR and/or network token support configured.",
+      "type": "string",
+      "enum": [
+        "ACTIVATE",
+        "SUSPEND",
+        "DELETE"
+      ]
+    }
+  }
+}

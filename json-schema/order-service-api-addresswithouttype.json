@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-addresswithouttype.json",
+  "title": "AddressWithoutType",
+  "description": "An Address following the convention of http://microformats.org/wiki/hcard",
+  "type": "object",
+  "required": [
+    "addressLine1",
+    "city",
+    "postCode",
+    "country"
+  ],
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/BaseAddressWithoutType"
+    }
+  ]
+}

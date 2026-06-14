@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-paymentpreferences.json",
+  "title": "paymentPreferences",
+  "description": "The payment preferences for a subscription.",
+  "type": "object",
+  "properties": {
+    "autoBillOutstanding": {
+      "type": "boolean",
+      "description": "Indicates whether to automatically bill the outstanding amount in the next billing cycle."
+    },
+    "setupFee": {
+      "$ref": "#/components/schemas/setupFee"
+    },
+    "setupFeeFailureAction": {
+      "type": "string",
+      "description": "The action to take on the subscription if the initial payment for the setup fails.",
+      "enum": [
+        "CONTINUE",
+        "CANCEL"
+      ]
+    },
+    "paymentFailureThreshold": {
+      "type": "number",
+      "description": "The maximum number of payment failures before a subscription is suspended."
+    }
+  }
+}

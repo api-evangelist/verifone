@@ -1,0 +1,11 @@
+{
+  "operationId": "Adjust Payment",
+  "summary": "Adjust the preauth transaction amount",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/adjust",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

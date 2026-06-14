@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model47.json",
+  "title": "Model47",
+  "description": "Model47 from PayPal eComm API",
+  "required": [
+    "authorizationId",
+    "createdAt",
+    "id",
+    "instoreReference"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Transaction UUID from create transaction API"
+    },
+    "authorizationId": {
+      "type": "string",
+      "description": "PayPal authorization identifier"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Authorization creation date (ISO-8601)",
+      "format": "date"
+    },
+    "expiresAt": {
+      "type": "string",
+      "description": "Authorization expiration date (ISO-8601)",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "description": "Transaction status",
+      "enum": [
+        "AUTHORISED"
+      ]
+    },
+    "payer": {
+      "$ref": "#/components/schemas/Auth_Payer_Info"
+    },
+    "instoreReference": {
+      "type": "string",
+      "description": "Reference to the transaction for internal usage for instore"
+    }
+  }
+}

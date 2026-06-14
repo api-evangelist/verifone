@@ -1,0 +1,12 @@
+{
+  "operationId": "postTransactionsIdAuthorize",
+  "summary": "Authorize transaction",
+  "method": "POST",
+  "path": "/transactions/{id}/authorize",
+  "responseExample": {
+    "authorizationId": "string",
+    "createdAt": "2025-01-01",
+    "id": "string",
+    "instoreReference": "string"
+  }
+}

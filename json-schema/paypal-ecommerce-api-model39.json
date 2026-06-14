@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model39.json",
+  "title": "Model39",
+  "description": "Model39 from PayPal eComm API",
+  "required": [
+    "paymentProviderContract"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    },
+    "planId": {
+      "maxLength": 50,
+      "minLength": 3,
+      "type": "string",
+      "description": "The ID of the plan"
+    },
+    "effectiveTime": {
+      "type": "string",
+      "description": "The date and time when this change is effective",
+      "format": "date"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "The quantity of the product or service in the subscription"
+    },
+    "shippingAmount": {
+      "$ref": "#/components/schemas/Model19"
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/Model12"
+    },
+    "applicationContext": {
+      "$ref": "#/components/schemas/applicationContext"
+    }
+  }
+}

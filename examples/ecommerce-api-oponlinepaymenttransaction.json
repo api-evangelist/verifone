@@ -1,0 +1,11 @@
+{
+  "operationId": "opOnlinePaymentTransaction",
+  "summary": "Initiate a OP Online payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/op-online-payment",
+  "responseExample": {
+    "id": "string",
+    "payment_url": "string",
+    "amount": 0
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-adjustdto.json",
+  "title": "AdjustDto",
+  "description": "AdjustDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, refer to the Currencies documentation for more details. The amount provided determines the type of adjustment. If it is greater than the original pre-authorization amount, it is treated as an increment. If it is less than the original pre-authorization amount, it is treated as a decrement. To fully void a transaction after an increment, set the amount to 0."
+    },
+    "reason": {
+      "type": "string",
+      "title": "Reason",
+      "description": "The reason of the adjust."
+    }
+  },
+  "required": [
+    "amount"
+  ]
+}

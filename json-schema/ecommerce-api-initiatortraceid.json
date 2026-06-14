@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-initiatortraceid.json",
+  "title": "initiatorTraceId",
+  "description": "A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI.\n This value will correspond to **ISO8583 DE11.**\n `Note: Use response.stan value for initiator_trace_id`",
+  "type": "string",
+  "maxLength": 40,
+  "deprecated": true
+}

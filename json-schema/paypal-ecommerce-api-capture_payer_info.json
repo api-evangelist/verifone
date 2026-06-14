@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-capture_payer_info.json",
+  "title": "Capture_Payer_Info",
+  "description": "Capture_Payer_Info from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "payerId": {
+      "type": "string",
+      "description": "The PayPal-assigned ID for the payer",
+      "pattern": "^[2-9A-HJ-NP-Z]{13}$"
+    },
+    "name": {
+      "$ref": "#/components/schemas/Payer_Name"
+    },
+    "phoneNumber": {
+      "$ref": "#/components/schemas/Phone_number"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address of the payer.",
+      "maxLength": 255
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/Shipping-Address"
+    },
+    "paymentStatus": {
+      "type": "string",
+      "description": "The status of the captured payment.\n\nThe possible values are:\n\n* COMPLETED. The funds for this captured payment were credited to the payee's PayPal account.\n* DECLINED. The funds could not be captured.\n* PENDING. The funds for this captured payment was not yet credited to the payee's PayPal account. A manual review might be pending.\n* FAILED. There was an error while capturing payment."
+    }
+  }
+}

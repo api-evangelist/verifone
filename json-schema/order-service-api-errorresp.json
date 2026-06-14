@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-errorresp.json",
+  "title": "Error",
+  "description": "A common Error object returned as part of the API layer.\n\n. This is modified to become the base class for all of the derived HTTP Error Responses.",
+  "type": "object",
+  "properties": {
+    "reversalStatus": {
+      "description": "Indicates to the API client if a technical reversal is required or has been completed by Verifone.\n\n|Value|Description|\n|-|-|\n|NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|\n|REQUIRED|A reversal is required by the client.|\n|COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "REQUIRED",
+        "COMPLETED"
+      ],
+      "default": "NONE"
+    }
+  },
+  "required": [
+    "code"
+  ]
+}

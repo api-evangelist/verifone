@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-packagedetails.json",
+  "title": "PackageDetails",
+  "description": "Select the base package, hardware and additional services for this order.",
+  "type": "object",
+  "properties": {
+    "portfolioUid": {
+      "description": "Verifone ID for the Portfolio Selected. If this is not provided then a default portfolio will be used.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "basePackageBundle": {
+      "$ref": "#/components/schemas/BundleAndPrice"
+    },
+    "servicePackages": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/components/schemas/ServicePackages"
+      }
+    },
+    "deliveryPackage": {
+      "$ref": "#/components/schemas/BundleAndPriceAndData"
+    }
+  },
+  "required": [
+    "basePackageBundle"
+  ]
+}

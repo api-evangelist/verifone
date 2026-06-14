@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model56.json",
+  "title": "Model56",
+  "description": "Model56 from PayPal eComm API",
+  "required": [
+    "amount",
+    "startingQuantity"
+  ],
+  "type": "object",
+  "properties": {
+    "startingQuantity": {
+      "type": "integer",
+      "description": "The starting quantity for the tier"
+    },
+    "endingQuantity": {
+      "type": "integer",
+      "description": "The ending quantity for the tier. Optional for the last tier"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/Model55"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-lastpayment.json",
+  "title": "lastPayment",
+  "description": "The details for the last payment of the subscription",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The status of the captured payment"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/Model14"
+    },
+    "time": {
+      "type": "string",
+      "description": "The date and time when the last payment was made",
+      "format": "date"
+    }
+  }
+}

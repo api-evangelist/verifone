@@ -1,0 +1,11 @@
+{
+  "operationId": "listV2Template",
+  "summary": "List Templates",
+  "method": "GET",
+  "path": "/v2/template/checkoutDetails/",
+  "responseExample": [
+    {
+      "name": "string"
+    }
+  ]
+}

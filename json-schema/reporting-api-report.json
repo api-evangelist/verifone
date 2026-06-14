@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-report.json",
+  "title": "Base report details",
+  "description": "Report from Reporting API",
+  "required": [
+    "fileName",
+    "mimeType",
+    "reportEntityUid",
+    "reportType"
+  ],
+  "type": "object",
+  "properties": {
+    "reportType": {
+      "$ref": "#/components/schemas/ReportTypeEnum"
+    },
+    "reportParameter": {
+      "$ref": "#/components/schemas/ReportParameters"
+    },
+    "mimeType": {
+      "$ref": "#/components/schemas/MimeType"
+    },
+    "reportEntityUid": {
+      "type": "string",
+      "description": "The internally assigned identifier for the entity for which the report was generated.",
+      "format": "uuid"
+    },
+    "fileName": {
+      "type": "string",
+      "description": "The filename of the report including extenstion (e.g. myfile.txt).\nPlease note that the file extenstion is validated based on the mimeType indicated in the request and\nthat the reportUid is concatenated to the filename (format: filename_reportUid.ext, e.g. myfile_cb941e2d-f446-413a-8c2b-28e26eb048fc.txt)"
+    }
+  }
+}

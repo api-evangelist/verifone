@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-batchsearchresponse.json",
+  "title": "BatchSearchResponse",
+  "description": "BatchSearchResponse from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "batches": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/components/schemas/BatchDetails"
+      }
+    },
+    "metadata": {
+      "$ref": "#/components/schemas/PagingMetadata"
+    }
+  },
+  "required": [
+    "batches",
+    "metadata"
+  ]
+}

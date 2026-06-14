@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/customer-api-tax.json",
+  "title": "Tax",
+  "description": "Tax from Customer API",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "pattern": "^[0-9]+$",
+      "type": "string",
+      "maxLength": 9,
+      "description": "An optional identifier of the document recipient:\n\n- Personal ID (for individuals)\n- Tax identification number (for businesses)"
+    }
+  }
+}

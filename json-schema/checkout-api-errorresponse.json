@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-errorresponse.json",
+  "title": "ErrorResponse",
+  "description": "ErrorResponse from Checkout API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "number",
+      "description": "A 3-digit code which uniquely identify an error."
+    },
+    "details": {
+      "$ref": "#/components/schemas/details"
+    },
+    "message": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "A description of the error."
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "Error timestamp",
+      "format": "date-time"
+    }
+  }
+}

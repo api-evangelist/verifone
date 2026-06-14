@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model32.json",
+  "title": "Model32",
+  "description": "Model32 from PayPal eComm API",
+  "required": [
+    "paymentProviderContract"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    },
+    "description": {
+      "type": "string",
+      "description": "Agreement description"
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/Model31"
+    },
+    "enableAddressChange": {
+      "type": "boolean",
+      "description": "Indicates whether to show the shipping address but prevent the customer from editing it."
+    },
+    "collectShippingAddress": {
+      "type": "boolean",
+      "description": "Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase."
+    },
+    "allowedCountries": {
+      "$ref": "#/components/schemas/allowedCountries"
+    },
+    "experienceId": {
+      "type": "string",
+      "description": "The ID of the experience profile to apply during the agreement approval UI flow."
+    },
+    "externalSelectedFundingInstrumentType": {
+      "type": "string",
+      "description": "The type of financial instrument (FI) that the merchant wants to promote.",
+      "enum": [
+        "CREDIT",
+        "PAY_UPON_INVOICE"
+      ]
+    },
+    "returnUrl": {
+      "type": "string",
+      "description": "The URL where the customer is redirected after the customer approves the payment"
+    },
+    "cancelUrl": {
+      "type": "string",
+      "description": "The URL where the customer is redirected after the customer cancels the payment"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-payerinfo.json",
+  "title": "payerInfo",
+  "description": "payerInfo from PayPal eComm API",
+  "required": [
+    "email",
+    "payerId"
+  ],
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "The payer's email address."
+    },
+    "suffix": {
+      "type": "string",
+      "description": "The payer's name suffix."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "The payer's first name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "The payer's last name."
+    },
+    "payerId": {
+      "type": "string",
+      "description": "The PayPal-assigned payer ID."
+    },
+    "phone": {
+      "type": "string",
+      "description": "The payer's phone number."
+    },
+    "billingAddress": {
+      "$ref": "#/components/schemas/billingAddress"
+    }
+  }
+}

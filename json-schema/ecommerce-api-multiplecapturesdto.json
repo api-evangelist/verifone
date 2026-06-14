@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-multiplecapturesdto.json",
+  "title": "MultipleCapturesDto",
+  "description": "MultipleCapturesDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "final_capture": {
+      "type": "boolean",
+      "description": "This flag is used to indicate if this capture is the final capture or not. Must be set to false if there is a need to do addional partial captures in the future."
+    },
+    "capture_sequence_number": {
+      "type": "number",
+      "maximum": 99,
+      "minimum": 1,
+      "description": "This field is used in indicating the sequence number of one of many partial capture being done. Value can be between 1 & 99. \n\n **Required** If capture_sequence_count number is provided."
+    },
+    "capture_sequence_count": {
+      "type": "number",
+      "maximum": 99,
+      "minimum": 2,
+      "description": "This field represents the total number of partial captures that will done. Value can be between 2 & 99. \n\n **Required** If capture_sequence_number is provided."
+    }
+  },
+  "required": [
+    "final_capture"
+  ]
+}

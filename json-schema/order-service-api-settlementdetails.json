@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-settlementdetails.json",
+  "title": "SettlementDetails",
+  "description": "Settlement details needed for onboarding in certain situations e.g. for Payware solutions.",
+  "type": "object",
+  "properties": {
+    "settlementTime": {
+      "type": "string",
+      "pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+      "description": "Settlement time in HH:MM format"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-listdetailedamount.json",
+  "title": "Detailed Amount",
+  "description": "A structure that represents a breakdown all of the different amounts that may appear on a single transaction.",
+  "type": "object",
+  "properties": {
+    "gratuity_amount": {
+      "title": "Gratuity Amount",
+      "description": "An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total 'amount' of the transaction.",
+      "$ref": "#/components/schemas/amountString"
+    },
+    "cashback_amount": {
+      "title": "Cashback Amount",
+      "description": "An optional additional amount representing the cashback associated with a payment.",
+      "$ref": "#/components/schemas/amountString"
+    },
+    "donation_amount": {
+      "title": "Donation Amount",
+      "description": "An optional additional amount representing the donation associated with a payment. This should be included in the total 'amount' of the transaction.",
+      "$ref": "#/components/schemas/amountString"
+    },
+    "tax_amount": {
+      "title": "Tax Amount",
+      "description": "An optional additional amount representing the tax associated with a payment. This should be included in the total 'amount' of the transaction.",
+      "$ref": "#/components/schemas/amountString"
+    },
+    "surcharge_amount": {
+      "title": "Surcharge Amount",
+      "description": "An optional additional amount representing the surcharge associated with a payment. This should be included in the total 'amount' of the transaction.",
+      "$ref": "#/components/schemas/amountString"
+    }
+  }
+}

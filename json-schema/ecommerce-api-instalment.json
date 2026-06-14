@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-instalment.json",
+  "title": "instalment",
+  "description": "The details on the instalment-scheme that should be enacted by the issuer.",
+  "required": [
+    "number_of_instalments"
+  ],
+  "type": "object",
+  "properties": {
+    "instalment_program": {
+      "type": "string",
+      "description": "The name of special program designated by scheme or issuer.",
+      "enum": [
+        "MCINST"
+      ]
+    },
+    "number_of_instalments": {
+      "minimum": 0,
+      "type": "integer",
+      "description": "The number of individual parts that the total amount should be paid in."
+    },
+    "down_payment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "first_instalment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "instalment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "interest_rate": {
+      "type": "number",
+      "description": "The interest rate.",
+      "format": "float"
+    },
+    "annual_percentage_rate": {
+      "type": "number",
+      "description": "The interest rate expressed in Annual Percentage Rate.",
+      "format": "float"
+    },
+    "handling_fee": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "total_amount_with_cost": {
+      "$ref": "#/components/schemas/amountDecimal"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model36.json",
+  "title": "Model36",
+  "description": "Model36 from PayPal eComm API",
+  "required": [
+    "billingCycles",
+    "name",
+    "paymentProviderContract",
+    "productId"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    },
+    "productId": {
+      "type": "string",
+      "description": "PayPal catalog product id"
+    },
+    "name": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The plan name"
+    },
+    "status": {
+      "type": "string",
+      "description": "The initial state of the plan",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "CREATED"
+      ]
+    },
+    "description": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The detailed description of the plan."
+    },
+    "billingCycles": {
+      "$ref": "#/components/schemas/Model35"
+    },
+    "paymentPreferences": {
+      "$ref": "#/components/schemas/paymentPreferences"
+    },
+    "taxes": {
+      "$ref": "#/components/schemas/taxes"
+    },
+    "quantitySupported": {
+      "type": "boolean",
+      "description": "Indicates whether you can subscribe to this plan by providing a quantity for the goods or service."
+    }
+  }
+}

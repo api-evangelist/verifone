@@ -1,0 +1,11 @@
+{
+  "operationId": "captureAuthorization",
+  "summary": "Capture authorization",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/capture",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

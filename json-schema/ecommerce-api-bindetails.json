@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-bindetails.json",
+  "title": "BinDetails",
+  "description": "BinDetails from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "bin": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 11,
+      "description": "The Bank Identification Number (also called  IIN - Issuer Identification Number) of this card."
+    },
+    "brand": {
+      "type": "string",
+      "description": "The brand of this card. eg. VISA, MASTERCARD, AMEX."
+    },
+    "issuer_country": {
+      "$ref": "#/components/schemas/issuerCountryEnum"
+    },
+    "issuer_name": {
+      "type": "string",
+      "description": "The issuer of this card. eg. HSBC, BARCLAYS."
+    },
+    "last_four": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "The last 4 digits of the card number."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of card application or account selection.",
+      "enum": [
+        "DEBIT",
+        "CREDIT"
+      ]
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the card. eg. NEW_WORLD"
+    }
+  }
+}

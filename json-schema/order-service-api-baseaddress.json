@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-baseaddress.json",
+  "title": "BaseAddress",
+  "description": "An Address following the convention of http://microformats.org/wiki/hcard",
+  "type": "object",
+  "properties": {
+    "receiverName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The receiver name for the address if different to the company/site name."
+    },
+    "addressLine1": {
+      "minLength": 1,
+      "maxLength": 40,
+      "type": "string",
+      "description": "Address Line 1. Should include street and apartment number if required."
+    },
+    "addressLine2": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Address Line 2"
+    },
+    "addressLine3": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Address Line 3"
+    },
+    "poBox": {
+      "type": "string",
+      "description": "The PO BOX number."
+    },
+    "city": {
+      "minLength": 1,
+      "maxLength": 28,
+      "type": "string",
+      "description": "Name of a built-up area, with defined boundaries, and a local government. This could be city or town."
+    },
+    "countrySubdivision": {
+      "maxLength": 35,
+      "minLength": 1,
+      "type": "string",
+      "description": "Identifies a sub-division of a country which may be state, region or county. This follows a similar format to the openbank api."
+    },
+    "postCode": {
+      "$ref": "#/components/schemas/PostCode"
+    },
+    "country": {
+      "$ref": "#/components/schemas/CountryCode3Enum"
+    },
+    "timeZone": {
+      "$ref": "#/components/schemas/TimeZone"
+    }
+  }
+}

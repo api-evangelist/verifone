@@ -1,0 +1,9 @@
+{
+  "operationId": "postTransactionsRiskContext",
+  "summary": "Set transaction context",
+  "method": "POST",
+  "path": "/transactions/risk/context",
+  "responseExample": {
+    "trackingId": "string"
+  }
+}

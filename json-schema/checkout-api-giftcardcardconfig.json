@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-giftcardcardconfig.json",
+  "title": "GiftCardCardConfig",
+  "description": "Card object configuration",
+  "type": "object",
+  "required": [
+    "payment_contract_id"
+  ],
+  "properties": {
+    "payment_contract_id": {
+      "maxLength": 25,
+      "type": "string",
+      "description": "This parameter can be found in the portal on the Payment Provider Contract attached to your organization or given to you by a Verifone employee. It is used to retrieve MID and other merchant configurations necessary for a card payment."
+    },
+    "shopper_interaction": {
+      "$ref": "#/components/schemas/shopper_interaction"
+    },
+    "authorization_type": {
+      "type": "string",
+      "description": "Card Authorization Type.",
+      "default": "FINAL_AUTH"
+    },
+    "pin_required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indicates whether security code for gift card is required or no."
+    },
+    "token_preference": {
+      "description": "Read <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/tokenization\">Tokenization</a> for additional information",
+      "required": [
+        "token_scope"
+      ],
+      "type": "object",
+      "properties": {
+        "token_scope": {
+          "type": "string",
+          "description": "The token scope under which a token gets created"
+        },
+        "token_expiry_date": {
+          "type": "string",
+          "description": "Token expiry date",
+          "format": "date"
+        },
+        "token_type": {
+          "type": "string",
+          "description": "Token type",
+          "default": "REUSE"
+        }
+      }
+    }
+  }
+}

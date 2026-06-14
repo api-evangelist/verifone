@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-httperror403.json",
+  "title": "HTTP 403 Error",
+  "description": "The request must be authorised to access the resource.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/ErrorResp"
+    },
+    {
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "403"
+          ],
+          "default": "403"
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Forbidden"
+          ],
+          "default": "Forbidden"
+        },
+        "message": {
+          "type": "string",
+          "default": "The request requires client authorisation to access resource."
+        },
+        "timestamp": {
+          "description": "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "AUTHENTICATION_ERROR"
+          ],
+          "default": "AUTHENTICATION_ERROR"
+        },
+        "param": {
+          "description": "The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "required": [
+    "code",
+    "title",
+    "message",
+    "type"
+  ],
+  "additionalProperties": false
+}

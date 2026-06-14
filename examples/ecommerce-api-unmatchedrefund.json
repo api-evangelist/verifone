@@ -1,0 +1,11 @@
+{
+  "operationId": "unmatchedRefund",
+  "summary": "Unmatched refund",
+  "method": "POST",
+  "path": "/api/v2/transactions/refund",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

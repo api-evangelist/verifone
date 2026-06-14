@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-settlementdate.json",
+  "title": "settlementDate",
+  "description": "This will reflect either the desired Merchant settlement date or the actual settlement date depending where the transaction request is within the payment lifecycle. A transaction may be assigned an intended settlement date, but it is possible that this date will not occur for technical reasons hence there should be a subsequent event to indicate the actual date of settlement. Format is date only as per RFC 3339.",
+  "type": "string",
+  "format": "date"
+}

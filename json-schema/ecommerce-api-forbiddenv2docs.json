@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-forbiddenv2docs.json",
+  "title": "ForbiddenV2Docs",
+  "description": "ForbiddenV2Docs from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Error timestamp"
+    },
+    "reversal_status": {
+      "type": "string",
+      "description": "Indicates to the API client if a technical reversal has been completed by Verifone.",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REQUIRED",
+        "COMPLETED"
+      ]
+    },
+    "code": {
+      "type": "number",
+      "enum": [
+        403
+      ],
+      "default": 403
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator."
+      ],
+      "default": "Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator."
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

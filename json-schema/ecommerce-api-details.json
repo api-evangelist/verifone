@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-details.json",
+  "title": "Details",
+  "description": "Details from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "auto_capture": {
+      "type": "boolean"
+    },
+    "mid": {
+      "type": "string",
+      "format": "integer",
+      "description": "Merchant ID (MID)"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "operationId": "klarnaPaymentTransaction",
+  "summary": "Complete a Klarna payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/klarna_complete",
+  "responseExample": {
+    "id": "string",
+    "instore_reference": "string",
+    "authorized_payment_method": {
+      "days": 0,
+      "no_of_installments": 0,
+      "payment_type": "INVOICE"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "operationId": "getBillingplansPlanid",
+  "summary": "Get billing plan",
+  "method": "GET",
+  "path": "/billingPlans/{planId}",
+  "responseExample": {
+    "billingCycles": [
+      {}
+    ],
+    "createTime": "2025-01-01",
+    "name": "string",
+    "productId": "string"
+  }
+}

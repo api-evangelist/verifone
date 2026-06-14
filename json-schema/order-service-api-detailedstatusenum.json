@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-detailedstatusenum.json",
+  "title": "DetailedStatusEnum",
+  "description": "An order will be in one of the following states.",
+  "type": "string",
+  "enum": [
+    "DRAFT",
+    "SUBMITTED",
+    "INPROGRESS",
+    "PENDING_THIRD_PARTY",
+    "PENDING_SIGNATURE",
+    "UNDER_REVIEW",
+    "REQUIRES_ATTENTION",
+    "INTERNAL_BOARDING",
+    "FULFILMENT_BOOKED",
+    "FULFILMENT_PICKED",
+    "FULFILMENT_SHIPPED",
+    "CANCEL_REQUESTED",
+    "CANCEL_INPROGRESS",
+    "CANCEL_ERROR",
+    "CANCELED_BYUSER",
+    "COMPLETED",
+    "CANCELLED",
+    "DECLINED",
+    "ONHOLD",
+    "OFFER_SENT",
+    "OPENED_BY_CUSTOMER",
+    "INPROGRESS_BY_CUSTOMER",
+    "DOCS_REQUIRED",
+    "DOCS_REQUIRES_ATTENTION"
+  ]
+}

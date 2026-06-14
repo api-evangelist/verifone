@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-sitereferenceid.json",
+  "title": "SiteReferenceId",
+  "description": "An optional identifier for the Site which can be provided if different to the merchantId.",
+  "type": "string",
+  "maxLength": 100,
+  "minLength": 1
+}

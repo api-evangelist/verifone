@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-contacttypeenum.json",
+  "title": "Contact Type",
+  "description": "An indicator for the type of contact.\n\n|Value|Description|\n|----|-----------|\n|BUSINESS|Generic business contact information, e.g. info@example.com|\n|DISPUTE_HANDLING|Generic contact information specific to dispute handling, e.g. disputes@example.com|\n|OWNER|Individual contact information of the owner of the Entity, e.g. ben.jerry@example.com|\n|PERSONAL|Personal contact information of the person representing the Entity, e.g. bjerr83@example-personal-email-domain.com|",
+  "type": "string",
+  "enum": [
+    "BUSINESS",
+    "DISPUTE_HANDLING",
+    "OWNER",
+    "PERSONAL"
+  ],
+  "default": "BUSINESS"
+}

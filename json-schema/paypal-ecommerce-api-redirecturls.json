@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-redirecturls.json",
+  "title": "redirectUrls",
+  "description": "redirectUrls from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "returnUrl": {
+      "type": "string",
+      "description": "The URL where the customer is redirected after the customer approves the payment"
+    },
+    "cancelUrl": {
+      "type": "string",
+      "description": "The URL where the customer is redirected after the customer cancels the payment"
+    }
+  }
+}

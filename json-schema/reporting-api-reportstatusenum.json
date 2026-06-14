@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-reportstatusenum.json",
+  "title": "Report status enumeration",
+  "description": "The status of the report will be in one of the following states.",
+  "type": "string",
+  "enum": [
+    "INITIATED",
+    "INVALID_INPUT_PARAMETERS",
+    "PROCESSING_STARTED",
+    "FAILED",
+    "SUCCESSFUL"
+  ]
+}

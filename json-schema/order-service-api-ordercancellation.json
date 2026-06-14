@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-ordercancellation.json",
+  "title": "OrderCancellation",
+  "description": "OrderCancellation from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "cancelReasonEnum": {
+      "$ref": "#/components/schemas/CancelReasonEnum"
+    },
+    "cancelAdditionalReason": {
+      "$ref": "#/components/schemas/CancelAdditionalReason"
+    },
+    "cancelledUserUid": {
+      "description": "Unique identifier (UUID) of the user who performed the cancellation.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "cancelledBy": {
+      "$ref": "#/components/schemas/UserName"
+    },
+    "cancelledDate": {
+      "type": "string",
+      "description": "Date and time when the order was cancelled, in UTC.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "cancelReasonEnum"
+  ]
+}

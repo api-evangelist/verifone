@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-capturecardtransactiondto.json",
+  "title": "CaptureCardTransactionDto",
+  "description": "CaptureCardTransactionDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "purchase_order_number": {
+      "title": "Purchase Order Number",
+      "description": "The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.\n",
+      "type": "string",
+      "maxLength": 17
+    },
+    "tax_indicator": {
+      "title": "Tax Indicator",
+      "description": "This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided\n",
+      "type": "string",
+      "enum": [
+        "TAX_PROVIDED",
+        "TAX_NOT_PROVIDED",
+        "NON_TAXABLE"
+      ],
+      "default": "TAX_NOT_PROVIDED"
+    },
+    "multiple_captures": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MultipleCapturesDto",
+          "title": "captureAuthorizationRequest_multiple_captures",
+          "description": "This field is mandatory in order to do multiple captures"
+        }
+      ]
+    },
+    "issuer_instalment": {
+      "$ref": "#/components/schemas/instalment"
+    },
+    "line_items": {
+      "type": "array",
+      "description": "The array of items being refunded.",
+      "items": {
+        "$ref": "#/components/schemas/UnmatchedLineItem"
+      }
+    },
+    "detailed_amount": {
+      "$ref": "#/components/schemas/DetailedAmount"
+    },
+    "receipt_type": {
+      "type": "string",
+      "description": "Defines the type of receipt to be generated",
+      "enum": [
+        "FULL_RECEIPT",
+        "INVOICE",
+        "INVOICE_RECEIPT",
+        "SIMPLE_RECEIPT",
+        "NONE"
+      ]
+    }
+  },
+  "required": [
+    "amount"
+  ]
+}

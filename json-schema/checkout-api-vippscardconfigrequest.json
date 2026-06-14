@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-vippscardconfigrequest.json",
+  "title": "VippsCardConfigRequest",
+  "description": "VippsCardConfigRequest from Checkout API",
+  "required": [
+    "sca_compliance_level",
+    "threed_secure"
+  ],
+  "type": "object",
+  "properties": {
+    "sca_compliance_level": {
+      "type": "string",
+      "description": "Strong Customer Authentication (SCA) compliance level, possible values </br>\n     * NONE: No SCA required. </br>\n     * WALLET: Depend on the wallet SCA mechanism. For Google Pay this means that MasterCard will shift liability, Visa will not. </br>\n     * FORCE_3DS: Do an additional 3DS step regardless of whether the wallet indicates the token is SCA-compliant.",
+      "enum": [
+        "NONE",
+        "WALLET",
+        "FORCE_3DS"
+      ]
+    },
+    "threed_secure": {
+      "$ref": "#/components/schemas/ThreeDSData"
+    },
+    "authorization_type": {
+      "type": "string",
+      "description": "Card Authorization Type (PRE_AUTH, FINAL_AUTH).  When capture now is set to true pre-authorization transactions cannot be done.",
+      "default": "FINAL_AUTH"
+    }
+  }
+}

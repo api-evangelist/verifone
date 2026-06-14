@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-hardwaremerchant.json",
+  "title": "HardwareMerchant",
+  "description": "details of the merchant",
+  "type": "object",
+  "properties": {
+    "merchantName": {
+      "$ref": "#/components/schemas/MerchantName"
+    },
+    "primaryContact": {
+      "$ref": "#/components/schemas/ContactType"
+    },
+    "requestedDateOfShipment": {
+      "$ref": "#/components/schemas/RequestedDateOfShipment"
+    },
+    "mcc": {
+      "$ref": "#/components/schemas/MCC"
+    },
+    "tradingAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "billingAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "companyAddress": {
+      "$ref": "#/components/schemas/AddressWithoutType"
+    },
+    "siteReferenceId": {
+      "$ref": "#/components/schemas/SiteReferenceId"
+    },
+    "siteName": {
+      "$ref": "#/components/schemas/SiteName"
+    },
+    "openingHours": {
+      "type": "array",
+      "description": "The list of opening periods per week day.",
+      "items": {
+        "$ref": "#/components/schemas/EntityOpeningHours"
+      },
+      "minItems": 1
+    },
+    "pois": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/components/schemas/HardwarePoiType"
+      }
+    }
+  },
+  "required": [
+    "primaryContact"
+  ]
+}

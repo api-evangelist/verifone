@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-requireddocument.json",
+  "title": "RequiredDocument",
+  "description": "Merchant Required Document Details",
+  "type": "object",
+  "properties": {
+    "documentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the document."
+    },
+    "documentName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Name of the document."
+    },
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Display name of the document shown to end user."
+    },
+    "status": {
+      "$ref": "#/components/schemas/DocumentStatusEnum",
+      "description": "Current status of the document."
+    },
+    "allowedContentTypes": {
+      "type": "array",
+      "description": "List of supported content types.",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/components/schemas/ContentTypeEnum"
+      }
+    },
+    "allowedContentLength": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Size of the uploaded document in bytes.  Default is 2 MB (2097152 bytes), maximum allowed is 8 MB (8388608 bytes).\n",
+      "default": 2097152,
+      "maximum": 8388608
+    },
+    "contact": {
+      "$ref": "#/components/schemas/ContractContactType"
+    }
+  },
+  "required": [
+    "documentId",
+    "documentName",
+    "status",
+    "allowedContentTypes"
+  ]
+}

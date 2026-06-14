@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-notificationreminder.json",
+  "title": "NotificationReminder",
+  "description": "Notification Reminder Sent Details",
+  "type": "object",
+  "properties": {
+    "lastNotificationSentDateTime": {
+      "description": "Date and Time of the last notification sent. Defaulted to `createdDateTime` on first saved order.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "notificationCount": {
+      "description": "Number of notifications sent. -1 = Unsubscribed, or 1, 2, 3 as per the notification sent.",
+      "type": "integer"
+    },
+    "templateName": {
+      "description": "NotificationTemplate Name used, e.g. `T650P_WELCOME`",
+      "type": "string"
+    },
+    "notifications": {
+      "description": "List of notifications, each with the date-time sent and the template used.",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Notification"
+      }
+    }
+  }
+}

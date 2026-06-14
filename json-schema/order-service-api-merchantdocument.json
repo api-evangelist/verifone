@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-merchantdocument.json",
+  "title": "MerchantDocument",
+  "description": "Merchant Document Info.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/RequiredDocument"
+    },
+    {
+      "properties": {
+        "uploadedDate": {
+          "type": "string",
+          "description": "The uploaded date for this document.",
+          "format": "date-time"
+        },
+        "modifiedDate": {
+          "type": "string",
+          "description": "The modified date for this document on status change.",
+          "format": "date-time"
+        }
+      }
+    }
+  ]
+}

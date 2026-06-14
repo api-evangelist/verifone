@@ -1,0 +1,12 @@
+{
+  "operationId": "postV2Customer",
+  "summary": "Create Customer",
+  "method": "POST",
+  "path": "/v2/customer",
+  "responseExample": {
+    "created_at": "2025-01-01T00:00:00Z",
+    "entity_id": "string",
+    "id": "string",
+    "updated_at": "2025-01-01T00:00:00Z"
+  }
+}

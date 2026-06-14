@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-internalallocatedinformation.json",
+  "title": "InternalAllocatedInformation",
+  "description": "Internally allocated identifiers. This is for verifone use only and is subject to change.",
+  "type": "object",
+  "properties": {
+    "oracleOrderNumber": {
+      "description": "The order number which Oracle allocated as part of the order.",
+      "type": "number"
+    },
+    "oracleShippingTrackingReference": {
+      "description": "The order shipping reference which Oracle allocated as part of the order.",
+      "type": "string"
+    },
+    "kycReportUid": {
+      "description": "KYC report generated for this order.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "tokenScopeUid": {
+      "description": "Token scope generated for this order.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "extendedDetails": {
+      "$ref": "#/components/schemas/ExtendedDetails"
+    },
+    "orderStats": {
+      "$ref": "#/components/schemas/OrderStats"
+    },
+    "vmssApplication": {
+      "$ref": "#/components/schemas/VmssApplication"
+    },
+    "salesforceApplicationId": {
+      "description": "The Application ID allocated by Salesforce.",
+      "type": "string"
+    },
+    "signingInformation": {
+      "$ref": "#/components/schemas/SigningInformation"
+    },
+    "econtractNotificationReminder": {
+      "description": "E-Contract Notification Reminder Sent Details.",
+      "$ref": "#/components/schemas/NotificationReminder"
+    },
+    "draftNotificationReminder": {
+      "description": "Draft Notification Reminder Sent Details.",
+      "$ref": "#/components/schemas/NotificationReminder"
+    },
+    "notificationReminders": {
+      "description": "A container for all supported notification reminders.",
+      "$ref": "#/components/schemas/NotificationReminders"
+    },
+    "customerOrderLink": {
+      "description": "Details of Customer Order Link.",
+      "$ref": "#/components/schemas/CustomerOrderLink"
+    },
+    "cancellationHistory": {
+      "type": "array",
+      "description": "List of cancellation records for the customer order.",
+      "items": {
+        "$ref": "#/components/schemas/OrderCancellation"
+      }
+    },
+    "externalOnboarding": {
+      "type": "object",
+      "description": "External merchant onboarding details",
+      "$ref": "#/components/schemas/ExternalOnboarding"
+    }
+  }
+}

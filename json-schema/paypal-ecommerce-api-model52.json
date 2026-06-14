@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model52.json",
+  "title": "Model52",
+  "description": "Model52 from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "$ref": "#/components/schemas/Model51"
+    },
+    "reason": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The reason for the refund. Appears in both the payer's transaction history and the emails that the\n payer receives."
+    },
+    "merchantReference": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer."
+    }
+  }
+}

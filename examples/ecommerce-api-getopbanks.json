@@ -1,0 +1,12 @@
+{
+  "operationId": "getOpBanks",
+  "summary": "Get a list of Banks supported by OP Online Payment",
+  "method": "GET",
+  "path": "/api/v2/get-op-banks",
+  "responseExample": [
+    {
+      "bank_id": "string",
+      "bank_name": "string"
+    }
+  ]
+}

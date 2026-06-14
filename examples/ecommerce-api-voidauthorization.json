@@ -1,0 +1,11 @@
+{
+  "operationId": "voidAuthorization",
+  "summary": "Void authorization",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/void",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

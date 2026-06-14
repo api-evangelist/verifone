@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-consenttextdynamicvalues.json",
+  "title": "consentTextDynamicValues",
+  "description": "Optional merchant provided links to be inserted in consent text as a link for the text in brackets.",
+  "type": "array",
+  "items": {
+    "type": "string"
+  }
+}

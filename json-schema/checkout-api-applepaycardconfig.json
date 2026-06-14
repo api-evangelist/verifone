@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-applepaycardconfig.json",
+  "title": "ApplePayCardConfig",
+  "description": "ApplePayCardConfig from Checkout API",
+  "required": [
+    "payment_contract_id",
+    "sca_compliance_level",
+    "threed_secure"
+  ],
+  "type": "object",
+  "properties": {
+    "sca_compliance_level": {
+      "type": "string",
+      "default": "NONE",
+      "description": "Strong Customer Authentication (SCA) compliance level, possible values </br>\n     * NONE: No SCA required. </br>\n     *<b>Deprecated</b> WALLET: Apple Pay will indicate the PSP to trigger 3DS which in this case will be required.\n      Details [here](https://developers.google.com/pay/api/web/reference/response-objects#assurance-details-specifications)</br>\n     *<b>Deprecated</b> FORCE_3DS: SCA will be triggered. Regarding the liability shift, please check\n      [this page](https://developers.googleblog.com/en/google-pay-enabling-liability-shift-for-eligible-visa-device-token-transactions-globally/)</br></br>\n      *<b>Note: </b> Apple Pay is SCA compliant by design and 3DS check is not a mandatory function for processing transactions with this wallet. As a result, the previously supported WALLET and FORCE_3DS parameters are no longer relevant for Apple Pay transactions and have been deprecated.\n      Supports only NONE. Any other values (WALLET or FORCE_3DS) are sanitized and ignored.",
+      "enum": [
+        "NONE",
+        "WALLET",
+        "FORCE_3DS"
+      ]
+    },
+    "threed_secure": {
+      "deprecated": true,
+      "description": "Used for <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/accepting-payments/3d-secure-payments\">3D-Secure payments</a>",
+      "type": "object"
+    },
+    "authorization_type": {
+      "type": "string",
+      "description": "Default: \"FINAL_AUTH\" <br /> Other Possible Values: \"PRE_AUTH\" <br /> Text: PRE_AUTH is used when a merchant wants to ensure shopper's funds availability at a later time. <br /> Attention: If you are using PRE_AUTH function make sure capture_now is set as FALSE. Otherwise the PRE_AUTH will not work. <br />",
+      "default": "FINAL_AUTH"
+    },
+    "shopper_interaction": {
+      "$ref": "#/components/schemas/shopper_interaction"
+    },
+    "payment_contract_id": {
+      "type": "string",
+      "description": "This parameter can be found in the portal on the Payment Provider Contract attached to your organization or given to you by a Verifone employee. It is used to retrieve MID and other merchant configurations necessary for a card payment."
+    },
+    "token_preference": {
+      "$ref": "#/x-alt-definitions/token_preference"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "operationId": "listTransactions",
+  "summary": "List transactions",
+  "method": "GET",
+  "path": "/api/v2/transactions",
+  "responseExample": [
+    {
+      "id": "string",
+      "amount": 0,
+      "acquirer_authorizing_network_id": "string"
+    }
+  ]
+}

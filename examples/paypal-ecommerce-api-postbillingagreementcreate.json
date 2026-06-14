@@ -1,0 +1,11 @@
+{
+  "operationId": "postBillingagreementCreate",
+  "summary": "Create billing agreement using token",
+  "method": "POST",
+  "path": "/billingAgreement/create",
+  "responseExample": {
+    "createTime": "string",
+    "id": "string",
+    "state": "string"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-starttime.json",
+  "title": "startTime",
+  "description": "startTime from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "replace"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "description": "The date and time when the subscription started",
+      "format": "date"
+    }
+  }
+}

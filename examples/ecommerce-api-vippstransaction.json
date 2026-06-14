@@ -1,0 +1,11 @@
+{
+  "operationId": "vippsTransaction",
+  "summary": "Initiate a Vipps payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/vipps",
+  "responseExample": {
+    "id": "string",
+    "redirect_url": "string",
+    "amount": 0
+  }
+}

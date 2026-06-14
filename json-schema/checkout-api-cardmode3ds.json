@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-cardmode3ds.json",
+  "title": "CardMode3DS",
+  "description": "CardMode3DS from Checkout API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/basic_card"
+    },
+    {
+      "type": "object",
+      "required": [
+        "threed_secure"
+      ],
+      "properties": {
+        "threed_secure": {
+          "$ref": "#/components/schemas/threed_secure"
+        },
+        "shopper_interaction": {
+          "$ref": "#/components/schemas/shopper_interaction"
+        }
+      }
+    }
+  ]
+}

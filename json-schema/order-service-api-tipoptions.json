@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-tipoptions.json",
+  "title": "Tip Options",
+  "description": "Tip Options",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tipEnabled": {
+      "description": "Enable tipping. When enabled the device presents a tip selection screen during a transaction, showing pre-configured tip amounts and an option for a custom amount.",
+      "type": "boolean"
+    },
+    "tipLimit": {
+      "description": "Defines the maximum percentage of the transaction amount that can be added as a tip. If this is exceeded, a warning is prompted.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "tipPercentages": {
+      "description": "Pre-Defines up to 3 tip percentage options for customers to choose from, after entering the purchase amount for a transaction, e.g. 10, 15, 20 = 10%, 15%, 20%, respectively. Note that the TipEnabled parameter must be enabled, and that only whole numbers are accepted as percentage values, e.g. 10% (not 10.5%).",
+      "type": "string",
+      "pattern": "([0-9]+,){0,2}([0-9]+)",
+      "maxLength": 150
+    }
+  }
+}

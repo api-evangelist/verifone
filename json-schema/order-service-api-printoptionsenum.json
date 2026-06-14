@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-printoptionsenum.json",
+  "title": "Receipt Printing Option",
+  "description": "Defines the receipt print options. - Possible values are: <br />Never Print - NEVER<br />Prompt for print - PROMPT<br />Always Print - ALWAYS<br />Always Print when Signature is Captured - ALWAYS_WITH_SIGNATURE",
+  "type": "string",
+  "enum": [
+    "NEVER",
+    "PROMPT",
+    "ALWAYS",
+    "ALWAYS_WITH_SIGNATURE"
+  ]
+}

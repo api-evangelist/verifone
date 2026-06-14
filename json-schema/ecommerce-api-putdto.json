@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-putdto.json",
+  "title": "PutDto",
+  "description": "PutDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "token_scope": {
+      "type": "string",
+      "title": "Token Scope",
+      "description": "The token scope under which this token was created.",
+      "format": "uuid"
+    },
+    "encrypted_card": {
+      "type": "string",
+      "title": "Client encrypted cardholder data",
+      "description": "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+    },
+    "card_brand": {
+      "type": "string",
+      "title": "The Card Type",
+      "description": "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International \n\n **Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type."
+    },
+    "token_type": {
+      "type": "string",
+      "title": "Token Type",
+      "description": "Token type",
+      "enum": [
+        "REUSE",
+        "ANALYTICS",
+        "REUSE_AND_ANALYTICS"
+      ],
+      "default": "REUSE"
+    },
+    "reuse_token_type": {
+      "title": "Reuse Token Type",
+      "description": "The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.",
+      "type": "string",
+      "enum": [
+        "CHASE",
+        "INTERNAL",
+        "TAVE"
+      ],
+      "default": "INTERNAL"
+    },
+    "token_expiry_date": {
+      "type": "string",
+      "description": "When this Token will expire.",
+      "format": "date"
+    },
+    "public_key_alias": {
+      "type": "string"
+    },
+    "token_context": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TokenContextDto"
+        }
+      ]
+    }
+  },
+  "required": [
+    "token_scope",
+    "encrypted_card",
+    "public_key_alias"
+  ]
+}

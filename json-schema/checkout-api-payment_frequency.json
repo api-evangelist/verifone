@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-payment_frequency.json",
+  "title": "payment_frequency",
+  "description": "Payment frequencies. Used only for processing_model=RECURRING",
+  "type": "object",
+  "properties": {
+    "time_unit": {
+      "type": "string",
+      "description": "must be one of  DAY WEEK MONTH YEAR",
+      "enum": [
+        "DAY",
+        "WEEK",
+        "MONTH",
+        "YEAR"
+      ]
+    },
+    "value": {
+      "type": "number"
+    }
+  }
+}

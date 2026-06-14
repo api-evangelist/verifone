@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-klarnapaymentinitiationresponse.json",
+  "title": "Klarna Initiate Payment Result",
+  "description": "klarnaPaymentInitiationResponse from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "title": "Transaction ID",
+      "type": "string",
+      "description": "The ID of the transaction.",
+      "format": "uuid-flexible"
+    },
+    "instore_reference": {
+      "type": "string",
+      "description": "In-store reference for the transaction"
+    },
+    "client_token": {
+      "type": "string",
+      "description": "Client token returned by klarna host to initialize the payment process"
+    },
+    "payment_method_categories": {
+      "type": "array",
+      "description": "Provides a list of available payment method categories at the time of checkout",
+      "items": {
+        "title": "Klarna Payment Method Category Object",
+        "type": "object",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "description": "The Identifier of the payment method category"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Klarna payment method category"
+          },
+          "asset_urls": {
+            "type": "object",
+            "properties": {
+              "standard": {
+                "type": "string",
+                "description": "URL of the standard asset"
+              },
+              "descriptive": {
+                "type": "string",
+                "description": "URL of the descriptive asset"
+              }
+            },
+            "description": "Asset URLs for the payment method provided by Klarna"
+          }
+        },
+        "description": "Klarna available payment method category for a new payment credit transaction returned by Klarna Host"
+      }
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "blocked": {
+      "type": "boolean",
+      "description": "True if the transaction has been blocked by a ruleset, false otherwise"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The time at which the transaction was created.",
+      "format": "date-time"
+    },
+    "customer": {
+      "type": "string",
+      "description": "The ID of a customer"
+    },
+    "details": {
+      "$ref": "#/components/schemas/ecomPaymentResponse_details"
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "processor": {
+      "type": "string",
+      "description": "The name of the processor used for this transaction",
+      "default": "KLARNA"
+    },
+    "payment_product": {
+      "type": "string",
+      "description": "The payment product corresponding to this transaction",
+      "default": "KLARNA"
+    },
+    "payment_product_type": {
+      "$ref": "#/components/schemas/PaymentProductType"
+    },
+    "shipping_information": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingInformationDto"
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The outcome of the payment request.",
+      "title": "Ecommerce Transaction Status",
+      "enum": [
+        "INITIATED",
+        "AUTHORIZED",
+        "AUTHORIZATION_VOIDED",
+        "CANCELLED",
+        "CUSTOMER_ACCEPTED",
+        "REFUNDED",
+        "FAILED",
+        "PENDING",
+        "DECLINED",
+        "SETTLEMENT_CANCELLED",
+        "SETTLEMENT_REQUESTED",
+        "SETTLEMENT_SUBMITTED",
+        "SETTLEMENT_COMPLETED",
+        "SETTLEMENT_PARTIAL",
+        "SETTLEMENT_DECLINED",
+        "VOIDED",
+        "UNKNOWN"
+      ]
+    },
+    "status_reason": {
+      "type": "string",
+      "description": "Message provided by the 3rd party service as additional information, when the transaction does not succeed."
+    },
+    "shopper_interaction": {
+      "type": "string",
+      "description": "Determines the sales channel the shopper gives their card details through:\n\n * `ECOMMERCE` Online transactions where the cardholder is present.\n\n * `MAIL` order transactions where the shopper is in contact with the merchant via email.\n\n * `TELEPHONE` order transactions where the shopper is in contact with the merchant via telephone.",
+      "enum": [
+        "ECOMMERCE",
+        "MAIL",
+        "TELEPHONE"
+      ],
+      "default": "ECOMMERCE"
+    },
+    "geo_location": {
+      "type": "array",
+      "description": "The latitude / longitude resolved from the customer's ip address.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "city": {
+      "type": "string",
+      "description": "The city resolved from the customer's ip address."
+    },
+    "country_code": {
+      "title": "Country Code",
+      "type": "string",
+      "description": "The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>."
+    }
+  }
+}

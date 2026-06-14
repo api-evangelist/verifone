@@ -1,0 +1,12 @@
+{
+  "operationId": "postProducts",
+  "summary": "Create product",
+  "method": "POST",
+  "path": "/products",
+  "responseExample": {
+    "createdAt": "2025-01-01",
+    "name": "string",
+    "type": "PHYSICAL",
+    "updatedAt": "2025-01-01"
+  }
+}

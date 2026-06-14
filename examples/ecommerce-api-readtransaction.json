@@ -1,0 +1,11 @@
+{
+  "operationId": "readTransaction",
+  "summary": "Read transaction",
+  "method": "GET",
+  "path": "/api/v2/transaction/{id}",
+  "responseExample": {
+    "id": "string",
+    "amount": "string",
+    "acquirer_authorizing_network_id": "string"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-unmatchedlineitem.json",
+  "title": "Ecommerce basket line items",
+  "description": "The description of item(s) that was included in a transaction or purchase.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Descriptive name of the order line item",
+      "maxLength": 255
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "Quantity of the order line item"
+    },
+    "unit_price": {
+      "type": "integer",
+      "description": "Unit Price is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details."
+    },
+    "unit_price_tax": {
+      "type": "integer",
+      "description": "Unit Price Tax is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details."
+    },
+    "tax_rate": {
+      "type": "number",
+      "description": "Item Tax Rate as percentage",
+      "format": "float"
+    },
+    "total_tax_amount": {
+      "type": "integer",
+      "description": "Total tax amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details."
+    },
+    "total_amount": {
+      "type": "integer",
+      "description": "Total Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details."
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Image URL for the line item",
+      "maxLength": 2000
+    },
+    "item_url": {
+      "type": "string",
+      "description": "The line item's product description page URL.",
+      "maxLength": 2000
+    },
+    "sku": {
+      "type": "string",
+      "description": "The stock keeping unit (SKU) for the item.",
+      "maxLength": 127
+    },
+    "description": {
+      "type": "string",
+      "description": "The detailed item description.",
+      "maxLength": 127
+    },
+    "category": {
+      "type": "string",
+      "description": "The item category type. <br />  The possible values are: <br />  * DIGITAL_GOODS - Goods that are stored, delivered, and used in their electronic format. This value is not currently supported for API callers that leverage the [PayPal for Commerce Platform](https://www.paypal.com/us/webapps/mpp/commerce-platform) product. <br />  * DIGITAL_GOODS - A tangible item that can be shipped with proof of delivery. <br />",
+      "enum": [
+        "DIGITAL_GOODS",
+        "PHYSICAL_GOODS"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "total_amount"
+  ]
+}

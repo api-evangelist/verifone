@@ -1,0 +1,7 @@
+{
+  "operationId": "postSubscriptionsIdRevise",
+  "summary": "Revise subscription",
+  "method": "POST",
+  "path": "/subscriptions/{id}/revise",
+  "responseExample": "string"
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-paypalpaymentconfig.json",
+  "title": "PaypalPaymentConfig",
+  "description": "Paypal payment configuration",
+  "required": [
+    "payment_contract_id"
+  ],
+  "type": "object",
+  "properties": {
+    "dynamic_descriptor": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "Value is displayed as short text on the bank statement of the cardholder"
+    },
+    "capture_now": {
+      "type": "boolean",
+      "description": "True - transaction will be sent as authCapture and automatically captured. <br /> False - transaction will be sent as auth and only authorized. NOT CAPTURED. <br /> If you don't have any value in the capture_now parameter, at the moment of the call the value will be set as TRUE. ",
+      "default": true
+    },
+    "payment_contract_id": {
+      "type": "string",
+      "description": "This parameter can be found in the portal on the Payment Provider Contract attached to your organization or given to you by a Verifone employee. It is used to retrieve MID and other merchant configurations necessary for a card payment."
+    },
+    "description": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "paypal request description"
+    },
+    "application_context": {
+      "$ref": "#/components/schemas/application_context"
+    }
+  }
+}

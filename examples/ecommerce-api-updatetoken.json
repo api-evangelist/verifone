@@ -1,0 +1,11 @@
+{
+  "operationId": "updateToken",
+  "summary": "Update Token Details",
+  "method": "PATCH",
+  "path": "/api/v2/card/{id}",
+  "responseExample": {
+    "bin": "string",
+    "expiry_month": 0,
+    "expiry_year": 0
+  }
+}

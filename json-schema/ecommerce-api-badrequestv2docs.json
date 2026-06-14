@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-badrequestv2docs.json",
+  "title": "BadRequestV2Docs",
+  "description": "BadRequestV2Docs from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Error timestamp"
+    },
+    "reversal_status": {
+      "type": "string",
+      "description": "Indicates to the API client if a technical reversal has been completed by Verifone.",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REQUIRED",
+        "COMPLETED"
+      ]
+    },
+    "code": {
+      "type": "number",
+      "enum": [
+        400
+      ],
+      "default": 400
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL."
+      ],
+      "default": "At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL."
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

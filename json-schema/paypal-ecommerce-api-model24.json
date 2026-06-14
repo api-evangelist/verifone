@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model24.json",
+  "title": "Model24",
+  "description": "Model24 from PayPal eComm API",
+  "required": [
+    "tax",
+    "unitAmount"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "Item name"
+    },
+    "unitAmount": {
+      "$ref": "#/components/schemas/unitAmount"
+    },
+    "tax": {
+      "$ref": "#/components/schemas/tax"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Item quantity"
+    },
+    "description": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "Item description"
+    },
+    "sku": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The Stock Keeping Unit"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category of Goods",
+      "enum": [
+        "DIGITAL_GOODS",
+        "PHYSICAL_GOODS"
+      ]
+    }
+  }
+}

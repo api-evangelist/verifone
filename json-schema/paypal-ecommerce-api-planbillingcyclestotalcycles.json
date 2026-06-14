@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-planbillingcyclestotalcycles.json",
+  "title": "planBillingCyclesTotalCycles",
+  "description": "planBillingCyclesTotalCycles from PayPal eComm API",
+  "required": [
+    "sequence",
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "replace"
+      ]
+    },
+    "value": {
+      "type": "integer",
+      "description": "The number of times this billing cycle gets executed"
+    },
+    "sequence": {
+      "type": "integer",
+      "description": "The order of the cycle to update"
+    }
+  }
+}

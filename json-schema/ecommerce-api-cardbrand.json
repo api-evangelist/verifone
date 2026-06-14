@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-cardbrand.json",
+  "title": "The Card Type",
+  "description": "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards.",
+  "type": "string"
+}

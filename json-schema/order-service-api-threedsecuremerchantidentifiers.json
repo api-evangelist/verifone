@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-threedsecuremerchantidentifiers.json",
+  "title": "Merchant Identifier",
+  "description": "Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.\nIn cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.\nFor example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:\n* One used for SafeKey (3DS authentication) * Another used for authorization via the acquirer or gateway",
+  "required": [
+    "merchantId",
+    "paymentType"
+  ],
+  "properties": {
+    "merchantId": {
+      "type": "string",
+      "description": "Merchant ID assigned by Acquirer for 3DS flow. Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.\nIn cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.\nFor example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:\n\n  * One used for SafeKey (3DS authentication)\n  * Another used for authorization via the acquirer or gateway",
+      "pattern": "^$|^(?!\\s*$).+",
+      "maxLength": 30
+    },
+    "paymentType": {
+      "$ref": "#/components/schemas/PaymentTypeEnum"
+    }
+  }
+}

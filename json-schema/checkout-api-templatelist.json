@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-templatelist.json",
+  "title": "TemplateList",
+  "description": "TemplateList from Checkout API",
+  "type": "array",
+  "items": {
+    "$ref": "#/components/schemas/CheckoutTemplate"
+  }
+}

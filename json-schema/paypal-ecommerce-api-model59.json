@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model59.json",
+  "title": "Model59",
+  "description": "Model59 from PayPal eComm API",
+  "required": [
+    "paymentProviderContract"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    },
+    "startTime": {
+      "$ref": "#/components/schemas/startTime"
+    },
+    "customId": {
+      "$ref": "#/components/schemas/customId"
+    },
+    "planPaymentPreferencesAutoBillOutstanding": {
+      "$ref": "#/components/schemas/planPaymentPreferencesAutoBillOutstanding"
+    },
+    "planBillingCyclesPricingSchemeFixedPrice": {
+      "$ref": "#/components/schemas/planBillingCyclesPricingSchemeFixedPrice"
+    },
+    "planBillingCyclesTotalCycles": {
+      "$ref": "#/components/schemas/planBillingCyclesTotalCycles"
+    },
+    "planBillingCyclesPricingSchemeTiers": {
+      "$ref": "#/components/schemas/planBillingCyclesPricingSchemeTiers"
+    },
+    "planTaxesPercentage": {
+      "$ref": "#/components/schemas/planTaxesPercentage"
+    },
+    "planTaxesInclusive": {
+      "$ref": "#/components/schemas/planTaxesInclusive"
+    },
+    "subscriberShippingAddress": {
+      "$ref": "#/components/schemas/subscriberShippingAddress"
+    },
+    "billingInfoOutstandingBalance": {
+      "$ref": "#/components/schemas/billingInfoOutstandingBalance"
+    },
+    "shippingAmount": {
+      "$ref": "#/components/schemas/Model58"
+    }
+  }
+}

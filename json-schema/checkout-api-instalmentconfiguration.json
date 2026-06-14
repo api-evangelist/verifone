@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-instalmentconfiguration.json",
+  "title": "InstalmentConfiguration",
+  "description": "The details on the instalment scheme that should be enacted by the issuer. Only applicable for ABS Acquirer.",
+  "required": [
+    "max_number_of_instalments"
+  ],
+  "type": "object",
+  "properties": {
+    "max_number_of_instalments": {
+      "minimum": 1,
+      "type": "integer",
+      "description": "The number of individual parts that the total amount should be paid in"
+    },
+    "down_payment_amount": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer",
+      "description": "An integer value for down payment amount"
+    }
+  }
+}

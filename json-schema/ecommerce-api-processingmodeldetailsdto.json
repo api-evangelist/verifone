@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-processingmodeldetailsdto.json",
+  "title": "ProcessingModelDetailsDto",
+  "description": "ProcessingModelDetailsDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "total_payment_number": {
+      "type": "number",
+      "description": "Total paymant Number."
+    },
+    "total_payment_amount": {
+      "type": "number",
+      "description": "total Payment Amount."
+    },
+    "first_payment_amount": {
+      "type": "number",
+      "description": "first Payment Amount."
+    },
+    "payment_frequency": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaymentFrequency"
+        }
+      ]
+    },
+    "processing_model": {
+      "type": "string",
+      "enum": [
+        "UNSCHEDULED_CREDENTIAL_ON_FILE",
+        "CREDENTIAL_ON_FILE",
+        "RECURRING",
+        "NONE",
+        "REAUTHORIZATION"
+      ],
+      "description": "Processing model to use for COF transaction. Refer to the card integration guide for more information on the usage."
+    },
+    "merchant_signup_code": {
+      "type": "string",
+      "description": "A pre-defined signup code between the merchant and the acquirer."
+    },
+    "current_payment_number": {
+      "type": "number",
+      "description": "The current number of recurring payments."
+    },
+    "amount_fixed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set `true` to indicate that recurring charges are of the same amount (often used for subscriptions), and set `false` to indicate variable amount between charges (often used for standing orders with fixed schedule)."
+    }
+  },
+  "required": [
+    "processing_model"
+  ]
+}

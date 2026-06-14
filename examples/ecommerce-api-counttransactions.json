@@ -1,0 +1,9 @@
+{
+  "operationId": "countTransactions",
+  "summary": "Count transactions",
+  "method": "GET",
+  "path": "/api/v2/transactions/count",
+  "responseExample": {
+    "count": 0
+  }
+}

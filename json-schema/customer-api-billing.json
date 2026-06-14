@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/customer-api-billing.json",
+  "title": "Billing",
+  "description": "Billing from Customer API",
+  "type": "object",
+  "properties": {
+    "address_1": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Customer's primary billing address information.\n\n**Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements."
+    },
+    "address_2": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Customer's secondary billing address information."
+    },
+    "address_3": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Customer's third billing address information."
+    },
+    "city": {
+      "maxLength": 28,
+      "type": "string",
+      "description": "Customer's city on their billing address.\n\n**Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements."
+    },
+    "country_code": {
+      "type": "string",
+      "description": "Customer's alpha-2 ISO 3166 country code (e.g. `US` for United States).\n\n**Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements."
+    },
+    "first_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Customer's first name. **Required** when `company_name` is not provided.\n\n**Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements."
+    },
+    "middle_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Customer's middle name."
+    },
+    "last_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Customer's last name. **Required** when `company_name` is not provided.\n\n**Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements."
+    },
+    "phone": {
+      "maxLength": 25,
+      "pattern": "^[0-9\\s\\-+().-]+$",
+      "type": "string",
+      "description": "Customer's phone number for the billing address."
+    },
+    "postal_code": {
+      "maxLength": 10,
+      "type": "string",
+      "description": "Customer's postal code for their billing address.\n\n**Note:** Required for 3DS unless a market or regional mandate restricts sending this information."
+    },
+    "state": {
+      "maxLength": 35,
+      "type": "string",
+      "description": "Customer's state or province for their billing address (e.g. `OH` for Ohio, `TX` for Texas)."
+    }
+  }
+}

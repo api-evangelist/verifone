@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-poiorder.json",
+  "title": "PoiOrder",
+  "description": "PoiOrder from Verifone Order API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/BaseOrderData"
+    },
+    {
+      "properties": {
+        "packageDetails": {
+          "$ref": "#/components/schemas/PackageDetails"
+        },
+        "contract": {
+          "$ref": "#/components/schemas/MerchantContract"
+        },
+        "entityUid": {
+          "$ref": "#/components/schemas/EntityUid"
+        },
+        "shippingAddress": {
+          "$ref": "#/components/schemas/AddressWithoutType"
+        },
+        "billingAddress": {
+          "$ref": "#/components/schemas/AddressWithoutType"
+        },
+        "requestedDateOfShipment": {
+          "$ref": "#/components/schemas/RequestedDateOfShipment"
+        },
+        "pois": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/BasePoiType"
+          }
+        },
+        "merchantId": {
+          "maxLength": 75,
+          "pattern": "^[a-zA-Z0-9]+$",
+          "type": "string",
+          "description": "The Merchant identifier to which POIs under this order should refer to while linking a Payment Provider Contract.A new PPC will be created & linked if the MID doesn't already exist or left blank."
+        }
+      }
+    }
+  ],
+  "required": [
+    "entityUid",
+    "pois"
+  ]
+}

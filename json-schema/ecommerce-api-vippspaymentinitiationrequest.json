@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-vippspaymentinitiationrequest.json",
+  "title": "Vipps Payment Initiation Request",
+  "description": "vippsPaymentInitiationRequest from Verifone eCommerce API",
+  "required": [
+    "amount",
+    "currency_code",
+    "customer",
+    "merchant_reference",
+    "payment_provider_contract",
+    "redirect_url"
+  ],
+  "type": "object",
+  "properties": {
+    "payment_provider_contract": {
+      "type": "string",
+      "description": "The identifier of payment provider contract you want to process the transaction request with.",
+      "format": "uuid-flexible"
+    },
+    "threed_secure": {
+      "$ref": "#/components/schemas/ThreeDSecure"
+    },
+    "app_phone_number": {
+      "maxLength": 18,
+      "type": "string",
+      "description": "The Phone Number registered with Vipps Mobile APP."
+    },
+    "redirect_url": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "Checkout Redirect URL which will be used by Vipps on Payment Completion."
+    },
+    "is_app": {
+      "type": "boolean",
+      "description": "Flag to identify the transaction originated from APP or Browser.",
+      "default": false
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "auth_type": {
+      "type": "string",
+      "description": "Flags a payment request for either pre-authorization or final authorization.\n * `PRE_AUTH` is used when the authorized amount is unknown and can be adjusted later.\n * `FINAL_AUTH` is used when a final authorized amount is known and the transaction will definitely be captured in whole.",
+      "enum": [
+        "PRE_AUTH",
+        "FINAL_AUTH"
+      ],
+      "default": "FINAL_AUTH"
+    },
+    "capture_now": {
+      "type": "boolean",
+      "description": "Whether auto-capture or not. Setting the value to 'false' will only authorize the transaction.",
+      "default": true
+    },
+    "customer": {
+      "type": "string",
+      "description": "The ID of a customer.",
+      "format": "uuid-flexible",
+      "title": "Customer ID"
+    },
+    "customer_ip": {
+      "description": "The IP Address of the customer where the transaction was initiated.",
+      "maxLength": 15,
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "ipv4"
+        },
+        {
+          "type": "string",
+          "format": "ipv6"
+        }
+      ]
+    },
+    "dynamic_descriptor": {
+      "maxLength": 25,
+      "type": "string",
+      "description": "A short [descriptor](https://en.wikipedia.org/wiki/Billing_descriptor) to be shown on bank statement of the customer. Please refer to the integration guide for the format requirements."
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "shipping_information": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingInformationDto"
+        }
+      ]
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The full user agent string of the device the customer used to submit the transaction.",
+      "maxLength": 256
+    },
+    "sales_description": {
+      "type": "string",
+      "description": "A reference used by the merchant to typically capture a description of the service provided. It could then be used by the merchant to help locate transactions. One could envision a situation where a merchant is trying to locate a transaction/ receipt but in speaking with the customer, the only (or at least a predominant) detail is what service was rendered",
+      "maxLength": 200
+    },
+    "currency_code": {
+      "title": "Currency Code",
+      "type": "string",
+      "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond\nto [ISO 4217](https://wikipedia.org/wiki/ISO_4217).\n\nPlease note that Klarna only supports Norwegian krone (NOK).",
+      "enum": [
+        "NOK"
+      ]
+    },
+    "sca_compliance_level": {
+      "type": "string",
+      "description": " * `NONE`: No SCA required.\n * `WALLET`: Depend on the wallet SCA mechanism. For Google Pay this means that MasterCard will shift liability, Visa will not.\n * `FORCE_3DS`: Do an additional 3DS step regardless of whether the wallet indicates the token is SCA-compliant.",
+      "enum": [
+        "NONE",
+        "WALLET",
+        "FORCE_3DS"
+      ],
+      "default": "WALLET"
+    },
+    "sca_exemption": {
+      "type": "string",
+      "description": "Use this field to request your transaction to be exempted from the application of the Strong Customer Authentication (SCA). Be advised that the use of this field may result to your liability in case of fraudulent transaction.\n            Possible Values:\n              1 - Low value payment\n              2 - Acquirer Transaction Risk Analysis\n              3 - Trusted beneficiary exemption\n              4 - Secure Corporate Payment (SCP) exemption\n              5 - Merchant Initiated Transaction\n              6 - SCA Delegation.\n\n**NOTE:** This only applies when `sca_compliance_level` = `NONE`",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    }
+  }
+}

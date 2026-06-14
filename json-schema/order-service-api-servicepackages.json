@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-servicepackages.json",
+  "title": "ServicePackages",
+  "description": "ServicePackages from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "packageBundleId": {
+      "$ref": "#/components/schemas/PackageBundleId"
+    },
+    "adjustedPrices": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/components/schemas/AdjustedPriceType"
+      }
+    },
+    "processorParameters": {
+      "$ref": "#/components/schemas/BaseProcessorParameters"
+    },
+    "additionalPackageData": {
+      "type": "array",
+      "description": "Input data required to configure the package. For example some packages require a merchant ID.",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/components/schemas/VariableResponseType"
+      }
+    },
+    "threeDSMerchantIdentifiers": {
+      "$ref": "#/components/schemas/ThreeDSecureMerchantIdentifiers"
+    }
+  },
+  "required": [
+    "packageBundleId"
+  ]
+}

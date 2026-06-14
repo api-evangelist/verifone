@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-customer_details.json",
+  "title": "customer_details",
+  "description": "customer_details from Checkout API",
+  "required": [
+    "entity_id"
+  ],
+  "type": "object",
+  "properties": {
+    "billing": {
+      "$ref": "#/components/schemas/billing"
+    },
+    "company_name": {
+      "maxLength": 100,
+      "type": "string",
+      "description": "Company of the customer. . **Required** in case that billing.firstName & billing.lastName are not provided."
+    },
+    "company_registration_number": {
+      "maxLength": 24,
+      "type": "string",
+      "description": "Unique identifier of the company, recognised by the government.\n                        Known as CoC (Chamber of Commerce) number in some countries"
+    },
+    "email_address": {
+      "maxLength": 255,
+      "type": "string",
+      "description": "Consumer's email address.<br>\n**Field required for**:  Klarna, Paypal"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)"
+    },
+    "phone_number": {
+      "maxLength": 25,
+      "pattern": "^(\\s*[0-9-+().])[0-9-\\s+().]*$",
+      "type": "string",
+      "description": "Cardholder's  phone number"
+    },
+    "shipping": {
+      "$ref": "#/components/schemas/shipping"
+    },
+    "title": {
+      "pattern": "^[a-zA-Z-\\s.]+$",
+      "maxLength": 120,
+      "type": "string",
+      "description": "Title"
+    },
+    "work_phone": {
+      "maxLength": 25,
+      "pattern": "^(\\s*[0-9-+().])[0-9-\\s+().]*$",
+      "type": "string",
+      "description": "Consumer's work phone number."
+    },
+    "tax": {
+      "$ref": "#/components/schemas/tax"
+    }
+  }
+}

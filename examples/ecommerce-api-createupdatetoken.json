@@ -1,0 +1,11 @@
+{
+  "operationId": "createUpdateToken",
+  "summary": "Create/Update Token Details",
+  "method": "PUT",
+  "path": "/api/v2/card",
+  "responseExample": {
+    "reuse_token": "string",
+    "analytics_token": "string",
+    "bin": "string"
+  }
+}

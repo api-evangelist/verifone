@@ -1,0 +1,11 @@
+{
+  "operationId": "getToken",
+  "summary": "Get Token Details",
+  "method": "GET",
+  "path": "/api/v2/card/{id}",
+  "responseExample": {
+    "reuse_token": "string",
+    "analytics_token": "string",
+    "bin": "string"
+  }
+}

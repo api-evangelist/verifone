@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-additionaldata.json",
+  "title": "AdditionalData",
+  "description": "Additional payment result data, which may be required to return in a particular payment response.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "acquirer_response_code": {
+      "$ref": "#/components/schemas/acquirerResponseCode"
+    },
+    "acquirer_response_message": {
+      "$ref": "#/components/schemas/acquirerResponseMessage"
+    },
+    "acquirer_authorizing_network_id": {
+      "$ref": "#/components/schemas/acquirerAuthorizingNetworkID"
+    },
+    "acquirer_authorizing_network_id_descriptor": {
+      "$ref": "#/components/schemas/acquirerAuthorizingNetworkIdDescriptor"
+    },
+    "initiator_trace_id": {
+      "$ref": "#/components/schemas/initiatorTraceId"
+    },
+    "settlement_date": {
+      "$ref": "#/components/schemas/settlementDate"
+    },
+    "issuer_receipt_text": {
+      "type": "string",
+      "description": "Additional text to print on transaction receipt, which optionally may be provided by the Issuer."
+    }
+  }
+}

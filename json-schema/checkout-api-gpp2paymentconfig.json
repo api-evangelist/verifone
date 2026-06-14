@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-gpp2paymentconfig.json",
+  "title": "GPP2PaymentConfig",
+  "description": "GPP2 payment configuration",
+  "required": [
+    "payment_contract_id"
+  ],
+  "type": "object",
+  "properties": {
+    "payment_contract_id": {
+      "type": "string",
+      "description": "This parameter can be found in the portal on the Payment Provider Contract attached to your organization or given to you by a Verifone employee. It is used to retrieve MID and other merchant configurations necessary for a card payment."
+    },
+    "shopper_interaction": {
+      "type": "string",
+      "description": "Used to indicate the channel used by to send they checkout link <br /> * ECOMMERCE <br /> * MAIL - value is used only in Virtual terminal transactions and cannot be used in createCheckout API call <br /> * MCOMMERCE <br /> * TELEPHONE - value is used only in Virtual terminal transactions and cannot be used in createCheckout API call <br />",
+      "default": "ECOMMERCE",
+      "enum": [
+        "ECOMMERCE",
+        "MAIL",
+        "MCOMMERCE",
+        "TELEPHONE"
+      ]
+    }
+  }
+}

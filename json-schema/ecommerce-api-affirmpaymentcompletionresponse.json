@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-affirmpaymentcompletionresponse.json",
+  "title": "Affirm Complete Payment Response",
+  "description": "affirmPaymentCompletionResponse from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "title": "Transaction ID",
+      "format": "uuid-flexible",
+      "description": "The ID of the transaction."
+    },
+    "authorization_expiration": {
+      "type": "string",
+      "description": "The time when the auth transaction will expire (i.e. before which capture must be made). The value is formatted in RFC 3339."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "currency_code": {
+      "$ref": "#/components/schemas/CurrencyCodeEnum"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the transaction was created."
+    },
+    "created_by": {
+      "description": "The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order",
+      "type": "string"
+    },
+    "customer": {
+      "description": "The ID of a customer",
+      "type": "string"
+    },
+    "merchant_reference": {
+      "type": "string",
+      "title": "merchantReference",
+      "description": "A reference specified by the merchant to identify the transaction",
+      "maxLength": 50
+    },
+    "processor": {
+      "type": "string",
+      "description": "The name of the processor used for this transaction",
+      "default": "KLARNA"
+    },
+    "payment_product": {
+      "type": "string",
+      "description": "The payment product corresponding to this transaction",
+      "default": "KLARNA"
+    },
+    "payment_product_type": {
+      "$ref": "#/components/schemas/PaymentProductType"
+    },
+    "status": {
+      "type": "string",
+      "description": "The outcome of the payment request.",
+      "title": "Ecommerce Transaction Status",
+      "enum": [
+        "INITIATED",
+        "AUTHORIZED",
+        "AUTHORIZATION_VOIDED",
+        "CANCELLED",
+        "CUSTOMER_ACCEPTED",
+        "REFUNDED",
+        "FAILED",
+        "PENDING",
+        "DECLINED",
+        "SETTLEMENT_CANCELLED",
+        "SETTLEMENT_REQUESTED",
+        "SETTLEMENT_SUBMITTED",
+        "SETTLEMENT_COMPLETED",
+        "SETTLEMENT_PARTIAL",
+        "SETTLEMENT_DECLINED",
+        "VOIDED",
+        "UNKNOWN"
+      ]
+    },
+    "status_reason": {
+      "type": "string",
+      "description": "Message provided by the 3rd party service as additional information, when the transaction does not succeed."
+    },
+    "geo_location": {
+      "type": "array",
+      "description": "The latitude / longitude resolved from the customer's ip address.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "country_code": {
+      "title": "Country Code",
+      "type": "string",
+      "description": "The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>."
+    }
+  }
+}

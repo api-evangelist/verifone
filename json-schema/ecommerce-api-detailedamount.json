@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-detailedamount.json",
+  "title": "Detailed Amount",
+  "description": "A structure that represents a breakdown all of the different amounts that may appear on a single transaction.",
+  "type": "object",
+  "properties": {
+    "gratuity_amount": {
+      "description": "An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total 'amount' of the transaction.\n\nAmount is specified without a decimal place e.g. $1.5 = 150.\n\n<i>The required number of decimal places for a currency code is according to ISO 4217.</i>",
+      "type": "integer"
+    },
+    "tax_amount": {
+      "title": "Tax Amount",
+      "description": "An optional value to specify the amount of any tax that was included  within the total amount for the transaction. This should be included  in the total 'amount' of the transaction.\n\nAmount is specified a decimal place e.g. $1.5 = 150.\n\n<i>The required number of decimal places for a currency code is according to ISO 4217.</i>",
+      "type": "integer"
+    },
+    "surcharge_amount": {
+      "title": "Surchange Amount",
+      "description": "An optional additional amount representing the surcharge associated with a payment. This should be included in the total 'amount' of the transaction.\n\nAmount is specified without a decimal place e.g. $1.5 = 150.\n\n<i>The required number of decimal places for a currency code is according to ISO 4217.</i>",
+      "type": "integer"
+    }
+  }
+}

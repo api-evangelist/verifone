@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-oponlinepaymentinitiationrequest.json",
+  "title": "OP Online Payment Initiation Request",
+  "description": "opOnlinePaymentInitiationRequest from Verifone eCommerce API",
+  "required": [
+    "amount",
+    "bank_id",
+    "cancel_url",
+    "currency_code",
+    "merchant_reference",
+    "payment_provider_contract",
+    "reject_url",
+    "return_url"
+  ],
+  "type": "object",
+  "properties": {
+    "payment_provider_contract": {
+      "type": "string",
+      "description": "The identifier of payment provider contract you want to process the transaction request with.",
+      "format": "uuid-flexible",
+      "title": "paymentProviderContractId"
+    },
+    "bank_id": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "OP bank ID for the bank to be used"
+    },
+    "bank_name": {
+      "type": "string",
+      "description": "Bank name for the selected Bank"
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "customer": {
+      "title": "Customer ID",
+      "type": "string",
+      "description": "The ID of a customer.",
+      "format": "uuid-flexible"
+    },
+    "dynamic_descriptor": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "A short [descriptor](https://en.wikipedia.org/wiki/Billing_descriptor) to be shown on the invoice of the customer. Please refer to the integration guide for the format requirements."
+    },
+    "line_items": {
+      "type": "array",
+      "description": "The array of items being purchased.",
+      "items": {
+        "$ref": "#/components/schemas/LineItem"
+      }
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The full user agent string of the device the customer used to submit the transaction.",
+      "maxLength": 256
+    },
+    "currency_code": {
+      "$ref": "#/components/schemas/CurrencyCodeEnum"
+    },
+    "language": {
+      "$ref": "#/components/schemas/Language"
+    },
+    "message_to_customer": {
+      "maxLength": 500,
+      "type": "string",
+      "description": "this message will be shown on OP's payment list"
+    },
+    "return_url": {
+      "type": "string",
+      "description": "redirect url for successful payments"
+    },
+    "cancel_url": {
+      "type": "string",
+      "description": "redirect url for cancelled payments"
+    },
+    "reject_url": {
+      "type": "string",
+      "description": "redirect url for rejected payments"
+    },
+    "payout_reference": {
+      "maxLength": 20,
+      "minLength": 4,
+      "pattern": "^[0-9]{4,20}$",
+      "type": "string",
+      "description": "A settlement reference specified by the merchant to identify the transaction including checksum digit."
+    }
+  }
+}

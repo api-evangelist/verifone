@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-identification.json",
+  "title": "identification",
+  "description": "Customer identification",
+  "required": [
+    "taxIdentificationNumber",
+    "taxIdentificationType"
+  ],
+  "type": "object",
+  "properties": {
+    "taxIdentificationNumber": {
+      "maxLength": 14,
+      "type": "string",
+      "description": "Customer tax ID. Supported for the PayPal payment method only. Typically, the tax ID is 11 characters long for individuals and 14 characters long for businesses."
+    },
+    "taxIdentificationType": {
+      "type": "string",
+      "description": "The customer tax ID type.",
+      "enum": [
+        "BR_CNPJ",
+        "BR_CPF"
+      ]
+    }
+  }
+}

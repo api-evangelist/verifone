@@ -1,0 +1,11 @@
+{
+  "operationId": "affirmInitTransaction",
+  "summary": "Initiate a Affirm payment.",
+  "method": "POST",
+  "path": "/api/v2/transactions/affirm",
+  "responseExample": {
+    "id": "string",
+    "checkout_id": "string",
+    "public_api_key": "string"
+  }
+}

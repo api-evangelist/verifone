@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model13.json",
+  "title": "Model13",
+  "description": "Model13 from PayPal eComm API",
+  "required": [
+    "cyclesCompleted",
+    "sequence",
+    "tenureType"
+  ],
+  "type": "object",
+  "properties": {
+    "tenureType": {
+      "type": "string",
+      "description": "The type of the billing cycle",
+      "enum": [
+        "REGULAR",
+        "TRIAL"
+      ]
+    },
+    "sequence": {
+      "type": "integer",
+      "description": "The order in which to run this cycle among other billing cycles"
+    },
+    "cyclesCompleted": {
+      "type": "integer",
+      "description": "The number of billing cycles that have completed"
+    },
+    "cyclesRemaining": {
+      "type": "integer",
+      "description": "For a finite billing cycle, cyclesRemaining is the number of remaining cycles. For an infinite billing cycle, cyclesRemaining is set as 0."
+    },
+    "currentPricingSchemeVersion": {
+      "type": "integer",
+      "description": "The active pricing scheme version for the billing cycle"
+    },
+    "totalCycles": {
+      "type": "integer",
+      "description": "The number of times this billing cycle gets executed. Trial billing cycles can only be executed a finite number of times (value between 1 and 999 for totalCycles). Regular billing cycles can be executed infinite times (value of 0 for totalCycles) or a finite number of times (value between 1 and 999 for totalCycles)."
+    }
+  }
+}

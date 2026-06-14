@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-genericerror429.json",
+  "title": "HTTP 429 Error",
+  "description": "The resource exists the number of requests has exceeded the specified quota.",
+  "required": [
+    "code",
+    "message",
+    "title",
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "429"
+      ],
+      "default": "429"
+    },
+    "title": {
+      "type": "string",
+      "enum": [
+        "Too Many Requests"
+      ],
+      "default": "Too Many Requests"
+    },
+    "message": {
+      "type": "string",
+      "default": "The number of requests from this client is restricted to a specified quota."
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone.",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "RATE_LIMIT_ERROR"
+      ],
+      "default": "RATE_LIMIT_ERROR"
+    },
+    "param": {
+      "type": "string",
+      "description": "The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example."
+    }
+  }
+}

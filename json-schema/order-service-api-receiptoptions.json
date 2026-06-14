@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-receiptoptions.json",
+  "title": "Receipt Options",
+  "description": "Receipt Options",
+  "type": "object",
+  "properties": {
+    "printMerchantReceipt": {
+      "$ref": "#/components/schemas/PrintOptionsEnum"
+    },
+    "printCustomerReceipt": {
+      "$ref": "#/components/schemas/PrintOptionsEnum"
+    },
+    "showEmailReceipts": {
+      "description": "Show e-mail option for customer receipts.",
+      "type": "boolean"
+    },
+    "showEmailTermsAndConditions": {
+      "description": "Determines if the device displays the Terms and Conditions text when a customer elects to receive an email receipt.",
+      "type": "boolean"
+    },
+    "greeting": {
+      "description": "Placeholder for greeting text on the receipt.",
+      "type": "string",
+      "pattern": "^(.|n)*$",
+      "maxLength": 10000
+    },
+    "footer": {
+      "description": "Receipt placeholder for footer text.",
+      "type": "string",
+      "maxLength": 10000,
+      "pattern": "^(.|n)*$"
+    }
+  }
+}

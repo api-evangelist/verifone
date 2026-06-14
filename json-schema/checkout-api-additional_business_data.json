@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-additional_business_data.json",
+  "title": "additional_business_data",
+  "description": "Merchant defined additional data fields for ABS Acquirer.",
+  "type": "object",
+  "properties": {
+    "addendum1": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "Additional field 1 for processor data."
+    },
+    "addendum2": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "Additional field 2 for processor data."
+    }
+  }
+}

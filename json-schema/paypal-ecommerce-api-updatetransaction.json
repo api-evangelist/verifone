@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-updatetransaction.json",
+  "title": "updateTransaction",
+  "description": "updateTransaction from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "intent": {
+      "type": "string",
+      "description": "Intent of this transaction",
+      "enum": [
+        "AUTHORIZE",
+        "CAPTURE"
+      ]
+    },
+    "payer": {
+      "$ref": "#/components/schemas/customer"
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.",
+      "maxLength": 127
+    },
+    "description": {
+      "type": "string",
+      "description": "Purchase description",
+      "maxLength": 127
+    },
+    "shipping": {
+      "$ref": "#/components/schemas/shipping"
+    },
+    "dynamicDescriptor": {
+      "type": "string",
+      "description": "If an Order is paid using the \"PayPal Wallet\" the statement descriptor will appear in following format on the payer card statement:  PAYPAL_prefix+(space)+merchant_descriptor+(space)+dynamicDescriptor.  The PAYPAL prefix uses 8 characters. Only the first 22 characters will be displayed in the statement. <br />  For example, <br/>  * The PayPal prefix toggle is PAYPAL <br/>  * The merchant descriptor in the profile is Janes Gift <br/>  * The soft descriptor is 800-123-1234 </br> Then, the statement descriptor on the card is PAYPAL * Janes Gift 80.",
+      "maxLength": 22
+    },
+    "amount": {
+      "$ref": "#/components/schemas/Model22"
+    },
+    "detailedAmount": {
+      "$ref": "#/components/schemas/detailedAmount"
+    }
+  }
+}

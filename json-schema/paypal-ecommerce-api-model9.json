@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model9.json",
+  "title": "Model9",
+  "description": "Model9 from PayPal eComm API",
+  "required": [
+    "billingCycles",
+    "createTime",
+    "name",
+    "productId"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "maxLength": 50,
+      "minLength": 6,
+      "type": "string",
+      "description": "Filters the response by a Product ID."
+    },
+    "productId": {
+      "type": "string",
+      "description": "PayPal catalog product id"
+    },
+    "name": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The plan name"
+    },
+    "billingCycles": {
+      "$ref": "#/components/schemas/billingCycles"
+    },
+    "paymentPreferences": {
+      "$ref": "#/components/schemas/paymentPreferences"
+    },
+    "status": {
+      "type": "string",
+      "description": "The initial state of the plan",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "CREATED"
+      ]
+    },
+    "description": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The detailed description of the plan."
+    },
+    "taxes": {
+      "$ref": "#/components/schemas/taxes"
+    },
+    "quantitySupported": {
+      "type": "boolean",
+      "description": "Indicates whether you can subscribe to this plan by providing a quantity for the goods or service."
+    },
+    "createTime": {
+      "type": "string",
+      "description": "The date and time when the billing plan was created.",
+      "format": "date"
+    },
+    "updateTime": {
+      "type": "string",
+      "description": "The date and time when the billing plan was updated.",
+      "format": "date"
+    }
+  }
+}

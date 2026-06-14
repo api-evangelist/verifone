@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-externalonboarding.json",
+  "title": "ExternalOnboarding",
+  "description": "External merchant onboarding details",
+  "type": "object",
+  "discriminator": {
+    "propertyName": "provider",
+    "mapping": {
+      "BANKAXEPT": "#/components/schemas/BankAxeptExternalOnboarding"
+    }
+  },
+  "properties": {
+    "provider": {
+      "title": "External Onboarding Provider",
+      "description": "The third-party provider used for merchant onboarding.",
+      "type": "string",
+      "enum": [
+        "BANKAXEPT"
+      ],
+      "default": "BANKAXEPT"
+    },
+    "agreementId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Agreement or onboarding order identifier returned by the third-party provider when onboarding is initiated.\n"
+    },
+    "agreementStatus": {
+      "type": "string",
+      "description": "Latest onboarding or agreement status received from the third-party provider.\n"
+    }
+  }
+}

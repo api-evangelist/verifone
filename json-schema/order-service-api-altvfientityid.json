@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-altvfientityid.json",
+  "title": "AltVfiEntityId",
+  "description": "A friendly ID associated with the merchant site/company. This will be visible/searchable in Verifone central. In many\ncases this will be the same value as merchantId.\n\n<strong>This value is not guaranteed as globally unique within Verifone. That value is the entityUid (uuid) property\nthat will be assigned on creation of the Entity and returned on the response.</strong>.",
+  "type": "string",
+  "maxLength": 30,
+  "pattern": "^[a-zA-Z0-9]+$"
+}

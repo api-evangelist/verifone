@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-promo_financing_details.json",
+  "title": "promo_financing_details",
+  "description": "promo_financing_details from Checkout API",
+  "type": "object",
+  "properties": {
+    "promo_financing_type": {
+      "type": "string",
+      "enum": [
+        "PROMO_APR",
+        "PROMO_AND_AFTER_APR"
+      ],
+      "description": "Type of special financing information requested. Promotional information may be requested for duration of the promo only (`PROMO_APR`) or for during and after promo period (`PROMO_AND_AFTER_APR`)."
+    },
+    "promo_plan": {
+      "type": "string",
+      "description": "The code or name of a promotional financing plan as set up between merchant and issuer."
+    },
+    "promo_plan_expiry": {
+      "type": "string",
+      "format": "date",
+      "description": "Expiry date for the requested promo plan. The format for the date is Mongo DB ISO 8601. <br /> <b>Example:</b> 2026-03-20T10:48:00.000Z <br />"
+    }
+  }
+}

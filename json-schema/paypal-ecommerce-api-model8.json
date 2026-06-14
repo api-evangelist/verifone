@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model8.json",
+  "title": "Model8",
+  "description": "Model8 from PayPal eComm API",
+  "required": [
+    "createTime",
+    "id",
+    "state"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the agreement."
+    },
+    "state": {
+      "type": "string",
+      "description": "The state of the agreement."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the agreement."
+    },
+    "merchant": {
+      "$ref": "#/components/schemas/merchant"
+    },
+    "payer": {
+      "$ref": "#/components/schemas/payer"
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/shippingAddress"
+    },
+    "plan": {
+      "$ref": "#/components/schemas/plan"
+    },
+    "createTime": {
+      "type": "string",
+      "description": "The date and time when the agreement was created."
+    },
+    "updateTime": {
+      "type": "string",
+      "description": "The date and time when the agreement was updated."
+    }
+  }
+}

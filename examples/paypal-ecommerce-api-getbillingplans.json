@@ -1,0 +1,13 @@
+{
+  "operationId": "getBillingplans",
+  "summary": "List billing plans",
+  "method": "GET",
+  "path": "/billingPlans",
+  "responseExample": {
+    "plans": [
+      {}
+    ],
+    "totalItems": 0,
+    "totalPages": 0
+  }
+}

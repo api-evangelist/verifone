@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-extendeddetails.json",
+  "title": "ExtendedDetails",
+  "description": "Detailed Status of the Order",
+  "type": "object",
+  "properties": {
+    "status": {
+      "$ref": "#/components/schemas/DetailedStatusEnum"
+    },
+    "code": {
+      "type": "string",
+      "description": "Code associated with the status (if applicable)"
+    },
+    "information": {
+      "type": "string",
+      "description": "Extra Information associated with the status (if applicable)"
+    },
+    "lastChangeTime": {
+      "$ref": "#/components/schemas/LastChangeTime"
+    },
+    "canCancel": {
+      "type": "boolean",
+      "description": "Can this order be cancelled."
+    }
+  }
+}

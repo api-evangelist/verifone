@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-poilaneinformation.json",
+  "title": "PoiLaneInformation",
+  "description": "Lane in which the POI is to be configured.",
+  "type": "object",
+  "properties": {
+    "customerLaneId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "customerLaneDesignator": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "laneNotes": {
+      "type": "string",
+      "maxLength": 200
+    }
+  }
+}

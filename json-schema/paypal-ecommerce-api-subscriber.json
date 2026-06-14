@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-subscriber.json",
+  "title": "subscriber",
+  "description": "The subscriber request information",
+  "type": "object",
+  "properties": {
+    "name": {
+      "$ref": "#/components/schemas/name"
+    },
+    "payerId": {
+      "pattern": "^[2-9A-HJ-NP-Z]{13}$",
+      "type": "string",
+      "description": "The PayPal-assigned ID for the payer"
+    },
+    "emailAddress": {
+      "maxLength": 255,
+      "type": "string",
+      "description": "Customer email address"
+    },
+    "phone": {
+      "$ref": "#/components/schemas/phone"
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/Model12"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-releasepreauthdto.json",
+  "title": "ReleasePreauthDto",
+  "description": "ReleasePreauthDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150.\nThe required number of decimal places for a currency code is according to ISO\nFor Account Verification transaction, provide 0 as value for this field."
+    }
+  }
+}

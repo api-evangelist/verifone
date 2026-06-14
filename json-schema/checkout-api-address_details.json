@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-address_details.json",
+  "title": "address_details",
+  "description": "address_details from Checkout API",
+  "type": "object",
+  "properties": {
+    "address_1": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "address_2": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "address_3": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "city": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "country_code": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "first_name": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "middle_name": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "last_name": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "phone": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "postal_code": {
+      "$ref": "#/components/schemas/template_field_mode"
+    },
+    "state": {
+      "$ref": "#/components/schemas/template_field_mode"
+    }
+  }
+}

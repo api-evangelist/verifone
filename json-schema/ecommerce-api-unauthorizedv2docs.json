@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-unauthorizedv2docs.json",
+  "title": "UnauthorizedV2Docs",
+  "description": "UnauthorizedV2Docs from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Error timestamp"
+    },
+    "reversal_status": {
+      "type": "string",
+      "description": "Indicates to the API client if a technical reversal has been completed by Verifone.",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REQUIRED",
+        "COMPLETED"
+      ]
+    },
+    "code": {
+      "type": "number",
+      "enum": [
+        401
+      ],
+      "default": 401
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request)."
+      ],
+      "default": "Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request)."
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

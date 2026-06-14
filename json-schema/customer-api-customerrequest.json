@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/customer-api-customerrequest.json",
+  "title": "CustomerRequest",
+  "description": "CustomerRequest from Customer API",
+  "required": [
+    "entity_id"
+  ],
+  "type": "object",
+  "properties": {
+    "billing": {
+      "$ref": "#/components/schemas/Billing"
+    },
+    "company_name": {
+      "maxLength": 100,
+      "type": "string",
+      "description": "Company name of the customer. **Required** when `billing.first_name` and `billing.last_name` are not provided."
+    },
+    "company_registration_number": {
+      "maxLength": 24,
+      "type": "string",
+      "description": "Unique identifier of the company recognised by the government. Known as CoC (Chamber of Commerce) number in some countries."
+    },
+    "email_address": {
+      "maxLength": 255,
+      "type": "string",
+      "format": "email",
+      "description": "Consumer's email address.\n\n**Field required for:** Klarna, PayPal\n\n**Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements."
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "Entity ID on which the customer is created. The Entity ID can be found at the organisation level as Organisation ID (`Administration > Organizations > [Organization] > Organisation ID`)."
+    },
+    "phone_number": {
+      "maxLength": 25,
+      "pattern": "^[0-9\\s\\-+().-]+$",
+      "type": "string",
+      "description": "Cardholder's phone number."
+    },
+    "shipping": {
+      "$ref": "#/components/schemas/Shipping"
+    },
+    "title": {
+      "pattern": "^[a-zA-Z\\-\\s.]+$",
+      "maxLength": 120,
+      "type": "string",
+      "description": "Customer's title (e.g. `Mr`, `Mrs`, `Dr`)."
+    },
+    "work_phone": {
+      "maxLength": 25,
+      "pattern": "^[0-9\\s\\-+().-]+$",
+      "type": "string",
+      "description": "Consumer's work phone number."
+    },
+    "tax": {
+      "$ref": "#/components/schemas/Tax"
+    },
+    "language": {
+      "type": "string",
+      "description": "Customer language preference for Invoice documents. See [Localisation](https://docs.verifone.com/online-payments/checkout/localization) for details."
+    }
+  }
+}

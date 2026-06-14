@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model16.json",
+  "title": "Model16",
+  "description": "Model16 from PayPal eComm API",
+  "required": [
+    "planId"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID of the subscription"
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the subscription",
+      "enum": [
+        "APPROVAL_PENDING",
+        "ACTIVE",
+        "APPROVED",
+        "CANCELLED",
+        "EXPIRED",
+        "SUSPENDED"
+      ]
+    },
+    "planId": {
+      "maxLength": 50,
+      "minLength": 3,
+      "type": "string",
+      "description": "The ID of the plan"
+    },
+    "planOverridden": {
+      "type": "boolean",
+      "description": "Indicates whether the subscription has overridden any plan attributes"
+    },
+    "statusUpdateTime": {
+      "type": "string",
+      "description": "The date and time when the subscription status updated last time",
+      "format": "date"
+    },
+    "statusChangeNote": {
+      "type": "string",
+      "description": "The reason or notes for the status of the subscription"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "The date and time when the subscription started",
+      "format": "date"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "The quantity of the product in the subscription"
+    },
+    "customId": {
+      "maxLength": 127,
+      "minLength": 1,
+      "pattern": "^[ -~]+",
+      "type": "string",
+      "description": "The custom id for the subscription. Can be invoice id"
+    },
+    "shippingAmount": {
+      "$ref": "#/components/schemas/shippingAmount"
+    },
+    "subscriber": {
+      "$ref": "#/components/schemas/subscriber"
+    },
+    "billingInfo": {
+      "$ref": "#/components/schemas/billingInfo"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "The date and time when the subscription created",
+      "format": "date"
+    },
+    "updatedAt": {
+      "type": "string",
+      "description": "The date and time when the subscription updated last time",
+      "format": "date"
+    }
+  }
+}

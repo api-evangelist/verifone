@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-klarnapaymentcompletionrequest.json",
+  "title": "Klarna Complete Payment Request",
+  "description": "klarnaPaymentCompletionRequest from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "authorization_token": {
+      "type": "string",
+      "description": "Token used for authorizing a payment transaction."
+    },
+    "refusal_reason": {
+      "$ref": "#/components/schemas/RefusalReason"
+    },
+    "merchant_reference": {
+      "type": "string",
+      "title": "Merchant Reference",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    }
+  }
+}

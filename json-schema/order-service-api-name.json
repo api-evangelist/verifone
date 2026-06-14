@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-name.json",
+  "title": "Name Details",
+  "description": "An object representing the name or component names of a party, person or business. No elements are mandatory due to the different usages, but the business rules need to be applied in the context where name is used.",
+  "type": "object",
+  "uniqueItems": false,
+  "properties": {
+    "firstName": {
+      "description": "The given name of contact.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "lastName": {
+      "description": "The surname name or family name of the contact. This is required when the name is for a party or person. Can also include the matronymic or mother's family name where this is customarily used.",
+      "minLength": 1,
+      "maxLength": 120,
+      "type": "string"
+    },
+    "prefix": {
+      "description": "The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.",
+      "maxLength": 120,
+      "type": "string"
+    },
+    "alternateFullName": {
+      "description": "The alternate name for the party. This can be a business name or nickname. This should be used where the name of the party cannot be parsed into its constituent parts such as first name or last name. If the party is a business then this should always be present.",
+      "maxLength": 200,
+      "type": "string"
+    },
+    "middleName": {
+      "description": "The middle name or names for a party or person.",
+      "maxLength": 120,
+      "type": "string"
+    },
+    "suffix": {
+      "description": "The name suffix for the party.",
+      "maxLength": 120,
+      "type": "string"
+    }
+  },
+  "required": [
+    "firstName",
+    "lastName"
+  ]
+}

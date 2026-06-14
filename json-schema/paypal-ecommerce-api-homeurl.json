@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-homeurl.json",
+  "title": "homeUrl",
+  "description": "homeUrl from PayPal eComm API",
+  "required": [
+    "op"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "description": "The remove operation does not require a value",
+      "enum": [
+        "add",
+        "remove",
+        "replace"
+      ]
+    },
+    "value": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string",
+      "description": "The image URL for the product"
+    }
+  }
+}

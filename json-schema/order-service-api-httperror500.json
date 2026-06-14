@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-httperror500.json",
+  "title": "HTTP 500 Error",
+  "description": "Unexpected Server Error",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/ErrorResp"
+    },
+    {
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "500"
+          ],
+          "default": "500"
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Internal Server Error"
+          ],
+          "default": "Internal Server Error"
+        },
+        "message": {
+          "type": "string",
+          "default": "The server encountered an unexpected condition which prevented it from fulfilling the request."
+        },
+        "timestamp": {
+          "description": "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "API_ERROR"
+          ],
+          "default": "API_ERROR"
+        },
+        "param": {
+          "description": "The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.",
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "required": [
+    "code",
+    "title",
+    "message",
+    "type"
+  ],
+  "additionalProperties": false
+}

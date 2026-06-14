@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-template_field_mode.json",
+  "title": "template_field_mode",
+  "description": "template_field_mode from Checkout API",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "HIDDEN",
+        "READ_ONLY",
+        "OPTIONAL",
+        "REQUIRED"
+      ]
+    }
+  }
+}

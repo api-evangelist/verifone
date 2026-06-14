@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-baseorderdata.json",
+  "title": "BaseOrderData",
+  "description": "BaseOrderData from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "orderReference": {
+      "$ref": "#/components/schemas/OrderReference"
+    },
+    "customerEntityUid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Verifone allocated ID for the customer this order is for (packages and bundles are associated with this entity)."
+    },
+    "requestedDate": {
+      "type": "string",
+      "description": "The requested date for this order.",
+      "format": "date-time"
+    },
+    "poRef": {
+      "type": "string",
+      "description": "Purchase Order Reference"
+    },
+    "paymentDetails": {
+      "$ref": "#/components/schemas/PaymentDetails"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Notes for the Order"
+    },
+    "additionalOrderData": {
+      "type": "array",
+      "description": "Input data which maybe required for the country/business unit to to complete the order. For example some countries require a VAT ID, or different legal forms of business, this will be defined by Verifone if needed for your integration",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/components/schemas/VariableResponseType"
+      }
+    }
+  },
+  "required": [
+    "orderReference",
+    "customerEntityUid"
+  ]
+}

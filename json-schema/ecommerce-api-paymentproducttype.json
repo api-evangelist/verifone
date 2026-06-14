@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-paymentproducttype.json",
+  "title": "Payment Product Type",
+  "description": "The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product",
+  "type": "string",
+  "enum": [
+    "Affirm",
+    "Amex",
+    "Crypto",
+    "Diners Club International",
+    "Discover",
+    "JCB",
+    "Klarna",
+    "Maestro",
+    "Mastercard",
+    "OP Online Payment",
+    "Swish",
+    "Unknown",
+    "Visa"
+  ],
+  "default": "Unknown"
+}

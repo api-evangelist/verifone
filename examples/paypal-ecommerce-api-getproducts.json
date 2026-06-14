@@ -1,0 +1,11 @@
+{
+  "operationId": "getProducts",
+  "summary": "List products",
+  "method": "GET",
+  "path": "/products",
+  "responseExample": {
+    "products": [
+      {}
+    ]
+  }
+}

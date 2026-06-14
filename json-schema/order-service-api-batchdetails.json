@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-batchdetails.json",
+  "title": "BatchDetails",
+  "description": "BatchDetails from Verifone Order API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/BatchDetailsUpdatable"
+    },
+    {
+      "properties": {
+        "batchId": {
+          "$ref": "#/components/schemas/BatchId"
+        },
+        "fileCreatedDate": {
+          "description": "The date time when the file was created on SFTP.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "filePickupDate": {
+          "description": "The date time when the file was picked up by the batch process.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "fileName": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "orderType": {
+          "$ref": "#/components/schemas/OrderType"
+        },
+        "retryCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 0
+        },
+        "transactions": {
+          "description": "Individual transactions of the batch.",
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/BatchLineItem",
+            "minItems": 1
+          }
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  ],
+  "required": [
+    "batchId",
+    "processingStatus"
+  ]
+}

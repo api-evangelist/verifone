@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-taxes.json",
+  "title": "taxes",
+  "description": "The tax details.",
+  "required": [
+    "percentage"
+  ],
+  "type": "object",
+  "properties": {
+    "percentage": {
+      "type": "string",
+      "description": "The tax percentage on the billing amount."
+    },
+    "inclusive": {
+      "type": "boolean",
+      "description": "Indicates whether the tax was already included in the billing amount."
+    }
+  }
+}

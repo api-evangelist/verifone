@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-bundleandprice.json",
+  "title": "BundleAndPrice",
+  "description": "BundleAndPrice from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "packageBundleId": {
+      "$ref": "#/components/schemas/PackageBundleId"
+    },
+    "price": {
+      "$ref": "#/components/schemas/AmountSimple"
+    }
+  },
+  "required": [
+    "packageBundleId"
+  ]
+}

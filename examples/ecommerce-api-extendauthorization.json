@@ -1,0 +1,11 @@
+{
+  "operationId": "extendAuthorization",
+  "summary": "Extend preauthorization",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/extend",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

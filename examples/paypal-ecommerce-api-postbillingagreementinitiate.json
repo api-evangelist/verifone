@@ -1,0 +1,10 @@
+{
+  "operationId": "postBillingagreementInitiate",
+  "summary": "Initiate billing agreement",
+  "method": "POST",
+  "path": "/billingAgreement/initiate",
+  "responseExample": {
+    "approvalUrl": "string",
+    "billingToken": "string"
+  }
+}

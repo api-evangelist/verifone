@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/3ds-authentication-api-errorresponse.json",
+  "title": "ErrorResponse",
+  "description": "ErrorResponse from 3D Secure API",
+  "required": [
+    "code",
+    "message"
+  ],
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "number",
+      "description": "A 3-digit code which uniquely identify an error."
+    },
+    "details": {
+      "$ref": "#/components/schemas/ErrorDetails"
+    },
+    "message": {
+      "type": "string",
+      "description": "A description of the error."
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Error timestamp"
+    }
+  }
+}

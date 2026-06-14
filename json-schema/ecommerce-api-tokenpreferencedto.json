@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-tokenpreferencedto.json",
+  "title": "TokenPreferenceDto",
+  "description": "TokenPreferenceDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "token_scope": {
+      "type": "string",
+      "title": "Token Scope",
+      "description": "The token scope under which this token was created.",
+      "format": "uuid"
+    },
+    "reuse_token_type": {
+      "title": "Reuse Token Type",
+      "description": "The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.<br>\n**Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.\n",
+      "type": "string",
+      "enum": [
+        "CHASE",
+        "INTERNAL",
+        "TAVE"
+      ],
+      "default": "INTERNAL"
+    },
+    "token_type": {
+      "type": "string",
+      "title": "Token Type",
+      "description": "Token type",
+      "enum": [
+        "REUSE",
+        "ANALYTICS",
+        "REUSE_AND_ANALYTICS"
+      ]
+    },
+    "token_expiry_date": {
+      "type": "string",
+      "description": "When this Token will expire.",
+      "format": "date"
+    }
+  },
+  "required": [
+    "token_scope"
+  ]
+}

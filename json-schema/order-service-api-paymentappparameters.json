@@ -1,0 +1,539 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-paymentappparameters.json",
+  "title": "Base Parameters",
+  "description": "Payment Parameters - these can be specified per merchant and/or overridden at the poi level. If no values are specified then default template values will be applied.",
+  "type": "object",
+  "properties": {
+    "AccountVerifyEnabled": {
+      "description": "Enable Account verification for this merchant",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "AllowDisableMerchantPreferredAppSelection": {
+      "description": "Display the option to disable merchant preferred app selection in the 'Prompt For Card' screen",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PurchaseEnabled": {
+      "description": "Enable Purchase transactions for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PurchaseAndCashoutEnabled": {
+      "description": "Enable prompting for a cashout amount as part of a purchase transaction.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ManualPurchaseAndCashoutEnabled": {
+      "description": "Enable Manual Card Entry for Purchase with Cashout.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PurchaseSurchargeEnabled": {
+      "description": "Enables surcharging for Purchase (+ Cash + Tip)\ntransactions. Surchargeable amount - this is the amount in\nthe transaction where a surcharge can be applied to.\nPurchase only - surchargeable amount is the purchase\namount. Purchase + Cash - surchargeable amount is the\npurchase amount only. Purchase + Cash + Tip -\nsurchargeable amount is the purchase amount only. Purchase\n+ Tip - surchargeable amount is the purchase amount only.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ContactlessSurchargeEnabled": {
+      "description": "Enable contactless surcharging.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "CashOutOnlySurchargeEnabled": {
+      "description": "Enables surcharging for Cashout only transactions.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PreauthCompletionSurchargeType": {
+      "description": "0 - Disabled: Pre-Auth/Completion transactions are not subject to surcharge\n\n1 - Pre-Auth: Surcharge is applied to Pre-Auth (initial) transaction\n\n2 - Completion: Surcharge is applied to Completion transaction",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-2]"
+    },
+    "MotoSurchargeEnabled": {
+      "description": "Enables surcharging for mail and telephone order (MOTO)\ntransactions.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ManualPurchaseEnabled": {
+      "description": "Enable Manual Card Entry for Purchase.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ManualRefundEnabled": {
+      "description": "Manual Refund Enabled.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ManualPreAuthEnabled": {
+      "description": "Enable Manual Card Entry for PreAuth.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "CashoutOnlyEnabled": {
+      "description": "Enable Cashout only transactions for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ManualCashoutOnlyEnabled": {
+      "description": "Enable Manual Card Entry for Cashout transactions without a purchase.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "RefundEnabled": {
+      "description": "Enable Refund transactions as such for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "LimitRefundAmountEnabled": {
+      "description": "Enable limit refund amount with MaxCashierRefundAmount and MaxManagerRefundAmount.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "EbtEnabled": {
+      "description": "Allow EBT (Electronic benefit transfer) payment type.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "VoidEnabled": {
+      "description": "Enable void transaction for magnetic stripe and chip cards for this product",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ManualVoidEnabled": {
+      "description": "Enable Manual Card Entry for Void",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "SplitPaymentsEnabled": {
+      "description": "Allow the total to be paid with multiple payments.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PreAuthEnabled": {
+      "description": "Enable Pre-Auth transactions for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PostAuthEnabled": {
+      "description": "Enable Post-Auth transactions for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "PreAuthCtlsEnabled": {
+      "description": "Enable Pre Authorization transaction for contactless payment methods for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "BalanceEnquiryEnabled": {
+      "description": "Enable Balance Enquiry transactions for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "MotoPaymentEnabled": {
+      "description": "Enable mail and telephone order (MOTO) payments.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "MotoTipEnabled": {
+      "description": "Enable tip for moto payments for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "MotoRefundEnabled": {
+      "description": "Enable moto refunds for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "MotoPreAuthEnabled": {
+      "description": "Enable moto PreAuth for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "MotoSeparationEnabled": {
+      "description": "Determines whether to present separate options for mail and telephone orders (MOTO).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "CashbackAmounts": {
+      "description": "Predefined cashout amounts presented at the cashout selection in the local currency. Maximum of 4 comma separated amounts e.g. 10.00,20.00,40.00.",
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^(\\d+\\.?\\d*,){0,3}(\\d+\\.?\\d*)$"
+    },
+    "MaxPurchaseAmount": {
+      "description": "Represents the maximum purchase amount allowed in the currency supported by the terminal. The value should be in a decimal format, e.g. $40 = 40.00. Maximal amount supported by the payment application is 9,999,999,999.99.",
+      "type": "string",
+      "maxLength": 13,
+      "minLength": 0,
+      "pattern": "^[0-9]{1,10}(\\.[0-9]{2})?$"
+    },
+    "MaxCashierRefundAmount": {
+      "description": "Maximum refund amount allowed by the cashier, in the currency supported by the terminal. The value should be in a decimal format, e.g. $40 = 40.00",
+      "type": "string",
+      "maxLength": 15,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "MaxManagerRefundAmount": {
+      "description": "Maximum refund amount allowed by the manager, in the currency supported by the terminal. The value should be in a decimal format, e.g. $40 = 40.00",
+      "type": "string",
+      "maxLength": 15,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "MaxRefundTotalAmountPerSettlement": {
+      "description": "Maximum refund amount allowed per settlement period, in the currency supported by the terminal. This value should be in a decimal format, e.g. $40 = 40.00",
+      "type": "string",
+      "maxLength": 15,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "MaxAmountRefundPerDay": {
+      "description": "Used to determine the maximum total amount of refunds for merchant per day, in the currency of related virtual terminal. This value should be in a decimal format, e.g. $40 = 40.00.",
+      "type": "string",
+      "maxLength": 15,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "MaxCountRefundPerDay": {
+      "description": "Used to determine the maximum total number of refunds for merchant per day",
+      "type": "string",
+      "maxLength": 3,
+      "minLength": 0,
+      "pattern": "^[0-9]{1,3}$"
+    },
+    "ForceOfflineEnabled": {
+      "description": "Indicates if the force offline operation is enabled for the merchant",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "CashbackCeiling": {
+      "description": "Maximum cashout amount allowed, in the currency supported by the terminal. The value should be in a decimal format,                  e.g. $40 = 40.00 - where the currency symbol depends on the region.",
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "PrintMerchantReceipt": {
+      "description": "Defines the merchant receipt print options.\n\n0-Never Print\n\n1-Prompt for print\n\n2-Always Print\n\n3-Always Print when Signature is Captured",
+      "type": "string"
+    },
+    "PrintCustomerReceipt": {
+      "description": "Defines the customer receipt print options.\n\n0-Never Print\n\n1-Prompt for print\n\n2-Always Print",
+      "type": "string"
+    },
+    "ShowEmailReceiptOption": {
+      "description": "Show e-mail option for customer receipts.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ShowEmailTermsAndConditions": {
+      "description": "Determines if the device displays the Terms and Conditions text when a customer elects to receive an email receipt.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ReceiptGreeting": {
+      "description": "Placeholder for greeting text on the receipt.",
+      "type": "string",
+      "maxLength": 10000,
+      "minLength": 0,
+      "pattern": "^(.|\\n)*$"
+    },
+    "ReceiptFooter": {
+      "description": "Receipt placeholder for footer text.",
+      "type": "string",
+      "maxLength": 10000,
+      "minLength": 0,
+      "pattern": "^(.|\\n)*$"
+    },
+    "TipEnabled": {
+      "description": "Enable purchase with tip transaction for this product",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "TipAdjustmentEnabled": {
+      "description": "Enable tip adjustment. When enabled the device can support tip adjustment flow.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "TipCustomOptionEnabled": {
+      "description": "Enable Custom option on the Tip screen for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "TipCustomOptionEntryMethod": {
+      "description": "Specifies how the customer enters a custom tip amount. Additional Tip Amount - customer enters the tip amount to be added to the total (default). Total Amount Including Tip - customer enters the total transaction amount and tip is calculated automatically, used in markets where a round-up tip strategy is common. - Possible values are: Tip Amount-0,Total Amount including Tip-1.",
+      "type": "string"
+    },
+    "TipLimit": {
+      "description": "Defines the maximum percentage of the transaction amount that can be added as a tip. If this is exceeded, a warning is prompted.",
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "TipLimitAmount": {
+      "description": "Defines the maximum amount that can added to the transaction as a tip. When the tip amount exceeds this limit, a warning is displayed. Any tip amount is allowed when TipLimitAmount set to 0.",
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "TipOverLimitAllowed": {
+      "description": "When enabled, the tip that is higher than defined by limit parameters, TipLimit (percentage) and TipLimitAmount (amount), will be allowed after confirmation.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "TipPercentages": {
+      "description": "Pre-Defines up to 4 tip percentage options for customers to choose from, after entering the purchase amount for a transaction, e.g. 10, 15, 20, 25% = 10%, 15%, 20%, 25% respectively.                 Note that the TipEnabled parameter must be enabled, and that only whole numbers are accepted as percentage values, e.g. 10% (not 10.5%).    Note also some terminal solutions only support 3 pre-defined limits.                 ",
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^(\\d{1,2},){0,3}(\\d{1,2})$"
+    },
+    "AutoSettlementEnabled": {
+      "description": "Settlement runs on a schedule.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "AutoSettlementTime": {
+      "description": "Settlement runs at this time everyday.",
+      "type": "string",
+      "maxLength": 5,
+      "minLength": 4,
+      "pattern": "^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$"
+    },
+    "SAFEnabled": {
+      "description": "Whether SAF (offline approval when device cannot go online or reach host/gateway), 1-Enabled, 0-Not enabled",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "MaxSAFAccumulativeAmount": {
+      "description": "Maximum amount of all pending SAF transactions that are allowed. Once this limit is reached, the terminal cannot approve anymore transaction as SAF",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 15,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "MaxSAFTransactionAmount": {
+      "description": "Maximum amount for a single transaction to be put into SAF. This overrides card scheme settings.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 15,
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "MerchantSurcharge": {
+      "description": "Surcharging options for different card products",
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CardProductSurcharge"
+      }
+    },
+    "RegionalParameters": {
+      "$ref": "#/components/schemas/BaseRegionalParameters"
+    },
+    "CardHolderPresent": {
+      "description": "Select if card holder is present (Always/Prompt/Never)",
+      "type": "string",
+      "enum": [
+        "Always",
+        "Prompt",
+        "Never"
+      ]
+    },
+    "MaxContactlessTransactionAmount": {
+      "description": "Maximum limit for contact less payments",
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "CommsFailFloorLimit": {
+      "description": "Maximum limit allowed by terminal when communications fail",
+      "type": "number",
+      "format": "decimal",
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$",
+      "deprecated": true
+    },
+    "VoiceAuthRefferalLimit": {
+      "description": "Maximum limit allowed for voice referral",
+      "type": "number",
+      "format": "decimal",
+      "pattern": "^[0-9]+(\\.[0-9]{2})?$"
+    },
+    "VoiceAuthRefferalCode": {
+      "description": "Voice Referral floor limit authorisation code",
+      "type": "string"
+    },
+    "CommerceTriggersEnabled": {
+      "description": "Enable commerce triggers.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "ContactlessCvmRequiredLimit": {
+      "description": "The contactless limit which CVM is required. If this is set it will override any defaults set for card brands in the EMV config - unless these defaults are more restrictive.",
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[a-fA-F0-9]*$"
+    },
+    "OfflineFloorLimit": {
+      "description": "The limit which transactions can be approved offline. Generally this is now set to zero (0). If this is set it will override any defaults set for card brands in the EMV config - unless these defaults are more restrictive.",
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[a-fA-F0-9]*$"
+    },
+    "CashEnabled": {
+      "description": "Enables Cash handling for the terminal.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "DualPricingEnabled": {
+      "description": "Enable Dual Pricing for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "DccEnabled": {
+      "description": "Enable Dynamic Currency Conversion for this merchant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-1]"
+    },
+    "DualPricingAdjustmentRate": {
+      "description": "Adjustment rate in dual pricing payment option.",
+      "type": "number",
+      "format": "decimal",
+      "pattern": "^-?\\d+(\\.\\d+)?$"
+    },
+    "DualPricingTipBasis": {
+      "description": "0 - When the original subtotal is set 0, the tip suggestions \n    are calculated using the original subtotal requested from the POS.\n\n1 - When the original subtotal is set 1, the tip suggestions are calculated \n    using the adjusted subtotal chosen by the customer from the dual pricing payment options.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1
+    },
+    "TransactionCurrencyCode_5F2A": {
+      "description": "5F2A Currency Code for the Terminal.",
+      "type": "string",
+      "maxLength": 4,
+      "minLength": 4,
+      "pattern": "^[a-fA-F0-9]*$"
+    },
+    "TransactionCurrencyExponent_5F36": {
+      "description": "5F36 Currency Exponent based on the country code for the Terminal.",
+      "type": "string",
+      "maxLength": 2,
+      "minLength": 2,
+      "pattern": "^[a-fA-F0-9]*$"
+    },
+    "CustomCurrencySymbol": {
+      "description": "Custom Currency Code symbol for the Terminal based on country.",
+      "type": "string",
+      "maxLength": 3,
+      "minLength": 3,
+      "pattern": "^[A-Z]*$"
+    },
+    "CurrencyCode": {
+      "$ref": "#/components/schemas/CurrencyCodeEnum"
+    },
+    "NumberFormatLocale": {
+      "description": "Locale for number formatting.",
+      "type": "string",
+      "maxLength": 8,
+      "minLength": 0,
+      "pattern": "^[a-zA-Z-]*$"
+    },
+    "SurchargeRefundMethod": {
+      "description": "Surcharge Refund Method 0- Default When Purchase Surcharge is Not Enabled 2- When Purchase Surcharge Enabled",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "pattern": "[0-2]"
+    }
+  }
+}

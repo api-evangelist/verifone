@@ -1,0 +1,459 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-gatewaytransactions.json",
+  "title": "GatewayTransactions",
+  "description": "GatewayTransactions from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "title": "Transaction ID",
+      "description": "The unique transaction id. This is the identifier to be used for locating the transaction and for reconciliation and auditing."
+    },
+    "amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "acquirer_authorizing_network_id": {
+      "$ref": "#/components/schemas/acquirerAuthorizingNetworkID"
+    },
+    "acquirer_authorizing_network_id_descriptor": {
+      "$ref": "#/components/schemas/acquirerAuthorizingNetworkIdDescriptor"
+    },
+    "acquirer_response_code": {
+      "$ref": "#/components/schemas/acquirerResponseCode"
+    },
+    "acquirer_response_message": {
+      "$ref": "#/components/schemas/acquirerResponseMessage"
+    },
+    "currency_code": {
+      "type": "string",
+      "title": "Currency code",
+      "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond to ISO 4217.",
+      "enum": [
+        "AED",
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LVL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XTS",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMK",
+        "ZMW",
+        "BTC"
+      ]
+    },
+    "city": {
+      "type": "string",
+      "description": "The city resolved from the customer's ip address."
+    },
+    "country_code": {
+      "type": "string",
+      "title": "<iso3166-alpha2>",
+      "description": "The country code resolved from the customer's ip address."
+    },
+    "created_at": {
+      "type": "string",
+      "title": "<date-time>",
+      "description": "The time at which the transaction was created"
+    },
+    "customer": {
+      "type": "string",
+      "description": "The ID of a customer."
+    },
+    "customer_ip": {
+      "type": "string",
+      "title": "<ipv4>",
+      "maxLength": 45,
+      "description": "The IP Address v4 where the event originated."
+    },
+    "dynamic_descriptor": {
+      "type": "string",
+      "description": "A short reference / descriptor that will show up on the customers bank statement. Please refer to the card payment integration guide for the format requirements, which are specific per card processor."
+    },
+    "geo_location": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "The latitude / longitude resolved from the customer's ip address."
+      }
+    },
+    "payment_account_reference": {
+      "type": "string",
+      "description": "Payment Account Reference is a unique non-sensitive reference to the cardholder PAN."
+    },
+    "payment_product": {
+      "type": "string",
+      "description": "The payment product corresponding to this transaction."
+    },
+    "payment_product_type": {
+      "$ref": "#/components/schemas/PaymentProductType"
+    },
+    "processor_reference": {
+      "type": "string",
+      "description": "Reference identifying the transaction, as provided by the processor."
+    },
+    "status": {
+      "title": "Transaction order status",
+      "type": "string",
+      "description": "Display transaction type and status, including if partial, of the related order transaction. E.g. 'PARTIAL CAPTURE AUTHORIZED'."
+    },
+    "transaction_type": {
+      "$ref": "#/components/schemas/TransactionType"
+    },
+    "transaction_status": {
+      "$ref": "#/components/schemas/TransactionState"
+    },
+    "parent_id": {
+      "title": "Related Transaction ID",
+      "type": "string",
+      "description": "The transaction id of a parent transaction, where the current transaction is an action based on a previous transactions."
+    },
+    "reason_code": {
+      "type": "string",
+      "description": "A reason code assigned by the acquiring platform; '0000' in case of success.",
+      "maxLength": 4
+    },
+    "card_brand": {
+      "$ref": "#/components/schemas/CardBrand"
+    },
+    "shipping_information": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingInformation"
+        },
+        {
+          "title": "Shipping Address",
+          "description": "The address where the purchased goods should be delivered to.\n<br><b>Please use customer_details.shipping.</b>",
+          "deprecated": true
+        }
+      ]
+    },
+    "customer_details": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CustomerDetailsDto"
+        }
+      ]
+    },
+    "merchant_reference": {
+      "type": "string",
+      "title": "Merchant reference",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The full user agent string of the device the customer used to submit the transaction."
+    },
+    "arn": {
+      "type": "string",
+      "title": "Acquirer reference number",
+      "description": "Acquirer reference number. Generated by the Acquirer at the time of clearing for card transactions."
+    },
+    "authorization_code": {
+      "type": "string",
+      "description": "An authorization code assigned by the processing platform."
+    },
+    "avs_result": {
+      "type": "string",
+      "description": "Address verification services result, which provides information about the outcome of the AVS check. The full list of codes and descriptions can be found <a href=\"https://docs.verifone.com/online-payments/fraud-management/address-verification-service-avs\">here</a>",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "I",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "R",
+        "S",
+        "T",
+        "U",
+        "W",
+        "X",
+        "Y",
+        "Z"
+      ]
+    },
+    "created_by": {
+      "type": "string",
+      "description": "The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order."
+    },
+    "cvv_present": {
+      "type": "boolean",
+      "description": "True if the card was used with a cvv."
+    },
+    "cvv_result": {
+      "type": "string",
+      "description": "CVV verification result, as returned by the processor. Refer to Key Concepts->Cards for understanding of the values.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "processor_payer_id": {
+      "type": "string",
+      "title": "Processor Payer Id",
+      "description": "This is the id used by the processor (e.g. an APM provider) for the payer."
+    },
+    "pos_device_id": {
+      "type": "string",
+      "description": "dentifier of the POS device used for the transaction."
+    },
+    "rrn": {
+      "type": "string",
+      "title": "Retrieval Reference Number",
+      "description": "Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system."
+    },
+    "shopper_interaction": {
+      "type": "string",
+      "description": "Determines the point of sale of a customer. Possible values: pos, moto, mail_order, telephone_order, ecommerce and cont_auth.",
+      "enum": [
+        "ecommerce",
+        "pos",
+        "moto",
+        "mail_order",
+        "telephone_order",
+        "unknown"
+      ]
+    },
+    "stan": {
+      "type": "string",
+      "maxLength": 40,
+      "title": "System Trace Audit Number.",
+      "description": "A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI. ISO8583 DE11."
+    },
+    "threed_authentication": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ThreeDSecure"
+        },
+        {
+          "description": "MPI authentication data. Please refer to the integration guide for information on its usage."
+        }
+      ]
+    },
+    "masked_card_number": {
+      "type": "string",
+      "title": "Masked PAN number",
+      "description": "Masked PAN number, the first 6 and last 4 digits of the card.",
+      "maxLength": 16
+    },
+    "promo_code": {
+      "type": "string",
+      "description": "A code defined by the merchant that affects the calculation of the total amount."
+    },
+    "payment_summary": {
+      "type": "object",
+      "title": "Summary of payment flow related information",
+      "properties": {
+        "captured_amount": {
+          "allOf": [
+            {
+              "title": "Captured Amount"
+            },
+            {
+              "$ref": "#/components/schemas/amountDecimal"
+            }
+          ]
+        }
+      }
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "The identifier of merchant entity you want to process the transaciton is already processed.",
+      "format": "uuid-flexible"
+    },
+    "acquirer_merchant_id": {
+      "type": "string",
+      "description": "The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor.",
+      "maxLength": 36
+    },
+    "description": {
+      "type": "string",
+      "description": "The description/message associated with this transaction. This will contain the refund reason for refunds."
+    },
+    "detailed_amount": {
+      "$ref": "#/components/schemas/ListDetailedAmount"
+    }
+  }
+}

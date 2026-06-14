@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-shippingaddress.json",
+  "title": "shippingAddress",
+  "description": "shippingAddress from PayPal eComm API",
+  "required": [
+    "addressLine1",
+    "city",
+    "country",
+    "countrySubdivision",
+    "postalCode"
+  ],
+  "type": "object",
+  "properties": {
+    "fullName": {
+      "type": "string",
+      "description": "Full Name"
+    },
+    "addressLine1": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address."
+    },
+    "addressLine2": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "The second line of the address. For example, suite or apartment number."
+    },
+    "city": {
+      "maxLength": 120,
+      "type": "string",
+      "description": "A city, town, or village. Smaller than admin_area_level_1"
+    },
+    "countrySubdivision": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision."
+    },
+    "country": {
+      "maxLength": 2,
+      "minLength": 2,
+      "pattern": "^([A-Z]{2}|C2)$",
+      "type": "string",
+      "description": "The two-character ISO 3166-1 code that identifies the country or region."
+    },
+    "postalCode": {
+      "maxLength": 60,
+      "type": "string",
+      "description": "The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent."
+    }
+  }
+}

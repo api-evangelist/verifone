@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-serialnumber.json",
+  "title": "SerialNumber",
+  "description": "The serial number of the physical device",
+  "type": "string",
+  "maxLength": 25
+}

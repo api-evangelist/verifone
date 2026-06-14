@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-mimetype.json",
+  "title": "MimeType",
+  "description": "The MIME type of this report.",
+  "type": "string",
+  "enum": [
+    "application/pdf",
+    "text/csv",
+    "text/plain"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "operationId": "getV2CustomerById",
+  "summary": "Get Customer",
+  "method": "GET",
+  "path": "/v2/customer/{customerId}",
+  "responseExample": {
+    "created_at": "2025-01-01T00:00:00Z",
+    "entity_id": "string",
+    "id": "string",
+    "updated_at": "2025-01-01T00:00:00Z"
+  }
+}

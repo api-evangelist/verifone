@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-terminalparameters.json",
+  "title": "Parameters",
+  "description": "Deprecated - Please use `paymentAppParameters`.",
+  "type": "object",
+  "deprecated": true,
+  "properties": {
+    "transactionOptions": {
+      "$ref": "#/components/schemas/TransactionOptions"
+    },
+    "limits": {
+      "$ref": "#/components/schemas/TransactionLimits"
+    },
+    "receiptOptions": {
+      "$ref": "#/components/schemas/ReceiptOptions"
+    },
+    "tipOptions": {
+      "$ref": "#/components/schemas/TipOptions"
+    }
+  }
+}

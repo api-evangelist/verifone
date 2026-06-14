@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-paymentconfigurations.json",
+  "title": "PaymentConfigurations",
+  "description": "Payment method configurations",
+  "type": "object",
+  "properties": {
+    "card": {
+      "$ref": "#/components/schemas/CardConfiguration"
+    },
+    "gpp2": {
+      "$ref": "#/components/schemas/GPP2PaymentConfig"
+    },
+    "gift_card": {
+      "$ref": "#/components/schemas/gift_card"
+    },
+    "paypal": {
+      "$ref": "#/components/schemas/PaypalPaymentConfig"
+    },
+    "google_pay": {
+      "$ref": "#/components/schemas/GooglePayPaymentConfig"
+    },
+    "apple_pay": {
+      "$ref": "#/components/schemas/apple_pay"
+    },
+    "klarna": {
+      "$ref": "#/components/schemas/KlarnaPaymentConfig"
+    },
+    "vipps": {
+      "$ref": "#/components/schemas/VippsPaymentConfigRequest"
+    },
+    "swish": {
+      "$ref": "#/components/schemas/swish_req"
+    },
+    "mobile_pay": {
+      "$ref": "#/components/schemas/mobile_pay_req"
+    },
+    "bank": {
+      "$ref": "#/components/schemas/bank"
+    },
+    "plcc": {
+      "$ref": "#/components/schemas/plcc"
+    }
+  }
+}

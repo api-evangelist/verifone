@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-swishpaymentinitiationrequest.json",
+  "title": "Swish Payment Initiation Request",
+  "description": "swishPaymentInitiationRequest from Verifone eCommerce API",
+  "required": [
+    "amount",
+    "currency_code",
+    "merchant_reference",
+    "payment_provider_contract"
+  ],
+  "type": "object",
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "description": "The identifier of merchant entity you want to process the transaction request with. Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)",
+      "format": "uuid-flexible"
+    },
+    "app_phone_number": {
+      "maxLength": 18,
+      "type": "string",
+      "description": "The Phone Number registered with Swish Mobile APP. This field is required for ECommerce flow, not needed MCommerce flow."
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "customer": {
+      "type": "string",
+      "description": "The ID of a customer.",
+      "format": "uuid-flexible",
+      "title": "Customer ID"
+    },
+    "customer_ip": {
+      "description": "The IP Address of the customer where the transaction was initiated.",
+      "maxLength": 15,
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "ipv4"
+        },
+        {
+          "type": "string",
+          "format": "ipv6"
+        }
+      ]
+    },
+    "dynamic_descriptor": {
+      "type": "string",
+      "description": "A short [descriptor](https://en.wikipedia.org/wiki/Billing_descriptor) to be  shown on bank statement of the customer and also shown in the Swish application. Max 50 chars, allowed characters are the letters a-\u00f6, A-\u00d6, the numbers 0-9 and the special characters :;.,?!()\u201d and space",
+      "maxLength": 50
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "shipping_information": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingInformationDto"
+        }
+      ]
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The full user agent string of the device the customer used to submit the transaction.",
+      "maxLength": 256
+    },
+    "sales_description": {
+      "type": "string",
+      "description": "A reference used by the merchant to typically capture a description of the service provided. It could then be used by the merchant to help locate transactions. One could envision a situation where a merchant is trying to locate a transaction/ receipt but in speaking with the customer, the only (or at least a predominant) detail is what service was rendered",
+      "maxLength": 200
+    },
+    "currency_code": {
+      "title": "Currency Code",
+      "type": "string",
+      "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond\nto [ISO 4217](https://wikipedia.org/wiki/ISO_4217).\n\nPlease note that Swish only supports Swedish krona (SEK).",
+      "enum": [
+        "SEK"
+      ]
+    }
+  }
+}

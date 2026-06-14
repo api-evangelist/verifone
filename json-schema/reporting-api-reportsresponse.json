@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-reportsresponse.json",
+  "title": "ReportsResponse",
+  "description": "ReportsResponse from Reporting API",
+  "type": "object",
+  "properties": {
+    "totals": {
+      "type": "integer",
+      "description": "Total number of reports. The total number of reports matching the search criteria, which can be larger than the number of elements in the array \"reports\" (which is upper bound by the \"pageSize\" parameter from the query request)."
+    },
+    "reports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ReportRecord"
+      }
+    }
+  }
+}

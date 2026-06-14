@@ -1,0 +1,9 @@
+{
+  "operationId": "getSubscriptionsId",
+  "summary": "Subscription Details",
+  "method": "GET",
+  "path": "/subscriptions/{id}",
+  "responseExample": {
+    "planId": "string"
+  }
+}

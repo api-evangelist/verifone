@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-locale.json",
+  "title": "Locale",
+  "description": "JSON schema for locale. Based off the BCP-47 language tag, ISO-3166 alpha-2 country code, and Olsen IANA time zone ID.",
+  "required": [
+    "countryCode"
+  ],
+  "type": "object",
+  "properties": {
+    "countryCode": {
+      "title": "Country Code",
+      "type": "string",
+      "description": "The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>."
+    },
+    "language": {
+      "$ref": "#/components/schemas/Language"
+    },
+    "timezoneId": {
+      "$ref": "#/components/schemas/TimeZone"
+    }
+  }
+}

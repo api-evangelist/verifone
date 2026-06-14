@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-application_context.json",
+  "title": "application_context",
+  "description": "Application context details",
+  "type": "object",
+  "properties": {
+    "brandName": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The label that overrides the business name in the PayPal account on the PayPal site."
+    },
+    "locale": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The BCP 47-formatted locale of pages that the PayPal payment experience shows.   PayPal supports a five-character code.  For example, da-DK, he-IL, id-ID, ja-JP, no-NO, pt-BR, ru-RU, sv-SE, th-TH, zh-CN, zh-HK, or zh-TW."
+    },
+    "landingPage": {
+      "type": "string",
+      "description": "The    type of landing page to show on the PayPal site for customer checkout. default will be NO_PREFERENCE Possible Values: <br />  * BILLING - When the customer clicks PayPal Checkout, the customer is redirected to a page to log in to PayPal and approve the payment. <br />  * LOGIN - When the customer clicks PayPal Checkout, the customer is redirected to a page to enter credit or debit card and other relevant billing information required to complete the purchase. <br />  * NO_PREFERENCE - When the customer clicks PayPal Checkout, the customer is redirected to either a page to log in to PayPal and approve the payment or to a page to enter credit or debit card and other relevant billing information required to complete the purchase, depending on their previous interaction with PayPal. <br />",
+      "enum": [
+        "BILLING",
+        "LOGIN",
+        "NO_PREFERENCE"
+      ]
+    },
+    "shippingPreference": {
+      "type": "string",
+      "description": "The shipping preference:\n* Redact the shipping address from the PayPal site. Recommended for digital goods.\n* Use the customer-provided shipping address on the PayPal site.\n* Use the merchant-provided address. The customer cannot change this address on the PayPal site.",
+      "enum": [
+        "NoShipping",
+        "CustomerProvided",
+        "MerchantProvided"
+      ]
+    },
+    "paymentPreference": {
+      "type": "string",
+      "description": "The merchant-preferred payment methods:\n* Accepts any type of payment from the customer.\n* Accepts only immediate payment from the customer. For example, credit card, PayPal balance, or instant ACH.",
+      "enum": [
+        "Any",
+        "Immediate"
+      ]
+    },
+    "shopperAuthorization": {
+      "type": "string",
+      "description": "NACHA (the regulatory body governing the ACH network) requires that API callers (merchants, partners) obtain the consumer\u2019s explicit authorization before initiating a transaction. ACH transactions are categorized (using SEC codes) by how you capture authorization from the Receiver (the person whose bank account is being debited or credited). PayPal supports the following SEC codes.\n* <b>TEL.</b> The API caller (merchant/partner) accepts authorization and payment information from a consumer over the telephone.\n* <b>WEB.</b> The API caller (merchant/partner) accepts Debit transactions from a consumer on their website.\n* <b>CCD.</b> Cash concentration and disbursement for corporate debit transaction. Used to disburse or consolidate funds. Entries are usually Optional high-dollar, low-volume, and time-critical. (e.g. intra-company transfers or invoice payments to suppliers).\n* <b>PPD.</b> Prearranged payment and deposit entries. Used for debit payments authorized by a consumer account holder, and usually initiated by a company. These are usually recurring debits (such as insurance premiums).",
+      "enum": [
+        "TEL",
+        "WEB",
+        "CCD",
+        "PPD"
+      ]
+    },
+    "returnUrl": {
+      "type": "string",
+      "description": "The URL where the customer is redirected after the customer approves the payment"
+    },
+    "cancelUrl": {
+      "type": "string",
+      "description": "The URL where the customer is redirected after the customer cancels the payment"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-theme.json",
+  "title": "Theme",
+  "description": "Theme parameters",
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "maxLength": 255,
+      "type": "string"
+    },
+    "logo": {
+      "type": "string",
+      "description": "Uploaded image Id"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)"
+    },
+    "base_font_family": {
+      "type": "string",
+      "description": "base fonts available for theme",
+      "enum": [
+        "Roboto",
+        "Open Sans",
+        "Lato",
+        "Slabo",
+        "Oswald",
+        "Source Sans Pro",
+        "Montserrat",
+        "Raleway",
+        "PT Sans",
+        "Lora",
+        "Noto Sans",
+        "Noto Serif",
+        "Nunito Sans",
+        "Concert One",
+        "Prompt",
+        "Work Sans"
+      ]
+    },
+    "text_color": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "heading_color": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "background_color": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "panel_background_color": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "primary_color": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "primary_color_inverse": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "primary_color_disabled": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "primary_color_inverse_disabled": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "error_color": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "error_color_inverse": {
+      "type": "string",
+      "description": "6 digit hex code, e.g. <code>ffe0e0</code>"
+    },
+    "input_border_radius": {
+      "type": "number"
+    },
+    "input_border_width": {
+      "type": "number"
+    },
+    "hide_verifone_seal": {
+      "type": "boolean",
+      "description": "Show/Hide verifone seal on the checkout page"
+    },
+    "config": {
+      "$ref": "#/components/schemas/config"
+    },
+    "id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

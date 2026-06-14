@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-shipping-address.json",
+  "title": "Shipping-Address",
+  "description": "Shipping Address details",
+  "type": "object",
+  "properties": {
+    "country": {
+      "type": "string",
+      "description": "The two-character ISO 3166-1 code that identifies the country or region.",
+      "minLength": 2,
+      "maxLength": 2,
+      "pattern": "^([A-Z]{2}|C2)$"
+    },
+    "postalCode": {
+      "type": "string",
+      "description": "The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.",
+      "maxLength": 60
+    },
+    "countrySubdivision": {
+      "type": "string",
+      "description": "The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.",
+      "maxLength": 300
+    },
+    "city": {
+      "type": "string",
+      "description": "A city, town, or village. Smaller than admin_area_level_1",
+      "maxLength": 120
+    },
+    "addressLine2": {
+      "type": "string",
+      "description": "The second line of the address. For example, suite or apartment number.",
+      "maxLength": 300
+    },
+    "addressLine1": {
+      "type": "string",
+      "description": "The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.",
+      "maxLength": 300
+    },
+    "fullName": {
+      "type": "string",
+      "description": "The name of the person to whom to ship the items."
+    }
+  },
+  "required": [
+    "country",
+    "postalCode"
+  ]
+}

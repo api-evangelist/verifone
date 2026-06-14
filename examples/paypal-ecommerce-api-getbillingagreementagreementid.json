@@ -1,0 +1,11 @@
+{
+  "operationId": "getBillingagreementAgreementid",
+  "summary": "Get agreement details",
+  "method": "GET",
+  "path": "/billingAgreement/{agreementId}",
+  "responseExample": {
+    "createTime": "string",
+    "id": "string",
+    "state": "string"
+  }
+}

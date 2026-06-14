@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-card_mode.json",
+  "title": "card_mode",
+  "description": "- `PAYMENT` - A checkout is created with the intent to perform a card payment. Verifone takes care of the full payment process and returns the final transaction response to the merchant, alongside any related details to it. Requires providing payment provider contract details. <br>\n- `3DS_PAYMENT` - Same as `PAYMENT` but with performing 3DS verification. <br>\n- `CARD_CAPTURE` - A checkout is created with intent to retrieve customer's card data. The checkout captures the card data of the shopper, encrypts it and returns it to the Merchant. The Merchant then uses the encrypted card data to perform 3DS and/or payments with it.<br /> The following fields are not required: <br />  * amount <br />  * currency_code <br />  * receipt_type <br /> Note: This option only returns an encrypted card in the end of the checkout process, no transaction is performed. You must perform the read checkout to get the encrypted card.\n- `3DS` - A checkout is created with intent to perform 3DS verification for the cardholder. The checkout captures the card data and performs 3DS verification with it and returns both card data and 3DS results to the Merchant. The merchant then can then use the encrypted card data to perform a payment with it. Requires providing 3DS contract details.",
+  "type": "string",
+  "enum": [
+    "PAYMENT",
+    "3DS_PAYMENT",
+    "CARD_CAPTURE",
+    "3DS"
+  ]
+}

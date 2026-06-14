@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-genericerror400.json",
+  "title": "HTTP 400 Error",
+  "description": "The request could not be understood by the server due to malformed syntax.",
+  "required": [
+    "code",
+    "message",
+    "title",
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "400"
+      ],
+      "default": "400"
+    },
+    "title": {
+      "type": "string",
+      "enum": [
+        "Bad Request"
+      ],
+      "default": "Bad Request"
+    },
+    "message": {
+      "type": "string",
+      "default": "The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications."
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone.",
+      "format": "date-time"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "INVALID_REQUEST_ERROR"
+      ],
+      "default": "INVALID_REQUEST_ERROR"
+    },
+    "param": {
+      "type": "string",
+      "description": "The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-tokendetailsrequestbody.json",
+  "title": "Reuse Token Details",
+  "description": "The details related to the token. For Third-Party Reuse tokens, these elements might be required as additional information together with the Reuse token itself.<br>\n**Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.\n",
+  "type": "object",
+  "properties": {
+    "expiry_month": {
+      "maximum": 12,
+      "type": "integer",
+      "description": "A 2 digit value as shown on card. ISO8583 - DE 14.\\n\\nThis is included as an optional value to be used for some Third-Party reuse token types."
+    },
+    "expiry_year": {
+      "maximum": 9999,
+      "type": "integer",
+      "description": "A 4 digit value as shown on card.\\n\\nThis is included as an optional value to be used for some Third-Party reuse token types."
+    }
+  },
+  "additionalProperties": false
+}

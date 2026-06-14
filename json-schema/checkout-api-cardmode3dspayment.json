@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-cardmode3dspayment.json",
+  "title": "CardMode3DSPayment",
+  "description": "CardMode3DSPayment from Checkout API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/basic_card"
+    },
+    {
+      "type": "object",
+      "required": [
+        "threed_secure",
+        "payment_contract_id"
+      ],
+      "properties": {
+        "threed_secure": {
+          "$ref": "#/components/schemas/threed_secure"
+        },
+        "dynamic_descriptor": {
+          "maxLength": 25,
+          "type": "string",
+          "description": "Value is displayed as short text on the bank statement of the cardholder"
+        },
+        "capture_now": {
+          "type": "boolean",
+          "description": "True - transaction will be sent as authCapture and automatically captured. <br /> False - transaction will be sent as auth and only authorized. NOT CAPTURED. <br /> If you don't have any value in the capture_now parameter, at the moment of the call the value will be set as TRUE. ",
+          "default": true
+        },
+        "shopper_interaction": {
+          "type": "string",
+          "description": "Used to indicate the channel used by to send they checkout link <br /> * ECOMMERCE",
+          "enum": [
+            "ECOMMERCE"
+          ]
+        },
+        "account_validation": {
+          "type": "boolean",
+          "description": "Indicates whether the card transaction should be processed as Account Validation request instead. If set to true, the amount provided for the Checkout would be ignored and the transaction be processed with amount: 0",
+          "default": false
+        },
+        "authorization_type": {
+          "type": "string",
+          "description": "Card Authorization Type (PRE_AUTH, FINAL_AUTH).  When capture now is set to true pre-authorization transactions cannot be done.",
+          "default": "FINAL_AUTH"
+        },
+        "payment_contract_id": {
+          "$ref": "#/components/schemas/payment_contract_id"
+        },
+        "token_preference": {
+          "$ref": "#/x-alt-definitions/card_token_preference"
+        },
+        "credit_term": {
+          "type": "string",
+          "description": "Determines the transaction type. Only applicable for ABS Acquirer. Available options: <br /> STANDARD - Sale <br /> PREFERRED - Sale - Preferred Isracard <br /> DEBIT - Sale - Direct Debit <br /> INSTALMENT_STANDARD - Instalment standard <br /> INSTALMENT_CREDIT - Instalment credit<br />",
+          "enum": [
+            "DEBIT",
+            "STANDARD",
+            "PREFERRED",
+            "INSTALMENT_CREDIT",
+            "INSTALMENT_STANDARD"
+          ]
+        },
+        "instalment": {
+          "$ref": "#/components/schemas/InstalmentConfiguration"
+        },
+        "stored_credential": {
+          "$ref": "#/components/schemas/stored_credential"
+        },
+        "additional_business_data": {
+          "$ref": "#/components/schemas/additional_business_data"
+        },
+        "reuse_token": {
+          "maxLength": 4096,
+          "type": "string",
+          "description": "The identifier used to represent the Cardholder data."
+        }
+      }
+    }
+  ]
+}

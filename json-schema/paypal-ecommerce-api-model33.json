@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model33.json",
+  "title": "Model33",
+  "description": "Model33 from PayPal eComm API",
+  "required": [
+    "approvalUrl",
+    "billingToken"
+  ],
+  "type": "object",
+  "properties": {
+    "approvalUrl": {
+      "type": "string",
+      "description": "PayPal approval URL"
+    },
+    "billingToken": {
+      "type": "string",
+      "description": "Billing token"
+    }
+  }
+}

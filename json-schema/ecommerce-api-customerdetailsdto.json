@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-customerdetailsdto.json",
+  "title": "Customer",
+  "description": "Customer information containing billing and shipping details.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.",
+      "maxLength": 120
+    },
+    "first_name": {
+      "type": "string",
+      "description": "The first name of the Customer. This may be a proper name or some form of entity name or nickname.",
+      "maxLength": 100
+    },
+    "middle_name": {
+      "type": "string",
+      "description": "The middle name of the Customer. This may be a proper name or some form of entity name or nickname.",
+      "maxLength": 100
+    },
+    "last_name": {
+      "type": "string",
+      "description": "The last name or family name of the Customer.",
+      "maxLength": 100
+    },
+    "company_name": {
+      "type": "string",
+      "description": "Where the Customer is an organisation or company this name should be used rather than the firstName lastName",
+      "maxLength": 100
+    },
+    "phone_number": {
+      "type": "string",
+      "description": "Customers phone number for billing address.",
+      "maxLength": 25
+    },
+    "email_address": {
+      "type": "string",
+      "title": "email",
+      "format": "email",
+      "description": "Customer email address, which might be used during refund flow."
+    },
+    "shipping": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CustomerDetailsShippingInformationDto"
+        }
+      ]
+    },
+    "billing": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BillingDto"
+        },
+        {
+          "description": "The address of billing.",
+          "title": "Billing Address"
+        }
+      ]
+    },
+    "language": {
+      "type": "string",
+      "title": "language",
+      "description": "The BCP-47 language tag. The tag is composed of:\n\n* The ISO-639 alpha-1 or ISO-639 alpha-2 language code\n\n* (Optional) The ISO-15924 script tag\n\n* The ISO-3166 alpha-2 country code\n\n `NOTE:`The value is case-insensitive, so for example \"he\" and \"HE\" should be considered equal."
+    }
+  }
+}

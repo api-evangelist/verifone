@@ -1,0 +1,3125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/vocabulary/vocabulary.json",
+  "title": "Verifone API Vocabulary",
+  "description": "Common terms and concepts across Verifone payment APIs",
+  "terms": {
+    "ThreeDSAuthenticationList": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "ThreeDSAuthentication": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "AuthenticationResult": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API",
+        "Checkout API",
+        "Customer API"
+      ]
+    },
+    "ErrorDetails": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "LookupRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "DeviceDataInfo": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "LookupResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "3D Secure API"
+      ]
+    },
+    "CreateCheckoutRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "PaymentConfigurations": {
+      "description": "Payment method configurations",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CardConfiguration": {
+      "description": "Card payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CardMode3DSPayment": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "basic_card": {
+      "description": "Card payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "card_mode": {
+      "description": "- `PAYMENT` - A checkout is created with the intent to perform a card payment. Verifone takes care of the full payment process and returns the final transaction response to the merchant, alongside any related details to it. Requires providing payment provider contract details. <br>\n- `3DS_PAYMENT` - Same as `PAYMENT` but with performing 3DS verification. <br>\n- `CARD_CAPTURE` - A checkout is created with intent to retrieve customer's card data. The checkout captures the card data of the shopper, encrypts it and returns it to the Merchant. The Merchant then uses the encrypted card data to perform 3DS and/or payments with it.<br /> The following fields are not required: <br />  * amount <br />  * currency_code <br />  * receipt_type <br /> Note: This option only returns an encrypted card in the end of the checkout process, no transaction is performed. You must perform the read checkout to get the encrypted card.\n- `3DS` - A checkout is created with intent to perform 3DS verification for the cardholder. The checkout captures the card data and performs 3DS verification with it and returns both card data and 3DS results to the Merchant. The merchant then can then use the encrypted card data to perform a payment with it. Requires providing 3DS contract details.",
+      "type": "string",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "card_capture_mode": {
+      "description": "Method of capturing card data.\nv2 is used by default as the recommended method.\nv1 is considered deprecated and is not supported for new integrations.",
+      "type": "string",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "threed_secure": {
+      "description": "Used for <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/accepting-payments/3d-secure-payments\">3D-Secure payments</a>",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "payment_contract_id": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "InstalmentConfiguration": {
+      "description": "The details on the instalment scheme that should be enacted by the issuer. Only applicable for ABS Acquirer.",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "stored_credential": {
+      "description": "Used for transactions with <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/stored-credentials\">Stored Credentials</a>",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "consentTextDynamicValues": {
+      "description": "Optional merchant provided links to be inserted in consent text as a link for the text in brackets.",
+      "type": "array",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "processing_model_details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "payment_frequency": {
+      "description": "Payment frequencies. Used only for processing_model=RECURRING",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "additional_business_data": {
+      "description": "Merchant defined additional data fields for ABS Acquirer.",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CardMode3DS": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "shopper_interaction": {
+      "description": "Used to indicate the channel used by to send they checkout link <br /> * ECOMMERCE <br /> * MAIL - value is used only in Virtual terminal transactions and cannot be used in createCheckout API call <br /> * TELEPHONE - value is used only in Virtual terminal transactions and cannot be used in createCheckout API call <br />",
+      "type": "string",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CardModePayment": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CardModeCapture": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "GPP2PaymentConfig": {
+      "description": "GPP2 payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "gift_card": {
+      "description": "Gift Card payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "GiftCardCardConfig": {
+      "description": "Card object configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "PaypalPaymentConfig": {
+      "description": "Paypal payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "application_context": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API",
+        "PayPal eComm API"
+      ]
+    },
+    "GooglePayPaymentConfig": {
+      "description": "Google Pay payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "GooglePayCardConfigRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "ThreeDSData": {
+      "description": "Used for <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/accepting-payments/3d-secure-payments\">3D-Secure payments</a>",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "apple_pay": {
+      "description": "Apple Pay payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "ApplePayCardConfig": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "KlarnaPaymentConfig": {
+      "description": "Klarna payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "VippsPaymentConfigRequest": {
+      "description": "Vipps payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "VippsCardConfigRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "swish_req": {
+      "description": "Swish payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "mobile_pay_req": {
+      "description": "MobilePay payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "card_req": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "bank": {
+      "description": "Bank payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "op": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "plcc": {
+      "description": "Plcc payment configuration",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "plcc_mode": {
+      "description": "- `CARD_CAPTURE` - A checkout is created with intent to retrieve customer's card data. The checkout captures the card data of the shopper, encrypts it and returns it to the Merchant. The Merchant then uses the encrypted card data to perform 3DS and/or payments with it.<br /> Following fields are not required: <br />  * amount <br />  * currency_code <br />  * receipt_type\n- `PAYMENT` - A checkout is created with the intent to perform a card payment. Verifone takes care of the full payment process and returns the final transaction response to the merchant, alongside any related details to it. Requires providing payment provider contract details. <br>",
+      "type": "string",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "I18nConfiguration": {
+      "description": "Language preferences for the checkout page. Read <a target=\"_blank\" href=\"/online-payments/checkout/localization\">Localisation</a> for details.",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "notification_methods": {
+      "description": "Parameter is used for the PAYMENT_LINK interaction type in order to specify the payment link delivery method ( Email or SMS )",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "EmailNotification": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "SMSNotification": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "LineItem": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API",
+        "Verifone eCommerce API"
+      ]
+    },
+    "customer_details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "billing": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "shipping": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API",
+        "PayPal eComm API"
+      ]
+    },
+    "tax": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API",
+        "PayPal eComm API"
+      ]
+    },
+    "promo_financing_details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CardCaptureRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CreateCheckoutResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API",
+        "PayPal eComm API"
+      ]
+    },
+    "UpdateThemeRequest": {
+      "description": "Theme parameters",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "config": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "Theme": {
+      "description": "Theme parameters",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "TemplateList": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CheckoutTemplate": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "address_details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "template_field_mode": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Checkout API"
+      ]
+    },
+    "CustomerListResponse": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "Customer API"
+      ]
+    },
+    "CustomerResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Customer API"
+      ]
+    },
+    "Billing": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Customer API"
+      ]
+    },
+    "Shipping": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Customer API"
+      ]
+    },
+    "Tax": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Customer API"
+      ]
+    },
+    "CustomerRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Customer API"
+      ]
+    },
+    "EncryptedCardPaymentRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ThreedAuthenticationDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "AdditionalDataDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "StoredCredentialDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ProcessingModelDetailsDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PaymentFrequency": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ShippingInformation": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CustomerDetailsDto": {
+      "description": "Customer information containing billing and shipping details.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CustomerDetailsShippingInformationDto": {
+      "description": "The address where the purchased goods should be delivered to.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "BillingDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CardBrand": {
+      "description": "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "InstalmentDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenPreferenceDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PromoFinancingDetails": {
+      "description": "Additional details of the special financing offers to customers using private label cards, typically in combination with `promo_code` field.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenPaymentRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenDetailsRequestBody": {
+      "description": "The details related to the token. For Third-Party Reuse tokens, these elements might be required as additional information together with the Reuse token itself.<br>\n**Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.\n",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "DetailedAmount": {
+      "description": "A structure that represents a breakdown all of the different amounts that may appear on a single transaction.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "EcomResponseCard": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "StoredCredential": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "Details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ThreedAuthentication": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "AdditionalData": {
+      "description": "Additional payment result data, which may be required to return in a particular payment response.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "acquirerResponseCode": {
+      "description": "Acquirer response returned during the authorisation.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "acquirerResponseMessage": {
+      "description": "The response description generated by the acquirer corresponding to the acquirer response code.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "acquirerAuthorizingNetworkID": {
+      "description": "The Network ID returned in the original authorization response.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "acquirerAuthorizingNetworkIdDescriptor": {
+      "description": "The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "initiatorTraceId": {
+      "description": "A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI.\n This value will correspond to **ISO8583 DE11.**\n `Note: Use response.stan value for initiator_trace_id`",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "settlementDate": {
+      "description": "This will reflect either the desired Merchant settlement date or the actual settlement date depending where the transaction request is within the payment lifecycle. A transaction may be assigned an intended settlement date, but it is possible that this date will not occur for technical reasons hence there should be a subsequent event to indicate the actual date of settlement. Format is date only as per RFC 3339.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenDetails": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "issuerCountryEnum": {
+      "description": "The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PromoFinancingResults": {
+      "description": "Details of the special financing offer returned from the issuer.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ecomPaymentResponse_issuer_instalment_result": {
+      "description": "Issuer-managed instalment response. May be used to inform on supported instalment options for the transaction in specific programs (e.g., Mastercard Instalment Payment Service).",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "paymentPlanOption": {
+      "description": "An instalment plan option available for the transaction. Instalments are managed by the issuer. To the merchant this is just another transaction.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "amountDecimal": {
+      "description": "Amount including decimal place.",
+      "type": "number",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "BadRequestV2Docs": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "UnauthorizedV2Docs": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ForbiddenV2Docs": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "NotFoundV2Docs": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "InternalErrorV2Docs": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CreateWalletDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "VerificationAdvice": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ApplePayMerchantValidationDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "vippsPaymentInitiationRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ThreeDSecure": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ShippingInformationDto": {
+      "description": "The address where the purchased goods should be delivered to.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "vippsPaymentInitiationResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ecomPaymentResponse_details": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PaymentProductType": {
+      "description": "The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "mobilePayPaymentInitiationRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "mobilePayPaymentInitiationResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "klarnaPaymentInitiationRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "Locale": {
+      "description": "JSON schema for locale. Based off the BCP-47 language tag, ISO-3166 alpha-2 country code, and Olsen IANA time zone ID.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "Language": {
+      "description": "The BCP-47 language tag. Composed of:<ul><li>The ISO-639 alpha-1 or ISO-639 alpha-2 language code</li><li>(Optional) The ISO-15924 script tag</li><li>The ISO-3166 alpha-2 country code</li></ul>",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TimeZone": {
+      "description": "A time zone, following the format defined in the IANA tz database (https://www.iana.org/time-zones). Valid examples are America/New_York and Etc/UTC. Do not use ambiguous, non-qualified values such as EST or GB. Before including this type in your interface, please consider whether it is actually appropriate to convey time zone information with your type. It is almost always the case that this should be transformed from UTC at the time of display to the user; this type might therefore be most associated with user-preference APIs.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API",
+        "Verifone Order API"
+      ]
+    },
+    "klarnaPaymentInitiationResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "swishPaymentInitiationRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "swishPaymentInitiationResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "opOnlinePaymentInitiationRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CurrencyCodeEnum": {
+      "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond\nto [ISO 4217](https://wikipedia.org/wiki/ISO_4217).\n\n<b>Deprecated:</b> `BYR` (replaced by BYN), `FRF` (replaced by EUR), `LTL` (replaced by EUR), `LVL` (replaced by EUR), `MRO` (replaced by MRU), `STD` (replaced by STN), `USS` (no replacement), `VEF`  (replaced by VES), `ZMK` (replaced by ZMV) and `BTC` (Bitcoin only supported as Crypto Amount).",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API",
+        "Verifone Order API"
+      ]
+    },
+    "opOnlinePaymentInitiationResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "opOnlinePaymentGetBanksResponse": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "affirmPaymentInitiationRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "affirmLineItem": {
+      "description": "The description of item(s) that was included in a transaction or purchase.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "affirmPaymentInitiationResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "EcomResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "klarnaPaymentCompletionRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "RefusalReason": {
+      "description": "The reason a transaction has been refused within the payment ecosystem by the client/Verifone/acquirer. This needs to be set by the component that is refusing this transaction request.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "klarnaPaymentCompletionResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "klarnaPaymentCompletionResponse_authorized_payment_method": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "AdjustDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CaptureCardTransactionDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "MultipleCapturesDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "instalment": {
+      "description": "The details on the instalment-scheme that should be enacted by the issuer.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "UnmatchedLineItem": {
+      "description": "The description of item(s) that was included in a transaction or purchase.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "RefundCardTransactionDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "unmatchedRefundEncryptedCardRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "unmatchedRefundBaseRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "unmatchedRefundTokenRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "EcomReverseTransactionResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ReleasePreauthDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "issuerInstalmentSelectionRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "affirmPaymentCompletionRequest": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "affirmPaymentCompletionResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "GatewayTransaction": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "amountString": {
+      "description": "Amount including decimal place.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TransactionType": {
+      "description": "A type indicator for the main operation or service that was performed as part of the transaction event.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TransactionState": {
+      "description": "This represents the available states that a transaction may have. At any given point it may only have a single state.",
+      "type": "string",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenDetailsPartial": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "ListDetailedAmount": {
+      "description": "A structure that represents a breakdown all of the different amounts that may appear on a single transaction.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "GatewayTransactions": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CountTransactionResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PutDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenContextDto": {
+      "description": "The context and identifiers related to the token request. **Mandatory** for external Third-Party tokens. Use of the /v2/card endpoint:\n\n  * If reuse_token_type = INTERNAL => then token_scope mandatory; token_context optional, and only token_context.entity_id would be used (if provided);\n\n  * If reuse_token_type = CHASE or TAVE => then token_context must be provided, with at least one of entity_id or payment_provider_contract; If CHASE or TAVE token requested without neither PPC nor entity_id, request will be declined.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "CardResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "BinDetails": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "SchemeToken": {
+      "description": "This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "TokenResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PatchDto": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "PatchTokenResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone eCommerce API"
+      ]
+    },
+    "MerchantOrder": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BaseOrderData": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "OrderReference": {
+      "description": "Client reference for the Order.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PaymentDetails": {
+      "description": "Details of how the order will be paid, and the further re-occuring billing for services.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "VariableResponseType": {
+      "description": "Variable/Value Pairs.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PackageDetails": {
+      "description": "Select the base package, hardware and additional services for this order.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BundleAndPrice": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PackageBundleId": {
+      "description": "The Verifone allocated ID for the package bundle.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "AmountSimple": {
+      "description": "The value, which can be anything from:\n- An integer. For currencies that are not typically fractional, such as `JPY`. - A three-place decimal fraction. For currencies that are subdivided into thousandths, such as `TND`.\n*The required number of decimal places for a currency code is according to [ISO 4217](https://wikipedia.org/wiki/ISO_4217). However the following table documents exception to ISO 4217 that is also allowed:*\n\n|Code|Currency|Decimals|Fixed minor units|\n|--------|-----------|---------|-----------|\n|ISK|Iceland Krona|2|.00|\n",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ServicePackages": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "AdjustedPriceType": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BaseProcessorParameters": {
+      "description": "Payment Processor Parameters related to Merchant onboarding.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ThreeDSecureMerchantIdentifiers": {
+      "description": "Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.\nIn cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.\nFor example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:\n* One used for SafeKey (3DS authentication) * Another used for authorization via the acquirer or gateway",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PaymentTypeEnum": {
+      "description": "A type indicator for the payment that is being processed. Value `GIFT` is deprecated.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BundleAndPriceAndData": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MerchantContract": {
+      "description": "Used if merchant contract is to be processed",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ContactAddressType": {
+      "description": "A Contact and their address details.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ContractContactType": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ContactTypeEnum": {
+      "description": "An indicator for the type of contact.\n\n|Value|Description|\n|----|-----------|\n|BUSINESS|Generic business contact information, e.g. info@example.com|\n|DISPUTE_HANDLING|Generic contact information specific to dispute handling, e.g. disputes@example.com|\n|OWNER|Individual contact information of the owner of the Entity, e.g. ben.jerry@example.com|\n|PERSONAL|Personal contact information of the person representing the Entity, e.g. bjerr83@example-personal-email-domain.com|",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ContactName": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "Name": {
+      "description": "An object representing the name or component names of a party, person or business. No elements are mandatory due to the different usages, but the business rules need to be applied in the context where name is used.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "Phone": {
+      "description": "A simple Phone Number",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PhoneTypeEnum": {
+      "description": "Phone type in PHONE_TYPE_CON. Mapped to PARTY_PHONE.PHONE_TYPE_CON_ID or VENUE_PHONE.PHONE_TYPE_CON_ID",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "EmailAddress": {
+      "description": "A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BusinessTitle": {
+      "description": "",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BaseAddress": {
+      "description": "An Address following the convention of http://microformats.org/wiki/hcard",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PostCode": {
+      "description": "Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CountryCode3Enum": {
+      "description": "The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SettlementAccount": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SepaAccount": {
+      "description": "A SEPA Account structure extending the base account",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "Account": {
+      "description": "Unambiguous identification of an account to which credit and debit entries are made.\n\nThese entries are based on the Open Banking standards used in various countries - UK, Australia, New Zealand as well as a combination of details from the ISO20022 account properties.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "IBANIdentifier": {
+      "description": "International Bank Account Number (ISO 13616-1:2007).\n The use of an IBAN is mandated for all SEPA transactions.\nThere are 66 countries that support this format. The length will vary by country. Norway has the shortest format, 15 characters, currently Malta is the longest with 31 characters.\n",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BICIdentifier": {
+      "description": "International Bank Identifier Code Format.\nThe Bank Identifier Code or SWIFT Code ,this can also be referred to as the CHIPS, NCC, VSC or IFSC depending on your location. Made up of 8 or 11 characters .The 3 main parts include: BankCode(4), Country Code(2) and Location (2).\nOptionally the branch identifier is a 3 character optional element that can supplement the 8 character BIC.\n[ISO 9362](https://www.iso.org/standard/84108.html)",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "DomesticSettlementAccount": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "DomesticAccount": {
+      "description": "A Domestic Bank Account structure extending the base account.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MerchantDocument": {
+      "description": "Merchant Document Info.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "RequiredDocument": {
+      "description": "Merchant Required Document Details",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "DocumentStatusEnum": {
+      "description": "Current status of the document. Rejected documents must be re-uploaded.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ContentTypeEnum": {
+      "description": "Supported content type for documents.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ReplacementAgreement": {
+      "description": "Replacement agreement details for devices covered under this contract.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ReplacedDevice": {
+      "description": "A device being replaced under a replacement agreement.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BaseMerchant": {
+      "description": "details of the merchant",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MerchantName": {
+      "description": "The primary merchant name, e.g. \"McDonalds\".",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "AltVfiEntityId": {
+      "description": "A friendly ID associated with the merchant site/company. This will be visible/searchable in Verifone central. In many\ncases this will be the same value as merchantId.\n\n<strong>This value is not guaranteed as globally unique within Verifone. That value is the entityUid (uuid) property\nthat will be assigned on creation of the Entity and returned on the response.</strong>.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "Industry": {
+      "description": "The Industry type applicable to a Merchant.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ContactType": {
+      "description": "The details of a Contact.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "RequestedDateOfShipment": {
+      "description": "Requested date of shipment.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MCC": {
+      "description": "The Merchant Category Code (MCC). A 4 digit Code classifying the type of business being done by the card acceptor or Merchant (in accordance with ISO 18245).",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "TerminalParameters": {
+      "description": "Deprecated - Please use `paymentAppParameters`.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "TransactionOptions": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "TransactionLimits": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ReceiptOptions": {
+      "description": "Receipt Options",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PrintOptionsEnum": {
+      "description": "Defines the receipt print options. - Possible values are: <br />Never Print - NEVER<br />Prompt for print - PROMPT<br />Always Print - ALWAYS<br />Always Print when Signature is Captured - ALWAYS_WITH_SIGNATURE",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "TipOptions": {
+      "description": "Tip Options",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PaymentAppParameters": {
+      "description": "Payment Parameters - these can be specified per merchant and/or overridden at the poi level. If no values are specified then default template values will be applied.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CardProductSurcharge": {
+      "description": "Surcharging settings",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BaseRegionalParameters": {
+      "description": "Payment Parameters - Regional specific options",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SettlementDetails": {
+      "description": "Settlement details needed for onboarding in certain situations e.g. for Payware solutions.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "EntityUidDeprecated": {
+      "description": "The Verifone allocated unique id for this site. This is allocated by Verifone when an order is initially received. Please use value returned in OrderResponse.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "AddressWithoutType": {
+      "description": "An Address following the convention of http://microformats.org/wiki/hcard",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BaseAddressWithoutType": {
+      "description": "An Address following the convention of http://microformats.org/wiki/hcard",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MerchantOrderResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "OrderId": {
+      "description": "Verifone allocated ID for the Order.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "OrderStatusEnum": {
+      "description": "",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CreatedUserId": {
+      "description": "The assigned User ID corresponding to the Order Created By.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "UserName": {
+      "description": "The username of the person who's UID is represented, e.g. \"John/Jane Smith\".",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "EntityUid": {
+      "description": "The Verifone allocated unique id for this site.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MerchantCompanyEntityUid": {
+      "description": "The Verifone allocated unique ID for this merchant company.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "InternalAllocatedInformationNewCompanyAndSite": {
+      "description": "Internally allocated identifiers. This is for verifone use only and is subject to change.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "InternalAllocatedInformation": {
+      "description": "Internally allocated identifiers. This is for verifone use only and is subject to change.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ExtendedDetails": {
+      "description": "Detailed Status of the Order",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "DetailedStatusEnum": {
+      "description": "An order will be in one of the following states.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "LastChangeTime": {
+      "description": "Time status detailed status last changed.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "OrderStats": {
+      "description": "Order Statistics",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "VmssApplication": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "VmssSchemeStatus": {
+      "description": "Scheme Status",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "VmssSchemeMatches": {
+      "description": "Number of matches found against the VMSS service.",
+      "type": "number",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SigningInformation": {
+      "description": "Information on the signing request.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SignersInformation": {
+      "description": "Information on the signers in the request.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "NotificationReminder": {
+      "description": "Notification Reminder Sent Details",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "Notification": {
+      "description": "Object containing the sent date-time and template used for the notification.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "NotificationReminders": {
+      "description": "A container for all supported notification reminders.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CustomerOrderLink": {
+      "description": "Customer Order Link Sent Details",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "OrderCancellation": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CancelReasonEnum": {
+      "description": "Reason for order cancellation.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CancelAdditionalReason": {
+      "description": "Free-Form reason for order cancellation.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ExternalOnboarding": {
+      "description": "External merchant onboarding details",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError400": {
+      "description": "The request could not be understood by the server due to malformed syntax.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "ErrorResp": {
+      "description": "A common Error object returned as part of the API layer.\n\n. This is modified to become the base class for all of the derived HTTP Error Responses.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError401": {
+      "description": "The request must be authenticated to access the resource.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError403": {
+      "description": "The request must be authorised to access the resource.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError404": {
+      "description": "The server cannot find the requested resource.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError429": {
+      "description": "The resource exists the number of requests has exceeded the specified quota.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError500": {
+      "description": "Unexpected Server Error",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError503": {
+      "description": "Service Unavailable Error",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "httpError504": {
+      "description": "Gateway Timeout Error",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiOrder": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BasePoiType": {
+      "description": "The Point of Interaction. This may refer to a number of different entities, but is primarily considered to be the Terminal. This object contains the POI details as they pertain to an individual payment, an instance of POI. This does not attempt to define all the settings or attributes that may be associated to a POI. Also, for a specific Acquirer/Contract combination there may be a different instance of the POI(TID). These different relationships are not part of this object.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiTypeEnum": {
+      "description": "The Point of Interaction Type. An indicator to indicate the type of Point of Interaction.\n\n**NOTE:** The value `MULTI_MERCHANT_CHILD` aligns to `MULT_MERCHANT` in common/Entity Service.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "AltVfiPoiId": {
+      "description": "An alternative Verifone assigned identifier used for the POI within Verifone systems for transaction processing. This\nis also referred to as the Terminal ID (TID). This value maps to DE41 in ISO8583 specification. This identifier may\nalso be used per contract if required.\n\n<strong>This value is not guaranteed to be globally unique. The unique value is the internally assigned uuid - poiUid\nwhich is returned on the response.</strong>",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SerialNumber": {
+      "description": "The serial number of the physical device",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiLaneInformation": {
+      "description": "Lane in which the POI is to be configured.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiNetworkConfig": {
+      "description": "Network settings of the POI",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "IpAddressv4v6": {
+      "description": "A valid IPV4 or V6 address.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiStatusEnum": {
+      "description": "",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "CutoverTime": {
+      "description": "The cutover time HH:MM. Usually this will be a local time where a timezone has to be used to be used to derive the UTC time. EG: processor.cutoverTimeZone",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiUid": {
+      "description": "The Verifone allocated unique id for this terminal/POI. This is allocated by Verifone when an order is initially received.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PoiOrderResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "MerchantNameWrapper": {
+      "description": "Simple Wrapper object for Merchant Name.Used by UI.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "HardwareOrder": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "HardwareOrderData": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "HardwareMerchant": {
+      "description": "details of the merchant",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SiteReferenceId": {
+      "description": "An optional identifier for the Site which can be provided if different to the merchantId.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "SiteName": {
+      "description": "The site name, if different to the merchant name.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "EntityOpeningHours": {
+      "description": "An dictionary map of the different opening hours for an Entity",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "DayOfWeekEnum": {
+      "description": "An enumeration specifying the days of the week.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "EntityOpeningPeriod": {
+      "description": "The opening and closing hours.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "HardwarePoiType": {
+      "description": "The Point of Interaction. This may refer to a number of different entities, but is primarily considered to be the Terminal. This object contains the POI details as they pertain to an individual payment, an instance of POI. This does not attempt to define all the settings or attributes that may be associated to a POI. Also, for a specific Acquirer/Contract combination there may be a different instance of the POI(TID). These different relationships are not part of this object.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BundleAndSerialNumberAndQuantity": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "HardwareOrderResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BatchStatus": {
+      "description": "",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PagingPageNumber": {
+      "description": "Page number for records.",
+      "type": "integer",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PagingPageSize": {
+      "description": "Page size for returned records.",
+      "type": "integer",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BatchSearchResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BatchDetails": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BatchDetailsUpdatable": {
+      "description": "Modifiable details of a batch.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BatchId": {
+      "description": "Idenitifer assigned to the order batch.",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "OrderType": {
+      "description": "",
+      "type": "string",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "BatchLineItem": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PagingMetadata": {
+      "description": "Metadata for searching/paging.",
+      "type": "object",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PagingTotalPages": {
+      "description": "Total pages of records.",
+      "type": "integer",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "PagingTotalItems": {
+      "description": "Total number of records.",
+      "type": "integer",
+      "apis": [
+        "Verifone Order API"
+      ]
+    },
+    "Model26": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model22": {
+      "description": "Total transaction amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "customer": {
+      "description": "Customer details",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Phone_number": {
+      "description": "Phone number",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "identification": {
+      "description": "Customer identification",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "address": {
+      "description": "Customer billing address",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "billingAddress": {
+      "description": "Shipping Address details",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "items": {
+      "description": "Items to purchase",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model24": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "unitAmount": {
+      "description": "Amount for the item",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "detailedAmount": {
+      "description": "Detailed amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "discount": {
+      "description": "Discount amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "shippingDiscount": {
+      "description": "Shipping discount amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "insurance": {
+      "description": "Insurance fee amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "handling": {
+      "description": "Handling fee amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model25": {
+      "description": "Shipping fee amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model28": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model5": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "updateTransaction": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model44": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model45": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model46": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model47": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Auth_Payer_Info": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Payer_Name": {
+      "description": "The name of the payer.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Shipping-Address": {
+      "description": "Shipping Address details",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model49": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model48": {
+      "description": "Amount to capture. If not provided, full capture will be performed.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model50": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Capture_Payer_Info": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model52": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model51": {
+      "description": "Amount to refund. If not provided, full refund will be performed.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model53": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model8": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "merchant": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "payeeInfo": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "payer": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "payerInfo": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "shippingAddress": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "plan": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "merchantPreferences": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "allowedCountries": {
+      "description": "An array of legally accepted customer country codes",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model17": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "redirectUrls": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model29": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model30": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model32": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model31": {
+      "description": "Shipping Address details",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model33": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model38": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model7": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "products": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model6": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model18": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model10": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model54": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "imageUrl": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "homeUrl": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "category": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "description": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model4": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "plans": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model3": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "billingCycles": {
+      "description": "An array of billing cycles for trial billing and regular billing",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model2": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "pricingScheme": {
+      "description": "The active pricing scheme for this billing cycle.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "fixedPrice": {
+      "description": "The fixed amount to charge for the subscription",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "tiers": {
+      "description": "An array of pricing tiers which are used for billing volume/tiered plans.",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model1": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "amount": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "frequency": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "paymentPreferences": {
+      "description": "The payment preferences for a subscription.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "setupFee": {
+      "description": "The initial set-up fee for the service.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "taxes": {
+      "description": "The tax details.",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model9": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model61": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model60": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model36": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model35": {
+      "description": "An array of billing cycles for trial billing and regular billing",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model34": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model37": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model20": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model19": {
+      "description": "Shipping charges amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "subscriber": {
+      "description": "The subscriber request information",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "name": {
+      "description": "The name of the payer",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "phone": {
+      "description": "The phone number of the customer. Available only when you enable the Contact Telephone Number option in the Profile & Settings for the merchant's PayPal account",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "phoneNumber": {
+      "description": "The phone number, in its canonical international E.164 numbering plan format",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model12": {
+      "description": "The shipping details",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model11": {
+      "description": "The name of the person to whom to ship the items",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "applicationContext": {
+      "description": "The application context, which customizes the payer experience during the subscription approval process with PayPal",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "paymentMethod": {
+      "description": "The customer and merchant payment preferences. Currently only PAYPAL payment method is supported",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model21": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model16": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "shippingAmount": {
+      "description": "The currency and amount for a financial transaction, such as a balance or payment due",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "billingInfo": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "outstandingBalance": {
+      "description": "The total pending bill amount, to be paid by the subscriber",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "cycleExecutions": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model13": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "lastPayment": {
+      "description": "The details for the last payment of the subscription",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model14": {
+      "description": "The last payment amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "lastFailedPayment": {
+      "description": "The details for the last failed payment of the subscription",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model15": {
+      "description": "The failed payment amount",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model59": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "startTime": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "customId": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "planPaymentPreferencesAutoBillOutstanding": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "planBillingCyclesPricingSchemeFixedPrice": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "value": {
+      "description": "The fixed amount to charge for the subscription. The changes to fixed amount are applicable to both existing and future subscriptions. For existing subscriptions, payments within 10 days of price change are not affected",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "planBillingCyclesTotalCycles": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "planBillingCyclesPricingSchemeTiers": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model57": {
+      "description": "",
+      "type": "array",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model56": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model55": {
+      "description": "The pricing amount for the tier",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "planTaxesPercentage": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "planTaxesInclusive": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "subscriberShippingAddress": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "billingInfoOutstandingBalance": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model58": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model39": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model40": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model41": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model42": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "Model43": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "PayPal eComm API"
+      ]
+    },
+    "ReportsResponse": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "ReportRecord": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "Report": {
+      "description": "",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "ReportTypeEnum": {
+      "description": "The type of the report.\n\n|Value|Description|\n|--------|-----------|\n|ABS_SETTLEMENT_RESPONSE_REPORT|ABS settlement report (generated and returned by ABS during settlement as a ready-made file report)|\n|BBX_PARTNER_COMMISSION_REPORT|BBX commission report (generated by BBX as a ready-made file report)|\n|INTERCARD_COMMISSION_REPORT|InterCard commission report (generated by InterCard as a ready-made file report)|\n|DAILY_TRANSACTION_REPORT|The daily transactions report is generated for each payout to the clearing entity (which e.g. can be either a store, a merchant or even a franchisee level). The content therefore depends on the particular setup. <br/>Please see https://verifone.cloud/docs/in-store-payments/merchant-payout-reports#daily-transactions-report|\n|INTERCARD_INVOICE|InterCard invoice (generated by InterCard as a ready-made file report)|\n|MERCHANT_SETTLEMENT_REPORT|The merchant settlement report contains a total summary (TS) and summary (S) records for all payment types which contributed to a single payout to the merchant. <br/>Please see https://verifone.cloud/docs/in-store-payments/merchant-payout-reports#merchant-settlement-report|",
+      "type": "string",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "ReportParameters": {
+      "description": "List of parameters which were basis for the generation of this report.",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "BankingPartner": {
+      "description": "The name of the banking partners.",
+      "type": "string",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "MimeType": {
+      "description": "The MIME type of this report.",
+      "type": "string",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "ReportUid": {
+      "description": "The unique identifier of that specific report.",
+      "type": "string",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "ReportStatusEnum": {
+      "description": "The status of the report will be in one of the following states.",
+      "type": "string",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError400": {
+      "description": "The request could not be understood by the server due to malformed syntax.",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError401": {
+      "description": "The request must be authenticated to access the resource.",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError403": {
+      "description": "The request must be authorised to access the resource.",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError404": {
+      "description": "The server cannot find the requested resource.",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError429": {
+      "description": "The resource exists the number of requests has exceeded the specified quota.",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError500": {
+      "description": "Unexpected Server Error",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError503": {
+      "description": "Service Unavailable Error",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    },
+    "genericError504": {
+      "description": "Gateway Timeout Error",
+      "type": "object",
+      "apis": [
+        "Reporting API"
+      ]
+    }
+  }
+}

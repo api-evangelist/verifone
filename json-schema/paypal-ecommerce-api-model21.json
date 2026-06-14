@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model21.json",
+  "title": "Model21",
+  "description": "Model21 from PayPal eComm API",
+  "required": [
+    "approvalUrl",
+    "id",
+    "planId",
+    "planOverridden",
+    "status",
+    "statusUpdateTime"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The PayPal-generated ID for the subscription."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the subscription."
+    },
+    "planId": {
+      "maxLength": 50,
+      "minLength": 3,
+      "type": "string",
+      "description": "The ID of the plan"
+    },
+    "statusUpdateTime": {
+      "type": "string",
+      "description": "Status update time.",
+      "format": "date"
+    },
+    "planOverridden": {
+      "type": "boolean",
+      "description": "Indicates whether the subscription has overridden any plan attributes."
+    },
+    "quantity": {
+      "type": "string",
+      "description": "The quantity of the product in the subscription."
+    },
+    "startTime": {
+      "type": "string",
+      "description": "The quantity of the product in the subscription.",
+      "format": "date"
+    },
+    "shippingAmount": {
+      "$ref": "#/components/schemas/Model19"
+    },
+    "subscriber": {
+      "$ref": "#/components/schemas/subscriber"
+    },
+    "applicationContext": {
+      "$ref": "#/components/schemas/applicationContext"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "The quantity of the product in the subscription.",
+      "format": "date"
+    },
+    "approvalUrl": {
+      "type": "string",
+      "description": "PayPal approval URL"
+    }
+  }
+}

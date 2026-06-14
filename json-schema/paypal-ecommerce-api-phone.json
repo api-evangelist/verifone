@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-phone.json",
+  "title": "phone",
+  "description": "The phone number of the customer. Available only when you enable the Contact Telephone Number option in the Profile & Settings for the merchant's PayPal account",
+  "required": [
+    "phoneNumber"
+  ],
+  "type": "object",
+  "properties": {
+    "phoneType": {
+      "type": "string",
+      "description": "The phone type",
+      "enum": [
+        "FAX",
+        "HOME",
+        "MOBILE",
+        "OTHER",
+        "PAGER"
+      ]
+    },
+    "phoneNumber": {
+      "$ref": "#/components/schemas/phoneNumber"
+    }
+  }
+}

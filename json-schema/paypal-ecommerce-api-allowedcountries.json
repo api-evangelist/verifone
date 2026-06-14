@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-allowedcountries.json",
+  "title": "allowedCountries",
+  "description": "An array of legally accepted customer country codes",
+  "type": "array",
+  "items": {
+    "maxLength": 2,
+    "minLength": 2,
+    "pattern": "^([A-Z]{2}|C2)$",
+    "type": "string",
+    "description": "The two-character ISO 3166-1 code that identifies the country or region."
+  }
+}

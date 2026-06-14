@@ -1,0 +1,11 @@
+{
+  "operationId": "postV2Lookup",
+  "summary": "Cardholder Authentication API for 3DS",
+  "method": "POST",
+  "path": "/v2/lookup",
+  "responseExample": {
+    "acs_rendering_type": "string",
+    "acs_transaction_id": "string",
+    "acs_url": "string"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-shippinginformationdto.json",
+  "title": "Shipping Address",
+  "description": "The address where the purchased goods should be delivered to.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Street address of the recipient."
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 28,
+      "description": "City of the recipient."
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 2,
+      "minLength": 2,
+      "format": "country-code",
+      "description": "A 2-letter ISO3166 alpha-2 country code for the address."
+    },
+    "postal_code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16,
+      "description": "A postal code for the address."
+    },
+    "email": {
+      "type": "string",
+      "title": "Email Address",
+      "minLength": 3,
+      "maxLength": 254,
+      "format": "email",
+      "description": "A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1."
+    },
+    "first_name": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "First name of the recipient."
+    },
+    "last_name": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Last name of the recipient."
+    },
+    "phone": {
+      "type": "number",
+      "maxLength": 15,
+      "description": "Numbers only, no dash or any other separator."
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 35,
+      "description": "A region / state / province for the address."
+    }
+  },
+  "required": [
+    "address",
+    "city",
+    "country",
+    "postal_code"
+  ]
+}

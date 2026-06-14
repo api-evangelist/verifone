@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-plan.json",
+  "title": "plan",
+  "description": "plan from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "merchantPreferences": {
+      "$ref": "#/components/schemas/merchantPreferences"
+    }
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-createwalletdto.json",
+  "title": "CreateWalletDto",
+  "description": "CreateWalletDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "payment_provider_contract": {
+      "type": "string",
+      "description": "The identifier of payment provider contract you want to process the transaction request with.",
+      "format": "uuid-flexible"
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "auth_type": {
+      "type": "string",
+      "description": "Flags a payment request for either pre-authorization or final authorization.\n\n* `PRE_AUTH` is used when the authorized amount is unknown and can be adjusted later.\n\n* `FINAL_AUTH` is used when a final authorized amount is known and the transaction will definitely be captured in whole.",
+      "enum": [
+        "PRE_AUTH",
+        "FINAL_AUTH"
+      ],
+      "default": "FINAL_AUTH"
+    },
+    "capture_now": {
+      "type": "boolean",
+      "description": "Whether auto-capture or not. Setting the value to 'false' will only authorize the transaction.",
+      "default": true
+    },
+    "customer": {
+      "type": "string",
+      "description": "The ID of a customer.",
+      "format": "uuid-flexible",
+      "title": "Customer ID"
+    },
+    "customer_ip": {
+      "description": "The IP Address of the customer where the transaction was initiated.",
+      "maxLength": 15,
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "ipv4"
+        },
+        {
+          "type": "string",
+          "format": "ipv6"
+        }
+      ]
+    },
+    "dynamic_descriptor": {
+      "type": "string",
+      "description": "A short [descriptor](https://en.wikipedia.org/wiki/Billing_descriptor) to be shown on bank statement of the customer. Please refer to the integration guide for the format requirements.",
+      "maxLength": 25
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "threed_authentication": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ThreedAuthenticationDto",
+          "description": "MPI authentication data. Please refer to the integration guide for information on its usage."
+        }
+      ]
+    },
+    "stored_credential": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StoredCredentialDto"
+        },
+        {
+          "title": "Stored Credential Payment",
+          "description": "The definition of a stored credential payment.",
+          "discriminator": {
+            "propertyName": "stored_credential_type",
+            "mapping": {
+              "SIGNUP": "#/components/schemas/StoredCredentialSignUp"
+            }
+          }
+        }
+      ]
+    },
+    "receipt_type": {
+      "type": "string",
+      "description": "Defines the type of receipt to be generated",
+      "enum": [
+        "FULL_RECEIPT",
+        "INVOICE",
+        "INVOICE_RECEIPT",
+        "SIMPLE_RECEIPT",
+        "NONE"
+      ]
+    },
+    "shipping_information": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ShippingInformation"
+        },
+        {
+          "title": "Shipping Address",
+          "description": "The address where the purchased goods should be delivered to.\n<br><b>Please use customer_details.shipping.</b>",
+          "deprecated": true
+        }
+      ]
+    },
+    "customer_details": {
+      "$ref": "#/components/schemas/CustomerDetailsDto"
+    },
+    "shopper_interaction": {
+      "type": "string",
+      "description": "Determines the sales channel the shopper gives their card details through:\n\n * `ECOMMERCE` Online transactions where the cardholder is present.\n\n * `MAIL` order transactions where the shopper is in contact with the merchant via email.\n\n * `TELEPHONE` order transactions where the shopper is in contact with the merchant via telephone.",
+      "enum": [
+        "ECOMMERCE",
+        "MAIL",
+        "TELEPHONE"
+      ],
+      "default": "ECOMMERCE"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The full user agent string of the device the customer used to submit the transaction.",
+      "maxLength": 256
+    },
+    "sales_description": {
+      "type": "string",
+      "description": "A reference used by the merchant to typically capture a description of the service provided. It could then be used by the merchant to help locate transactions. One could envision a situation where a merchant is trying to locate a transaction/ receipt but in speaking with the customer, the only (or at least a predominant) detail is what service was rendered",
+      "maxLength": 200
+    },
+    "sca_exemption": {
+      "type": "string",
+      "description": "Use this field to request your transaction to be exempted from the application of the Strong Customer Authentication (SCA). Be advised that the use of this field may result to your liability in case of fraudulent transaction.\n\n Possible Values:\n\n 1 - Low value payment\n\n 2 - Acquirer Transaction Risk Analysis\n\n 3 - Trusted beneficiary exemption\n\n 4 - Secure Corporate Payment (SCP) exemption\n\n 5 - Merchant Initiated Transaction\n\n 6 - SCA Delegation",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "currency_code": {
+      "type": "string",
+      "title": "Currency Code",
+      "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD.\n\n Values correspond to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).",
+      "enum": [
+        "AED",
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LVL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XTS",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMK",
+        "ZMW",
+        "BTC"
+      ]
+    },
+    "card_brand": {
+      "$ref": "#/components/schemas/CardBrand"
+    },
+    "encrypted_cvv": {
+      "type": "string",
+      "title": "The encrypted cvv Card",
+      "description": "This is an optional field that is only supported with `reuse_token` or `stored_credentials.reference`."
+    },
+    "brand_choice": {
+      "type": "string",
+      "description": "For dual-branded cards identifies whether selection is made by a cardholder or merchant.",
+      "enum": [
+        "MERCHANT",
+        "CARDHOLDER"
+      ],
+      "default": "MERCHANT"
+    },
+    "refusal_reason": {
+      "type": "string",
+      "title": "Refusal Reason",
+      "description": "The reason a transaction has been refused within the payment ecosystem by the client/Verifone/acquirer. This needs to be set by the component that is refusing this transaction request.",
+      "enum": [
+        "ACQUIRER_COMMS_FAILURE",
+        "ACQUIRER_REFUSED",
+        "CARD_BRAND_NOT_ACCEPTED",
+        "CARD_EXPIRED",
+        "CARD_NOT_ACCEPTED",
+        "CARD_NOT_VALID",
+        "CARD_PRODUCT_NOT_ACCEPTED",
+        "ORIGINAL_TRANSACTION_NOT_FOUND",
+        "INVALID_BIN",
+        "PARTIAL_AUTH_NOT_ALLOWED",
+        "RECEIPT_FAILURE",
+        "REFUND_NOT_ACCEPTED",
+        "THREEDSECURE_FAILED_ACS",
+        "THREEDSECURE_FAILED_AUTH",
+        "THREEDSECURE_FAILED_COMMS",
+        "UNAPPROVED_OPERATOR",
+        "UNKNOWN_REASON"
+      ]
+    },
+    "token_preference": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TokenPreferenceDto",
+          "title": "Token Preference",
+          "description": "Contains the properties required to create a token"
+        }
+      ]
+    },
+    "wallet_type": {
+      "type": "string",
+      "enum": [
+        "APPLE_PAY",
+        "GOOGLE_PAY"
+      ]
+    },
+    "wallet_payload": {
+      "type": "object",
+      "description": "The encrypted payload object provided by the Wallet on the frontend"
+    },
+    "sca_compliance_level": {
+      "type": "string",
+      "description": "Determines if 3ds is needed:\n\nsca_compliance_level | WalletPayload authMethod | Additional 3ds\r\n--- | --- | ---\r\nNONE | N/A | NO\r\nWALLET | PAN_ONLY | YES\r\nWALLET | 3DS_CRYPTOGRAM | NO\r\nFORCE_3DS | N/A | YES\r\n",
+      "enum": [
+        "NONE",
+        "WALLET",
+        "FORCE_3DS"
+      ],
+      "default": "WALLET"
+    },
+    "promo_code": {
+      "type": "string",
+      "description": "A code defined by the merchant that affects the calculation of the total amount."
+    },
+    "promo_financing_details": {
+      "$ref": "#/components/schemas/PromoFinancingDetails"
+    },
+    "purchase_order_number": {
+      "title": "Purchase Order Number",
+      "description": "The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.\n",
+      "type": "string",
+      "maxLength": 17
+    },
+    "tax_indicator": {
+      "title": "Tax Indicator",
+      "description": "This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided\n",
+      "type": "string",
+      "enum": [
+        "TAX_PROVIDED",
+        "TAX_NOT_PROVIDED",
+        "NON_TAXABLE"
+      ],
+      "default": "TAX_NOT_PROVIDED"
+    },
+    "detailed_amount": {
+      "$ref": "#/components/schemas/DetailedAmount"
+    },
+    "additional_data": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Additional information for transaction, which may be required in a particular payment request.",
+      "properties": {
+        "program_support": {
+          "type": "array",
+          "description": "List of supported special programs. Can be used to indicate capability to process enhanced response data.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "MCINST"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "payment_provider_contract",
+    "amount",
+    "currency_code",
+    "wallet_type",
+    "wallet_payload"
+  ]
+}

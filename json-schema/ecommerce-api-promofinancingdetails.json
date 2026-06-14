@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-promofinancingdetails.json",
+  "title": "Promo Financing",
+  "description": "Additional details of the special financing offers to customers using private label cards, typically in combination with `promo_code` field.",
+  "type": "object",
+  "properties": {
+    "promoFinancingType": {
+      "description": "Type of special financing information requested. Promotional information may be requested for duration of the promo only (`PROMO_APR`) or for during and after promo period (`PROMO_AND_AFTER_APR`).\",",
+      "type": "string",
+      "enum": [
+        "PROMO_APR",
+        "PROMO_AND_AFTER_APR"
+      ]
+    },
+    "promoPlan": {
+      "description": "The code or name of a promotional financing plan as set up between merchant and issuer.",
+      "type": "string"
+    },
+    "promoPlanExpiry": {
+      "description": "Expiry date for the requested promo plan.",
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-reportrecord.json",
+  "title": "ReportRecord",
+  "description": "ReportRecord from Reporting API",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Report"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "reportUid": {
+          "$ref": "#/components/schemas/ReportUid"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "The date and time the report was created.",
+          "format": "date-time"
+        },
+        "modifiedOn": {
+          "type": "string",
+          "description": "The date and time the report was last modified.",
+          "format": "date-time"
+        },
+        "status": {
+          "$ref": "#/components/schemas/ReportStatusEnum"
+        }
+      }
+    }
+  ]
+}

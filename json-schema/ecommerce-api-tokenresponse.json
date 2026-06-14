@@ -1,0 +1,303 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-tokenresponse.json",
+  "title": "TokenResponse",
+  "description": "TokenResponse from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "reuse_token": {
+      "type": "string",
+      "description": "The identifier used to represent the Cardholder data."
+    },
+    "analytics_token": {
+      "type": "string",
+      "description": "A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes."
+    },
+    "bin": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 11,
+      "description": "The Bank Identification Number (also called IIN - Issuer Identification Number) of this card."
+    },
+    "expiry_month": {
+      "type": "integer",
+      "maximum": 12,
+      "description": "A 2 digit value as shown on card. ISO8583 - DE 14"
+    },
+    "expiry_year": {
+      "type": "integer",
+      "maximum": 9999,
+      "description": "A 4 digit value as shown on card."
+    },
+    "last_four": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "The last 4 digits of the card number."
+    },
+    "card_holder_name": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The Card holder name as it appears on the card."
+    },
+    "brand": {
+      "type": "string",
+      "description": "The brand of this card. eg. VISA, MASTERCARD, AMEX."
+    },
+    "issuer_country": {
+      "$ref": "#/components/schemas/issuerCountryEnum"
+    },
+    "issuer_name": {
+      "type": "string",
+      "description": "The issuer of this card. eg. HSBC, BARCLAYS."
+    },
+    "currency": {
+      "type": "string",
+      "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond\nto [ISO 4217](https://wikipedia.org/wiki/ISO_4217).",
+      "enum": [
+        "AED",
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LTL",
+        "LVL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "USS",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XTS",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMK",
+        "ZMW",
+        "BTC"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of card application or account selection.",
+      "enum": [
+        "DEBIT",
+        "CREDIT"
+      ]
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant of the card. eg. NEW_WORLD"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "The last date token was updated.",
+      "format": "date"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The last date token was created.",
+      "format": "date"
+    },
+    "token_expiry_date": {
+      "type": "string",
+      "description": "When this Token will expire.",
+      "format": "date"
+    },
+    "reuse_token_type": {
+      "title": "Reuse Token Type",
+      "description": "The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.",
+      "type": "string",
+      "enum": [
+        "CHASE",
+        "INTERNAL",
+        "TAVE"
+      ],
+      "default": "INTERNAL"
+    },
+    "token_scope": {
+      "type": "string",
+      "description": "The token scope under which this token was created.",
+      "format": "uuid"
+    },
+    "token_status": {
+      "type": "string",
+      "description": "The status of the Token.",
+      "title": "Token Status Type",
+      "enum": [
+        "DELETED",
+        "ACTIVE",
+        "SUSPENDED"
+      ]
+    },
+    "bin_details": {
+      "$ref": "#/components/schemas/BinDetails"
+    },
+    "scheme_token": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SchemeToken"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-signinginformation.json",
+  "title": "SigningInformation",
+  "description": "Information on the signing request.",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "description": "Signing Provider used",
+      "enum": [
+        "SIGNICAT",
+        "ADOBE",
+        "DOKOBIT"
+      ]
+    },
+    "providerRef": {
+      "type": "string",
+      "description": "Signing Provider reference to the signing request"
+    },
+    "signedFileUrl": {
+      "type": "string",
+      "description": "URL to the signed file"
+    },
+    "signingRequests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SignersInformation"
+      }
+    }
+  },
+  "required": [
+    "provider",
+    "providerRef"
+  ]
+}

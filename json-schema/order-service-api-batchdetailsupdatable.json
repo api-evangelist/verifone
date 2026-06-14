@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-batchdetailsupdatable.json",
+  "title": "BatchDetailsUpdatable",
+  "description": "Modifiable details of a batch.",
+  "type": "object",
+  "properties": {
+    "processingStatus": {
+      "$ref": "#/components/schemas/BatchStatus"
+    },
+    "responseFileSent": {
+      "type": "boolean",
+      "default": false
+    },
+    "responseFileName": {
+      "type": "string",
+      "maxLength": 200
+    }
+  }
+}

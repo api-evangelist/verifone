@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/customer-api-errorresponse.json",
+  "title": "ErrorResponse",
+  "description": "ErrorResponse from Customer API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "A 3-digit code that uniquely identifies the error."
+    },
+    "details": {
+      "type": "object",
+      "description": "Additional error details."
+    },
+    "message": {
+      "type": "string",
+      "description": "A human-readable description of the error."
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Unix timestamp of when the error occurred."
+    }
+  }
+}

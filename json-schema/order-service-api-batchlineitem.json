@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-batchlineitem.json",
+  "title": "BatchLineItem",
+  "description": "BatchLineItem from Verifone Order API",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "$ref": "#/components/schemas/OrderId"
+    },
+    "requestId": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Unique value per line per file"
+    },
+    "entityType": {
+      "type": "string",
+      "enum": [
+        "MERCHANT_COMPANY",
+        "MERCHANT_SITE",
+        "POI"
+      ],
+      "description": "The type of entity that the operation is performed on"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "PARTIAL_UPDATE",
+        "TRADING_ADDRESS_UPDATE",
+        "DELETE"
+      ],
+      "description": "The operation performed on the entity"
+    },
+    "entityLogicalId": {
+      "type": "string",
+      "description": "The logical identifier of the entity.This could be a MID or a TID",
+      "maxLength": 30
+    },
+    "keyValues": {
+      "type": "string",
+      "description": "Operational parameters defined as key-value pairs"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "description": "HTTP Status returned by order API"
+    },
+    "response": {
+      "type": "string",
+      "description": "Response from order API"
+    },
+    "orderStatus": {
+      "description": "Status from order API",
+      "$ref": "#/components/schemas/OrderStatusEnum"
+    }
+  }
+}

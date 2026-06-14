@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-config.json",
+  "title": "config",
+  "description": "config from Checkout API",
+  "type": "object",
+  "properties": {
+    "is_default": {
+      "type": "boolean",
+      "default": false,
+      "description": "Specifies whether the theme is the default theme for the entity. Only one default theme allowed per Entity/Organization."
+    }
+  }
+}

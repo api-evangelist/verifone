@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-cardconfiguration.json",
+  "title": "CardConfiguration",
+  "description": "Card payment configuration",
+  "discriminator": {
+    "propertyName": "mode",
+    "mapping": {
+      "3DS_PAYMENT": "#/components/schemas/CardMode3DSPayment",
+      "3DS": "#/components/schemas/CardMode3DS",
+      "PAYMENT": "#/components/schemas/CardModePayment",
+      "CARD_CAPTURE": "#/components/schemas/CardModeCapture"
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/CardMode3DSPayment"
+    },
+    {
+      "$ref": "#/components/schemas/CardMode3DS"
+    },
+    {
+      "$ref": "#/components/schemas/CardModePayment"
+    },
+    {
+      "$ref": "#/components/schemas/CardModeCapture"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "mode": {
+      "$ref": "#/components/schemas/card_mode"
+    },
+    "card_capture_mode": {
+      "$ref": "#/components/schemas/card_capture_mode"
+    },
+    "cvv_required": {
+      "type": "boolean",
+      "description": "Indicates whether cvv is required",
+      "default": false
+    },
+    "input_overrides": {
+      "anyOf": [
+        {
+          "$ref": "#/x-alt-definitions/input_overrides"
+        },
+        {
+          "$ref": "#/x-alt-definitions/Model2"
+        }
+      ]
+    }
+  }
+}

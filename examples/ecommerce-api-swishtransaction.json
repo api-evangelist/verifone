@@ -1,0 +1,11 @@
+{
+  "operationId": "swishTransaction",
+  "summary": "Initiate a Swish payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/swish",
+  "responseExample": {
+    "id": "string",
+    "amount": 0,
+    "blocked": false
+  }
+}

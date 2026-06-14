@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-reportparameters.json",
+  "title": "Report Parameters",
+  "description": "List of parameters which were basis for the generation of this report.",
+  "type": "object",
+  "properties": {
+    "batchUUID": {
+      "type": "string",
+      "description": "The unique identifier of the settlement batch this report is related to. Mapped to PDSP's `transaction.context.paymentContext.batchUUID`.",
+      "format": "uuid"
+    },
+    "settlementBatchFileNumber": {
+      "type": "string",
+      "description": "The identifier of the settlement batch file this report is related to. Mapped to PDSP's `transaction.settlementContext.settlementBatchFileNumber`."
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Correlation ID.",
+      "format": "uuid"
+    },
+    "clearingEntityUid": {
+      "type": "string",
+      "description": "Clearing Entity UUID.",
+      "format": "uuid"
+    },
+    "clearingAccountUid": {
+      "type": "string",
+      "description": "Clearing Account UUID.",
+      "format": "uuid"
+    },
+    "clearingDate": {
+      "type": "string",
+      "description": "Date & Time.",
+      "format": "date-time"
+    },
+    "clearingMerchantName": {
+      "type": "string",
+      "description": "Clearing merchant name."
+    },
+    "clearingUid": {
+      "type": "string",
+      "description": "The clearing UUID.",
+      "format": "uuid"
+    },
+    "clearingBankAccount": {
+      "type": "string",
+      "description": "The clearing bank account."
+    },
+    "bankingPartner": {
+      "$ref": "#/components/schemas/BankingPartner"
+    },
+    "clearingBankCode": {
+      "type": "string",
+      "description": "The clearing bank code."
+    },
+    "clearingMerchantId": {
+      "type": "string",
+      "description": "The clearing merchant ID."
+    },
+    "clearingReference": {
+      "type": "string",
+      "description": "The clearing reference."
+    },
+    "generatedOn": {
+      "type": "string",
+      "description": "The timestamp when the original report was created.",
+      "format": "date-time",
+      "deprecated": true
+    },
+    "invoicePeriodFrom": {
+      "type": "string",
+      "description": "The start date of the invoicing period.",
+      "format": "date"
+    },
+    "invoicePeriodTo": {
+      "type": "string",
+      "description": "The end date of the invoicing period.",
+      "format": "date"
+    },
+    "invoiceNumber": {
+      "type": "string",
+      "description": "Invoice number."
+    },
+    "reportDescription": {
+      "type": "string",
+      "description": "Description of the report."
+    },
+    "reportableDay": {
+      "type": "string",
+      "description": "The date the report was generated for.",
+      "format": "date"
+    }
+  }
+}

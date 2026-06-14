@@ -1,0 +1,597 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/3ds-authentication-api-lookuprequest.json",
+  "title": "LookupRequest",
+  "description": "LookupRequest from 3D Secure API",
+  "required": [
+    "amount",
+    "billing_address_1",
+    "billing_city",
+    "billing_country_code",
+    "billing_first_name",
+    "billing_last_name",
+    "currency_code",
+    "device_info_id",
+    "email",
+    "merchant_reference",
+    "threeds_contract_id"
+  ],
+  "type": "object",
+  "properties": {
+    "account_age_indicator": {
+      "type": "string",
+      "description": "Length of time cardholder has had account. Possible Values:  * 01 - No account  * 02 - Created during transaction  * 03 - Less than 30 days  * 04 - 30-60 days  * 05 - More than 60 days",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ]
+    },
+    "account_change_date": {
+      "type": "string",
+      "description": "Date the cardholder's account was last changed. This includes changes to the billing or shipping address, new payment accounts or new users added.` Format: YYYYMMDD`",
+      "format": "date"
+    },
+    "account_change_indicator": {
+      "type": "string",
+      "description": "Length of time since the last change to the cardholder account. This includes shipping address, new payment account or new user added. Possible Values: * 01 - Changed during transaction * 02 - Less than 30 days * 03 - 30-60 days * 04 - More than 60 days",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ]
+    },
+    "account_create_date": {
+      "type": "string",
+      "description": "Date the cardholder opened the account. `Format: YYYYMMDD`",
+      "format": "date"
+    },
+    "account_id": {
+      "maxLength": 64,
+      "type": "string",
+      "description": "Additional cardholder account information."
+    },
+    "account_purchases": {
+      "maximum": 9999,
+      "type": "number",
+      "description": "Number of purchases with this cardholder account during the previous six months."
+    },
+    "account_pwd_change_date": {
+      "type": "string",
+      "description": "Date the cardholder last changed or reset password on account. `Format: YYYYMMDD`",
+      "format": "date"
+    },
+    "account_pwd_change_indicator": {
+      "type": "string",
+      "description": "Length of time since the cardholder changed or reset the password on the account.  Possible Values:  * 01 - No change  * 02 - Changed during transaction  * 03 - Less than 30 days  * 04 - 30-60 days  * 05 - More than 60 days",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ]
+    },
+    "acs_window_size": {
+      "type": "string",
+      "description": "An override field that a merchant can pass in to set the challenge window size to display to the end cardholder.The ACS will reply with content that is formatted appropriately to this window size to allow for the best user experience. The sizes are width x height in pixels of the window displayed in the cardholder browser window. Possible values:  * 01 - 250x400  * 02 - 390x400  * 03 - 500x600  * 04 - 600x400  * 05 - Full page",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ]
+    },
+    "add_card_attempts": {
+      "maximum": 999,
+      "type": "number",
+      "description": "Number of add card attempts in the last 24 hours."
+    },
+    "address_match": {
+      "type": "string",
+      "description": "Indicates whether cardholder billing and shipping addresses match. Possible Values:  * Y - Shipping address matches billing address  * N - Shipping address does not match billing address",
+      "enum": [
+        "Y",
+        "N"
+      ]
+    },
+    "alias": {
+      "maxLength": 128,
+      "type": "string",
+      "description": "An alias that uniquely identifies the account.  NOTE: This field is required if Tokenization is enabled in the Merchant profile settings."
+    },
+    "alternate_authentication_data": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "Data that documents and supports a specific authentication process that was sent in the AlternateAuthenticationMethod field."
+    },
+    "alternate_authentication_date": {
+      "type": "string",
+      "description": "Date and time in UTC of the cardholder authentication. ` Format: YYYYMMDDHHMM`",
+      "format": "date"
+    },
+    "alternate_authentication_method": {
+      "type": "string",
+      "description": "Mechanism used by the cardholder to authenticate to the 3DS requester.  Possible Values:  * 01 - No authentication occurred (e.g. Guest Checkout)  * 02 - Login to the cardholder account at the Merchant system using Merchant system credentials  * 03 - Login to the cardholder account at the Merchant system using a Federated ID  * 04 - Login to the cardholder account at the Merchant system using Issuer credentials  * 05 - Login to the cardholder account at the Merchant system using third-party authentication  * 06 - Login to the cardholder account at the Merchant system using FIDO Authenticator",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06"
+      ]
+    },
+    "authentication_indicator": {
+      "type": "string",
+      "description": "Indicates the type of Authentication request. 01 - Payment transaction  02 - Recurring transaction   03 - Installment transaction   04 - Add card   05 - Maintain card   06 - Cardholder verification as part of EMV token ID&V",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06"
+      ]
+    },
+    "amount": {
+      "maximum": 9007199254740991,
+      "type": "number",
+      "description": "The amount of the transaction."
+    },
+    "billing_first_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Consumer's billing first name."
+    },
+    "billing_last_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Consumer's last name."
+    },
+    "billing_phone": {
+      "maxLength": 20,
+      "type": "string",
+      "description": "Conditional: Consumer's phone number for billing address. This should be unformatted without hyphens. ITU/E.123 format with international prefix (+PPNNNNNNNNN...)"
+    },
+    "billing_address_1": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Consumer's billing address information."
+    },
+    "billing_address_2": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's billing address information."
+    },
+    "billing_address_3": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's billing address information."
+    },
+    "billing_city": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Consumer's city on their billing address."
+    },
+    "billing_postal_code": {
+      "maxLength": 16,
+      "type": "string",
+      "description": "Consumer's postal code of their billing address. Required unless market or regional mandate restricts sending this information."
+    },
+    "billing_state": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Consumer's state or province of their billing address. Only the sub division code of the ISO 3166-2 format.\n For example, the subdivision code for the state of Texas in the United States and Berlin in Germany is respectively\n * Code: US-TX - Subdivision Code: TX\n* Code: DE-BE - Subdivision Code: BE\n Required unless market or regional mandate restricts sending this information, or State is not applicable for this country."
+    },
+    "billing_country_code": {
+      "type": "string",
+      "description": "Consumer's alpha 2 digit ISO 3166 country code."
+    },
+    "card": {
+      "type": "string",
+      "description": "The ID of the card that is checked for enrollment. \n Note: The card is required if encrypted_card or reuse_token is not provided."
+    },
+    "encrypted_card": {
+      "type": "string",
+      "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+    },
+    "public_key_alias": {
+      "type": "string",
+      "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+    },
+    "reuse_token": {
+      "maxLength": 255,
+      "minLength": 16,
+      "type": "string",
+      "description": "The Verifone issued reuse token used to represent the previously stored cardholder data. \n Note: reuse_token is required if card or encrypted_card is not provided."
+    },
+    "currency_code": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "Alphabetical ISO 4217 currency code for the sale amount."
+    },
+    "card_type": {
+      "type": "string",
+      "description": "Type of cards used for purchase.  Possible Values:  * VSA - Visa  * MSC - Mastercard  * VSD - Visa Delta/Debit (UK)  * VSE - Visa Electron  * MAE - Maestro (UK, Spain & Austria) AMX - American Express  * DSC - Discover  * DIN - Diners  * CBLA - Carte Blanche JCB - JCB  * ENR - EnRoute  * JAL - JAL  * CTB - Carte Bleue  * DNK - Dankort  * CSI - CartaSi  * EAN - Encoded Account Number UATP - UATP  * MAEI - Maestro (International)  * CB - Cartes Bancaires",
+      "enum": [
+        "VSA",
+        "MSC",
+        "VSD",
+        "VSE",
+        "MAE",
+        "AMX",
+        "DSC",
+        "DIN",
+        "CBLA",
+        "JCB",
+        "ENR",
+        "JAL",
+        "CTB",
+        "DNK",
+        "CSI",
+        "EAN",
+        "UATP",
+        "MAEI",
+        "CB"
+      ]
+    },
+    "category_code": {
+      "maximum": 9999,
+      "type": "number",
+      "description": "Merchant category code (MCC) NOTE: This field is required by Mastercard and Visa Brazil extensions."
+    },
+    "challenge_indicator": {
+      "type": "string",
+      "description": "NOTE: This is a 2.0 required field, Cardinal will default to 01 on Merchant Configuration - can be overridden by the merchant. Possible Values: * 01 - No preference * 02 - No challenge requested * 03 - Challenge requested (3DS Requestor Preference) * 04 - Challenge requested (Mandate) * 90 - Used to call the CB Scoring platform",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "90"
+      ]
+    },
+    "device_info_id": {
+      "type": "string",
+      "description": "Device infromation ID that relates to the device data that was previously collected."
+    },
+    "delivery_email": {
+      "maxLength": 255,
+      "type": "string",
+      "description": "For electronic delivery, email address to which the merchandise was delivered."
+    },
+    "delivery_time_frame": {
+      "type": "string",
+      "description": "Indicates the delivery timeframe.  Possible Values:  * 01 - Electronic delivery  * 02 - Same day shipping  * 03 - Overnight shipping  * 04 - Two or more days shipping",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ]
+    },
+    "device_channel": {
+      "type": "string",
+      "description": "Determines the channel that the transaction came through. Possible Values:  * SDK  * Browser  * 3RI NOTE: SDK will dynamically set SDK when using the Mobile SDK or Browser when customer is using our JavaScript SDK. Client will need to set 3RI for Merchant Initiated or 3RI transactions.",
+      "enum": [
+        "SDK",
+        "Browser",
+        "3RI"
+      ]
+    },
+    "device_data_info": {
+      "$ref": "#/components/schemas/DeviceDataInfo"
+    },
+    "email": {
+      "type": "string",
+      "description": "Consumer's email address."
+    },
+    "fraud_activity": {
+      "type": "string",
+      "description": "Indicates whether the merchant experienced suspicious activity (including previous fraud) on the account. Possible Values:  * 01 - No suspicious activity  * 02 - Suspicious activity observed",
+      "enum": [
+        "01",
+        "02"
+      ]
+    },
+    "gift_card_amount": {
+      "maximum": 999999999999999,
+      "type": "number",
+      "description": "The purchase amount total for prepaid gift cards in major units. Example: $123.45 USD = 12345"
+    },
+    "gift_card_count": {
+      "maximum": 99,
+      "type": "number",
+      "description": "Total count of individual prepaid gift cards purchased."
+    },
+    "gift_card_currency_code": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "ISO 4217 currency code for the gift card purchased."
+    },
+    "installment": {
+      "maximum": 999,
+      "minimum": 2,
+      "type": "number",
+      "description": "Indicates the maximum number of authorizations for installment payments. An integer value greater than 1 indicating the maximum number of permitted authorizations for installment payments. ** Required for Recurring and Installment transactions, when authenticationIndicator=\"02\" & \"03\" **"
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "Order Number or transaction identifier from the Merchant commerce website."
+    },
+    "merchant_score": {
+      "maxLength": 20,
+      "type": "string",
+      "description": "The global score calculated by the CB Scoring platform."
+    },
+    "message_category": {
+      "type": "string",
+      "description": "Category of the message for a specific use case.  Possible Values: \n  * 01 - PA (payment)/ NPA (non payment) with amount 0 \n  * 02 - NPA (non payment) \n  NOTE: Default is payment (01). Configured on Merchant account, or can be overridden on transaction.",
+      "enum": [
+        "01",
+        "02"
+      ]
+    },
+    "phone_number": {
+      "type": "string",
+      "description": "Cardholder's phone number. ITU/E.123 format with international prefix (+PPNNNNNNNNN...). Required unless market or regional mandate restricts sending this information."
+    },
+    "payment_account_age": {
+      "type": "string",
+      "description": "Date when the payment account was added to the cardholder account. ` Format: YYYYMMDD`",
+      "format": "date"
+    },
+    "payment_account_indicator": {
+      "type": "string",
+      "description": "Indicates the length of time that the payment account was enrolled in the merchant account. Possible Values:  * 01 - No account (guest checkout)  * 02 - During the transaction  * 03 - Less than 30 days  * 04 - 30-60 days  * 05 - More than 60 days",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ]
+    },
+    "payment_use_case": {
+      "type": "string",
+      "description": "The value from this field will be mapped to the data field on the CB-USECASE extension.\n NOTE: Required for CB transactions (required if MessageCategory = PA, or MessageCategory = NPA and AuthenticationIndicator = 02 or 03).\n - Possible Values:\n \t* 01 - Single Payment \n \t* 02 - Fixed Amount and Term Subscription \n \t * 03 - Payment By Instalments \n \t* 04 - Payment By Shipment \n \t* 05 - Other Recurring Payments",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05"
+      ]
+    },
+    "pre_order_date": {
+      "type": "string",
+      "description": "Expected date that a pre-ordered purchase will be available. `Format: YYYYMMDD`",
+      "format": "date"
+    },
+    "pre_order_indicator": {
+      "type": "string",
+      "description": "Indicates whether the cardholder is placing an order with a future availability or release date.  Possible Values:  * 01 - Merchandise available  * 02 - Future availability",
+      "enum": [
+        "01",
+        "02"
+      ]
+    },
+    "prior_authentication_data": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "This field carry data that the ACS can use to verify the authentication process"
+    },
+    "prior_authentication_method": {
+      "type": "string",
+      "description": "Mechanism used by the Cardholder to previously authenticate to the 3DS Requestor.  * 01 - Frictionless authentication occurred by ACS  * 02 - Cardholder challenge occurred by ACS  * 03 - AVS verified  * 04 - Other issuer methods",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ]
+    },
+    "prior_authentication_ref": {
+      "maxLength": 36,
+      "type": "string",
+      "description": "This data element contains a ACS Transaction ID for a prior authenticated transaction. For example, the first recurring transaction that was authenticated with the cardholder"
+    },
+    "prior_authentication_time": {
+      "type": "string",
+      "description": "Date and time in UTC of the prior cardholder authentication. ` Format: YYYYMMDDHHMM`",
+      "format": "date"
+    },
+    "product_code": {
+      "type": "string",
+      "description": "Merchant product code.  Possible Values:   * PHY - Goods/Service Purchase   * CHA - Check Acceptance   * ACF - Account Funding   * QCT - Quasi-Cash Transaction   * PAL - Prepaid Activation and Load  NOTE: This value defaults to PHY. This field can be used to override that value if applicable.",
+      "enum": [
+        "PHY",
+        "CHA",
+        "ACF",
+        "QCT",
+        "PAL"
+      ]
+    },
+    "purchase_date": {
+      "type": "string",
+      "description": "Date of original purchase. `Format: YYYYMMDDHHMMSS` NOTE: If not passed, SDK will use current date. Required for recurring transactions. ** Required for Recurring and Installment transactions, when authenticationIndicator=\"02\" & \"03\" **",
+      "format": "date"
+    },
+    "recurring_end": {
+      "type": "string",
+      "description": "The date after which no further recurring authorizations should be performed. `Format: YYYYMMDD` ** Required for Recurring and Installment transactions, when authenticationIndicator=\"02\" & \"03\" **",
+      "format": "date"
+    },
+    "recurring_frequency": {
+      "maximum": 9999,
+      "type": "number",
+      "description": "Conditional: Integer value indicating the minimum number of days between recurring authorizations. A frequency of monthly is indicated by the value 28. Multiple of 28 days will be used to indicate months. Example: 6 months = 168 ** Required for Recurring and Installment transactions, when authenticationIndicator=\"02\" & \"03\" **"
+    },
+    "reorder_indicator": {
+      "type": "string",
+      "description": "Indicates whether the cardholder is placing an order with a future availability or release date.  Possible Values:  * 01 - Merchandise available  * 02 - Future availability",
+      "enum": [
+        "01",
+        "02"
+      ]
+    },
+    "requestor_id": {
+      "maxLength": 35,
+      "type": "string",
+      "description": "This value is a Directory Server assigned 3DS Requestor ID value, each DS may provide a unique ID. NOTE: This is a 2.0 value only and if passed will override the Requestor ID value that is, configured on the Merchant's profile."
+    },
+    "requestor_name": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "This value is a Directory Server assigned 3DS Requestor Name value, each DS may provide a unique ID. NOTE: This is a 2.0 value only and if passed will override the Requestor Name value that is configured on the Merchant's profile."
+    },
+    "sdk_max_timeout": {
+      "maximum": 99,
+      "type": "number",
+      "description": "This field indicates the maximum amount of time for all 3DS 2.0 messages to be communicated between all components (in minutes). Possible Values: * Greater than or equal to 05 (05 is the minimum timeout to set) * Cardinal Default is set to 15 * NOTE: This field is a required 3DS 2.0 field and Cardinal sends in a default of 15 if nothing is passed."
+    },
+    "shipping_address_1": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's shipping address information."
+    },
+    "shipping_address_2": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's shipping address information."
+    },
+    "shipping_address_3": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's shipping address information."
+    },
+    "shipping_address_usage_date": {
+      "type": "string",
+      "description": "Date when the shipping address used for this transaction was first used.  `Format: YYYYMMDD`",
+      "format": "date"
+    },
+    "shipping_address_usage_indicator": {
+      "type": "string",
+      "description": "Indicates when the shipping address used for transaction was first used. Possible Values:  * 01 - This transaction  * 02 - Less than 30 days  * 03 - 30-60 days  * 04 - More than 60 days",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ]
+    },
+    "shipping_city": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's city of their shipping address."
+    },
+    "shipping_country_code": {
+      "type": "string",
+      "description": "Conditional: Consumer's alpha 2 digit ISO 3166 country code."
+    },
+    "shipping_method_indicator": {
+      "type": "string",
+      "description": "Indicates shipping method chosen for the transaction.  Possible Values:   * 01 - Ship to cardholder billing address  * 02 - Ship to another verified address on file with merchant  * 03 - Ship to address that is different than billing address  * 04 - Ship to store (store address should be populated on request)  * 05 - Digital goods  * 06 - Travel and event tickets, not shipped  * 07 - Other",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07"
+      ]
+    },
+    "shipping_name_indicator": {
+      "type": "string",
+      "description": "Indicates if the cardholder name on the account is identical to the shipping name used for the transaction. Possible Values: * 01 - Account and shipping name identical * 02 - Account and shipping name differ",
+      "enum": [
+        "01",
+        "02"
+      ]
+    },
+    "shipping_postal_code": {
+      "maxLength": 16,
+      "type": "string",
+      "description": "Conditional: Consumer's postal code of their shipping address."
+    },
+    "shipping_state": {
+      "maxLength": 50,
+      "type": "string",
+      "description": "Conditional: Consumer's state or province of their shipping address. ISO 3166-2 format as sub division code."
+    },
+    "threeds_contract_id": {
+      "type": "string",
+      "description": "The ID of the threeDSContractId used."
+    },
+    "three_ri_indicator": {
+      "type": "string",
+      "description": "Indicates the type of 3RI request. Possible Values:  * 01 - Recurring transaction  * 02 - Installment transaction  * 03 - Add card  * 04 - Maintain card  * 05 - Account verification  * 06 - Split/delayed shipment  * 07 - Top-up  * 08 - Mail Order  * 09 - Telephone Order  * 10 - Whitelist status check  * 11 - Other payment",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11"
+      ]
+    },
+    "threeds_version": {
+      "type": "string",
+      "description": "This field contains the 3DS version that can be leveraged to force a transaction down the 1.0 rails.",
+      "enum": [
+        "1.0.2"
+      ],
+      "deprecated": true
+    },
+    "token": {
+      "maxLength": 100,
+      "type": "string",
+      "description": "The third party token that will be used to process the transaction in place of the actual card number.  NOTE: This field is required if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token in place of the Cardinal token."
+    },
+    "transaction_mode": {
+      "type": "string",
+      "description": "Transaction mode identifier. Identifies the channel the transaction originates from. Available Options: M - Moto (Mail Order Telephone Order) P - Mobile Device R - Retail (Physical Store) S - Computer Device T - Tablet Device",
+      "enum": [
+        "M",
+        "P",
+        "R",
+        "S",
+        "T"
+      ]
+    },
+    "transaction_count_day": {
+      "maximum": 999,
+      "type": "number",
+      "description": "Number of transactions (successful or abandoned) for this cardholder account within the last 24 hours."
+    },
+    "transaction_count_year": {
+      "maximum": 999,
+      "type": "number",
+      "description": "Number of transactions (successful or abandoned) for this cardholder account within the last year."
+    },
+    "total_items": {
+      "maxLength": 2,
+      "minLength": 2,
+      "type": "string",
+      "description": "Number of purchased items or services Possible Values: \n 00-99"
+    },
+    "work_phone": {
+      "maxLength": 25,
+      "type": "string",
+      "description": "Conditional: Consumer's work phone number. ITU/E.123 format with international prefix (+PPNNNNNNNNN...)"
+    }
+  }
+}

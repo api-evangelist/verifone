@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-shopper_interaction.json",
+  "title": "shopper_interaction",
+  "description": "Used to indicate the channel used by to send they checkout link <br /> * ECOMMERCE <br /> * MAIL - value is used only in Virtual terminal transactions and cannot be used in createCheckout API call <br /> * TELEPHONE - value is used only in Virtual terminal transactions and cannot be used in createCheckout API call <br />",
+  "type": "string",
+  "default": "ECOMMERCE",
+  "enum": [
+    "ECOMMERCE",
+    "MAIL",
+    "TELEPHONE"
+  ]
+}

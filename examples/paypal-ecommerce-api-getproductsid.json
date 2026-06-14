@@ -1,0 +1,12 @@
+{
+  "operationId": "getProductsId",
+  "summary": "Get product details",
+  "method": "GET",
+  "path": "/products/{id}",
+  "responseExample": {
+    "createdAt": "2025-01-01",
+    "name": "string",
+    "type": "PHYSICAL",
+    "updatedAt": "2025-01-01"
+  }
+}

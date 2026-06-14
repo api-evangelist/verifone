@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-cardcapturerequest.json",
+  "title": "CardCaptureRequest",
+  "description": "CardCaptureRequest from Checkout API",
+  "required": [
+    "configurations",
+    "entity_id"
+  ],
+  "type": "object",
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "description": "Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)"
+    },
+    "customer": {
+      "type": "string",
+      "description": "<p>ID of a Customer created via the <a target='_blank' href=\"https://docs.verifone.com/api-reference/open-api-references/customer\">Customer API</a>. A customer object can be created and attached to a Checkout. The customer object can store relevant customer details. Some of these details might be required, depending on the payment method and/or authentication mechanisms (e.g., 3DS) used in the Checkout</p>"
+    },
+    "configurations": {
+      "type": "object",
+      "properties": {
+        "card": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "CARD_CAPTURE"
+              ]
+            },
+            "card_capture_mode": {
+              "$ref": "#/components/schemas/card_capture_mode"
+            },
+            "cvv_required": {
+              "type": "boolean",
+              "description": "Indicates whether cvv is required",
+              "default": false
+            },
+            "input_overrides": {
+              "anyOf": [
+                {
+                  "$ref": "#/x-alt-definitions/input_overrides"
+                },
+                {
+                  "$ref": "#/x-alt-definitions/Model2"
+                }
+              ]
+            }
+          },
+          "description": "Card payment configuration"
+        }
+      }
+    },
+    "expiry_time": {
+      "type": "string",
+      "description": "Expiry time of the Checkout page. Defaults to 15 min from creation time. If a user tries to visit or use an expired Checkout, an error will be shown. Maximum value is 30 days.",
+      "format": "date"
+    },
+    "merchant_reference": {
+      "maxLength": 50,
+      "pattern": "^[^=+\\-@].*",
+      "type": "string",
+      "description": "Reference provided by Merchant to identify the Checkout and the transaction initiated from it"
+    },
+    "return_url": {
+      "type": "string",
+      "description": "URL belonging to the Merchant website, where the Customer would be redirected after the Checkout has been completed. If this parameter is used, the customer will be redirected after spending 10 seconds on the payment confirmation page provided by Verifone in case of HPP and PAYMENT LINK transactions. For IFRAME transaction the redirect is performed right after the checkout page without passing through the payment confirmation page.   <br /> <b>Note 1:</b> The return_url accepts only securely connected URLs i.e., via https protocol. <br /> <b>Note 2:</b> The time after which redirection happens can be customized using redirect_method."
+    },
+    "shop_url": {
+      "type": "string",
+      "description": "URL belonging to the Merchant website, where the Customer would be redirected in case of cancelled Checkout. <br /> <b>Note:</b> Only applicable to HPP or PAYMENT_LINK interaction type."
+    },
+    "i18n": {
+      "$ref": "#/components/schemas/I18nConfiguration"
+    },
+    "interaction_type": {
+      "type": "string",
+      "description": "Type of checkout. Allows for distinguishing payments accepted via different channels. <br /> Possible Values: <br />  * HPP - For payments done as Hosted Payments Page integration.<br />  * IFRAME - For payments done as an Iframe integration.<br /> * PAYMENT_LINK - For payments done through the Payment link feature in the merchant portal.",
+      "default": "HPP",
+      "enum": [
+        "HPP",
+        "IFRAME",
+        "PAYMENT_LINK"
+      ]
+    },
+    "notification_methods": {
+      "$ref": "#/components/schemas/notification_methods"
+    },
+    "theme_id": {
+      "type": "string",
+      "description": "Parameter that was created within the create theme API call that applies the customizations upon the checkout interface. Read <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/theming\">Theming</a> for details."
+    },
+    "sales_channel": {
+      "type": "string",
+      "description": "Channel used to process transactions. <br /> Possible Values: <br />  * ECOMMERCE <br/>  * MOTO <br /> For sales_channel MOTO, no card.shopper_interaction is needed to be sent for this option.",
+      "enum": [
+        "ECOMMERCE",
+        "MOTO"
+      ]
+    },
+    "redirect_method": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "HEADER_REDIRECT"
+      ],
+      "description": "Configures the redirect behaviour for return_url on successful payment when interaction type is either HPP or PAYMENT_LINK </br>\n     * DEFAULT: The customer will be redirected after spending 10 seconds on the payment confirmation page provided by Verifone. </br>\n     * HEADER_REDIRECT: The payment confirmation page is skipped and the customer is redirected immediately. <br /> \n    <b>Note:</b> This parameter does not have any effect when interaction type is IFRAME."
+    }
+  }
+}

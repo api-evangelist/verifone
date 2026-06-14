@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-businesstitle.json",
+  "title": "BusinessTitle",
+  "description": "BusinessTitle from Verifone Order API",
+  "type": "string",
+  "maxLength": 100
+}

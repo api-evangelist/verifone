@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-application_context.json",
+  "title": "application_context",
+  "description": "application_context from Checkout API",
+  "type": "object",
+  "properties": {
+    "landing_page": {
+      "type": "string",
+      "description": "The type of landing page to show on the PayPal site for customer checkout",
+      "enum": [
+        "BILLING",
+        "LOGIN",
+        "NO_PREFERENCE"
+      ]
+    },
+    "brand_name": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The label that overrides the business name in the PayPal account on the PayPal site."
+    },
+    "locale": {
+      "maxLength": 10,
+      "minLength": 2,
+      "pattern": "^[a-z]{2}(?:-[A-Z][a-z]{3})?(?:-(?:[A-Z]{2}))?$",
+      "type": "string",
+      "description": "The BCP 47-formatted locale of pages that the PayPal payment experience shows.PayPal supports a five-character code. For example, da-DK, he-IL, id-ID, ja-JP, no-NO, pt-BR, ru-RU, sv-SE, th-TH, zh-CN, zh-HK, or zh-TW."
+    }
+  }
+}

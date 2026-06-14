@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model45.json",
+  "title": "Model45",
+  "description": "Model45 from PayPal eComm API",
+  "required": [
+    "trackingId"
+  ],
+  "type": "object",
+  "properties": {
+    "trackingId": {
+      "type": "string",
+      "description": "A unique ID to track each transaction"
+    }
+  }
+}

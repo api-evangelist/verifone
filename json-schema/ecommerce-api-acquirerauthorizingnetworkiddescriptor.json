@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-acquirerauthorizingnetworkiddescriptor.json",
+  "title": "acquirerAuthorizingNetworkIdDescriptor",
+  "description": "The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.",
+  "type": "string"
+}

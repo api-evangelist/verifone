@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-signersinformation.json",
+  "title": "SignersInformation",
+  "description": "Information on the signers in the request.",
+  "type": "object",
+  "properties": {
+    "providerRef": {
+      "description": "Signing Provider reference to the signers signing request.",
+      "type": "string"
+    },
+    "contact": {
+      "$ref": "#/components/schemas/ContactType"
+    },
+    "signed": {
+      "description": "Has the signer signed the contract.",
+      "type": "boolean",
+      "default": false
+    },
+    "signedDateTime": {
+      "description": "Date/Time signer signed the request.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "signingLink": {
+      "description": "This is the link used for signing the contract.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "contact"
+  ]
+}

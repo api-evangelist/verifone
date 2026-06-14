@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-plcc_mode.json",
+  "title": "plcc_mode",
+  "description": "- `CARD_CAPTURE` - A checkout is created with intent to retrieve customer's card data. The checkout captures the card data of the shopper, encrypts it and returns it to the Merchant. The Merchant then uses the encrypted card data to perform 3DS and/or payments with it.<br /> Following fields are not required: <br />  * amount <br />  * currency_code <br />  * receipt_type\n- `PAYMENT` - A checkout is created with the intent to perform a card payment. Verifone takes care of the full payment process and returns the final transaction response to the merchant, alongside any related details to it. Requires providing payment provider contract details. <br>",
+  "type": "string",
+  "enum": [
+    "CARD_CAPTURE",
+    "PAYMENT"
+  ]
+}

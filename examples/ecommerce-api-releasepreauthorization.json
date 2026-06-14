@@ -1,0 +1,11 @@
+{
+  "operationId": "ReleasePreAuthorization",
+  "summary": "Release PreAuthorization",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/release",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

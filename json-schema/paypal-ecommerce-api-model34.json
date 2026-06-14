@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model34.json",
+  "title": "Model34",
+  "description": "Model34 from PayPal eComm API",
+  "required": [
+    "sequence",
+    "tenureType"
+  ],
+  "type": "object",
+  "properties": {
+    "pricingScheme": {
+      "$ref": "#/components/schemas/pricingScheme"
+    },
+    "frequency": {
+      "$ref": "#/components/schemas/frequency"
+    },
+    "tenureType": {
+      "type": "string",
+      "description": "The tenure type of the billing cycle.",
+      "enum": [
+        "REGULAR",
+        "TRIAL"
+      ]
+    },
+    "sequence": {
+      "type": "number",
+      "description": "The order in which this cycle is to run among other billing cycles."
+    },
+    "totalCycles": {
+      "type": "number",
+      "description": "The number of times this billing cycle gets executed."
+    }
+  }
+}

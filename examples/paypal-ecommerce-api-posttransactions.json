@@ -1,0 +1,11 @@
+{
+  "operationId": "postTransactions",
+  "summary": "Create transaction",
+  "method": "POST",
+  "path": "/transactions",
+  "responseExample": {
+    "createdAt": "2025-01-01",
+    "id": "string",
+    "instoreReference": "string"
+  }
+}

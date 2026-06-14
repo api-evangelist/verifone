@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model4.json",
+  "title": "Model4",
+  "description": "Model4 from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "plans": {
+      "$ref": "#/components/schemas/plans"
+    },
+    "totalItems": {
+      "type": "number",
+      "description": "The total number of items."
+    },
+    "totalPages": {
+      "type": "number",
+      "description": "The total number of pages."
+    }
+  }
+}

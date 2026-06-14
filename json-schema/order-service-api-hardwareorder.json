@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-hardwareorder.json",
+  "title": "HardwareOrder",
+  "description": "HardwareOrder from Verifone Order API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/HardwareOrderData"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "packageDetails": {
+          "$ref": "#/components/schemas/PackageDetails"
+        },
+        "merchant": {
+          "$ref": "#/components/schemas/HardwareMerchant"
+        }
+      },
+      "required": [
+        "merchant"
+      ]
+    }
+  ]
+}

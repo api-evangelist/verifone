@@ -1,0 +1,15 @@
+{
+  "operationId": "postBillingplansCreate",
+  "summary": "Create billing plan",
+  "method": "POST",
+  "path": "/billingPlans/create",
+  "responseExample": {
+    "billingCycles": [
+      {}
+    ],
+    "createTime": "2025-01-01",
+    "id": "string",
+    "name": "string",
+    "productId": "string"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-bank.json",
+  "title": "bank",
+  "description": "Bank payment configuration",
+  "required": [
+    "op"
+  ],
+  "type": "object",
+  "properties": {
+    "dynamic_descriptor": {
+      "maxLength": 25,
+      "type": "string",
+      "description": "Value is displayed as short text on the bank statement of the cardholder"
+    },
+    "authorization_type": {
+      "type": "string",
+      "description": "Card Authorization Type (PRE_AUTH, FINAL_AUTH).  When capture now is set to true pre-authorization transactions cannot be done.",
+      "default": "FINAL_AUTH"
+    },
+    "shopper_interaction": {
+      "type": "string",
+      "description": "Used to indicate the channel used by to send they checkout link <br /> * ECOMMERCE <br /> * MAIL",
+      "enum": [
+        "ECOMMERCE",
+        "MAIL"
+      ]
+    },
+    "message_to_customer": {
+      "type": "string",
+      "description": "Message to customer",
+      "maxLength": 500
+    },
+    "op": {
+      "$ref": "#/components/schemas/op"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "operationId": "saleTransaction",
+  "summary": "Initiate a payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/card",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

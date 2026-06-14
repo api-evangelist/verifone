@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-merchantpreferences.json",
+  "title": "merchantPreferences",
+  "description": "merchantPreferences from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "collectShippingAddress": {
+      "type": "string",
+      "description": "Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase."
+    },
+    "enableAddressChange": {
+      "type": "string",
+      "description": "Indicates whether to show the shipping address but prevent the customer from editing it."
+    },
+    "experienceId": {
+      "type": "string",
+      "description": "The ID of the experience profile to apply during the agreement approval UI flow."
+    },
+    "externalSelectedFundingInstrumentType": {
+      "type": "string",
+      "description": "The type of financial instrument (FI) that the merchant wants to promote."
+    },
+    "allowedCountries": {
+      "$ref": "#/components/schemas/allowedCountries"
+    }
+  }
+}

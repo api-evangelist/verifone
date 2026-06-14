@@ -1,0 +1,11 @@
+{
+  "operationId": "klarnaInitTransaction",
+  "summary": "Initiate a Klarna payment.",
+  "method": "POST",
+  "path": "/api/v2/transactions/klarna",
+  "responseExample": {
+    "id": "string",
+    "instore_reference": "string",
+    "client_token": "string"
+  }
+}

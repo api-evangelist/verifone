@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-phonenumber.json",
+  "title": "phoneNumber",
+  "description": "The phone number, in its canonical international E.164 numbering plan format",
+  "required": [
+    "nationalNumber"
+  ],
+  "type": "object",
+  "properties": {
+    "nationalNumber": {
+      "maxLength": 14,
+      "minLength": 1,
+      "pattern": "^[0-9]{1,14}?$",
+      "type": "string"
+    }
+  }
+}

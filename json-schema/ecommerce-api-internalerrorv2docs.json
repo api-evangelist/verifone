@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-internalerrorv2docs.json",
+  "title": "InternalErrorV2Docs",
+  "description": "InternalErrorV2Docs from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Error timestamp"
+    },
+    "reversal_status": {
+      "type": "string",
+      "description": "Indicates to the API client if a technical reversal has been completed by Verifone.",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REQUIRED",
+        "COMPLETED"
+      ]
+    },
+    "code": {
+      "type": "number",
+      "enum": [
+        500
+      ],
+      "default": 500
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error"
+      ],
+      "default": "Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error"
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

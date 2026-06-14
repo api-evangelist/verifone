@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-contractcontacttype.json",
+  "title": "ContractContactType",
+  "description": "ContractContactType from Verifone Order API",
+  "type": "object",
+  "required": [
+    "contactType",
+    "name"
+  ],
+  "properties": {
+    "contactType": {
+      "$ref": "#/components/schemas/ContactTypeEnum"
+    },
+    "name": {
+      "$ref": "#/components/schemas/ContactName"
+    },
+    "phoneNumbers": {
+      "description": "The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.",
+      "items": {
+        "$ref": "#/components/schemas/Phone"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "type": "array"
+    },
+    "email": {
+      "$ref": "#/components/schemas/EmailAddress"
+    },
+    "businessTitle": {
+      "$ref": "#/components/schemas/BusinessTitle"
+    },
+    "passportId": {
+      "type": "string",
+      "description": "Passport Identity Identifier.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "nationality": {
+      "type": "string",
+      "description": "Nationality",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "additionalNationalities": {
+      "type": "array",
+      "description": "Additional Nationalities",
+      "uniqueItems": true,
+      "maxItems": 20,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      }
+    },
+    "nationalIdentifer": {
+      "type": "string",
+      "description": "Contact's national identity identifier.",
+      "minLength": 1,
+      "maxLength": 20
+    }
+  }
+}

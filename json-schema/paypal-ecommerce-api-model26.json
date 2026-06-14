@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model26.json",
+  "title": "Model26",
+  "description": "Model26 from PayPal eComm API",
+  "required": [
+    "amount",
+    "paymentProviderContract"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "Payment Provider contract"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/Model22"
+    },
+    "intent": {
+      "type": "string",
+      "description": "Intent of this transaction",
+      "default": "CAPTURE",
+      "enum": [
+        "AUTHORIZE",
+        "CAPTURE"
+      ]
+    },
+    "customer": {
+      "$ref": "#/components/schemas/customer"
+    },
+    "applicationContext": {
+      "$ref": "#/components/schemas/application_context"
+    },
+    "shipping": {
+      "$ref": "#/components/schemas/shipping"
+    },
+    "items": {
+      "$ref": "#/components/schemas/items"
+    },
+    "dynamicDescriptor": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "If an Order is paid using the \"PayPal Wallet\" the statement descriptor will appear in following format on the payer card statement:  PAYPAL_prefix+(space)+merchant_descriptor+(space)+dynamicDescriptor.  The PAYPAL prefix uses 8 characters. Only the first 22 characters will be displayed in the statement. <br />  For example, <br/>  * The PayPal prefix toggle is PAYPAL <br/>  * The merchant descriptor in the profile is Janes Gift <br/>  * The soft descriptor is 800-123-1234 </br> Then, the statement descriptor on the card is PAYPAL * Janes Gift 80."
+    },
+    "merchantReference": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer."
+    },
+    "description": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "Purchase description"
+    },
+    "detailedAmount": {
+      "$ref": "#/components/schemas/detailedAmount"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model58.json",
+  "title": "Model58",
+  "description": "Model58 from PayPal eComm API",
+  "required": [
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "add",
+        "replace"
+      ]
+    },
+    "value": {
+      "$ref": "#/components/schemas/Model19"
+    }
+  }
+}

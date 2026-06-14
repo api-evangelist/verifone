@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/3ds-authentication-api-devicedatainfo.json",
+  "title": "DeviceDataInfo",
+  "description": "DeviceDataInfo from 3D Secure API",
+  "type": "object",
+  "properties": {
+    "browser_java_enabled": {
+      "type": "boolean",
+      "description": "A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property."
+    },
+    "browser_header": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "The exact content of the HTTP accept headers sent from the cardholder's browser.  Example: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    },
+    "browser_language": {
+      "maxLength": 8,
+      "type": "string",
+      "description": "Value represents the browser language as defined in IETF BCP47 . Example: en-US"
+    },
+    "browser_color_depth": {
+      "maxLength": 2,
+      "type": "string",
+      "description": "Value represents the bit depth of the color palette for displaying images, in bits per pixel Example: 24"
+    },
+    "browser_screen_height": {
+      "maxLength": 6,
+      "type": "string",
+      "description": "Total height of the Cardholder's screen in pixels. Example: 864"
+    },
+    "browser_screen_width": {
+      "maxLength": 6,
+      "type": "string",
+      "description": "Total width of the cardholder's screen in pixels. Example: 1536"
+    },
+    "browser_time_zone": {
+      "maxLength": 5,
+      "type": "string",
+      "description": "Time difference between UTC time and the cardholder browser local time, in minutes Example: 300"
+    },
+    "user_agent": {
+      "maxLength": 2048,
+      "type": "string",
+      "description": "The exact content of the HTTP user agent header.  Example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "The IP address of the Consumer.  NOTE:   IPv4 and IPv6 are supported.  Example:  IPv4 address:  1.12.123.255  IPv6 address: 2011:0db8:85 a3:0101:0101:8a2e:03 70:7334"
+    },
+    "browser_javascript_enabled": {
+      "type": "boolean",
+      "description": "A Boolean value that represents the ability of the cardholder browser to execute JavaScript."
+    }
+  }
+}

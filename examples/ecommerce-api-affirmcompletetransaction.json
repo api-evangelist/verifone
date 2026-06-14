@@ -1,0 +1,11 @@
+{
+  "operationId": "affirmCompleteTransaction",
+  "summary": "Complete a Affirm payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/affirm_complete",
+  "responseExample": {
+    "id": "string",
+    "authorization_expiration": "string",
+    "amount": 0
+  }
+}

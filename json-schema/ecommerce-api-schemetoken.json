@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-schemetoken.json",
+  "title": "SchemeToken",
+  "description": "This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.",
+  "type": "object",
+  "properties": {
+    "network_token": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 16,
+      "description": "Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account."
+    },
+    "status": {
+      "type": "string",
+      "title": "Token Status Type",
+      "enum": [
+        "VALID",
+        "SUSPENDED",
+        "DELETED"
+      ],
+      "description": "The status of the cardholder data token."
+    },
+    "expiry_month": {
+      "type": "integer",
+      "minimum": 12,
+      "description": "Network tokens' expiry date's month\n. A 2 digit value. ISO8583 - DE 14"
+    },
+    "expiry_year": {
+      "type": "integer",
+      "minimum": 9999,
+      "description": "Network tokens' expiry date's year. A 4 digit value."
+    },
+    "payment_account_reference": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Payment Account Reference"
+    }
+  }
+}

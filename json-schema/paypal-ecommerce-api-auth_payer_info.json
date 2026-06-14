@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-auth_payer_info.json",
+  "title": "Auth_Payer_Info",
+  "description": "Auth_Payer_Info from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "payerId": {
+      "type": "string",
+      "description": "The PayPal-assigned ID for the payer",
+      "pattern": "^[2-9A-HJ-NP-Z]{13}$"
+    },
+    "name": {
+      "$ref": "#/components/schemas/Payer_Name"
+    },
+    "phoneNumber": {
+      "$ref": "#/components/schemas/Phone_number"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address of the payer.",
+      "maxLength": 255
+    },
+    "shippingAddress": {
+      "$ref": "#/components/schemas/Shipping-Address"
+    },
+    "authorizationStatus": {
+      "type": "string",
+      "description": "The status of the authorized payment.\n\nThe possible values are:\n\n* CREATED. The authorized payment is created. No captured payments have been made for this authorized payment.\n* PARTIALLY_CREATED. The payment which was authorized for an amount that is less than the originally requested amount.\n* DENIED. PayPal cannot authorize funds for this authorized payment.\n* PENDING. The created authorization is in pending state. A manual review might be pending."
+    }
+  }
+}

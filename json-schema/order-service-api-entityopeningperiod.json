@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-entityopeningperiod.json",
+  "title": "Opening Period",
+  "description": "The opening and closing hours.",
+  "properties": {
+    "start": {
+      "pattern": "^\\d{2}:\\d{2}$",
+      "type": "string"
+    },
+    "end": {
+      "pattern": "^\\d{2}:\\d{2}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "end",
+    "start"
+  ]
+}

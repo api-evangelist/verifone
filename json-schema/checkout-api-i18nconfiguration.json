@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-i18nconfiguration.json",
+  "title": "I18nConfiguration",
+  "description": "Language preferences for the checkout page. Read <a target=\"_blank\" href=\"/online-payments/checkout/localization\">Localisation</a> for details.",
+  "type": "object",
+  "properties": {
+    "default_language": {
+      "type": "string",
+      "description": "Default language is used for displaying the page. Any customer language choice would override this option",
+      "default": "en"
+    },
+    "fallback_language": {
+      "type": "string",
+      "description": "Fallback language is used when DEFAULT_LANGUAGE is invalid. Any customer language choice would override this option",
+      "default": "en"
+    },
+    "show_language_options": {
+      "type": "boolean",
+      "description": "Indicates whether a language selection option should be shown to the customer on the Checkout page or not",
+      "default": true
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-plantaxespercentage.json",
+  "title": "planTaxesPercentage",
+  "description": "planTaxesPercentage from PayPal eComm API",
+  "required": [
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "add",
+        "replace"
+      ]
+    },
+    "value": {
+      "type": "integer",
+      "description": "The tax percentage on the billing amount"
+    }
+  }
+}

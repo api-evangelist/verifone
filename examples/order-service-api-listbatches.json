@@ -1,0 +1,17 @@
+{
+  "operationId": "listBatches",
+  "summary": "List batches",
+  "method": "GET",
+  "path": "/orders/batch",
+  "responseExample": {
+    "batches": [
+      {}
+    ],
+    "metadata": {
+      "totalPages": {},
+      "pageNumber": {},
+      "pageSize": {},
+      "totalItems": {}
+    }
+  }
+}

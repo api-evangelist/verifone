@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-lineitem.json",
+  "title": "LineItem",
+  "description": "LineItem from Checkout API",
+  "required": [
+    "name",
+    "total_amount"
+  ],
+  "type": "object",
+  "properties": {
+    "image_url": {
+      "maxLength": 2000,
+      "type": "string",
+      "description": "Image URL for the line item"
+    },
+    "item_url": {
+      "maxLength": 2000,
+      "type": "string",
+      "description": "Item URL for the line item"
+    },
+    "name": {
+      "maxLength": 255,
+      "type": "string",
+      "description": "Descriptive name of the order line item"
+    },
+    "quantity": {
+      "type": "integer",
+      "default": 1,
+      "description": "Quantity of the order line item"
+    },
+    "unit_price": {
+      "type": "number",
+      "description": "Unit Price"
+    },
+    "unit_price_tax": {
+      "type": "number",
+      "description": "Unit Price Tax"
+    },
+    "tax_rate": {
+      "type": "number",
+      "description": "Additional details specific to this type of event"
+    },
+    "total_tax_amount": {
+      "type": "number",
+      "description": "Total tax amount"
+    },
+    "total_amount": {
+      "type": "number",
+      "description": "Total Amount"
+    },
+    "sku": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The stock keeping unit (SKU) for the item."
+    },
+    "description": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The detailed item description."
+    },
+    "category": {
+      "type": "string",
+      "description": "The item category type. <br />  The possible values are: <br />  * DIGITAL_GOODS - Goods that are stored, delivered, and used in their electronic format. <br />  * PHYSICAL_GOODS - A tangible item that can be shipped with proof of delivery.",
+      "enum": [
+        "DIGITAL_GOODS",
+        "PHYSICAL_GOODS"
+      ]
+    }
+  }
+}

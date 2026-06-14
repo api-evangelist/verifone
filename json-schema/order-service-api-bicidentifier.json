@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-bicidentifier.json",
+  "title": "Bank Identifier Code",
+  "description": "International Bank Identifier Code Format.\nThe Bank Identifier Code or SWIFT Code ,this can also be referred to as the CHIPS, NCC, VSC or IFSC depending on your location. Made up of 8 or 11 characters .The 3 main parts include: BankCode(4), Country Code(2) and Location (2).\nOptionally the branch identifier is a 3 character optional element that can supplement the 8 character BIC.\n[ISO 9362](https://www.iso.org/standard/84108.html)",
+  "type": "string",
+  "pattern": "^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$",
+  "maxLength": 11
+}

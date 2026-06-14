@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model49.json",
+  "title": "Model49",
+  "description": "Model49 from PayPal eComm API",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "$ref": "#/components/schemas/Model48"
+    },
+    "description": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "An informational note about the capture. Appears in both the payer's transaction history and the\n emails that the payer receives."
+    },
+    "agreementId": {
+      "type": "string",
+      "description": "Billing Agreement id"
+    },
+    "merchantReference": {
+      "maxLength": 127,
+      "type": "string",
+      "description": "The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer."
+    }
+  }
+}

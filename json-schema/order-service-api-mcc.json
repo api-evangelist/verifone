@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-mcc.json",
+  "title": "MCC",
+  "description": "The Merchant Category Code (MCC). A 4 digit Code classifying the type of business being done by the card acceptor or Merchant (in accordance with ISO 18245).",
+  "type": "string",
+  "minLength": 4,
+  "maxLength": 4,
+  "pattern": "^[0-9]{4,4}$"
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-payment_contract_id.json",
+  "title": "payment_contract_id",
+  "description": "payment_contract_id from Checkout API",
+  "oneOf": [
+    {
+      "type": "string",
+      "description": "This parameter can be found in the portal on the Payment Provider Contract attached to your organization or given to you by a Verifone employee. It is used to retrieve MID and other merchant configurations necessary for a card payment."
+    },
+    {
+      "type": "object",
+      "$ref": "#/x-alt-definitions/paymentContractIdDef"
+    }
+  ]
+}

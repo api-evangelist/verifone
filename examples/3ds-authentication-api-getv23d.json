@@ -1,0 +1,13 @@
+{
+  "operationId": "getV23d",
+  "summary": "List ThreeDSAuthentications",
+  "method": "GET",
+  "path": "/v2/3d",
+  "responseExample": [
+    {
+      "_id": "string",
+      "amount": 0,
+      "threeds_contract_id": "string"
+    }
+  ]
+}

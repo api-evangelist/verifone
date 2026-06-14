@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-unmatchedrefundtokenrequest.json",
+  "title": "Using Reuse Token",
+  "description": "unmatchedRefundTokenRequest from Verifone eCommerce API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/unmatchedRefundBaseRequest"
+    },
+    {
+      "properties": {
+        "reuse_token": {
+          "title": "Verifone or Third-Party Reuse Token",
+          "description": "The Verifone or Third-Party issued reuse token used to represent the previously stored cardholder data.\nRequired here if not referenced by providing the stored credential signup reference `stored_credential.reference` in a subsequent charge request.\n",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 14
+        },
+        "reuse_token_type": {
+          "title": "Reuse Token Type",
+          "description": "The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.\n**Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.\n",
+          "type": "string",
+          "enum": [
+            "CHASE",
+            "INTERNAL",
+            "TAVE"
+          ],
+          "default": "INTERNAL"
+        },
+        "reuse_token_details": {
+          "$ref": "#/components/schemas/TokenDetailsRequestBody"
+        },
+        "encrypted_svc_access_code": {
+          "type": "string",
+          "title": "Client encrypted SVC Access Code",
+          "description": "The SVC Access Code encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\nThe data to encrypt is a JSON with tag svcAccessCode.\n\nAdditionally a tag called captureTime must be presenting indicating the time the cvv was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z."
+        },
+        "public_key_alias": {
+          "type": "string",
+          "title": "Public Key Alias",
+          "description": "The alias for the public key used to encrypt the card/identity card/cvv/svc access code."
+        },
+        "prefer_fund_transfer": {
+          "type": "boolean",
+          "description": "This flag is to be set to true when the merchant would like to use\nfund transfer options like OCT and the Payment provider contract\nis enabled for both fund transfers and unmatched refund.",
+          "default": false
+        },
+        "receipt_type": {
+          "type": "string",
+          "description": "Defines the type of receipt to be generated",
+          "enum": [
+            "FULL_RECEIPT",
+            "INVOICE",
+            "INVOICE_RECEIPT",
+            "SIMPLE_RECEIPT",
+            "NONE"
+          ]
+        }
+      },
+      "required": [
+        "reuse_token"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-contacttype.json",
+  "title": "ContactType",
+  "description": "The details of a Contact.",
+  "type": "object",
+  "properties": {
+    "contactType": {
+      "$ref": "#/components/schemas/ContactTypeEnum"
+    },
+    "name": {
+      "$ref": "#/components/schemas/ContactName"
+    },
+    "phoneNumbers": {
+      "description": "The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.",
+      "items": {
+        "$ref": "#/components/schemas/Phone"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "type": "array"
+    },
+    "email": {
+      "$ref": "#/components/schemas/EmailAddress"
+    },
+    "businessTitle": {
+      "$ref": "#/components/schemas/BusinessTitle"
+    }
+  },
+  "required": [
+    "contactType",
+    "name"
+  ]
+}

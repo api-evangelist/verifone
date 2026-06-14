@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-pricingscheme.json",
+  "title": "pricingScheme",
+  "description": "The active pricing scheme for this billing cycle.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "maximum": 999,
+      "type": "number",
+      "description": "The version of the pricing scheme."
+    },
+    "fixedPrice": {
+      "$ref": "#/components/schemas/fixedPrice"
+    },
+    "pricingModel": {
+      "type": "string",
+      "description": "The pricing model for tiered plan",
+      "enum": [
+        "VOLUME",
+        "TIERED"
+      ]
+    },
+    "tiers": {
+      "$ref": "#/components/schemas/tiers"
+    }
+  }
+}

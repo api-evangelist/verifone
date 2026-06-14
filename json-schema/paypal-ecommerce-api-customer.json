@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-customer.json",
+  "title": "customer",
+  "description": "Customer details",
+  "type": "object",
+  "properties": {
+    "email": {
+      "maxLength": 255,
+      "type": "string",
+      "description": "Customer email address"
+    },
+    "payerId": {
+      "pattern": "^[2-9A-HJ-NP-Z]{13}$",
+      "type": "string",
+      "description": "The PayPal-assigned ID for the payer"
+    },
+    "phoneNumber": {
+      "$ref": "#/components/schemas/Phone_number"
+    },
+    "birthDate": {
+      "type": "string",
+      "description": "Date of birth of the customer, 10 characters, ISO-8601 (YYYY-MM-DD)",
+      "format": "date"
+    },
+    "identification": {
+      "$ref": "#/components/schemas/identification"
+    },
+    "address": {
+      "$ref": "#/components/schemas/address"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "Customer first name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Customer last name"
+    }
+  }
+}

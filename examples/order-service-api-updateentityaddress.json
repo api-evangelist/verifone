@@ -1,0 +1,14 @@
+{
+  "operationId": "updateEntityAddress",
+  "summary": "Partial Update of a Trading address",
+  "method": "PATCH",
+  "path": "/entities/{entityUid}/tradingAddress",
+  "responseExample": {
+    "contact": {
+      "contactType": {},
+      "name": {}
+    },
+    "vfiSiteId": "string",
+    "storeNumber": "string"
+  }
+}

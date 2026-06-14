@@ -1,0 +1,7 @@
+{
+  "operationId": "postBillingagreementAgreementidCancel",
+  "summary": "Cancel agreement details",
+  "method": "POST",
+  "path": "/billingAgreement/{agreementId}/cancel",
+  "responseExample": "string"
+}

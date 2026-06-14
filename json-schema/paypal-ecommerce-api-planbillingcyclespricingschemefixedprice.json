@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-planbillingcyclespricingschemefixedprice.json",
+  "title": "planBillingCyclesPricingSchemeFixedPrice",
+  "description": "planBillingCyclesPricingSchemeFixedPrice from PayPal eComm API",
+  "required": [
+    "sequence",
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "add",
+        "replace"
+      ]
+    },
+    "value": {
+      "$ref": "#/components/schemas/value"
+    },
+    "sequence": {
+      "type": "integer",
+      "description": "The order of the cycle to update"
+    }
+  }
+}

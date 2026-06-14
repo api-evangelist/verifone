@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model60.json",
+  "title": "Model60",
+  "description": "Model60 from PayPal eComm API",
+  "required": [
+    "percentage"
+  ],
+  "type": "object",
+  "properties": {
+    "percentage": {
+      "type": "string",
+      "description": "The tax percentage on the billing amount."
+    }
+  }
+}

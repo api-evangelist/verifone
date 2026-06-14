@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-lastchangetime.json",
+  "title": "LastChangeTime",
+  "description": "Time status detailed status last changed.",
+  "type": "string",
+  "format": "date-time"
+}

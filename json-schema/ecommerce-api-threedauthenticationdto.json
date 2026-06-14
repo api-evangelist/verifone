@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-threedauthenticationdto.json",
+  "title": "ThreedAuthenticationDto",
+  "description": "ThreedAuthenticationDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "eci_flag": {
+      "type": "string",
+      "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically.This should be passed on the authorization transaction to the Gateway/Processor.Please refer to the integration guide for information on its usage.",
+      "enum": [
+        "05",
+        "06",
+        "07",
+        "02",
+        "01",
+        "00"
+      ]
+    },
+    "enrolled": {
+      "type": "string",
+      "enum": [
+        "Y",
+        "N",
+        "U",
+        "B"
+      ],
+      "description": "The enrolment response status of Authentication eligibility from the Directory Server.\n\nPossible Values:\n\n * `Y` - Yes, Bank is participating in 3-D Secure protocol and will return the ACSUrl.\n\n * `N` - No, Bank is not participating in 3-D Secure protocol.\n\n * `U` - Unavailable,  the DS or ACS is not available for authentication at the time of the request.\n\n * `B` - Bypass, merchant authentication rule is triggered to bypass authentication in this use case.\n\nNOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+    },
+    "cavv": {
+      "type": "string",
+      "minLength": 28,
+      "maxLength": 48,
+      "description": "Cardholder Authentication Verification Value (CAVV). Base64-encoded values of 28 or 32 characters. Hex-encoded values of 40 or 48 characters."
+    },
+    "cavv_algorithm": {
+      "type": "string",
+      "description": "The algorithm used to generate the CAVV value. Supported for 3D Secure v1 only."
+    },
+    "pares_status": {
+      "type": "string",
+      "enum": [
+        "Y",
+        "N",
+        "U",
+        "A",
+        "C",
+        "R"
+      ],
+      "description": "Authentication response code.\n\nPossible Values:\n\n * `Y` - Successful Authentication.\n\n * `N` - Failed Authentication.\n\n * `U` - Unable to Complete Authentication\n\n * `A` - Successful Attempts Transaction.\n\n * `C` - Challenge Required for Authentication.\n\n * `R` - Authentication Rejected."
+    },
+    "xid": {
+      "type": "string",
+      "description": "The transaction identifier assigned by Directory Server. Supported for 3D Secure v1 only."
+    },
+    "threeds_version": {
+      "type": "string",
+      "enum": [
+        "1.0.2",
+        "2.1.0",
+        "2.2.0"
+      ],
+      "description": "The 3DS version used to process the transaction."
+    },
+    "ds_transaction_id": {
+      "type": "string",
+      "description": "The unique transaction identifier assigned by the Directory Server. Supported for 3D Secure v2 only."
+    },
+    "signature_verification": {
+      "type": "string",
+      "enum": [
+        "Y",
+        "N"
+      ],
+      "description": "Transaction Signature status identifier.\n\n Possible Values:\n\n *  `Y` - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted.\n\n * `N` - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+    },
+    "verification": {
+      "type": "array",
+      "description": "Any verification/authentication responses captured as part of the submission of the transaction. e.g. 3DS response values or ACRQ/ARCP. For some mPos transactions the verification may be performed on-device e.g. ApplePay, Face ID or Touch ID.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "DENIED",
+          "NON_PARTICIPATION",
+          "UNABLE_TO_AUTHENTICATE",
+          "MERCHANT_NOT_ENROLLED",
+          "WITH_CRYPTOGRAM",
+          "WITHOUT_CRYPTOGRAM"
+        ]
+      }
+    },
+    "error_desc": {
+      "type": "string",
+      "description": "Application error description for the associated error number(s).\n\n NOTE: Multiple error descriptions are separated by a comma."
+    },
+    "error_no": {
+      "type": "string",
+      "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request.\n\n NOTE: Multiple error numbers are separated by a comma."
+    },
+    "authentication_amount": {
+      "type": "integer",
+      "title": "amount",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150.\nThe required number of decimal places for a currency code is according to ISO 4217.\nFor Account Verification transactions, provide 0 as value for this field."
+    },
+    "additional_data": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AdditionalDataDto",
+          "description": "Additional 3DS data, which may be required in the particular payment request."
+        }
+      ]
+    }
+  }
+}

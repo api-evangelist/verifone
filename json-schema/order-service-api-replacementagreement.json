@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-replacementagreement.json",
+  "title": "ReplacementAgreement",
+  "description": "Replacement agreement details for devices covered under this contract.",
+  "type": "object",
+  "required": [
+    "devices"
+  ],
+  "properties": {
+    "contractNumber": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Contract number for the replacement agreement."
+    },
+    "devices": {
+      "type": "array",
+      "description": "List of devices being replaced.",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/components/schemas/ReplacedDevice"
+      }
+    }
+  }
+}

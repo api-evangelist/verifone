@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/3ds-authentication-api-threedsauthentication.json",
+  "title": "ThreeDSAuthentication",
+  "description": "ThreeDSAuthentication from 3D Secure API",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string",
+      "description": "ThreeDSAuthentication id"
+    },
+    "amount": {
+      "maximum": 9007199254740991,
+      "type": "number",
+      "description": "The amount of the transaction."
+    },
+    "threeds_contract_id": {
+      "type": "string",
+      "description": "The ID of the threeDSContractId used."
+    },
+    "authentication": {
+      "$ref": "#/components/schemas/AuthenticationResult"
+    },
+    "card": {
+      "type": "string",
+      "description": "The ID of the card that is checked for enrollment."
+    },
+    "currency_code": {
+      "maxLength": 3,
+      "minLength": 3,
+      "type": "string",
+      "description": "Alphabetical ISO 4217 currency code for the sale amount."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The time at which the authentication was created.",
+      "format": "date"
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "The ID of the entity, which this authentication belongs to."
+    },
+    "transaction_id": {
+      "type": "string",
+      "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+    }
+  }
+}

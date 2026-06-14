@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-smsnotification.json",
+  "title": "SMSNotification",
+  "description": "SMSNotification from Checkout API",
+  "type": "object",
+  "properties": {
+    "phone_number": {
+      "maxLength": 15,
+      "pattern": "^[0-9-\\s\\-+().-]+$",
+      "type": "string",
+      "description": "Phone number to which notification will be sent. This field can only be used for Pay By Link feature."
+    }
+  }
+}

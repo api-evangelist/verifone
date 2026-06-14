@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-unmatchedrefundencryptedcardrequest.json",
+  "title": "Using Encrypted Card",
+  "description": "unmatchedRefundEncryptedCardRequest from Verifone eCommerce API",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/unmatchedRefundBaseRequest"
+    },
+    {
+      "properties": {
+        "encrypted_card": {
+          "type": "string",
+          "title": "Client encrypted cardholder data",
+          "description": "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+        },
+        "encrypted_svc_access_code": {
+          "type": "string",
+          "title": "Client encrypted SVC Access Code",
+          "description": "The SVC Access Code encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\nThe data to encrypt is a JSON with tag svcAccessCode.\n\nAdditionally a tag called captureTime must be presenting indicating the time the cvv was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z."
+        },
+        "public_key_alias": {
+          "type": "string",
+          "title": "Public Key Alias",
+          "description": "The alias for the public key used to encrypt the card/identity card/cvv/svc access code."
+        },
+        "prefer_fund_transfer": {
+          "type": "boolean",
+          "description": "This flag is to be set to true when the merchant would like to use\nfund transfer options like OCT and the Payment provider contract\nis enabled for both fund transfers and unmatched refund.",
+          "default": false
+        },
+        "receipt_type": {
+          "type": "string",
+          "description": "Defines the type of receipt to be generated",
+          "enum": [
+            "FULL_RECEIPT",
+            "INVOICE",
+            "INVOICE_RECEIPT",
+            "SIMPLE_RECEIPT",
+            "NONE"
+          ]
+        }
+      },
+      "required": [
+        "encrypted_card",
+        "public_key_alias"
+      ]
+    }
+  ]
+}

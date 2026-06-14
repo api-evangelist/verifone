@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/customer-api-shipping.json",
+  "title": "Shipping",
+  "description": "Shipping from Customer API",
+  "type": "object",
+  "properties": {
+    "address_1": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Consumer's primary shipping address information.\n\n**Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish"
+    },
+    "address_2": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Consumer's secondary shipping address information.\n\n**Field required for:** PayPal"
+    },
+    "address_3": {
+      "maxLength": 40,
+      "type": "string",
+      "description": "Consumer's third shipping address information."
+    },
+    "city": {
+      "maxLength": 28,
+      "type": "string",
+      "description": "Consumer's city on their shipping address.\n\n**Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish"
+    },
+    "first_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Consumer's first name.\n\n**Field required for:** Klarna, Vipps, MobilePay"
+    },
+    "middle_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Consumer's middle name."
+    },
+    "last_name": {
+      "maxLength": 22,
+      "type": "string",
+      "description": "Consumer's last name.\n\n**Field required for:** Klarna, Vipps, MobilePay"
+    },
+    "phone": {
+      "maxLength": 25,
+      "pattern": "^[0-9\\s\\-+().-]+$",
+      "type": "string",
+      "description": "Consumer's phone number for the shipping address.\n\n**Field required for:** Klarna, PayPal, Vipps, MobilePay"
+    },
+    "country_code": {
+      "type": "string",
+      "description": "Consumer's alpha-2 ISO 3166 country code (e.g. `US` for United States).\n\n**Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish"
+    },
+    "postal_code": {
+      "maxLength": 10,
+      "type": "string",
+      "description": "Consumer's postal code for their shipping address.\n\n**Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish"
+    },
+    "state": {
+      "maxLength": 35,
+      "type": "string",
+      "description": "Consumer's state or province for their shipping address (e.g. `OH` for Ohio, `TX` for Texas).\n\n**Field required for:** Klarna, PayPal"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "operationId": "postSubscriptions",
+  "summary": "Create subscription",
+  "method": "POST",
+  "path": "/subscriptions",
+  "responseExample": {
+    "approvalUrl": "string",
+    "id": "string",
+    "planId": "string",
+    "planOverridden": false,
+    "status": "string"
+  }
+}

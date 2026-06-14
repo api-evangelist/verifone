@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-paymentplanoption.json",
+  "title": "Instalment payment plan option",
+  "description": "An instalment plan option available for the transaction. Instalments are managed by the issuer. To the merchant this is just another transaction.",
+  "type": "object",
+  "properties": {
+    "number_of_instalments": {
+      "minimum": 1,
+      "type": "integer",
+      "description": "The number of individual parts that the total amount should be paid in."
+    },
+    "first_instalment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "instalment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "interest_rate": {
+      "type": "number",
+      "description": "The interest rate.",
+      "format": "float"
+    },
+    "annual_percentage_rate": {
+      "type": "number",
+      "description": "The interest rate expressed in Annual Percentage Rate.",
+      "format": "float"
+    },
+    "handling_fee": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "total_amount_with_cost": {
+      "$ref": "#/components/schemas/amountDecimal"
+    }
+  }
+}

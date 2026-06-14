@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-amountsimple.json",
+  "title": "Amount Simple Type",
+  "description": "The value, which can be anything from:\n- An integer. For currencies that are not typically fractional, such as `JPY`. - A three-place decimal fraction. For currencies that are subdivided into thousandths, such as `TND`.\n*The required number of decimal places for a currency code is according to [ISO 4217](https://wikipedia.org/wiki/ISO_4217). However the following table documents exception to ISO 4217 that is also allowed:*\n\n|Code|Currency|Decimals|Fixed minor units|\n|--------|-----------|---------|-----------|\n|ISK|Iceland Krona|2|.00|\n",
+  "type": "string",
+  "maxLength": 32,
+  "pattern": "^((-?[0-9]+)|(-?([0-9]+)?[.][0-9]+))$"
+}

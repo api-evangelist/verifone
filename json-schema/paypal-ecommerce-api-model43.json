@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model43.json",
+  "title": "Model43",
+  "description": "Model43 from PayPal eComm API",
+  "required": [
+    "paymentProviderContract"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    },
+    "reason": {
+      "type": "string",
+      "description": "The reason for suspenson of the subscription."
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-additionaldatadto.json",
+  "title": "AdditionalDataDto",
+  "description": "AdditionalDataDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "total_items": {
+      "type": "number",
+      "description": "Number of purchased items or services.",
+      "minimum": 0,
+      "maximum": 99
+    },
+    "device_channel": {
+      "type": "string",
+      "enum": [
+        "SDK",
+        "BROWSER"
+      ],
+      "description": "Determines the channel that the transaction came through."
+    },
+    "status_reason": {
+      "type": "string",
+      "description": "Provides additional information as to why the PAResStatus has the specific value.\n\n **NOTE**: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+    },
+    "challenge_indicator": {
+      "type": "string",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "90"
+      ],
+      "description": "This is a 2.0 required field. Possible values are:\n\n * `01` No preference\n\n * `02` No challenge requested\n\n * `03` Challenge requested (3DS Requestor preference)\n\n * `04` Challenge requested (Mandate)\n\n * `90` Used to call the CB Scoring platform"
+    },
+    "challenge_cancel": {
+      "type": "string",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07"
+      ],
+      "description": "Indicator informing the ACS and the DS that the authentication has been cancelled.\n\n Possible values are:\n\n * `01` Cardholder selected \u201cCancel\u201d\n\n * `02` 3DS Requestor cancelled Authentication.\n\n * `03` Transaction Abandoned\n\n * `04` Transaction Timed Out at ACS \u2014 other timeouts\n\n * `05` Transaction Timed Out at ACS \u2014 First CReq not received by ACS\n\n * `06` Transaction Error\n\n * `07` Unknown"
+    },
+    "acs_url": {
+      "type": "string",
+      "maxLength": 2048,
+      "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction.\n\n **NOTE**: Available if Enrolled = Y"
+    },
+    "acs_operator_id": {
+      "type": "string",
+      "maxLength": 32,
+      "description": "DS assigned ACS identifier. Each DS can provide a unique ID to each ACS on an individual basis."
+    },
+    "network_score": {
+      "type": "string",
+      "maxLength": 2,
+      "format": "number",
+      "description": "The global score calculated by the CB Scoring platform."
+    },
+    "reason_code": {
+      "type": "string",
+      "description": "The error code indicating a problem with this transaction."
+    },
+    "reason_desc": {
+      "type": "string",
+      "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message."
+    }
+  }
+}

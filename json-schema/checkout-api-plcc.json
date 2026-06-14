@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-plcc.json",
+  "title": "plcc",
+  "description": "Plcc payment configuration",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "$ref": "#/components/schemas/plcc_mode"
+    },
+    "payment_contract_id": {
+      "type": "string",
+      "description": "This parameter can be found in the portal on the Payment Provider Contract attached to your organization or given to you by a Verifone employee. It is used to retrieve MID and other merchant configurations necessary for a card payment."
+    },
+    "shopper_interaction": {
+      "$ref": "#/components/schemas/shopper_interaction"
+    },
+    "authorization_type": {
+      "type": "string",
+      "description": "Card Authorization Type (PRE_AUTH, FINAL_AUTH).  When capture now is set to true pre-authorization transactions cannot be done.",
+      "default": "FINAL_AUTH"
+    },
+    "capture_now": {
+      "type": "boolean",
+      "description": "True - transaction will be sent as authCapture and automatically captured. <br /> False - transaction will be sent as auth and only authorized. NOT CAPTURED. <br /> If you don't have any value in the capture_now parameter, at the moment of the call the value will be set as TRUE. ",
+      "default": true
+    }
+  }
+}

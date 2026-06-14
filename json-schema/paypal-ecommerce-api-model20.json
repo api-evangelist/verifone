@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model20.json",
+  "title": "Model20",
+  "description": "Model20 from PayPal eComm API",
+  "required": [
+    "paymentProviderContract",
+    "planId"
+  ],
+  "type": "object",
+  "properties": {
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    },
+    "planId": {
+      "maxLength": 50,
+      "minLength": 3,
+      "type": "string",
+      "description": "The ID of the plan"
+    },
+    "startTime": {
+      "type": "string",
+      "description": "The date and time when the subscription started",
+      "format": "date"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "The quantity of the product in the subscription"
+    },
+    "shippingAmount": {
+      "$ref": "#/components/schemas/Model19"
+    },
+    "subscriber": {
+      "$ref": "#/components/schemas/subscriber"
+    },
+    "customId": {
+      "maxLength": 127,
+      "minLength": 1,
+      "pattern": "^[ -~]+",
+      "type": "string",
+      "description": "The custom id for the subscription. Can be invoice id"
+    },
+    "applicationContext": {
+      "$ref": "#/components/schemas/applicationContext"
+    }
+  }
+}

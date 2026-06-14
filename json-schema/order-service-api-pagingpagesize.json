@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-pagingpagesize.json",
+  "title": "PagingPageSize",
+  "description": "Page size for returned records.",
+  "type": "integer",
+  "minimum": 1,
+  "maximum": 100,
+  "default": 50
+}

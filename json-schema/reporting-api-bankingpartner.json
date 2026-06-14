@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/reporting-api-bankingpartner.json",
+  "title": "Banking partner",
+  "description": "The name of the banking partners.",
+  "type": "string",
+  "enum": [
+    "DESJARDINS",
+    "IBC",
+    "INTERCARD"
+  ]
+}

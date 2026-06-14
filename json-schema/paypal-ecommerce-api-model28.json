@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model28.json",
+  "title": "Model28",
+  "description": "Model28 from PayPal eComm API",
+  "required": [
+    "createdAt",
+    "id",
+    "instoreReference"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Transaction UUID from create transaction API"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Transaction creation date (ISO-8601)",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "description": "Transaction status",
+      "enum": [
+        "INITIATED",
+        "AUTHORISED"
+      ]
+    },
+    "orderId": {
+      "type": "string",
+      "description": "PayPal order identifier"
+    },
+    "instoreReference": {
+      "type": "string",
+      "description": "Reference to the transaction for internal usage for instore"
+    },
+    "approvalUrl": {
+      "type": "string",
+      "description": "The URL where the customer should be redirected to approve the payment"
+    }
+  }
+}

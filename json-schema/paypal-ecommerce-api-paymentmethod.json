@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-paymentmethod.json",
+  "title": "paymentMethod",
+  "description": "The customer and merchant payment preferences. Currently only PAYPAL payment method is supported",
+  "type": "object",
+  "properties": {
+    "payerSelected": {
+      "type": "string",
+      "description": "The customer-selected payment method on the merchant site"
+    },
+    "payeePreferred": {
+      "type": "string",
+      "description": "The merchant-preferred payment methods",
+      "enum": [
+        "UNRESTRICTED",
+        "IMMEDIATE_PAYMENT_REQUIRED"
+      ]
+    }
+  }
+}

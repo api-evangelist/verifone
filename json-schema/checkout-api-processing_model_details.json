@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-processing_model_details.json",
+  "title": "processing_model_details",
+  "description": "processing_model_details from Checkout API",
+  "required": [
+    "processing_model"
+  ],
+  "type": "object",
+  "properties": {
+    "processing_model": {
+      "type": "string",
+      "description": "<br />  * RECURRING - allows only for RECURRING subsequent charges to be done. <br />  * NONE - does not specify what is the type of subsequent charges. Only allows CREDENTIAL_ON_FILE and UNSCHEDULED_CREDENTIAL_ON_FILE charges. <br />  * If it is RECURRING for SIGNUP should be RECURRING FOR CHARGE TOO. <br />  * If it is NONE for SIGNUP should be CREDENTIAL_ON_FILE or UNSCHEDULED_CREDENTIAL_ON_FILE FOR CHARGE.",
+      "enum": [
+        "RECURRING",
+        "NONE"
+      ]
+    },
+    "total_payment_number": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Total number of payments for the stored credential series. Usage applies to specific acquirers. Used only for processing_model=RECURRING"
+    },
+    "total_payment_amount": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Total amount for all the payments in the stored credential series. Usage applies to specific acquirers. Used only for processing_model=RECURRING"
+    },
+    "first_payment_amount": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "type": "integer",
+      "description": "Amount of first payment for the stored credential series. Usage applies to specific acquirers. Used only for processing_model=RECURRING"
+    },
+    "payment_frequency": {
+      "$ref": "#/components/schemas/payment_frequency"
+    },
+    "merchant_signup_code": {
+      "type": "string",
+      "description": "Merchant signup code for the stored credential series. Usage applies to specific acquirers. Used only for processing_model=NONE"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-apple_pay.json",
+  "title": "apple_pay",
+  "description": "Apple Pay payment configuration",
+  "type": "object",
+  "properties": {
+    "dynamic_descriptor": {
+      "maxLength": 25,
+      "type": "string",
+      "description": "Value is displayed as short text on the bank statement of the cardholder"
+    },
+    "capture_now": {
+      "type": "boolean",
+      "description": "True - transaction will be sent as authCapture and automatically captured. <br /> False - transaction will be sent as auth and only authorized. NOT CAPTURED. <br /> If you don't have any value in the capture_now parameter, at the moment of the call the value will be set as TRUE.",
+      "default": true
+    },
+    "account_validation": {
+      "type": "boolean",
+      "description": "Indicates whether the card transaction should be processed as Account Validation request instead. If set to true, the amount provided for the Checkout would be ignored and the transaction be processed with amount: 0",
+      "default": false
+    },
+    "card": {
+      "$ref": "#/components/schemas/ApplePayCardConfig"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "operationId": "postTransactionsIdRefund",
+  "summary": "Refund transaction",
+  "method": "POST",
+  "path": "/transactions/{id}/refund",
+  "responseExample": {
+    "createdAt": "2025-01-01",
+    "id": "string",
+    "instoreReference": "string",
+    "refundId": "string"
+  }
+}

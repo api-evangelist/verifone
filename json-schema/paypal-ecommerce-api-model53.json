@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model53.json",
+  "title": "Model53",
+  "description": "Model53 from PayPal eComm API",
+  "required": [
+    "createdAt",
+    "id",
+    "instoreReference",
+    "refundId"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Transaction UUID from create transaction API"
+    },
+    "refundId": {
+      "type": "string",
+      "description": "Refund identifier"
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Refund creation date (ISO-8601)",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "description": "Transaction status",
+      "enum": [
+        "AUTHORISED"
+      ]
+    },
+    "instoreReference": {
+      "type": "string",
+      "description": "Reference to the transaction for internal usage for instore"
+    }
+  }
+}

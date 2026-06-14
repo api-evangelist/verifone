@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-customerorderlink.json",
+  "title": "CustomerOrderLink",
+  "description": "Customer Order Link Sent Details",
+  "type": "object",
+  "properties": {
+    "orderLink": {
+      "description": "The unique order link sent to the customer to help them navigate directly to the relevant  step in the order process. This link ensures the customer can update their order efficiently.\n",
+      "type": "string",
+      "format": "uri"
+    },
+    "linkInitiatorUserUid": {
+      "description": "The unique User ID of the user who generated the order link.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "linkInitiatorUsername": {
+      "$ref": "#/components/schemas/UserName"
+    },
+    "linkReceiverUserUid": {
+      "description": "The unique User ID of the customer who received the order link.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "linkReceiverUsername": {
+      "$ref": "#/components/schemas/UserName"
+    },
+    "linkSendTime": {
+      "description": "Date and time when the order link was sent to the customer.  This represents when the system triggered the link delivery.\n",
+      "type": "string",
+      "format": "date-time"
+    },
+    "linkOpendByCustomerTime": {
+      "description": "Date and time when the order link was opened by the customer.\n",
+      "type": "string",
+      "format": "date-time"
+    },
+    "customerUpdateTime": {
+      "description": "Date and time when the customer last updated their order after using the order link.\n",
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

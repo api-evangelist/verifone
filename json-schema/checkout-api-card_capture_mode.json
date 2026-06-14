@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-card_capture_mode.json",
+  "title": "card_capture_mode",
+  "description": "Method of capturing card data.\nv2 is used by default as the recommended method.\nv1 is considered deprecated and is not supported for new integrations.",
+  "type": "string",
+  "enum": [
+    "v2",
+    "v1"
+  ]
+}

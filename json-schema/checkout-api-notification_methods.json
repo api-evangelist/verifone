@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/checkout-api-notification_methods.json",
+  "title": "notification_methods",
+  "description": "Parameter is used for the PAYMENT_LINK interaction type in order to specify the payment link delivery method ( Email or SMS )",
+  "type": "object",
+  "properties": {
+    "email": {
+      "$ref": "#/components/schemas/EmailNotification"
+    },
+    "sms": {
+      "$ref": "#/components/schemas/SMSNotification"
+    }
+  }
+}

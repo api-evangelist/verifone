@@ -1,0 +1,12 @@
+{
+  "operationId": "postTransactionsIdCapture",
+  "summary": "Capture transaction",
+  "method": "POST",
+  "path": "/transactions/{id}/capture",
+  "responseExample": {
+    "captureId": "string",
+    "createdAt": "2025-01-01",
+    "id": "string",
+    "instoreReference": "string"
+  }
+}

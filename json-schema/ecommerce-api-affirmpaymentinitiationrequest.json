@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-affirmpaymentinitiationrequest.json",
+  "title": "Affirm Initiate Payment Request",
+  "description": "affirmPaymentInitiationRequest from Verifone eCommerce API",
+  "required": [
+    "payment_provider_contract",
+    "amount",
+    "redirect_url",
+    "cancel_url",
+    "currency_code"
+  ],
+  "type": "object",
+  "properties": {
+    "payment_provider_contract": {
+      "type": "string",
+      "description": "The identifier of payment provider contract you want to process the transaction request with.",
+      "format": "uuid-flexible",
+      "title": "paymentProviderContractId"
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field."
+    },
+    "tax_amount": {
+      "description": "Tax Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.",
+      "type": "integer"
+    },
+    "redirect_url": {
+      "type": "string",
+      "description": "Checkout Redirect URL which will be used by Affirm on Payment Completion.",
+      "maxLength": 2048
+    },
+    "cancel_url": {
+      "type": "string",
+      "description": "Checkout Cancel URL which will be used by Affirm on Payment Completion.",
+      "maxLength": 2048
+    },
+    "capture_now": {
+      "type": "boolean",
+      "description": "Whether auto-capture or not. Setting the to 'false' will only authorize the transaction.",
+      "default": true
+    },
+    "customer": {
+      "title": "Customer ID",
+      "type": "string",
+      "description": "The ID of a customer.",
+      "format": "uuid-flexible"
+    },
+    "customer_ip": {
+      "description": "The IP Address of the customer where the transaction was initiated.",
+      "maxLength": 15,
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "ipv4"
+        },
+        {
+          "type": "string",
+          "format": "ipv6"
+        }
+      ]
+    },
+    "customer_details": {
+      "$ref": "#/components/schemas/CustomerDetailsDto"
+    },
+    "merchant_reference": {
+      "type": "string",
+      "description": "A reference specified by the merchant to identify the transaction.",
+      "maxLength": 50
+    },
+    "line_items": {
+      "type": "array",
+      "description": "The array of items being purchased.",
+      "items": {
+        "$ref": "#/components/schemas/affirmLineItem"
+      }
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "The full user agent string of the device the customer used to submit the transaction.",
+      "maxLength": 256
+    },
+    "currency_code": {
+      "$ref": "#/components/schemas/CurrencyCodeEnum"
+    },
+    "locale": {
+      "$ref": "#/components/schemas/Locale"
+    },
+    "mode": {
+      "type": "string",
+      "description": "Set to modal to enable the modal checkout flow (default uses redirect checkout flow). Possible values: authorization.\n * `MODAL:` Users go through the Affirm flow in a modal window while remaining on merchant site. Modal checkout with the help of affirm.js will enable client-side callbacks so that merchant can do post checkout confirmation procedures on merchant site.\n * `REDIRECT:` Users are redirected to Affirm site, where they authenticate and go through the checkout flow. Once they complete checkout, they're returned to the merchant site.",
+      "enum": [
+        "MODAL",
+        "REDIRECT"
+      ],
+      "default": "REDIRECT"
+    }
+  }
+}

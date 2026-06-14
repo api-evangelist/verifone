@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-altvfipoiid.json",
+  "title": "AltVfiPoiId",
+  "description": "An alternative Verifone assigned identifier used for the POI within Verifone systems for transaction processing. This\nis also referred to as the Terminal ID (TID). This value maps to DE41 in ISO8583 specification. This identifier may\nalso be used per contract if required.\n\n<strong>This value is not guaranteed to be globally unique. The unique value is the internally assigned uuid - poiUid\nwhich is returned on the response.</strong>",
+  "type": "string",
+  "maxLength": 12
+}

@@ -1,0 +1,9 @@
+{
+  "operationId": "getBillingagreementTokenTokenid",
+  "summary": "Show token details",
+  "method": "GET",
+  "path": "/billingAgreement/token/{tokenId}",
+  "responseExample": {
+    "tokenId": "string"
+  }
+}

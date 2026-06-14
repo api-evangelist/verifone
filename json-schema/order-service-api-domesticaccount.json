@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-domesticaccount.json",
+  "title": "Domestic Bank Account",
+  "description": "A Domestic Bank Account structure extending the base account.",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Account"
+    },
+    {
+      "properties": {
+        "accountName": {
+          "description": "Name of the account as known by the financial institution operating the account.",
+          "type": "string"
+        },
+        "sortCode": {
+          "description": "The UK Sorting Code identifier the sort code is xx xx xx.",
+          "type": "string",
+          "pattern": "^[0-9]{6,6}$"
+        },
+        "bsb": {
+          "description": "An Australian/New Zealand term for the Bank State Branch indicator. It is a 6 digit value constructed with the first 2 digits identifying the bank.",
+          "type": "string",
+          "pattern": "^[0-9]{6,6}$"
+        },
+        "routingTransitNumber": {
+          "type": "string",
+          "description": "Routing transit number for the bank account. A routing transit number is a nine-digit number used to identify a bank or financial institution when clearing funds or processing checks. Established by the American Bankers Association (ABA).",
+          "pattern": "^[0-9]{9,9}$"
+        },
+        "accountNumberType": {
+          "description": "The type of the `accountNumber` which asserts the format of the number:\n - `BANKGIRIT`: Up to 9 characters (example: 123-4567 or 1234-5678)\n - `PLUSGIROT`: Up to 24 characters; starts with \"SE50\"\n - `DEFAULT`: Format-less value",
+          "type": "string",
+          "enum": [
+            "BANKGIROT",
+            "PLUSGIROT",
+            "DEFAULT"
+          ],
+          "default": "DEFAULT"
+        },
+        "accountNumber": {
+          "description": "The number of the account.",
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

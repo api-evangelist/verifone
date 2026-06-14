@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-notfoundv2docs.json",
+  "title": "NotFoundV2Docs",
+  "description": "NotFoundV2Docs from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "details": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "timestamp": {
+      "type": "number",
+      "description": "Error timestamp"
+    },
+    "reversal_status": {
+      "type": "string",
+      "description": "Indicates to the API client if a technical reversal has been completed by Verifone.",
+      "default": "NONE",
+      "enum": [
+        "NONE",
+        "REQUIRED",
+        "COMPLETED"
+      ]
+    },
+    "code": {
+      "type": "number",
+      "enum": [
+        404
+      ],
+      "default": 404
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights."
+      ],
+      "default": "The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights."
+    }
+  },
+  "required": [
+    "message"
+  ]
+}

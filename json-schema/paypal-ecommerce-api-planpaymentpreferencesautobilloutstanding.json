@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-planpaymentpreferencesautobilloutstanding.json",
+  "title": "planPaymentPreferencesAutoBillOutstanding",
+  "description": "planPaymentPreferencesAutoBillOutstanding from PayPal eComm API",
+  "required": [
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "op": {
+      "type": "string",
+      "enum": [
+        "replace"
+      ]
+    },
+    "value": {
+      "type": "boolean",
+      "description": "Indicates whether to automatically bill the outstanding amount in the next billing cycle"
+    }
+  }
+}

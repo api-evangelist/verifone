@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-ecompaymentresponse_issuer_instalment_result.json",
+  "title": "ecomPaymentResponse_issuer_instalment_result",
+  "description": "Issuer-managed instalment response. May be used to inform on supported instalment options for the transaction in specific programs (e.g., Mastercard Instalment Payment Service).",
+  "type": "object",
+  "properties": {
+    "instalment_program": {
+      "type": "string",
+      "description": "The name of special program designated by scheme or issuer.",
+      "enum": [
+        "MCINST"
+      ]
+    },
+    "payment_option": {
+      "type": "string",
+      "description": "Available payment mode allowed by issuer for the transaction.",
+      "enum": [
+        "FULL",
+        "FULL_OR_INSTALMENT",
+        "INSTALMENT"
+      ]
+    },
+    "payment_plan_option": {
+      "type": "array",
+      "description": "The issuer may offer more than one instalment options within certain instalment programs.",
+      "items": {
+        "$ref": "#/components/schemas/paymentPlanOption"
+      }
+    },
+    "number_of_instalments": {
+      "minimum": 0,
+      "type": "integer",
+      "description": "The number of individual parts that the total amount should be paid in."
+    },
+    "min_number_of_instalments": {
+      "type": "integer",
+      "description": "The minimal number of individual parts that the total amount could be paid in, if choice is available."
+    },
+    "max_number_of_instalments": {
+      "type": "integer",
+      "description": "The maximal number of individual parts that the total amount could be paid in, if choice is available."
+    },
+    "interest_rate": {
+      "type": "number",
+      "description": "The interest rate.",
+      "format": "float"
+    },
+    "annual_percentage_rate": {
+      "type": "number",
+      "description": "The interest rate expressed in Annual Percentage Rate.",
+      "format": "float"
+    },
+    "handling_fee": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "down_payment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "instalment_amount": {
+      "$ref": "#/components/schemas/amountDecimal"
+    },
+    "total_amount_with_cost": {
+      "$ref": "#/components/schemas/amountDecimal"
+    }
+  },
+  "additionalProperties": false
+}

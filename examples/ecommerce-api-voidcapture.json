@@ -1,0 +1,11 @@
+{
+  "operationId": "voidCapture",
+  "summary": "Void capture",
+  "method": "POST",
+  "path": "/api/v2/transactions/{id}/void_capture",
+  "responseExample": {
+    "id": "string",
+    "payment_provider_contract": "string",
+    "amount": 0
+  }
+}

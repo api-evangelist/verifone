@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-poinetworkconfig.json",
+  "title": "PoiNetworkConfig",
+  "description": "Network settings of the POI",
+  "type": "object",
+  "properties": {
+    "ipAddress": {
+      "$ref": "#/components/schemas/IpAddressv4v6"
+    },
+    "ipGateway": {
+      "$ref": "#/components/schemas/IpAddressv4v6"
+    },
+    "subnetMask": {
+      "$ref": "#/components/schemas/IpAddressv4v6"
+    },
+    "networkPrefix": {
+      "$ref": "#/components/schemas/IpAddressv4v6"
+    },
+    "dns1": {
+      "$ref": "#/components/schemas/IpAddressv4v6"
+    },
+    "dns2": {
+      "$ref": "#/components/schemas/IpAddressv4v6"
+    },
+    "wifiSSID": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 32
+    },
+    "wifiPassword": {
+      "type": "string"
+    },
+    "wpaEncryptionMethod": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 10
+    }
+  }
+}

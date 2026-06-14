@@ -1,0 +1,11 @@
+{
+  "operationId": "mobilePayTransaction",
+  "summary": "Initiate a MobilePay payment",
+  "method": "POST",
+  "path": "/api/v2/transactions/mobilepay",
+  "responseExample": {
+    "id": "string",
+    "redirect_url": "string",
+    "amount": 0
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/paypal-ecommerce-api-model29.json",
+  "title": "Model29",
+  "description": "Model29 from PayPal eComm API",
+  "required": [
+    "billingToken",
+    "paymentProviderContract"
+  ],
+  "type": "object",
+  "properties": {
+    "billingToken": {
+      "type": "string",
+      "description": "PayPal agreement token"
+    },
+    "paymentProviderContract": {
+      "type": "string",
+      "description": "PayPal Payment Provider Contract UUID"
+    }
+  }
+}

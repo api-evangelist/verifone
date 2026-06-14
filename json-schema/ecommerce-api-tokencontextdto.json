@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-tokencontextdto.json",
+  "title": "token_context",
+  "description": "The context and identifiers related to the token request. **Mandatory** for external Third-Party tokens. Use of the /v2/card endpoint:\n\n  * If reuse_token_type = INTERNAL => then token_scope mandatory; token_context optional, and only token_context.entity_id would be used (if provided);\n\n  * If reuse_token_type = CHASE or TAVE => then token_context must be provided, with at least one of entity_id or payment_provider_contract; If CHASE or TAVE token requested without neither PPC nor entity_id, request will be declined.",
+  "type": "object",
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "format": "uuid-flexible",
+      "description": "The identifier of merchant entity for which this request is related to."
+    },
+    "payment_provider_contract": {
+      "type": "string",
+      "format": "uuid-flexible",
+      "description": "The identifier of payment provider contract you want to process this request with. Relevant only for external Third-party tokens."
+    }
+  }
+}

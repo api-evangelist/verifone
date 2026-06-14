@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/order-service-api-entityuid.json",
+  "title": "EntityUid",
+  "description": "The Verifone allocated unique id for this site.",
+  "type": "string",
+  "format": "uuid"
+}

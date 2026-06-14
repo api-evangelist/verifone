@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-instalmentdto.json",
+  "title": "InstalmentDto",
+  "description": "InstalmentDto from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "down_payment_amount": {
+      "type": "number",
+      "title": "Amount Simple Type",
+      "description": "The value, which can be anything from: An integer - for currencies that are not typically fractional, such as JPY. A three-place decimal fraction - for currencies that are subdivided into thousandths, such as TND. An eight-place decimal fraction - for currencies such as Bitcoin. For the required number of decimal places for a currency code, see ISO 4217"
+    },
+    "number_of_instalments": {
+      "type": "number",
+      "description": "The number of individual parts that the total amount should be paid in."
+    },
+    "instalment_amount": {
+      "type": "number",
+      "title": "Amount Simple Type",
+      "description": "The value, which can be anything from: An integer - for currencies that are not typically fractional, such as JPY. A three-place decimal fraction - for currencies that are subdivided into thousandths, such as TND. An eight-place decimal fraction - for currencies such as Bitcoin. For the required number of decimal places for a currency code, see ISO 4217"
+    }
+  }
+}

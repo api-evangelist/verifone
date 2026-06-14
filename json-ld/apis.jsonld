@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "verifone": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/vocabulary/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "http://schema.org/",
+    "Payment": "schema:PaymentService",
+    "amount": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "currency_code": {
+      "@id": "schema:priceCurrency"
+    },
+    "entity_id": {
+      "@id": "schema:identifier"
+    },
+    "transaction_id": {
+      "@id": "schema:identifier"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "status": {
+      "@id": "schema:status"
+    },
+    "email": {
+      "@id": "schema:email"
+    },
+    "phone": {
+      "@id": "schema:telephone"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "url": {
+      "@id": "schema:url"
+    },
+    "country": {
+      "@id": "schema:addressCountry"
+    },
+    "city": {
+      "@id": "schema:addressLocality"
+    },
+    "address": {
+      "@id": "schema:streetAddress"
+    },
+    "postal_code": {
+      "@id": "schema:postalCode"
+    },
+    "first_name": {
+      "@id": "schema:givenName"
+    },
+    "last_name": {
+      "@id": "schema:familyName"
+    },
+    "3d_secure_api": "verifone:3ds-authentication-api.json#",
+    "checkout_api": "verifone:checkout-api.json#",
+    "customer_api": "verifone:customer-api.json#",
+    "verifone_ecommerce_api": "verifone:ecommerce-api.json#",
+    "verifone_order_api": "verifone:order-service-api.json#",
+    "paypal_ecomm_api": "verifone:paypal-ecommerce-api.json#",
+    "reporting_api": "verifone:reporting-api.json#"
+  },
+  "@type": "schema:WebAPI",
+  "@id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/apis.yml",
+  "schema:name": "Verifone API",
+  "schema:description": "Verifone payment technology APIs including POS terminal management, online payment processing, commerce platform integration, and omnichannel payment acceptance.",
+  "schema:url": "https://docs.verifone.com",
+  "schema:provider": {
+    "@type": "schema:Organization",
+    "schema:name": "Verifone",
+    "schema:url": "https://verifone.com"
+  },
+  "schema:documentation": "https://docs.verifone.com/api-reference",
+  "schema:termsOfService": "https://docs.verifone.com",
+  "schema:category": [
+    "Payments",
+    "POS",
+    "FinTech",
+    "eCommerce"
+  ]
+}

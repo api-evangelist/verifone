@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-language.json",
+  "title": "Language",
+  "description": "The BCP-47 language tag. Composed of:<ul><li>The ISO-639 alpha-1 or ISO-639 alpha-2 language code</li><li>(Optional) The ISO-15924 script tag</li><li>The ISO-3166 alpha-2 country code</li></ul>",
+  "maxLength": 11,
+  "minLength": 2,
+  "type": "string"
+}

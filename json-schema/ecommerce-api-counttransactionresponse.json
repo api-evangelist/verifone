@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/json-schema/ecommerce-api-counttransactionresponse.json",
+  "title": "CountTransactionResponse",
+  "description": "CountTransactionResponse from Verifone eCommerce API",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "number",
+      "title": "Transaction count",
+      "description": "count of transaction"
+    }
+  }
+}
