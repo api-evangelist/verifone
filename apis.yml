@@ -6,7 +6,7 @@ description: >-
   payments, eCommerce, hosted checkout, 3D Secure authentication, customer
   management, device management via VHQ, hardware ordering, and financial
   reporting across EMEA, Americas, and Asia-Pacific regions.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -26,7 +26,7 @@ apis:
       iFrames. The Checkout API enables merchants to create hosted payment pages
       (HPP) and embedded iFrame checkouts that support cards, digital wallets,
       and alternative payment methods across multiple regions.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
     baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
     tags:
@@ -51,7 +51,7 @@ apis:
       order placement via direct server-to-server API calls, supporting
       tokenization, alternative payment methods, stored value cards, and BIN
       lookup across global regions.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/ecommerce
     baseURL: https://us.gsc.verifone.cloud
     tags:
@@ -76,7 +76,7 @@ apis:
       flows. The 3D Secure API provides Strong Customer Authentication (SCA)
       compliance through JWT-based flows, lookup functionality, and full 3DS
       authentication supporting both frictionless and challenge user experiences.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/3d-secure
     baseURL: https://us.gsc.verifone.cloud
     tags:
@@ -100,7 +100,7 @@ apis:
       customer for reuse across Checkout and eCommerce services. Supports RSQL
       filtering, customer creation, retrieval, update, and deletion across
       regional environments.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/customer
     baseURL: https://us.gsc.verifone.cloud/oidc/customer-service
     tags:
@@ -123,7 +123,7 @@ apis:
       financial reports from Verifone's cloud platform. The Reporting API
       provides access to settlement reports, transaction data, and financial
       reconciliation across all Verifone payment channels and regions.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/reporting
     baseURL: https://us.gsc.verifone.cloud/oidc/report-engine/api/v1
     tags:
@@ -147,7 +147,7 @@ apis:
       payment hardware, provision and board devices, manage the full lifecycle
       of merchant and point-of-interaction (POI) entities, and handle
       maintenance workflows including MID/TID generation and webhook callbacks.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/order-service
     baseURL: https://us.gsc.verifone.cloud
     tags:
@@ -172,7 +172,7 @@ apis:
       billing agreements, subscription products, billing plans, recurring
       subscriptions, and risk context management through a unified Verifone
       integration layer.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/api-reference/open-api-references/paypal-ecom
     baseURL: https://us.gsc.verifone.cloud
     tags:
@@ -195,7 +195,7 @@ apis:
       health monitoring, application configuration, and real-time estate
       management for thousands of payment terminals. Integrates with existing
       systems to automate VHQ operations including geo-location support.
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.verifone.com/vhq
     baseURL: https://vhq.verifone.com
     tags:
