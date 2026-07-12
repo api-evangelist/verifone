@@ -215,6 +215,10 @@ apis:
         email: ''
 
 common:
+  - type: DomainSecurity
+    url: security/verifone-domain-security.yml
+  - type: Authentication
+    url: authentication/verifone-authentication.yml
   - type: Portal
     url: https://docs.verifone.com
   - type: Documentation

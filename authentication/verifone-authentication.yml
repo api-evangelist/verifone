@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/3ds-authentication-api.json, openapi/checkout-api.json, openapi/customer-api.json,
+  openapi/ecommerce-api.json, openapi/paypal-ecommerce-api.json, openapi/reporting-api.json
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be
+    signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id),
+    and `roles` claims.'
+  sources:
+  - openapi/3ds-authentication-api.json
+  - openapi/checkout-api.json
+  - openapi/customer-api.json
+  - openapi/paypal-ecommerce-api.json
+  - openapi/reporting-api.json
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization:
+    Basic <credentials>`.'
+  sources:
+  - openapi/3ds-authentication-api.json
+  - openapi/checkout-api.json
+  - openapi/customer-api.json
+  - openapi/ecommerce-api.json
+  - openapi/reporting-api.json
