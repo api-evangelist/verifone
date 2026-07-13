@@ -2,11 +2,10 @@
   "repo": "verifone",
   "feeds": [
     {
-      "source": "https://verifone.cloud/blog",
-      "saved": 0,
-      "error": "301 redirect to docs.verifone.com/blog which returns 404"
+      "source": "https://cst.test-gsc.vfims.com",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T13:19:38Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
