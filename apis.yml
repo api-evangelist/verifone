@@ -215,6 +215,8 @@ apis:
         email: ''
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/verifone-agentic-access.yml
   - type: DomainSecurity
     url: security/verifone-domain-security.yml
   - type: Authentication
