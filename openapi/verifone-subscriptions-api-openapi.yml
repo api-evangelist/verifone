@@ -1,0 +1,2863 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Subscriptions API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Subscriptions
+paths:
+  /subscriptions:
+    post:
+      tags:
+      - Subscriptions
+      summary: Create subscription
+      operationId: postSubscriptions
+      parameters:
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model20'
+        required: false
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model21'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /subscriptions/{id}:
+    get:
+      tags:
+      - Subscriptions
+      summary: Subscription Details
+      operationId: getSubscriptionsId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: paymentProviderContract
+        in: query
+        description: PayPal Payment Provider Contract UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model16'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+    patch:
+      tags:
+      - Subscriptions
+      summary: Update subscription
+      operationId: patchSubscriptionsId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model59'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /subscriptions/{id}/revise:
+    post:
+      tags:
+      - Subscriptions
+      summary: Revise subscription
+      operationId: postSubscriptionsIdRevise
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model39'
+        required: false
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /subscriptions/{id}/cancel:
+    post:
+      tags:
+      - Subscriptions
+      summary: Cancel subscription
+      operationId: postSubscriptionsIdCancel
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model40'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /subscriptions/{id}/capture:
+    post:
+      tags:
+      - Subscriptions
+      summary: Capture authorized payment on subscription
+      operationId: postSubscriptionsIdCapture
+      parameters:
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model41'
+        required: false
+      responses:
+        '202':
+          description: Accepted
+          content: {}
+  /subscriptions/{id}/activate:
+    post:
+      tags:
+      - Subscriptions
+      summary: Activate subscription
+      operationId: postSubscriptionsIdActivate
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model42'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /subscriptions/{id}/suspend:
+    post:
+      tags:
+      - Subscriptions
+      summary: Suspend subscription
+      operationId: postSubscriptionsIdSuspend
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model43'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+components:
+  schemas:
+    billingInfoOutstandingBalance:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - replace
+        value:
+          $ref: '#/components/schemas/outstandingBalance'
+    billingAddress:
+      required:
+      - country
+      - postalCode
+      type: object
+      properties:
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+      description: Shipping Address details
+    cycleExecutions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model13'
+    Model42:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason for activation of a subscription
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+    shippingAmount:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: The currency and amount for a financial transaction, such as a balance or payment due
+    amount:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+    Model43:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        reason:
+          type: string
+          description: The reason for suspenson of the subscription.
+    lastFailedPayment:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Model15'
+        time:
+          type: string
+          description: The date and time when the failed payment was made
+          format: date
+        reasonCode:
+          type: string
+          description: The reason code for the payment failure
+          enum:
+          - CURRENCY_MISMATCH
+          - INTERNAL_SERVER_ERROR
+          - PAYEE_ACCOUNT_RESTRICTED
+          - PAYER_ACCOUNT_RESTRICTED
+          - PAYER_CANNOT_PAY
+          - PAYMENT_DENIED
+          - TRANSACTION_RECEIVING_LIMIT_EXCEEDED
+          - SENDING_LIMIT_EXCEEDED
+        nextPaymentRetryTime:
+          type: string
+          description: The time when the retry attempt for the failed payment occurs
+          format: date
+      description: The details for the last failed payment of the subscription
+    Model41:
+      required:
+      - amount
+      - paymentProviderContract
+      - reason
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        reason:
+          type: string
+          description: The reason or note for the subscription charge.
+        amount:
+          $ref: '#/components/schemas/amount'
+    Model39:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        planId:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: The ID of the plan
+        effectiveTime:
+          type: string
+          description: The date and time when this change is effective
+          format: date
+        quantity:
+          type: integer
+          description: The quantity of the product or service in the subscription
+        shippingAmount:
+          $ref: '#/components/schemas/Model19'
+        shippingAddress:
+          $ref: '#/components/schemas/Model12'
+        applicationContext:
+          $ref: '#/components/schemas/applicationContext'
+    subscriber:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/name'
+        payerId:
+          pattern: ^[2-9A-HJ-NP-Z]{13}$
+          type: string
+          description: The PayPal-assigned ID for the payer
+        emailAddress:
+          maxLength: 255
+          type: string
+          description: Customer email address
+        phone:
+          $ref: '#/components/schemas/phone'
+        shippingAddress:
+          $ref: '#/components/schemas/Model12'
+      description: The subscriber request information
+    Model16:
+      required:
+      - planId
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the subscription
+        status:
+          type: string
+          description: The status of the subscription
+          enum:
+          - APPROVAL_PENDING
+          - ACTIVE
+          - APPROVED
+          - CANCELLED
+          - EXPIRED
+          - SUSPENDED
+        planId:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: The ID of the plan
+        planOverridden:
+          type: boolean
+          description: Indicates whether the subscription has overridden any plan attributes
+        statusUpdateTime:
+          type: string
+          description: The date and time when the subscription status updated last time
+          format: date
+        statusChangeNote:
+          type: string
+          description: The reason or notes for the status of the subscription
+        startTime:
+          type: string
+          description: The date and time when the subscription started
+          format: date
+        quantity:
+          type: integer
+          description: The quantity of the product in the subscription
+        customId:
+          maxLength: 127
+          minLength: 1
+          pattern: ^[ -~]+
+          type: string
+          description: The custom id for the subscription. Can be invoice id
+        shippingAmount:
+          $ref: '#/components/schemas/shippingAmount'
+        subscriber:
+          $ref: '#/components/schemas/subscriber'
+        billingInfo:
+          $ref: '#/components/schemas/billingInfo'
+        createdAt:
+          type: string
+          description: The date and time when the subscription created
+          format: date
+        updatedAt:
+          type: string
+          description: The date and time when the subscription updated last time
+          format: date
+    Model55:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: The pricing amount for the tier
+    billingInfo:
+      required:
+      - failedPaymentsCount
+      - outstandingBalance
+      type: object
+      properties:
+        outstandingBalance:
+          $ref: '#/components/schemas/outstandingBalance'
+        cycleExecutions:
+          $ref: '#/components/schemas/cycleExecutions'
+        lastPayment:
+          $ref: '#/components/schemas/lastPayment'
+        nextBillingTime:
+          type: string
+        finalPaymentTime:
+          type: string
+        failedPaymentsCount:
+          type: number
+        lastFailedPayment:
+          $ref: '#/components/schemas/lastFailedPayment'
+    details:
+      type: object
+    applicationContext:
+      type: object
+      properties:
+        brandName:
+          type: string
+          description: The label that overrides the business name in the PayPal account on the PayPal site
+        locale:
+          type: string
+          description: The BCP 47-formatted locale of pages that the PayPal payment experience shows. PayPal supports a five-character code. For example, da-DK, he-IL, id-ID, ja-JP, no-NO, pt-BR, ru-RU, sv-SE, th-TH, zh-CN, zh-HK, or zh-TW
+        shippingPreference:
+          type: string
+          description: The location from which the shipping address is derived
+          enum:
+          - GET_FROM_FILE
+          - NO_SHIPPING
+          - SET_PROVIDED_ADDRESS
+        userAction:
+          type: string
+          description: Configures the label name to Continue or Subscribe Now for subscription consent experience
+          enum:
+          - CONTINUE
+          - SUBSCRIBE_NOW
+        paymentMethod:
+          $ref: '#/components/schemas/paymentMethod'
+        returnUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer approves the payment
+        cancelUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer cancels the payment
+      description: The application context, which customizes the payer experience during the subscription approval process with PayPal
+    value:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: The fixed amount to charge for the subscription. The changes to fixed amount are applicable to both existing and future subscriptions. For existing subscriptions, payments within 10 days of price change are not affected
+    startTime:
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - replace
+        value:
+          type: string
+          description: The date and time when the subscription started
+          format: date
+    paymentMethod:
+      type: object
+      properties:
+        payerSelected:
+          type: string
+          description: The customer-selected payment method on the merchant site
+        payeePreferred:
+          type: string
+          description: The merchant-preferred payment methods
+          enum:
+          - UNRESTRICTED
+          - IMMEDIATE_PAYMENT_REQUIRED
+      description: The customer and merchant payment preferences. Currently only PAYPAL payment method is supported
+    lastPayment:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the captured payment
+        amount:
+          $ref: '#/components/schemas/Model14'
+        time:
+          type: string
+          description: The date and time when the last payment was made
+          format: date
+      description: The details for the last payment of the subscription
+    planBillingCyclesPricingSchemeFixedPrice:
+      required:
+      - sequence
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - add
+          - replace
+        value:
+          $ref: '#/components/schemas/value'
+        sequence:
+          type: integer
+          description: The order of the cycle to update
+    Model58:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - add
+          - replace
+        value:
+          $ref: '#/components/schemas/Model19'
+    outstandingBalance:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: The total pending bill amount, to be paid by the subscriber
+    subscriberShippingAddress:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - add
+          - replace
+        value:
+          $ref: '#/components/schemas/Model12'
+    Model13:
+      required:
+      - cyclesCompleted
+      - sequence
+      - tenureType
+      type: object
+      properties:
+        tenureType:
+          type: string
+          description: The type of the billing cycle
+          enum:
+          - REGULAR
+          - TRIAL
+        sequence:
+          type: integer
+          description: The order in which to run this cycle among other billing cycles
+        cyclesCompleted:
+          type: integer
+          description: The number of billing cycles that have completed
+        cyclesRemaining:
+          type: integer
+          description: For a finite billing cycle, cyclesRemaining is the number of remaining cycles. For an infinite billing cycle, cyclesRemaining is set as 0.
+        currentPricingSchemeVersion:
+          type: integer
+          description: The active pricing scheme version for the billing cycle
+        totalCycles:
+          type: integer
+          description: The number of times this billing cycle gets executed. Trial billing cycles can only be executed a finite number of times (value between 1 and 999 for totalCycles). Regular billing cycles can be executed infinite times (value of 0 for totalCycles) or a finite number of times (value between 1 and 999 for totalCycles).
+    Model19:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Shipping charges amount
+    planBillingCyclesPricingSchemeTiers:
+      required:
+      - sequence
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - replace
+        value:
+          $ref: '#/components/schemas/Model57'
+        sequence:
+          type: integer
+          description: The order of the cycle to update
+    Model5:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date
+    Model56:
+      required:
+      - amount
+      - startingQuantity
+      type: object
+      properties:
+        startingQuantity:
+          type: integer
+          description: The starting quantity for the tier
+        endingQuantity:
+          type: integer
+          description: The ending quantity for the tier. Optional for the last tier
+        amount:
+          $ref: '#/components/schemas/Model55'
+    Model20:
+      required:
+      - paymentProviderContract
+      - planId
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        planId:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: The ID of the plan
+        startTime:
+          type: string
+          description: The date and time when the subscription started
+          format: date
+        quantity:
+          type: integer
+          description: The quantity of the product in the subscription
+        shippingAmount:
+          $ref: '#/components/schemas/Model19'
+        subscriber:
+          $ref: '#/components/schemas/subscriber'
+        customId:
+          maxLength: 127
+          minLength: 1
+          pattern: ^[ -~]+
+          type: string
+          description: The custom id for the subscription. Can be invoice id
+        applicationContext:
+          $ref: '#/components/schemas/applicationContext'
+    planTaxesInclusive:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - add
+          - replace
+        value:
+          type: boolean
+          description: Indicates whether the tax was already included in the billing amount
+    Model21:
+      required:
+      - approvalUrl
+      - id
+      - planId
+      - planOverridden
+      - status
+      - statusUpdateTime
+      type: object
+      properties:
+        id:
+          type: string
+          description: The PayPal-generated ID for the subscription.
+        status:
+          type: string
+          description: The status of the subscription.
+        planId:
+          maxLength: 50
+          minLength: 3
+          type: string
+          description: The ID of the plan
+        statusUpdateTime:
+          type: string
+          description: Status update time.
+          format: date
+        planOverridden:
+          type: boolean
+          description: Indicates whether the subscription has overridden any plan attributes.
+        quantity:
+          type: string
+          description: The quantity of the product in the subscription.
+        startTime:
+          type: string
+          description: The quantity of the product in the subscription.
+          format: date
+        shippingAmount:
+          $ref: '#/components/schemas/Model19'
+        subscriber:
+          $ref: '#/components/schemas/subscriber'
+        applicationContext:
+          $ref: '#/components/schemas/applicationContext'
+        createdAt:
+          type: string
+          description: The quantity of the product in the subscription.
+          format: date
+        approvalUrl:
+          type: string
+          description: PayPal approval URL
+    planPaymentPreferencesAutoBillOutstanding:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - replace
+        value:
+          type: boolean
+          description: Indicates whether to automatically bill the outstanding amount in the next billing cycle
+    Model12:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Model11'
+        address:
+          $ref: '#/components/schemas/billingAddress'
+      description: The shipping details
+    Model11:
+      type: object
+      properties:
+        fullName:
+          maxLength: 300
+          type: string
+      description: The name of the person to whom to ship the items
+    name:
+      type: object
+      properties:
+        givenName:
+          maxLength: 140
+          type: string
+        surname:
+          maxLength: 140
+          type: string
+      description: The name of the payer
+    planTaxesPercentage:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - add
+          - replace
+        value:
+          type: integer
+          description: The tax percentage on the billing amount
+    phone:
+      required:
+      - phoneNumber
+      type: object
+      properties:
+        phoneType:
+          type: string
+          description: The phone type
+          enum:
+          - FAX
+          - HOME
+          - MOBILE
+          - OTHER
+          - PAGER
+        phoneNumber:
+          $ref: '#/components/schemas/phoneNumber'
+      description: The phone number of the customer. Available only when you enable the Contact Telephone Number option in the Profile & Settings for the merchant's PayPal account
+    phoneNumber:
+      required:
+      - nationalNumber
+      type: object
+      properties:
+        nationalNumber:
+          maxLength: 14
+          minLength: 1
+          pattern: ^[0-9]{1,14}?$
+          type: string
+      description: The phone number, in its canonical international E.164 numbering plan format
+    Model57:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model56'
+    Model40:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        reason:
+          type: string
+          description: The reason for the cancellation of a subscription.
+        amount:
+          description: The amount of the outstanding balance. This value cannot be greater than the current outstanding balance amount.
+          required:
+          - currencyCode
+          - value
+          type: object
+          properties:
+            value:
+              minimum: 0
+              type: integer
+              description: Integer amount value (100 is 1.00)
+            currencyCode:
+              maxLength: 3
+              minLength: 3
+              type: string
+              description: Currency code (ISO-4217)
+              enum:
+              - AED
+              - AFN
+              - ALL
+              - AMD
+              - ANG
+              - AOA
+              - ARS
+              - AUD
+              - AWG
+              - AZN
+              - BAM
+              - BBD
+              - BDT
+              - BGN
+              - BHD
+              - BIF
+              - BMD
+              - BND
+              - BOB
+              - BOV
+              - BRL
+              - BSD
+              - BTN
+              - BWP
+              - BYN
+              - BZD
+              - CAD
+              - CDF
+              - CHE
+              - CHF
+              - CHW
+              - CLF
+              - CLP
+              - CNY
+              - COP
+              - COU
+              - CRC
+              - CUC
+              - CUP
+              - CVE
+              - CZK
+              - DJF
+              - DKK
+              - DOP
+              - DZD
+              - EGP
+              - ERN
+              - ETB
+              - EUR
+              - FJD
+              - FKP
+              - GBP
+              - GEL
+              - GHS
+              - GIP
+              - GMD
+              - GNF
+              - GTQ
+              - GYD
+              - HKD
+              - HNL
+              - HRK
+              - HTG
+              - HUF
+              - IDR
+              - ILS
+              - INR
+              - IQD
+              - IRR
+              - ISK
+              - JMD
+              - JOD
+              - JPY
+              - KES
+              - KGS
+              - KHR
+              - KMF
+              - KPW
+              - KRW
+              - KWD
+              - KYD
+              - KZT
+              - LAK
+              - LBP
+              - LKR
+              - LRD
+              - LSL
+              - LYD
+              - MAD
+              - MDL
+              - MGA
+              - MKD
+              - MMK
+              - MNT
+              - MOP
+              - MRU
+              - MUR
+              - MVR
+              - MWK
+              - MXN
+              - MXV
+              - MYR
+              - MZN
+              - NAD
+              - NGN
+              - NIO
+              - NOK
+              - NPR
+              - NZD
+              - OMR
+              - PAB
+              - PEN
+              - PGK
+              - PHP
+              - PKR
+              - PLN
+              - PYG
+              - QAR
+              - RON
+              - RSD
+              - RUB
+              - RWF
+              - SAR
+              - SBD
+              - SCR
+              - SDG
+              - SEK
+              - SGD
+              - SHP
+              - SLL
+              - SOS
+              - SRD
+              - SSP
+              - STN
+              - SVC
+              - SYP
+              - SZL
+              - THB
+              - TJS
+              - TMT
+              - TND
+              - TOP
+              - TRY
+              - TTD
+              - TWD
+              - TZS
+              - UAH
+              - UGX
+              - USD
+              - USN
+              - UYI
+              - UYU
+              - UYW
+              - UZS
+              - VES
+              - VND
+              - VUV
+              - WST
+              - XAF
+              - XAG
+              - XAU
+              - XBA
+              - XBB
+              - XBC
+              - XBD
+              - XCD
+              - XDR
+              - XOF
+              - XPD
+              - XPF
+              - XPT
+              - XSU
+              - XTS
+              - XUA
+              - XXX
+              - YER
+              - ZAR
+              - ZMW
+              - ZWL
+    Model15:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: The failed payment amount
+    planBillingCyclesTotalCycles:
+      required:
+      - sequence
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - replace
+        value:
+          type: integer
+          description: The number of times this billing cycle gets executed
+        sequence:
+          type: integer
+          description: The order of the cycle to update
+    Model59:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        startTime:
+          $ref: '#/components/schemas/startTime'
+        customId:
+          $ref: '#/components/schemas/customId'
+        planPaymentPreferencesAutoBillOutstanding:
+          $ref: '#/components/schemas/planPaymentPreferencesAutoBillOutstanding'
+        planBillingCyclesPricingSchemeFixedPrice:
+          $ref: '#/components/schemas/planBillingCyclesPricingSchemeFixedPrice'
+        planBillingCyclesTotalCycles:
+          $ref: '#/components/schemas/planBillingCyclesTotalCycles'
+        planBillingCyclesPricingSchemeTiers:
+          $ref: '#/components/schemas/planBillingCyclesPricingSchemeTiers'
+        planTaxesPercentage:
+          $ref: '#/components/schemas/planTaxesPercentage'
+        planTaxesInclusive:
+          $ref: '#/components/schemas/planTaxesInclusive'
+        subscriberShippingAddress:
+          $ref: '#/components/schemas/subscriberShippingAddress'
+        billingInfoOutstandingBalance:
+          $ref: '#/components/schemas/billingInfoOutstandingBalance'
+        shippingAmount:
+          $ref: '#/components/schemas/Model58'
+    Model14:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          minimum: 0
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: The last payment amount
+    customId:
+      required:
+      - value
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - add
+          - replace
+        value:
+          maxLength: 127
+          minLength: 1
+          pattern: ^[ -~]+
+          type: string
+          description: The custom id for the subscription. Can be invoice id
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

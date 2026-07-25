@@ -1,0 +1,282 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Theming API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Theming
+paths:
+  /v2/theme/{themeId}:
+    put:
+      tags:
+      - Theming
+      summary: Update Theme
+      operationId: putV2ThemeThemeid
+      parameters:
+      - name: themeId
+        in: path
+        description: Parameter that was created within the create theme API call that applies the customizations upon the checkout interface. Read <a target="_blank" href="https://docs.verifone.com/online-payments/checkout/theming">Theming</a> for details.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateThemeRequest'
+        required: false
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Theme'
+                - type: object
+                  properties:
+                    details:
+                      type: object
+                      description: The details object displays any errors or warnings that occur during the request.
+                      properties:
+                        warnings:
+                          type: array
+                          items:
+                            type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    UpdateThemeRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        logo:
+          type: string
+          description: Uploaded image Id
+        entity_id:
+          type: string
+          description: Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)
+        base_font_family:
+          type: string
+          description: base fonts available for theme
+          enum:
+          - Roboto
+          - Open Sans
+          - Lato
+          - Slabo
+          - Oswald
+          - Source Sans Pro
+          - Montserrat
+          - Raleway
+          - PT Sans
+          - Lora
+          - Noto Sans
+          - Noto Serif
+          - Nunito Sans
+          - Concert One
+          - Prompt
+          - Work Sans
+        text_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        heading_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        background_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        panel_background_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color_inverse:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color_disabled:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color_inverse_disabled:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        error_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        error_color_inverse:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        input_border_radius:
+          type: number
+        input_border_width:
+          type: number
+        hide_verifone_seal:
+          type: boolean
+          description: Show/Hide verifone seal on the checkout page
+        config:
+          $ref: '#/components/schemas/config'
+      description: Theme parameters
+    config:
+      type: object
+      properties:
+        is_default:
+          type: boolean
+          default: false
+          description: Specifies whether the theme is the default theme for the entity. Only one default theme allowed per Entity/Organization.
+    Theme:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        logo:
+          type: string
+          description: Uploaded image Id
+        entity_id:
+          type: string
+          description: Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)
+        base_font_family:
+          type: string
+          description: base fonts available for theme
+          enum:
+          - Roboto
+          - Open Sans
+          - Lato
+          - Slabo
+          - Oswald
+          - Source Sans Pro
+          - Montserrat
+          - Raleway
+          - PT Sans
+          - Lora
+          - Noto Sans
+          - Noto Serif
+          - Nunito Sans
+          - Concert One
+          - Prompt
+          - Work Sans
+        text_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        heading_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        background_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        panel_background_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color_inverse:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color_disabled:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        primary_color_inverse_disabled:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        error_color:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        error_color_inverse:
+          type: string
+          description: 6 digit hex code, e.g. <code>ffe0e0</code>
+        input_border_radius:
+          type: number
+        input_border_width:
+          type: number
+        hide_verifone_seal:
+          type: boolean
+          description: Show/Hide verifone seal on the checkout page
+        config:
+          $ref: '#/components/schemas/config'
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date
+        updated_at:
+          type: string
+          format: date
+      description: Theme parameters
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          maxLength: 2048
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date-time
+    details:
+      type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

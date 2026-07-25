@@ -1,0 +1,1528 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Token Management API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Token Management
+paths:
+  /api/v2/card:
+    put:
+      operationId: createUpdateToken
+      summary: Create/Update Token Details
+      description: "Create/Update a token using the Verifone Tokenisation Service.\n\n If a token exists for the card already, it is updated with the information in the request. Otherwise, a new token is created for the given card."
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutDto'
+      responses:
+        '200':
+          description: Token result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Token Management
+  /api/v2/card/{id}:
+    get:
+      operationId: getToken
+      summary: Get Token Details
+      description: Get the details associated with a Verifone issued reuse token.
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+        schema:
+          title: Verifone Reuse Token
+          maxLength: 255
+          minLength: 14
+      responses:
+        '200':
+          description: Token Result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Token Management
+    delete:
+      operationId: deleteToken
+      summary: Delete Token
+      description: Delete a Verifone issued reuse token. This operation is not reversible.
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+        schema:
+          title: Verifone Reuse Token
+          maxLength: 255
+          minLength: 14
+      responses:
+        '204':
+          description: Success. Token was successfully deleted.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Token Management
+    patch:
+      operationId: updateToken
+      summary: Update Token Details
+      description: "Update the details associated with a Verifone issued reuse token.\n\n If the token needs to be linked to a new PAN, the card property must be present.\n\n It is possible to update only partial details against the same card on file like expiry date, cardholder name or CVV."
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+        schema:
+          title: Verifone Reuse Token
+          maxLength: 255
+          minLength: 14
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDto'
+      responses:
+        '200':
+          description: Token result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatchTokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Token Management
+  /api/v2/card/{id}/suspend:
+    patch:
+      operationId: suspendToken
+      summary: Suspend Token
+      description: "Suspend a Verifone issued reuse token. This operation is reversible.\n\n The token can be activated again by calling the 'Activate Token' endpoint."
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+        schema:
+          title: Verifone Reuse Token
+          maxLength: 255
+          minLength: 14
+      responses:
+        '204':
+          description: Success. Token was successfully suspended.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Token Management
+  /api/v2/card/{id}/activate:
+    patch:
+      operationId: activateToken
+      summary: Activate Token
+      description: Activate a Verifone issued reuse token.
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+        schema:
+          title: Verifone Reuse Token
+          maxLength: 255
+          minLength: 14
+      responses:
+        '204':
+          description: Success. Token was successfully activated.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Token Management
+components:
+  schemas:
+    SchemeToken:
+      type: object
+      description: This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.
+      properties:
+        network_token:
+          type: string
+          minLength: 12
+          maxLength: 16
+          description: Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account.
+        status:
+          type: string
+          title: Token Status Type
+          enum:
+          - VALID
+          - SUSPENDED
+          - DELETED
+          description: The status of the cardholder data token.
+        expiry_month:
+          type: integer
+          minimum: 12
+          description: 'Network tokens'' expiry date''s month
+
+            . A 2 digit value. ISO8583 - DE 14'
+        expiry_year:
+          type: integer
+          minimum: 9999
+          description: Network tokens' expiry date's year. A 4 digit value.
+        payment_account_reference:
+          type: string
+          maxLength: 50
+          description: Payment Account Reference
+    NotFoundV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 404
+          default: 404
+        message:
+          type: string
+          enum:
+          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+      required:
+      - message
+    ForbiddenV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 403
+          default: 403
+        message:
+          type: string
+          enum:
+          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+      required:
+      - message
+    CardResponse:
+      type: object
+      properties:
+        reuse_token:
+          type: string
+          description: The identifier used to represent the Cardholder data.
+        analytics_token:
+          type: string
+          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
+        bin:
+          type: string
+          minLength: 4
+          maxLength: 11
+          description: The Bank Identification Number (also called IIN - Issuer Identification Number) of this card.
+        expiry_month:
+          type: integer
+          maximum: 12
+          description: A 2 digit value as shown on card. ISO8583 - DE 14
+        expiry_year:
+          type: integer
+          maximum: 9999
+          description: A 4 digit value as shown on card.
+        last_four:
+          type: string
+          maxLength: 4
+          description: The last 4 digits of the card number.
+        card_holder_name:
+          type: string
+          maxLength: 30
+          description: The Card holder name as it appears on the card.
+        bin_details:
+          $ref: '#/components/schemas/BinDetails'
+        updated_at:
+          type: string
+          description: The last date token was updated.
+          format: date
+        created_at:
+          type: string
+          description: The last date token was created.
+          format: date
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        reuse_token_type:
+          title: Reuse Token Type
+          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+        token_scope:
+          type: string
+          description: The token scope under which this token was created.
+          format: uuid
+        token_status:
+          type: string
+          description: The status of the Token.
+          title: Token Status Type
+          enum:
+          - DELETED
+          - ACTIVE
+          - SUSPENDED
+        currency:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        issuer_country:
+          $ref: '#/components/schemas/issuerCountryEnum'
+        scheme_token:
+          allOf:
+          - $ref: '#/components/schemas/SchemeToken'
+    InternalErrorV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 500
+          default: 500
+        message:
+          type: string
+          enum:
+          - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+          default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+      required:
+      - message
+    BadRequestV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 400
+          default: 400
+        message:
+          type: string
+          enum:
+          - 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+          default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+      required:
+      - message
+    TokenResponse:
+      type: object
+      properties:
+        reuse_token:
+          type: string
+          description: The identifier used to represent the Cardholder data.
+        analytics_token:
+          type: string
+          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
+        bin:
+          type: string
+          minLength: 4
+          maxLength: 11
+          description: The Bank Identification Number (also called IIN - Issuer Identification Number) of this card.
+        expiry_month:
+          type: integer
+          maximum: 12
+          description: A 2 digit value as shown on card. ISO8583 - DE 14
+        expiry_year:
+          type: integer
+          maximum: 9999
+          description: A 4 digit value as shown on card.
+        last_four:
+          type: string
+          maxLength: 4
+          description: The last 4 digits of the card number.
+        card_holder_name:
+          type: string
+          maxLength: 30
+          description: The Card holder name as it appears on the card.
+        brand:
+          type: string
+          description: The brand of this card. eg. VISA, MASTERCARD, AMEX.
+        issuer_country:
+          $ref: '#/components/schemas/issuerCountryEnum'
+        issuer_name:
+          type: string
+          description: The issuer of this card. eg. HSBC, BARCLAYS.
+        currency:
+          type: string
+          description: 'Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond
+
+            to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).'
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYR
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LTL
+          - LVL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRO
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STD
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - USS
+          - UYI
+          - UYU
+          - UZS
+          - VEF
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XTS
+          - XXX
+          - YER
+          - ZAR
+          - ZMK
+          - ZMW
+          - BTC
+        type:
+          type: string
+          description: The type of card application or account selection.
+          enum:
+          - DEBIT
+          - CREDIT
+        variant:
+          type: string
+          description: The variant of the card. eg. NEW_WORLD
+        updated_at:
+          type: string
+          description: The last date token was updated.
+          format: date
+        created_at:
+          type: string
+          description: The last date token was created.
+          format: date
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        reuse_token_type:
+          title: Reuse Token Type
+          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+          default: INTERNAL
+        token_scope:
+          type: string
+          description: The token scope under which this token was created.
+          format: uuid
+        token_status:
+          type: string
+          description: The status of the Token.
+          title: Token Status Type
+          enum:
+          - DELETED
+          - ACTIVE
+          - SUSPENDED
+        bin_details:
+          $ref: '#/components/schemas/BinDetails'
+        scheme_token:
+          allOf:
+          - $ref: '#/components/schemas/SchemeToken'
+    PatchDto:
+      type: object
+      properties:
+        encrypted_card:
+          type: string
+          title: Client encrypted cardholder data
+          description: "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+        cvv:
+          type: string
+          description: The CVV (Card Verification Value) as it appears on the card.
+          maxLength: 30
+        card_holder_name:
+          type: string
+          description: The Card holder name as it appears on the card.
+          maxLength: 30
+        card_holder_email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        expiry_month:
+          type: integer
+          description: Card expiry month. A 2 digit value as shown on card. ISO8583 - DE 14.
+          maximum: 12
+          minimum: 1
+        expiry_year:
+          type: integer
+          description: Card expiry year. A 4 digit value as shown on the card.
+          maximum: 9999
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        public_key_alias:
+          type: string
+        scheme_token_action:
+          description: Indicates if the scheme tokens should be created / deleted / suspended. Scheme tokens will be created only if token scope has PAR and/or network token support configured.
+          type: string
+          enum:
+          - ACTIVATE
+          - SUSPEND
+          - DELETE
+    BinDetails:
+      type: object
+      properties:
+        bin:
+          type: string
+          minLength: 4
+          maxLength: 11
+          description: The Bank Identification Number (also called  IIN - Issuer Identification Number) of this card.
+        brand:
+          type: string
+          description: The brand of this card. eg. VISA, MASTERCARD, AMEX.
+        issuer_country:
+          $ref: '#/components/schemas/issuerCountryEnum'
+        issuer_name:
+          type: string
+          description: The issuer of this card. eg. HSBC, BARCLAYS.
+        last_four:
+          type: string
+          maxLength: 4
+          description: The last 4 digits of the card number.
+        type:
+          type: string
+          description: The type of card application or account selection.
+          enum:
+          - DEBIT
+          - CREDIT
+        variant:
+          type: string
+          description: The variant of the card. eg. NEW_WORLD
+    PatchTokenResponse:
+      type: object
+      properties:
+        bin:
+          type: string
+          minLength: 4
+          maxLength: 11
+          description: The Bank Identification Number (also called IIN - Issuer Identification Number) of this card.
+        expiry_month:
+          type: integer
+          maximum: 12
+          description: A 2 digit value as shown on card. ISO8583 - DE 14
+        expiry_year:
+          type: integer
+          maximum: 9999
+          description: A 4 digit value as shown on card.
+        last_four:
+          type: string
+          maxLength: 4
+          description: The last 4 digits of the card number.
+        card_holder_name:
+          type: string
+          maxLength: 30
+          description: The Card holder name as it appears on the card.
+        card_holder_email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        updated_at:
+          type: string
+          description: The last date token was updated.
+          format: date
+        created_at:
+          type: string
+          description: The last date token was created.
+          format: date
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        token_status:
+          type: string
+          description: The status of the Token.
+          title: Token Status Type
+          enum:
+          - DELETED
+          - ACTIVE
+          - SUSPENDED
+        bin_details:
+          $ref: '#/components/schemas/BinDetails'
+        currency:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        issuer_country:
+          $ref: '#/components/schemas/issuerCountryEnum'
+        scheme_token:
+          title: Scheme Token Response
+          description: This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.
+          type: object
+          properties:
+            network_token:
+              description: Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account.
+              type: string
+              minLength: 12
+              maxLength: 16
+            status:
+              description: The status of the cardholder data token.
+              type: string
+              enum:
+              - DELETED
+              - ACTIVE
+              - SUSPENDED
+            expiry_month:
+              description: Network tokens' expiry date's month. A 2 digit value. ISO8583 - DE 14
+              type: integer
+              maximum: 12
+            expiry_year:
+              description: Network tokens' expiry date's year. A 4 digit value.
+              type: integer
+              maximum: 9999
+            payment_account_reference:
+              description: Payment Account Reference
+              type: string
+              maxLength: 29
+    issuerCountryEnum:
+      type: string
+      description: The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+      enum:
+      - ZZZ
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATA
+      - ATF
+      - ATG
+      - AUS
+      - AUT
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BES
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BSB
+      - BRN
+      - BTN
+      - BVT
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HMD
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MOZ
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PSE
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGC
+      - SGP
+      - SHN
+      - SJM
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - UMI
+      - URY
+      - USA
+      - UZB
+      - VAT
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+    TokenContextDto:
+      type: object
+      title: token_context
+      description: "The context and identifiers related to the token request. **Mandatory** for external Third-Party tokens. Use of the /v2/card endpoint:\n\n  * If reuse_token_type = INTERNAL => then token_scope mandatory; token_context optional, and only token_context.entity_id would be used (if provided);\n\n  * If reuse_token_type = CHASE or TAVE => then token_context must be provided, with at least one of entity_id or payment_provider_contract; If CHASE or TAVE token requested without neither PPC nor entity_id, request will be declined."
+      properties:
+        entity_id:
+          type: string
+          format: uuid-flexible
+          description: The identifier of merchant entity for which this request is related to.
+        payment_provider_contract:
+          type: string
+          format: uuid-flexible
+          description: The identifier of payment provider contract you want to process this request with. Relevant only for external Third-party tokens.
+    UnauthorizedV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 401
+          default: 401
+        message:
+          type: string
+          enum:
+          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+      required:
+      - message
+    CurrencyCodeEnum:
+      title: Currency Code
+      type: string
+      description: 'Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond
+
+        to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
+
+
+        <b>Deprecated:</b> `BYR` (replaced by BYN), `FRF` (replaced by EUR), `LTL` (replaced by EUR), `LVL` (replaced by EUR), `MRO` (replaced by MRU), `STD` (replaced by STN), `USS` (no replacement), `VEF`  (replaced by VES), `ZMK` (replaced by ZMV) and `BTC` (Bitcoin only supported as Crypto Amount).'
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    PutDto:
+      type: object
+      properties:
+        token_scope:
+          type: string
+          title: Token Scope
+          description: The token scope under which this token was created.
+          format: uuid
+        encrypted_card:
+          type: string
+          title: Client encrypted cardholder data
+          description: "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+        card_brand:
+          type: string
+          title: The Card Type
+          description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International \n\n **Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type."
+        token_type:
+          type: string
+          title: Token Type
+          description: Token type
+          enum:
+          - REUSE
+          - ANALYTICS
+          - REUSE_AND_ANALYTICS
+          default: REUSE
+        reuse_token_type:
+          title: Reuse Token Type
+          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+          default: INTERNAL
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        public_key_alias:
+          type: string
+        token_context:
+          allOf:
+          - $ref: '#/components/schemas/TokenContextDto'
+      required:
+      - token_scope
+      - encrypted_card
+      - public_key_alias
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

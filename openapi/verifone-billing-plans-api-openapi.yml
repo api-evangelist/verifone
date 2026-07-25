@@ -1,0 +1,1358 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Billing Plans API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Billing Plans
+paths:
+  /billingPlans:
+    get:
+      tags:
+      - Billing Plans
+      summary: List billing plans
+      operationId: getBillingplans
+      parameters:
+      - name: paymentProviderContract
+        in: query
+        description: PayPal Payment Provider Contract UUID
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: query
+        description: Filters the response by a Product ID.
+        schema:
+          maxLength: 50
+          minLength: 6
+          type: string
+      - name: ids
+        in: query
+        description: Filters the response by list of plan IDs.
+        schema:
+          maxLength: 270
+          minLength: 6
+          type: string
+      - name: pageSize
+        in: query
+        description: The number of items to return in the response.
+        schema:
+          maximum: 20
+          minimum: 1
+          type: number
+      - name: page
+        in: query
+        description: A non-zero integer which is the start index of the entire list of items to return in the response.
+        schema:
+          maximum: 100000
+          minimum: 1
+          type: number
+      - name: totalRequired
+        in: query
+        description: Indicates whether to show the total count in the response.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model4'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingPlans/{planId}/activate:
+    put:
+      tags:
+      - Billing Plans
+      summary: Activate billing plans
+      operationId: putBillingplansPlanidActivate
+      parameters:
+      - name: planId
+        in: path
+        description: PayPal billing plan Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model38'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingPlans/{planId}/deactivate:
+    put:
+      tags:
+      - Billing Plans
+      summary: Deactivate billing plans
+      operationId: putBillingplansPlanidDeactivate
+      parameters:
+      - name: planId
+        in: path
+        description: PayPal billing plan Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model38'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingPlans/{planId}:
+    get:
+      tags:
+      - Billing Plans
+      summary: Get billing plan
+      operationId: getBillingplansPlanid
+      parameters:
+      - name: planId
+        in: path
+        description: PayPal billing plan Id
+        required: true
+        schema:
+          type: string
+      - name: paymentProviderContract
+        in: query
+        description: PayPal Payment Provider Contract UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model9'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+    put:
+      tags:
+      - Billing Plans
+      summary: Update billing plans
+      operationId: putBillingplansPlanid
+      parameters:
+      - name: planId
+        in: path
+        description: PayPal billing plan Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model61'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingPlans/create:
+    post:
+      tags:
+      - Billing Plans
+      summary: Create billing plan
+      operationId: postBillingplansCreate
+      parameters:
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model36'
+        required: false
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model37'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+components:
+  schemas:
+    plans:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model3'
+    setupFee:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+      description: The initial set-up fee for the service.
+    fixedPrice:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+      description: The fixed amount to charge for the subscription
+    Model4:
+      type: object
+      properties:
+        plans:
+          $ref: '#/components/schemas/plans'
+        totalItems:
+          type: number
+          description: The total number of items.
+        totalPages:
+          type: number
+          description: The total number of pages.
+    amount:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+    Model34:
+      required:
+      - sequence
+      - tenureType
+      type: object
+      properties:
+        pricingScheme:
+          $ref: '#/components/schemas/pricingScheme'
+        frequency:
+          $ref: '#/components/schemas/frequency'
+        tenureType:
+          type: string
+          description: The tenure type of the billing cycle.
+          enum:
+          - REGULAR
+          - TRIAL
+        sequence:
+          type: number
+          description: The order in which this cycle is to run among other billing cycles.
+        totalCycles:
+          type: number
+          description: The number of times this billing cycle gets executed.
+    Model1:
+      required:
+      - amount
+      - startingQuantity
+      type: object
+      properties:
+        startingQuantity:
+          type: string
+          description: The starting quantity for the tier.
+        endingQuantity:
+          type: string
+          description: The ending quantity for the tier. Optional for the last tier.
+        amount:
+          $ref: '#/components/schemas/amount'
+    Model3:
+      required:
+      - billingCycles
+      - createTime
+      - name
+      - paymentPreferences
+      type: object
+      properties:
+        id:
+          maxLength: 50
+          minLength: 6
+          type: string
+          description: Filters the response by a Product ID.
+        name:
+          maxLength: 127
+          type: string
+          description: The plan name
+        billingCycles:
+          $ref: '#/components/schemas/billingCycles'
+        paymentPreferences:
+          $ref: '#/components/schemas/paymentPreferences'
+        status:
+          type: string
+          description: The initial state of the plan
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - CREATED
+        description:
+          maxLength: 127
+          type: string
+          description: The detailed description of the plan.
+        taxes:
+          $ref: '#/components/schemas/taxes'
+        quantitySupported:
+          type: boolean
+          description: Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.
+        createTime:
+          type: string
+          description: The date and time when the billing plan was created.
+          format: date
+        updateTime:
+          type: string
+          description: The date and time when the billing plan was updated.
+          format: date
+    Model60:
+      required:
+      - percentage
+      type: object
+      properties:
+        percentage:
+          type: string
+          description: The tax percentage on the billing amount.
+    Model35:
+      minItems: 1
+      type: array
+      description: An array of billing cycles for trial billing and regular billing
+      items:
+        $ref: '#/components/schemas/Model34'
+    tiers:
+      type: array
+      description: An array of pricing tiers which are used for billing volume/tiered plans.
+      items:
+        $ref: '#/components/schemas/Model1'
+    Model36:
+      required:
+      - billingCycles
+      - name
+      - paymentProviderContract
+      - productId
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        productId:
+          type: string
+          description: PayPal catalog product id
+        name:
+          maxLength: 127
+          type: string
+          description: The plan name
+        status:
+          type: string
+          description: The initial state of the plan
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - CREATED
+        description:
+          maxLength: 127
+          type: string
+          description: The detailed description of the plan.
+        billingCycles:
+          $ref: '#/components/schemas/Model35'
+        paymentPreferences:
+          $ref: '#/components/schemas/paymentPreferences'
+        taxes:
+          $ref: '#/components/schemas/taxes'
+        quantitySupported:
+          type: boolean
+          description: Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.
+    details:
+      type: object
+    Model2:
+      required:
+      - frequency
+      - sequence
+      - tenureType
+      type: object
+      properties:
+        pricingScheme:
+          $ref: '#/components/schemas/pricingScheme'
+        frequency:
+          $ref: '#/components/schemas/frequency'
+        tenureType:
+          type: string
+          description: The interval at which the subscription is charged or billed.
+          enum:
+          - REGULAR
+          - TRIAL
+        sequence:
+          type: number
+          description: The order in which this cycle is to run among other billing cycles.
+        totalCycles:
+          type: number
+          description: The number of times this billing cycle gets executed.
+    Model9:
+      required:
+      - billingCycles
+      - createTime
+      - name
+      - productId
+      type: object
+      properties:
+        id:
+          maxLength: 50
+          minLength: 6
+          type: string
+          description: Filters the response by a Product ID.
+        productId:
+          type: string
+          description: PayPal catalog product id
+        name:
+          maxLength: 127
+          type: string
+          description: The plan name
+        billingCycles:
+          $ref: '#/components/schemas/billingCycles'
+        paymentPreferences:
+          $ref: '#/components/schemas/paymentPreferences'
+        status:
+          type: string
+          description: The initial state of the plan
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - CREATED
+        description:
+          maxLength: 127
+          type: string
+          description: The detailed description of the plan.
+        taxes:
+          $ref: '#/components/schemas/taxes'
+        quantitySupported:
+          type: boolean
+          description: Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.
+        createTime:
+          type: string
+          description: The date and time when the billing plan was created.
+          format: date
+        updateTime:
+          type: string
+          description: The date and time when the billing plan was updated.
+          format: date
+    taxes:
+      required:
+      - percentage
+      type: object
+      properties:
+        percentage:
+          type: string
+          description: The tax percentage on the billing amount.
+        inclusive:
+          type: boolean
+          description: Indicates whether the tax was already included in the billing amount.
+      description: The tax details.
+    Model5:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date
+    Model37:
+      required:
+      - billingCycles
+      - createTime
+      - id
+      - name
+      - productId
+      - status
+      type: object
+      properties:
+        id:
+          maxLength: 50
+          minLength: 6
+          type: string
+          description: The unique PayPal-generated ID for the plan.
+        productId:
+          type: string
+          description: PayPal catalog product id
+        name:
+          maxLength: 127
+          type: string
+          description: The plan name
+        status:
+          type: string
+          description: The initial state of the plan
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - CREATED
+        description:
+          maxLength: 127
+          type: string
+          description: The detailed description of the plan.
+        billingCycles:
+          $ref: '#/components/schemas/billingCycles'
+        paymentPreferences:
+          $ref: '#/components/schemas/paymentPreferences'
+        taxes:
+          $ref: '#/components/schemas/taxes'
+        quantitySupported:
+          type: boolean
+          description: Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.
+        createTime:
+          type: string
+          description: The date and time when the billing plan was created.
+          format: date
+        updateTime:
+          type: string
+          description: The date and time when the billing plan was updated.
+          format: date
+    paymentPreferences:
+      type: object
+      properties:
+        autoBillOutstanding:
+          type: boolean
+          description: Indicates whether to automatically bill the outstanding amount in the next billing cycle.
+        setupFee:
+          $ref: '#/components/schemas/setupFee'
+        setupFeeFailureAction:
+          type: string
+          description: The action to take on the subscription if the initial payment for the setup fails.
+          enum:
+          - CONTINUE
+          - CANCEL
+        paymentFailureThreshold:
+          type: number
+          description: The maximum number of payment failures before a subscription is suspended.
+      description: The payment preferences for a subscription.
+    billingCycles:
+      minItems: 1
+      type: array
+      description: An array of billing cycles for trial billing and regular billing
+      items:
+        $ref: '#/components/schemas/Model2'
+    frequency:
+      required:
+      - intervalUnit
+      type: object
+      properties:
+        intervalUnit:
+          type: string
+          description: The interval at which the subscription is charged or billed.
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+        intervalCount:
+          type: number
+          description: The number of intervals after which a subscriber is billed.
+    pricingScheme:
+      type: object
+      properties:
+        version:
+          maximum: 999
+          type: number
+          description: The version of the pricing scheme.
+        fixedPrice:
+          $ref: '#/components/schemas/fixedPrice'
+        pricingModel:
+          type: string
+          description: The pricing model for tiered plan
+          enum:
+          - VOLUME
+          - TIERED
+        tiers:
+          $ref: '#/components/schemas/tiers'
+      description: The active pricing scheme for this billing cycle.
+    Model38:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+    Model61:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        description:
+          maxLength: 127
+          type: string
+          description: The detailed description of the plan.
+        paymentPreferences:
+          $ref: '#/components/schemas/paymentPreferences'
+        taxes:
+          $ref: '#/components/schemas/Model60'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

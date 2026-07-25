@@ -1,0 +1,231 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Templating API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Templating
+paths:
+  /v2/template/checkoutDetails/:
+    get:
+      tags:
+      - Templating
+      summary: List Templates
+      operationId: listV2Template
+      parameters:
+      - name: search
+        in: query
+        description: 'Filter templates using RSQL syntax. Combine expressions with `;` (AND) or `,` (OR).
+
+
+          **Filterable fields:**
+
+
+          | Field | Type | Operators |
+
+          |-------|------|-----------|
+
+          | `name` | string | `==` `!=` `=in=` `=out=` `=regex=` `=contains=` |
+
+          | `created_at` | date | `==` `!=` `=in=` `=out=` `=gt=` `=ge=` `=lt=` `=le=` |
+
+          | `updated_at` | date | `==` `!=` `=in=` `=out=` `=gt=` `=ge=` `=lt=` `=le=` |
+
+          | `entity_id` | string | `==` `!=` `=in=` `=out=` `=regex=` |
+
+
+          **Examples:**
+
+          - `name==MyTemplate;entity_id==a6b45428-0296-4394-8ddd-0b50b5b20aa9`
+
+          - `name==TemplateName`'
+        schema:
+          type: string
+      - name: order_criteria
+        in: query
+        schema:
+          type: string
+          enum:
+          - name
+          - created_at
+          - updated_at
+      - name: order_by
+        in: query
+        description: The ordering sequence of the selected templates If not selected then Descending order is the default order.
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      - name: page_number
+        in: query
+        description: A filter query in RSQL format to retrieve templates based on page number. If not selected then a default pageNumber is 1.
+        schema:
+          minimum: 1
+          type: number
+      - name: page_size
+        in: query
+        description: A filter query in RSQL format to retrieve templates based on page size. If not selected then a default pageSize is 50
+        schema:
+          minimum: 0
+          type: number
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    address_details:
+      type: object
+      properties:
+        address_1:
+          $ref: '#/components/schemas/template_field_mode'
+        address_2:
+          $ref: '#/components/schemas/template_field_mode'
+        address_3:
+          $ref: '#/components/schemas/template_field_mode'
+        city:
+          $ref: '#/components/schemas/template_field_mode'
+        country_code:
+          $ref: '#/components/schemas/template_field_mode'
+        first_name:
+          $ref: '#/components/schemas/template_field_mode'
+        middle_name:
+          $ref: '#/components/schemas/template_field_mode'
+        last_name:
+          $ref: '#/components/schemas/template_field_mode'
+        phone:
+          $ref: '#/components/schemas/template_field_mode'
+        postal_code:
+          $ref: '#/components/schemas/template_field_mode'
+        state:
+          $ref: '#/components/schemas/template_field_mode'
+    CheckoutTemplate:
+      title: CreateTemplateRequest
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          type: string
+        entity_id:
+          type: string
+          description: Entity Id can be located on the organization level as Organization ID (Administration > Organizations > [Organization] > Organisation ID value)
+        billing_is_same_as_shipping:
+          type: boolean
+          default: true
+          description: Indicates whether billing address is same as shipping address or not.
+        shipping_first_billing_second:
+          type: boolean
+          default: false
+          description: Indicates the order of addresses in which the merchant wants to collect the information from the customer.
+        field_settings:
+          type: object
+          properties:
+            billing:
+              $ref: '#/components/schemas/address_details'
+            company_name:
+              $ref: '#/components/schemas/template_field_mode'
+            company_registration_number:
+              $ref: '#/components/schemas/template_field_mode'
+            email_address:
+              $ref: '#/components/schemas/template_field_mode'
+            entity_id:
+              $ref: '#/components/schemas/template_field_mode'
+            phone_number:
+              $ref: '#/components/schemas/template_field_mode'
+            shipping:
+              $ref: '#/components/schemas/address_details'
+            title:
+              $ref: '#/components/schemas/template_field_mode'
+            work_phone:
+              $ref: '#/components/schemas/template_field_mode'
+            tax:
+              type: object
+              properties:
+                identifier:
+                  $ref: '#/components/schemas/template_field_mode'
+    TemplateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CheckoutTemplate'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          maxLength: 2048
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date-time
+    details:
+      type: object
+    template_field_mode:
+      type: object
+      properties:
+        mode:
+          type: string
+          enum:
+          - HIDDEN
+          - READ_ONLY
+          - OPTIONAL
+          - REQUIRED
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

@@ -1,0 +1,2099 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Transaction API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Transaction
+paths:
+  /api/v2/transaction/{id}:
+    get:
+      operationId: readTransaction
+      summary: Read transaction
+      description: Get a transaction
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: transaction id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTransaction'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Transaction
+  /api/v2/transactions:
+    get:
+      operationId: listTransactions
+      summary: List transactions
+      description: List of transactions
+      parameters:
+      - name: acquirer_merchant_id
+        required: false
+        in: query
+        description: The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor.
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: Amount of the transaction.
+        schema:
+          type: number
+      - name: created_at
+        required: false
+        in: query
+        description: The time at which the transaction was created.
+        schema:
+          title: <date-time>
+          type: string
+      - name: created_start
+        in: query
+        description: 'The start time range for when the transaction was created, specified in UTC. Use this in conjunction with `created_end` to query for a time range. A maximum range of 1 month of transactions can be queried at a time. Note: If this is not specified it will default to the current date/time - 7 days.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: <date-time>
+          type: string
+      - name: created_end
+        in: query
+        description: 'The end time range for when a transaction was created, specified in UTC. Use this in conjunction with `created_start` to query for a time range. A maximum range of 1 month of transactions can be queried at a time. Note: If this is not specified it will default to the current date/time.'
+        required: false
+        style: form
+        explode: true
+        schema:
+          title: <date-time>
+          type: string
+      - name: country_code
+        required: false
+        in: query
+        description: The country code resolved from the customer's ip address.
+        schema:
+          title: <iso3166-alpha2>
+          type: string
+      - name: currency_code
+        required: false
+        in: query
+        description: Three-letter ISO 4217 alphabetical currency code. e.g. USD.
+        schema:
+          title: Values correspond to ISO 4217.
+          type: string
+      - name: customer
+        required: false
+        in: query
+        description: The ID of a customer.
+        schema:
+          type: string
+      - name: enity_id
+        required: false
+        in: query
+        description: The identifier of merchant entity you want to process the transaciton is already processed.
+        schema:
+          type: string
+      - name: invoice_number
+        required: false
+        in: query
+        description: The invoice number used to track the order for POS transactions. For Ecommerce, use merchant_reference.
+        schema:
+          title: Invoice Number
+          type: string
+          maxLength: 127
+      - name: merchant_reference
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          maxLength: 50
+          description: A reference specified by the merchant to identify the transaction.
+      - name: payment_product_type
+        required: false
+        in: query
+        description: Fees applied to the transaction, based on the payment product. e.g. For card transactions - interchange fees
+        schema:
+          enum:
+          - Amex
+          - Diners Club International
+          - Discover
+          - JCB
+          - Maestro
+          - Mastercard
+          - Visa
+          type: string
+      - name: shopper_interaction
+        required: false
+        in: query
+        description: Determines the point of sale of a customer.
+        schema:
+          enum:
+          - ecommerce
+          - pos
+          - mail_order
+          - telephone_order
+          - unknown
+          type: string
+      - name: status
+        required: false
+        in: query
+        schema:
+          title: Please use `transaction_status` instead.
+          enum:
+          - INITIATED
+          - AUTHORIZED
+          - AUTHORIZATION_VOIDED
+          - REFUNDED
+          - FAILED
+          - PENDING
+          - DECLINED
+          - SETTLEMENT_CANCELLED
+          - SETTLEMENT_REQUESTED
+          - SETTLEMENT_SUBMITTED
+          - SETTLEMENT_COMPLETED
+          - SETTLEMENT_PARTIAL
+          - SETTLEMENT_DECLINED
+          - VOIDED
+          - UNKNOWN
+          type: string
+          deprecated: true
+      - name: transaction_type
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/TransactionType'
+      - name: transaction_status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/TransactionState'
+      - name: _sort
+        required: false
+        in: query
+        description: Sorts the results by ascending order according to the provided field. If the field is prefixed with dash (e.g. -created_at), the order is descending.
+        schema:
+          enum:
+          - created_at
+          - -created_at
+          type: string
+      - name: _skip
+        required: false
+        in: query
+        description: Skips a number of pages.
+        schema:
+          type: number
+      - name: _limit
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 10000
+          default: 50
+          type: number
+      - name: reason_code
+        required: false
+        in: query
+        description: A reason code assigned by the acquiring platform; '00' in case of success.
+        schema:
+          type: string
+      - name: rrn
+        required: false
+        in: query
+        description: Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system.
+        schema:
+          type: string
+      - name: pos_device_id
+        required: false
+        in: query
+        description: Identifier of the POS device used for the transaction.
+        schema:
+          type: number
+      - name: stan
+        required: false
+        in: query
+        description: System Trace Audit Number.
+        schema:
+          type: number
+      - name: id
+        required: false
+        in: query
+        description: The ID of the transaction
+        schema:
+          type: string
+      - name: x-vfi-api-idempotencykey
+        required: false
+        in: query
+        description: Unique transaction identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GatewayTransactions'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Transaction
+  /api/v2/transactions/count:
+    get:
+      operationId: countTransactions
+      summary: Count transactions
+      description: Count transactions
+      parameters:
+      - name: acquirer_merchant_id
+        required: false
+        in: query
+        description: The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor.
+        schema:
+          type: string
+      - name: amount
+        required: false
+        in: query
+        description: Amount of the transaction.
+        schema:
+          type: number
+      - name: created_at
+        required: false
+        in: query
+        description: The time at which the transaction was created.
+        schema:
+          title: <date-time>
+          type: string
+      - name: country_code
+        required: false
+        in: query
+        description: The country code resolved from the customer's ip address.
+        schema:
+          title: <iso3166-alpha2>
+          type: string
+      - name: currency_code
+        required: false
+        in: query
+        description: Three-letter ISO 4217 alphabetical currency code. e.g. USD.
+        schema:
+          title: Values correspond to ISO 4217.
+          type: string
+      - name: customer
+        required: false
+        in: query
+        description: The ID of a customer.
+        schema:
+          type: string
+      - name: enity_id
+        required: false
+        in: query
+        description: The identifier of merchant entity you want to process the transaciton is already processed.
+        schema:
+          type: string
+      - name: invoice_number
+        required: false
+        in: query
+        description: The invoice number used to track the order for POS transactions. For Ecommerce, use merchant_reference.
+        schema:
+          title: Invoice Number
+          type: string
+          maxLength: 127
+      - name: merchant_reference
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          maxLength: 50
+          description: A reference specified by the merchant to identify the transaction.
+      - name: payment_product_type
+        required: false
+        in: query
+        description: Fees applied to the transaction, based on the payment product. e.g. For card transactions - interchange fees
+        schema:
+          enum:
+          - Amex
+          - Diners Club International
+          - Discover
+          - JCB
+          - Maestro
+          - Mastercard
+          - Visa
+          type: string
+      - name: shopper_interaction
+        required: false
+        in: query
+        description: Determines the point of sale of a customer.
+        schema:
+          enum:
+          - ecommerce
+          - pos
+          - mail_order
+          - telephone_order
+          - unknown
+          type: string
+      - name: status
+        required: false
+        in: query
+        schema:
+          title: <b>Deprecated</b>. Please use `transaction_status` instead.
+          enum:
+          - INITIATED
+          - AUTHORIZED
+          - AUTHORIZATION_VOIDED
+          - REFUNDED
+          - FAILED
+          - PENDING
+          - DECLINED
+          - SETTLEMENT_CANCELLED
+          - SETTLEMENT_REQUESTED
+          - SETTLEMENT_SUBMITTED
+          - SETTLEMENT_COMPLETED
+          - SETTLEMENT_PARTIAL
+          - SETTLEMENT_DECLINED
+          - VOIDED
+          - UNKNOWN
+          type: string
+          deprecated: true
+      - name: transaction_type
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/TransactionType'
+      - name: transaction_status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/TransactionState'
+      - name: reason_code
+        required: false
+        in: query
+        description: A reason code assigned by the acquiring platform; '00' in case of success.
+        schema:
+          type: string
+      - name: rrn
+        required: false
+        in: query
+        description: Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system.
+        schema:
+          type: string
+      - name: pos_device_id
+        required: false
+        in: query
+        description: Identifier of the POS device used for the transaction.
+        schema:
+          type: number
+      - name: stan
+        required: false
+        in: query
+        description: System Trace Audit Number.
+        schema:
+          type: number
+      - name: id
+        required: false
+        in: query
+        description: The ID of the transaction
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Count transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountTransactionResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestV2Docs'
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedV2Docs'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenV2Docs'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundV2Docs'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorV2Docs'
+      tags:
+      - Transaction
+components:
+  schemas:
+    amountString:
+      type: string
+      description: Amount including decimal place.
+    ThreeDSecure:
+      type: object
+      properties:
+        eci_flag:
+          type: string
+          title: Electronic Commerce Indicator.
+          enum:
+          - '00'
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+        enrolled:
+          type: string
+          title: The enrolment response status of Authentication eligibility from the Directory Server.
+          description: "Possible Values:\n    Y - Yes, Bank is participating in 3-D Secure protocol and will return the ACSUrl.\n    N - No, Bank is not participating in 3-D Secure protocol.\n    U - Unavailable, the DS or ACS is not available for authentication at the time of the request.\n    B - Bypass, merchant authentication rule is triggered to bypass authentication in this use case.\n    NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+        cavv:
+          type: string
+          maxLength: 48
+          title: Cardholder Authentication Verification Value (CAVV)
+          description: Base64-encoded values of 28 or 32 characters. Hex-encoded values of 40 or 48 characters.
+        cavv_algorithm:
+          type: string
+          description: Indicates the algorithm used to generate the CAVV value.Please refer to the integration guide for information on its usage.
+        pares_status:
+          type: string
+          title: Authentication response code.
+          description: "Possible Values:\n      Y - Successful Authentication.\n      U - Unable to Complete Authentication\n      A - Successful Attempts Transaction."
+        xid:
+          type: string
+          description: Transaction identifier resulting from authentication processing.Please refer to the integration guide for information on its usage.
+        ds_transaction_id:
+          type: string
+          title: The unique transaction identifier
+          description: The unique transaction identifier assigned by the Directory Server. Supported for 3D Secure v2 only.
+        threeds_version:
+          type: string
+          title: The 3DS version used to process the transaction.
+          enum:
+          - 1.0.2
+          - 2.1.0
+          - 2.2.0
+    ShippingInformation:
+      type: object
+      properties:
+        address:
+          type: string
+          maxLength: 300
+          description: Street address of the recipient.
+        city:
+          type: string
+          maxLength: 28
+          description: City of the recipient.
+        country:
+          type: string
+          maxLength: 2
+          minLength: 2
+          format: country-code
+          description: A 2-letter ISO3166 alpha-2 country code for the address.
+        postal_code:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: A postal code for the address.
+        email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        first_name:
+          type: string
+          maxLength: 100
+          description: First name of the recipient.
+        last_name:
+          type: string
+          maxLength: 100
+          description: Last name of the recipient.
+        phone:
+          type: number
+          maxLength: 15
+          description: Numbers only, no dash or any other separator.
+        state:
+          type: string
+          maxLength: 35
+          description: A region / state / province for the address.
+      required:
+      - address
+      - city
+      - country
+      - postal_code
+    TransactionState:
+      title: Transaction State
+      type: string
+      description: This represents the available states that a transaction may have. At any given point it may only have a single state.
+      enum:
+      - APPROVED
+      - AUTHENTICATING
+      - AUTHORISED
+      - AWAITING_INVOICE
+      - CANCELLED
+      - CONFIRMED
+      - COMPLETED
+      - CUSTOMER_ACCEPTED
+      - DECLINED
+      - DEFERRED
+      - DISPUTED
+      - EXCEPTION
+      - EXPIRED
+      - FAILED
+      - INITIATED
+      - ON_HOLD
+      - PARTIALLY_REFUNDED
+      - RECEIVED
+      - RECONCILED
+      - RECONCILIATION_FAILED
+      - REFUNDED
+      - REJECTED
+      - REPEATING
+      - REVERSED
+      - REVERSE_ERROR
+      - REVERSING
+      - ROUTING
+      - SENT
+      - SETTLED
+      - SETTLEMENT_FAILED
+      - SETTLEMENT_REQUESTED
+      - SUBMITTED
+      - TIMED_OUT
+      - UNMATCHED
+    BillingDto:
+      type: object
+      additionalProperties: false
+      properties:
+        address_1:
+          type: string
+          maxLength: 40
+          description: Customer's primary billing address information.
+        address_2:
+          type: string
+          maxLength: 40
+          description: Customer's secondary billing address information.
+        address_3:
+          type: string
+          maxLength: 40
+          description: Customer's third billing address information.
+        city:
+          type: string
+          maxLength: 28
+          description: Customer's city on their billing address
+        country:
+          type: string
+          title: Country Code
+          description: The ISO 3166-1 alpha-3 country code.
+          enum:
+          - ZZ
+          - AD
+          - AE
+          - AF
+          - AG
+          - AI
+          - AL
+          - AM
+          - AO
+          - AQ
+          - AR
+          - AS
+          - AT
+          - AU
+          - AW
+          - AX
+          - AZ
+          - BA
+          - BB
+          - BD
+          - BE
+          - BF
+          - BG
+          - BH
+          - BI
+          - BJ
+          - BL
+          - BM
+          - BN
+          - BO
+          - BQ
+          - BR
+          - BS
+          - BT
+          - BV
+          - BW
+          - BY
+          - BZ
+          - CA
+          - CC
+          - CD
+          - CF
+          - CG
+          - CH
+          - CI
+          - CK
+          - CL
+          - CM
+          - CN
+          - CO
+          - CR
+          - CU
+          - CV
+          - CW
+          - CX
+          - CY
+          - CZ
+          - DE
+          - DJ
+          - DK
+          - DM
+          - DO
+          - DZ
+          - EC
+          - EE
+          - EG
+          - EH
+          - ER
+          - ES
+          - ET
+          - FI
+          - FJ
+          - FK
+          - FM
+          - FO
+          - FR
+          - GA
+          - GB
+          - GD
+          - GE
+          - GF
+          - GG
+          - GH
+          - GI
+          - GL
+          - GM
+          - GN
+          - GP
+          - GQ
+          - GR
+          - GS
+          - GT
+          - GU
+          - GW
+          - GY
+          - HK
+          - HM
+          - HN
+          - HR
+          - HT
+          - HU
+          - ID
+          - IE
+          - IL
+          - IM
+          - IN
+          - IO
+          - IQ
+          - IR
+          - IS
+          - IT
+          - JE
+          - JM
+          - JO
+          - JP
+          - KE
+          - KG
+          - KH
+          - KI
+          - KM
+          - KN
+          - KP
+          - KR
+          - KW
+          - KY
+          - KZ
+          - LA
+          - LB
+          - LC
+          - LI
+          - LK
+          - LR
+          - LS
+          - LT
+          - LU
+          - LV
+          - LY
+          - MA
+          - MC
+          - MD
+          - ME
+          - MF
+          - MG
+          - MH
+          - MK
+          - ML
+          - MM
+          - MN
+          - MO
+          - MP
+          - MQ
+          - MR
+          - MS
+          - MT
+          - MU
+          - MV
+          - MW
+          - MX
+          - MY
+          - MZ
+          - NA
+          - NC
+          - NE
+          - NF
+          - NG
+          - NI
+          - NL
+          - 'NO'
+          - NP
+          - NR
+          - NU
+          - NZ
+          - OM
+          - PA
+          - PE
+          - PF
+          - PG
+          - PH
+          - PK
+          - PL
+          - PM
+          - PN
+          - PR
+          - PS
+          - PT
+          - PW
+          - PY
+          - QA
+          - RE
+          - RO
+          - RS
+          - RU
+          - RW
+          - SA
+          - SB
+          - SC
+          - SD
+          - SE
+          - SG
+          - SH
+          - SI
+          - SJ
+          - SK
+          - SL
+          - SM
+          - SN
+          - SO
+          - SR
+          - SS
+          - ST
+          - SV
+          - SX
+          - SY
+          - SZ
+          - TC
+          - TD
+          - TF
+          - TG
+          - TH
+          - TJ
+          - TK
+          - TL
+          - TM
+          - TN
+          - TO
+          - TR
+          - TT
+          - TV
+          - TW
+          - TZ
+          - UA
+          - UG
+          - UM
+          - US
+          - UY
+          - UZ
+          - VA
+          - VC
+          - VE
+          - VG
+          - VI
+          - VN
+          - VU
+          - WF
+          - WS
+          - YE
+          - YT
+          - ZA
+          - ZM
+          - ZW
+        phone:
+          type: string
+          maxLength: 25
+          description: Customer's phone number for billing address. This should be un formatted without hyphens. (e.g. 4422345678)
+        postal_code:
+          type: string
+          maxLength: 10
+          description: Customer's postal code of their billing address.
+        state:
+          type: string
+          maxLength: 35
+          description: Customer's state or province of their billing address. (e,g. Ohio = OH, Texas = TX)
+    ListDetailedAmount:
+      title: Detailed Amount
+      description: A structure that represents a breakdown all of the different amounts that may appear on a single transaction.
+      type: object
+      properties:
+        gratuity_amount:
+          title: Gratuity Amount
+          description: An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+        cashback_amount:
+          title: Cashback Amount
+          description: An optional additional amount representing the cashback associated with a payment.
+          $ref: '#/components/schemas/amountString'
+        donation_amount:
+          title: Donation Amount
+          description: An optional additional amount representing the donation associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+        tax_amount:
+          title: Tax Amount
+          description: An optional additional amount representing the tax associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+        surcharge_amount:
+          title: Surcharge Amount
+          description: An optional additional amount representing the surcharge associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+    UnauthorizedV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 401
+          default: 401
+        message:
+          type: string
+          enum:
+          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+      required:
+      - message
+    TransactionType:
+      type: string
+      description: A type indicator for the main operation or service that was performed as part of the transaction event.
+      enum:
+      - AUTHORISATION
+      - BALANCE
+      - CANCEL
+      - CAPTURE
+      - CARD_ACTIVATION
+      - CARD_DEACTIVATION
+      - CARD_VERIFICATION
+      - CASH_ADVANCE
+      - CASH_DEPOSIT
+      - DECLINED
+      - DELAYED_CHARGE
+      - EXTEND
+      - ISSUER_INSTALMENT_SELECTION
+      - LOAD
+      - NO_SHOW
+      - NON_FINANCIAL
+      - PREAUTH
+      - PREAUTH_COMPLETION
+      - PREAUTH_INCREMENT
+      - RATE
+      - REAUTHORISATION
+      - REFUND
+      - SALE
+      - UNLOAD
+      - VOID
+    TokenDetailsPartial:
+      type: object
+      properties:
+        reuse_token_type:
+          title: Reuse Token Type
+          description: 'The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.<br>
+
+            **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
+
+            '
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+          default: INTERNAL
+        reuse_token:
+          type: string
+          description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+          minLength: 14
+          maxLength: 255
+        analytics_token:
+          type: string
+          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
+    ForbiddenV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 403
+          default: 403
+        message:
+          type: string
+          enum:
+          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+      required:
+      - message
+    amountDecimal:
+      type: number
+      description: Amount including decimal place.
+    CustomerDetailsDto:
+      type: object
+      title: Customer
+      description: Customer information containing billing and shipping details.
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
+          maxLength: 120
+        first_name:
+          type: string
+          description: The first name of the Customer. This may be a proper name or some form of entity name or nickname.
+          maxLength: 100
+        middle_name:
+          type: string
+          description: The middle name of the Customer. This may be a proper name or some form of entity name or nickname.
+          maxLength: 100
+        last_name:
+          type: string
+          description: The last name or family name of the Customer.
+          maxLength: 100
+        company_name:
+          type: string
+          description: Where the Customer is an organisation or company this name should be used rather than the firstName lastName
+          maxLength: 100
+        phone_number:
+          type: string
+          description: Customers phone number for billing address.
+          maxLength: 25
+        email_address:
+          type: string
+          title: email
+          format: email
+          description: Customer email address, which might be used during refund flow.
+        shipping:
+          allOf:
+          - $ref: '#/components/schemas/CustomerDetailsShippingInformationDto'
+        billing:
+          allOf:
+          - $ref: '#/components/schemas/BillingDto'
+          - description: The address of billing.
+            title: Billing Address
+        language:
+          type: string
+          title: language
+          description: "The BCP-47 language tag. The tag is composed of:\n\n* The ISO-639 alpha-1 or ISO-639 alpha-2 language code\n\n* (Optional) The ISO-15924 script tag\n\n* The ISO-3166 alpha-2 country code\n\n `NOTE:`The value is case-insensitive, so for example \"he\" and \"HE\" should be considered equal."
+    acquirerResponseMessage:
+      description: The response description generated by the acquirer corresponding to the acquirer response code.
+      type: string
+    acquirerAuthorizingNetworkID:
+      description: The Network ID returned in the original authorization response.
+      type: string
+    PaymentProductType:
+      title: Payment Product Type
+      type: string
+      description: The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product
+      enum:
+      - Affirm
+      - Amex
+      - Crypto
+      - Diners Club International
+      - Discover
+      - JCB
+      - Klarna
+      - Maestro
+      - Mastercard
+      - OP Online Payment
+      - Swish
+      - Unknown
+      - Visa
+      default: Unknown
+    acquirerAuthorizingNetworkIdDescriptor:
+      description: The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.
+      type: string
+    GatewayTransaction:
+      type: object
+      properties:
+        id:
+          type: string
+          title: Transaction ID
+          description: The unique transaction id. This is the identifier to be used for locating the transaction and for reconciliation and auditing.
+        amount:
+          $ref: '#/components/schemas/amountString'
+        acquirer_authorizing_network_id:
+          $ref: '#/components/schemas/acquirerAuthorizingNetworkID'
+        acquirer_authorizing_network_id_descriptor:
+          $ref: '#/components/schemas/acquirerAuthorizingNetworkIdDescriptor'
+        acquirer_response_code:
+          $ref: '#/components/schemas/acquirerResponseCode'
+        acquirer_response_message:
+          $ref: '#/components/schemas/acquirerResponseMessage'
+        currency_code:
+          type: string
+          title: Currency code
+          description: Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond to ISO 4217.
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYR
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LTL
+          - LVL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRO
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STD
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - USS
+          - UYI
+          - UYU
+          - UZS
+          - VEF
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XTS
+          - XXX
+          - YER
+          - ZAR
+          - ZMK
+          - ZMW
+          - BTC
+        city:
+          type: string
+          description: The city resolved from the customer's ip address.
+        country_code:
+          type: string
+          title: <iso3166-alpha2>
+          description: The country code resolved from the customer's ip address.
+        created_at:
+          type: string
+          title: <date-time>
+          description: The time at which the transaction was created
+        customer:
+          type: string
+          description: The ID of a customer.
+        customer_ip:
+          type: string
+          title: <ipv4>
+          maxLength: 45
+          description: The IP Address v4 where the event originated.
+        dynamic_descriptor:
+          type: string
+          description: A short reference / descriptor that will show up on the customers bank statement. Please refer to the card payment integration guide for the format requirements, which are specific per card processor.
+        geo_location:
+          type: array
+          items:
+            type: string
+            description: The latitude / longitude resolved from the customer's ip address.
+        payment_product:
+          type: string
+          description: The payment product corresponding to this transaction.
+        payment_product_type:
+          $ref: '#/components/schemas/PaymentProductType'
+        processor_reference:
+          type: string
+          description: Reference identifying the transaction, as provided by the processor.
+        status:
+          title: Transaction order status
+          type: string
+          description: Display transaction type and status, including if partial, of the related order transaction. E.g. 'PARTIAL CAPTURE AUTHORIZED'.
+        transaction_type:
+          $ref: '#/components/schemas/TransactionType'
+        transaction_status:
+          $ref: '#/components/schemas/TransactionState'
+        parent_id:
+          title: Related Transaction ID
+          type: string
+          description: The transaction id of a parent transaction, where the current transaction is an action based on a previous transactions.
+        reason_code:
+          type: string
+          description: A reason code assigned by the acquiring platform; '0000' in case of success.
+          maxLength: 4
+        card_brand:
+          $ref: '#/components/schemas/CardBrand'
+        shipping_information:
+          allOf:
+          - $ref: '#/components/schemas/ShippingInformation'
+          - title: Shipping Address
+            description: 'The address where the purchased goods should be delivered to.
+
+              <br><b>Please use customer_details.shipping.</b>'
+            deprecated: true
+        customer_details:
+          allOf:
+          - $ref: '#/components/schemas/CustomerDetailsDto'
+        merchant_reference:
+          type: string
+          title: Merchant reference
+          description: A reference specified by the merchant to identify the transaction.
+          maxLength: 50
+        user_agent:
+          type: string
+          description: The full user agent string of the device the customer used to submit the transaction.
+        arn:
+          type: string
+          title: Acquirer reference number
+          description: Acquirer reference number. Generated by the Acquirer at the time of clearing for card transactions.
+        authorization_code:
+          type: string
+          description: An authorization code assigned by the processing platform.
+        avs_result:
+          type: string
+          description: Address verification services result, which provides information about the outcome of the AVS check. The full list of codes and descriptions can be found <a href="https://docs.verifone.com/online-payments/fraud-management/address-verification-service-avs">here</a>
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+          - I
+          - K
+          - L
+          - M
+          - N
+          - O
+          - P
+          - R
+          - S
+          - T
+          - U
+          - W
+          - X
+          - Y
+          - Z
+        created_by:
+          type: string
+          description: The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order.
+        cvv_present:
+          type: boolean
+          description: True if the card was used with a cvv.
+        cvv_result:
+          type: string
+          description: CVV verification result, as returned by the processor. Refer to Key Concepts->Cards for understanding of the values.
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+        processor_payer_id:
+          type: string
+          title: Processor Payer Id
+          description: This is the id used by the processor (e.g. an APM provider) for the payer.
+        pos_device_id:
+          type: string
+          description: dentifier of the POS device used for the transaction.
+        rrn:
+          type: string
+          title: Retrieval Reference Number
+          description: Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system.
+        shopper_interaction:
+          type: string
+          description: 'Determines the point of sale of a customer. Possible values: pos, moto, mail_order, telephone_order, ecommerce and cont_auth.'
+          enum:
+          - ecommerce
+          - pos
+          - moto
+          - mail_order
+          - telephone_order
+          - unknown
+        stan:
+          type: string
+          maxLength: 40
+          title: System Trace Audit Number.
+          description: A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI. ISO8583 DE11.
+        threed_authentication:
+          allOf:
+          - $ref: '#/components/schemas/ThreeDSecure'
+          - description: MPI authentication data. Please refer to the integration guide for information on its usage.
+        masked_card_number:
+          type: string
+          title: Masked PAN number
+          description: Masked PAN number, the first 6 and last 4 digits of the card.
+          maxLength: 16
+        promo_code:
+          type: string
+          description: A code defined by the merchant that affects the calculation of the total amount.
+        payment_summary:
+          type: object
+          title: Summary of payment flow related information
+          properties:
+            captured_amount:
+              allOf:
+              - title: Captured Amount
+              - $ref: '#/components/schemas/amountString'
+        token_details:
+          allOf:
+          - $ref: '#/components/schemas/TokenDetailsPartial'
+            description: This object is returned as the response to a request for Create/Update Token.
+        entity_id:
+          type: string
+          description: The identifier of merchant entity you want to process the transaciton is already processed.
+          format: uuid-flexible
+        acquirer_merchant_id:
+          type: string
+          description: The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor.
+          maxLength: 36
+        description:
+          type: string
+          description: The description/message associated with this transaction. This will contain the refund reason for refunds.
+        detailed_amount:
+          $ref: '#/components/schemas/ListDetailedAmount'
+    CustomerDetailsShippingInformationDto:
+      type: object
+      additionalProperties: false
+      description: The address where the purchased goods should be delivered to.
+      title: Shipping Address
+      properties:
+        address:
+          type: string
+          maxLength: 300
+          description: Street address of the recipient.
+        city:
+          type: string
+          maxLength: 28
+          description: City of the recipient.
+        country:
+          type: string
+          maxLength: 2
+          minLength: 2
+          format: country-code
+          description: A 2-letter ISO3166 alpha-2 country code for the address.
+        postal_code:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: A postal code for the address.
+        email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        first_name:
+          type: string
+          maxLength: 100
+          description: First name of the recipient.
+        last_name:
+          type: string
+          maxLength: 100
+          description: Last name of the recipient.
+        phone:
+          type: string
+          maxLength: 18
+          description: Telephone number.
+        state:
+          type: string
+          maxLength: 35
+          description: A region / state / province for the address.
+      required:
+      - address
+      - city
+      - country
+      - postal_code
+    CountTransactionResponse:
+      type: object
+      properties:
+        count:
+          type: number
+          title: Transaction count
+          description: count of transaction
+    NotFoundV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 404
+          default: 404
+        message:
+          type: string
+          enum:
+          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+      required:
+      - message
+    InternalErrorV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 500
+          default: 500
+        message:
+          type: string
+          enum:
+          - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+          default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+      required:
+      - message
+    BadRequestV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 400
+          default: 400
+        message:
+          type: string
+          enum:
+          - 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+          default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+      required:
+      - message
+    GatewayTransactions:
+      type: object
+      properties:
+        id:
+          type: string
+          title: Transaction ID
+          description: The unique transaction id. This is the identifier to be used for locating the transaction and for reconciliation and auditing.
+        amount:
+          $ref: '#/components/schemas/amountDecimal'
+        acquirer_authorizing_network_id:
+          $ref: '#/components/schemas/acquirerAuthorizingNetworkID'
+        acquirer_authorizing_network_id_descriptor:
+          $ref: '#/components/schemas/acquirerAuthorizingNetworkIdDescriptor'
+        acquirer_response_code:
+          $ref: '#/components/schemas/acquirerResponseCode'
+        acquirer_response_message:
+          $ref: '#/components/schemas/acquirerResponseMessage'
+        currency_code:
+          type: string
+          title: Currency code
+          description: Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond to ISO 4217.
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYR
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LTL
+          - LVL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRO
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STD
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - USS
+          - UYI
+          - UYU
+          - UZS
+          - VEF
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XTS
+          - XXX
+          - YER
+          - ZAR
+          - ZMK
+          - ZMW
+          - BTC
+        city:
+          type: string
+          description: The city resolved from the customer's ip address.
+        country_code:
+          type: string
+          title: <iso3166-alpha2>
+          description: The country code resolved from the customer's ip address.
+        created_at:
+          type: string
+          title: <date-time>
+          description: The time at which the transaction was created
+        customer:
+          type: string
+          description: The ID of a customer.
+        customer_ip:
+          type: string
+          title: <ipv4>
+          maxLength: 45
+          description: The IP Address v4 where the event originated.
+        dynamic_descriptor:
+          type: string
+          description: A short reference / descriptor that will show up on the customers bank statement. Please refer to the card payment integration guide for the format requirements, which are specific per card processor.
+        geo_location:
+          type: array
+          items:
+            type: string
+            description: The latitude / longitude resolved from the customer's ip address.
+        payment_account_reference:
+          type: string
+          description: Payment Account Reference is a unique non-sensitive reference to the cardholder PAN.
+        payment_product:
+          type: string
+          description: The payment product corresponding to this transaction.
+        payment_product_type:
+          $ref: '#/components/schemas/PaymentProductType'
+        processor_reference:
+          type: string
+          description: Reference identifying the transaction, as provided by the processor.
+        status:
+          title: Transaction order status
+          type: string
+          description: Display transaction type and status, including if partial, of the related order transaction. E.g. 'PARTIAL CAPTURE AUTHORIZED'.
+        transaction_type:
+          $ref: '#/components/schemas/TransactionType'
+        transaction_status:
+          $ref: '#/components/schemas/TransactionState'
+        parent_id:
+          title: Related Transaction ID
+          type: string
+          description: The transaction id of a parent transaction, where the current transaction is an action based on a previous transactions.
+        reason_code:
+          type: string
+          description: A reason code assigned by the acquiring platform; '0000' in case of success.
+          maxLength: 4
+        card_brand:
+          $ref: '#/components/schemas/CardBrand'
+        shipping_information:
+          allOf:
+          - $ref: '#/components/schemas/ShippingInformation'
+          - title: Shipping Address
+            description: 'The address where the purchased goods should be delivered to.
+
+              <br><b>Please use customer_details.shipping.</b>'
+            deprecated: true
+        customer_details:
+          allOf:
+          - $ref: '#/components/schemas/CustomerDetailsDto'
+        merchant_reference:
+          type: string
+          title: Merchant reference
+          description: A reference specified by the merchant to identify the transaction.
+          maxLength: 50
+        user_agent:
+          type: string
+          description: The full user agent string of the device the customer used to submit the transaction.
+        arn:
+          type: string
+          title: Acquirer reference number
+          description: Acquirer reference number. Generated by the Acquirer at the time of clearing for card transactions.
+        authorization_code:
+          type: string
+          description: An authorization code assigned by the processing platform.
+        avs_result:
+          type: string
+          description: Address verification services result, which provides information about the outcome of the AVS check. The full list of codes and descriptions can be found <a href="https://docs.verifone.com/online-payments/fraud-management/address-verification-service-avs">here</a>
+          enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+          - I
+          - K
+          - L
+          - M
+          - N
+          - O
+          - P
+          - R
+          - S
+          - T
+          - U
+          - W
+          - X
+          - Y
+          - Z
+        created_by:
+          type: string
+          description: The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order.
+        cvv_present:
+          type: boolean
+          description: True if the card was used with a cvv.
+        cvv_result:
+          type: string
+          description: CVV verification result, as returned by the processor. Refer to Key Concepts->Cards for understanding of the values.
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+        processor_payer_id:
+          type: string
+          title: Processor Payer Id
+          description: This is the id used by the processor (e.g. an APM provider) for the payer.
+        pos_device_id:
+          type: string
+          description: dentifier of the POS device used for the transaction.
+        rrn:
+          type: string
+          title: Retrieval Reference Number
+          description: Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system.
+        shopper_interaction:
+          type: string
+          description: 'Determines the point of sale of a customer. Possible values: pos, moto, mail_order, telephone_order, ecommerce and cont_auth.'
+          enum:
+          - ecommerce
+          - pos
+          - moto
+          - mail_order
+          - telephone_order
+          - unknown
+        stan:
+          type: string
+          maxLength: 40
+          title: System Trace Audit Number.
+          description: A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI. ISO8583 DE11.
+        threed_authentication:
+          allOf:
+          - $ref: '#/components/schemas/ThreeDSecure'
+          - description: MPI authentication data. Please refer to the integration guide for information on its usage.
+        masked_card_number:
+          type: string
+          title: Masked PAN number
+          description: Masked PAN number, the first 6 and last 4 digits of the card.
+          maxLength: 16
+        promo_code:
+          type: string
+          description: A code defined by the merchant that affects the calculation of the total amount.
+        payment_summary:
+          type: object
+          title: Summary of payment flow related information
+          properties:
+            captured_amount:
+              allOf:
+              - title: Captured Amount
+              - $ref: '#/components/schemas/amountDecimal'
+        entity_id:
+          type: string
+          description: The identifier of merchant entity you want to process the transaciton is already processed.
+          format: uuid-flexible
+        acquirer_merchant_id:
+          type: string
+          description: The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor.
+          maxLength: 36
+        description:
+          type: string
+          description: The description/message associated with this transaction. This will contain the refund reason for refunds.
+        detailed_amount:
+          $ref: '#/components/schemas/ListDetailedAmount'
+    acquirerResponseCode:
+      description: Acquirer response returned during the authorisation.
+      type: string
+      maxLength: 4
+    CardBrand:
+      type: string
+      title: The Card Type
+      description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards."
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

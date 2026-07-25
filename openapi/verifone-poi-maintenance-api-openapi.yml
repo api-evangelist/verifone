@@ -1,0 +1,566 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication POI Maintenance API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: POI Maintenance
+paths:
+  /pois/{poiUid}:
+    delete:
+      tags:
+      - POI Maintenance
+      summary: Delete a Single POI
+      description: 'Deletes a POI.
+
+
+        **forceDelete=false (default)**
+
+        Deletion fails with 400 if the POI is ACTIVE. The POI must be
+
+        INACTIVE before calling this endpoint.
+
+
+        **forceDelete=true**
+
+        An ACTIVE POI is automatically inactivated before deletion. If already
+
+        INACTIVE, deletion proceeds directly.
+
+        Returns 400 if the inactivation step fails; the POI is not deleted.'
+      operationId: deletePoi
+      parameters:
+      - $ref: '#/components/parameters/forceDeleteQueryParam'
+      responses:
+        '204':
+          description: The Poi was successfully deleted.
+          headers:
+            orderId:
+              schema:
+                $ref: '#/components/schemas/OrderId'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+components:
+  schemas:
+    httpError401:
+      title: HTTP 401 Error
+      type: object
+      description: The request must be authenticated to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '401'
+            default: '401'
+          title:
+            type: string
+            enum:
+            - Unauthorised
+            default: Unauthorised
+          message:
+            type: string
+            default: The request requires client authentication.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    OrderId:
+      description: Verifone allocated ID for the Order.
+      type: string
+      format: uuid
+    httpError404:
+      title: HTTP 404 Error
+      type: object
+      description: The server cannot find the requested resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '404'
+            default: '404'
+          title:
+            type: string
+            enum:
+            - Not Found
+            default: Not Found
+          message:
+            type: string
+            default: The server cannot find the requested resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError503:
+      title: HTTP 503 Error
+      type: object
+      description: Service Unavailable Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '503'
+            default: '503'
+          title:
+            type: string
+            enum:
+            - Service Unavailable
+            default: Service Unavailable
+          message:
+            type: string
+            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError429:
+      title: HTTP 429 Error
+      type: object
+      description: The resource exists the number of requests has exceeded the specified quota.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '429'
+            default: '429'
+          title:
+            type: string
+            enum:
+            - Too Many Requests
+            default: Too Many Requests
+          message:
+            type: string
+            default: The number of requests from this client is restricted to a specified quota.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - RATE_LIMIT_ERROR
+            default: RATE_LIMIT_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError500:
+      title: HTTP 500 Error
+      type: object
+      description: Unexpected Server Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '500'
+            default: '500'
+          title:
+            type: string
+            enum:
+            - Internal Server Error
+            default: Internal Server Error
+          message:
+            type: string
+            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError400:
+      title: HTTP 400 Error
+      type: object
+      description: The request could not be understood by the server due to malformed syntax.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '400'
+            default: '400'
+          title:
+            type: string
+            enum:
+            - Bad Request
+            default: Bad Request
+          message:
+            type: string
+            default: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError504:
+      title: HTTP 504 Error
+      type: object
+      description: Gateway Timeout Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '504'
+            default: '504'
+          title:
+            type: string
+            enum:
+            - Gateway Timeout
+            default: Gateway Timeout
+          message:
+            type: string
+            default: The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    ErrorResp:
+      title: Error
+      description: 'A common Error object returned as part of the API layer.
+
+
+        . This is modified to become the base class for all of the derived HTTP Error Responses.'
+      type: object
+      properties:
+        reversalStatus:
+          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
+
+
+            |Value|Description|
+
+            |-|-|
+
+            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
+
+            |REQUIRED|A reversal is required by the client.|
+
+            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+          default: NONE
+      required:
+      - code
+    httpError403:
+      title: HTTP 403 Error
+      type: object
+      description: The request must be authorised to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '403'
+            default: '403'
+          title:
+            type: string
+            enum:
+            - Forbidden
+            default: Forbidden
+          message:
+            type: string
+            default: The request requires client authorisation to access resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+  responses:
+    '401':
+      description: Unauthorised Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError401'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError400'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '404':
+      description: Not Found Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError404'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '429':
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError429'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '504':
+      description: Service Timeout
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError504'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '500':
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError500'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '403':
+      description: Forbidden Request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError403'
+    '503':
+      description: Service Not Available
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError503'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

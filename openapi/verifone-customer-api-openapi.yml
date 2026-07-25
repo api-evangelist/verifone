@@ -1,0 +1,611 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Customer API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Customer
+  description: Operations for creating, retrieving, updating, and deleting customer records.
+paths:
+  /v2/customer:
+    get:
+      tags:
+      - Customer
+      summary: List Customers
+      operationId: getV2Customer
+      parameters:
+      - name: search
+        in: query
+        required: true
+        description: "A filter query in [RSQL format](https://aboullaite.me/rsql/) to retrieve customers. The returned\ncustomers are limited to those that can be retrieved by the user.\n\n**Filterable fields:**\n\n| Criteria | Type | Operators |\n|---|---|---|\n| billing.address_1 | string | ==, !=, =in=, =out=, =regex= |\n| billing.address_2 | string | ==, !=, =in=, =out=, =regex= |\n| billing.address_3 | string | ==, !=, =in=, =out=, =regex= |\n| billing.city | string | ==, !=, =in=, =out=, =regex= |\n| billing.country_code | string | ==, !=, =in=, =out=, =regex= |\n| billing.first_name | string | ==, !=, =in=, =out=, =regex= |\n| billing.middle_name | string | ==, !=, =in=, =out=, =regex= |\n| billing.last_name | string | ==, !=, =in=, =out=, =regex= |\n| billing.phone | string | ==, !=, =in=, =out=, =regex= |\n| billing.postal_code | string | ==, !=, =in=, =out=, =regex= |\n| billing.state | string | ==, !=, =in=, =out=, =regex= |\n| company_name | string | ==, !=, =in=, =out=, =regex= |\n| company_registration_number | string | ==, !=, =in=, =out=, =regex= |\n| email_address | string | ==, !=, =in=, =out=, =regex= |\n| entity_id | string | ==, !=, =in=, =out=, =regex= |\n| id | string | ==, !=, =in=, =out=, =regex= |\n| phone_number | string | ==, !=, =in=, =out=, =regex= |\n| shipping.address_1 | string | ==, !=, =in=, =out=, =regex= |\n| shipping.address_2 | string | ==, !=, =in=, =out=, =regex= |\n| shipping.address_3 | string | ==, !=, =in=, =out=, =regex= |\n| shipping.city | string | ==, !=, =in=, =out=, =regex= |\n| shipping.country_code | string | ==, !=, =in=, =out=, =regex= |\n| shipping.first_name | string | ==, !=, =in=, =out=, =regex= |\n| shipping.middle_name | string | ==, !=, =in=, =out=, =regex= |\n| shipping.last_name | string | ==, !=, =in=, =out=, =regex= |\n| shipping.phone | number | ==, !=, =in=, =out=, =gt=, =ge=, =lt=, =le= |\n| shipping.postal_code | string | ==, !=, =in=, =out=, =regex= |\n| shipping.state | string | ==, !=, =in=, =out=, =regex= |\n| title | string | ==, !=, =in=, =out=, =regex= |\n| work_phone | string | ==, !=, =in=, =out=, =regex= |\n| tax.identifier | string | ==, !=, =in=, =out=, =regex= |\n| created_at | date | ==, !=, =in=, =out=, =gt=, =ge=, =lt=, =le= |\n| updated_at | date | ==, !=, =in=, =out=, =gt=, =ge=, =lt=, =le= |\n| language | string | ==, !=, =in=, =out=, =regex= |\n\n**Operators:**\n\n| Operator | Description |\n|---|---|\n| == | equal |\n| != | not equal |\n| =lt= | less than |\n| =le= | less than and equal to |\n| =gt= | greater than |\n| =ge= | greater than and equal to |\n| =regex= | pattern matching |\n| =in= | multiple arguments search |\n| =out= | exclude |\n| **;** | Logical AND |\n| **,** | Logical OR |\n\n**Note:** Logical AND (`;`) has higher precedence than Logical OR (`,`). Use parentheses `()` to\noverride operator precedence.\n\n**Examples:**\n\n    /v2/customer?search=id==123&order_by=ASC&order_criteria=email_address&page_size=1&page_number=2\n\n    /v2/customer?search=id==123435&order_by=DESC&order_criteria=billing.address_1&page_size=10&page_number=1\n\n    /v2/customer?search=id==dg373&order_by=ASC&order_criteria=company_name&page_size=1&page_number=2"
+        schema:
+          type: string
+      - name: order_criteria
+        in: query
+        description: 'The field to order results by. If not specified, results are ordered by created date.
+
+
+          Allowed values: `billing.address_1`, `billing.address_2`, `billing.address_3`, `billing.city`,
+
+          `billing.country_code`, `billing.first_name`, `billing.middle_name`, `billing.last_name`,
+
+          `billing.phone`, `billing.postal_code`, `billing.state`, `company_name`,
+
+          `company_registration_number`, `email_address`, `entity_id`, `id`, `phone_number`,
+
+          `shipping.address_1`, `shipping.address_2`, `shipping.address_3`, `shipping.city`,
+
+          `shipping.country_code`, `shipping.first_name`, `shipping.last_name`, `shipping.phone`,
+
+          `shipping.postal_code`, `shipping.state`, `title`, `work_phone`, `tax.identifier`, `created_at`'
+        schema:
+          type: string
+      - name: order_by
+        in: query
+        description: The sort direction. Defaults to `DESC` if not specified.
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      - name: page_number
+        in: query
+        description: Page number to retrieve. Defaults to `1` if not specified.
+        schema:
+          minimum: 1
+          type: integer
+      - name: page_size
+        in: query
+        description: Number of results per page. Defaults to `50` if not specified.
+        schema:
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Customer
+      summary: Create Customer
+      operationId: postV2Customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v2/customer/{customerId}:
+    get:
+      tags:
+      - Customer
+      summary: Get Customer
+      operationId: getV2CustomerById
+      parameters:
+      - name: customerId
+        in: path
+        description: Customer UUID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Customer
+      summary: Update Customer
+      operationId: postV2CustomerById
+      parameters:
+      - name: customerId
+        in: path
+        description: Customer UUID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - Customer
+      summary: Delete Customer
+      operationId: deleteV2CustomerById
+      parameters:
+      - name: customerId
+        in: path
+        description: Customer UUID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: Customer successfully deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Tax:
+      type: object
+      properties:
+        identifier:
+          pattern: ^[0-9]+$
+          type: string
+          maxLength: 9
+          description: 'An optional identifier of the document recipient:
+
+
+            - Personal ID (for individuals)
+
+            - Tax identification number (for businesses)'
+    Billing:
+      type: object
+      properties:
+        address_1:
+          maxLength: 40
+          type: string
+          description: 'Customer''s primary billing address information.
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        address_2:
+          maxLength: 40
+          type: string
+          description: Customer's secondary billing address information.
+        address_3:
+          maxLength: 40
+          type: string
+          description: Customer's third billing address information.
+        city:
+          maxLength: 28
+          type: string
+          description: 'Customer''s city on their billing address.
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        country_code:
+          type: string
+          description: 'Customer''s alpha-2 ISO 3166 country code (e.g. `US` for United States).
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        first_name:
+          maxLength: 22
+          type: string
+          description: 'Customer''s first name. **Required** when `company_name` is not provided.
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        middle_name:
+          maxLength: 22
+          type: string
+          description: Customer's middle name.
+        last_name:
+          maxLength: 22
+          type: string
+          description: 'Customer''s last name. **Required** when `company_name` is not provided.
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        phone:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Customer's phone number for the billing address.
+        postal_code:
+          maxLength: 10
+          type: string
+          description: 'Customer''s postal code for their billing address.
+
+
+            **Note:** Required for 3DS unless a market or regional mandate restricts sending this information.'
+        state:
+          maxLength: 35
+          type: string
+          description: Customer's state or province for their billing address (e.g. `OH` for Ohio, `TX` for Texas).
+    CustomerRequest:
+      required:
+      - entity_id
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/Billing'
+        company_name:
+          maxLength: 100
+          type: string
+          description: Company name of the customer. **Required** when `billing.first_name` and `billing.last_name` are not provided.
+        company_registration_number:
+          maxLength: 24
+          type: string
+          description: Unique identifier of the company recognised by the government. Known as CoC (Chamber of Commerce) number in some countries.
+        email_address:
+          maxLength: 255
+          type: string
+          format: email
+          description: 'Consumer''s email address.
+
+
+            **Field required for:** Klarna, PayPal
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        entity_id:
+          type: string
+          description: Entity ID on which the customer is created. The Entity ID can be found at the organisation level as Organisation ID (`Administration > Organizations > [Organization] > Organisation ID`).
+        phone_number:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Cardholder's phone number.
+        shipping:
+          $ref: '#/components/schemas/Shipping'
+        title:
+          pattern: ^[a-zA-Z\-\s.]+$
+          maxLength: 120
+          type: string
+          description: Customer's title (e.g. `Mr`, `Mrs`, `Dr`).
+        work_phone:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Consumer's work phone number.
+        tax:
+          $ref: '#/components/schemas/Tax'
+        language:
+          type: string
+          description: Customer language preference for Invoice documents. See [Localisation](https://docs.verifone.com/online-payments/checkout/localization) for details.
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: A 3-digit code that uniquely identifies the error.
+        details:
+          type: object
+          description: Additional error details.
+        message:
+          type: string
+          description: A human-readable description of the error.
+        timestamp:
+          type: integer
+          description: Unix timestamp of when the error occurred.
+    CustomerResponse:
+      required:
+      - created_at
+      - entity_id
+      - id
+      - updated_at
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID.
+        billing:
+          $ref: '#/components/schemas/Billing'
+        company_name:
+          maxLength: 100
+          type: string
+          description: Company name of the customer. **Required** when `billing.first_name` and `billing.last_name` are not provided.
+        company_registration_number:
+          maxLength: 24
+          type: string
+          description: Unique identifier of the company recognised by the government. Known as CoC (Chamber of Commerce) number in some countries.
+        email_address:
+          maxLength: 255
+          type: string
+          format: email
+          description: 'Consumer''s email address.
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        entity_id:
+          type: string
+          description: Entity ID on which the customer is created.
+        phone_number:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Cardholder's phone number.
+        shipping:
+          $ref: '#/components/schemas/Shipping'
+        title:
+          pattern: ^[a-zA-Z\-\s.]+$
+          maxLength: 120
+          type: string
+          description: Customer's title (e.g. `Mr`, `Mrs`, `Dr`).
+        work_phone:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Consumer's work phone number.
+        tax:
+          $ref: '#/components/schemas/Tax'
+        language:
+          type: string
+          description: Customer language preference for Invoice documents. See [Localisation](https://docs.verifone.com/online-payments/checkout/localization) for details.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this customer was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this customer was last updated.
+    Shipping:
+      type: object
+      properties:
+        address_1:
+          maxLength: 40
+          type: string
+          description: 'Consumer''s primary shipping address information.
+
+
+            **Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish'
+        address_2:
+          maxLength: 40
+          type: string
+          description: 'Consumer''s secondary shipping address information.
+
+
+            **Field required for:** PayPal'
+        address_3:
+          maxLength: 40
+          type: string
+          description: Consumer's third shipping address information.
+        city:
+          maxLength: 28
+          type: string
+          description: 'Consumer''s city on their shipping address.
+
+
+            **Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish'
+        first_name:
+          maxLength: 22
+          type: string
+          description: 'Consumer''s first name.
+
+
+            **Field required for:** Klarna, Vipps, MobilePay'
+        middle_name:
+          maxLength: 22
+          type: string
+          description: Consumer's middle name.
+        last_name:
+          maxLength: 22
+          type: string
+          description: 'Consumer''s last name.
+
+
+            **Field required for:** Klarna, Vipps, MobilePay'
+        phone:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: 'Consumer''s phone number for the shipping address.
+
+
+            **Field required for:** Klarna, PayPal, Vipps, MobilePay'
+        country_code:
+          type: string
+          description: 'Consumer''s alpha-2 ISO 3166 country code (e.g. `US` for United States).
+
+
+            **Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish'
+        postal_code:
+          maxLength: 10
+          type: string
+          description: 'Consumer''s postal code for their shipping address.
+
+
+            **Field required for:** Klarna, PayPal, Vipps, MobilePay, Google Pay, Apple Pay, Affirm, Swish'
+        state:
+          maxLength: 35
+          type: string
+          description: 'Consumer''s state or province for their shipping address (e.g. `OH` for Ohio, `TX` for Texas).
+
+
+            **Field required for:** Klarna, PayPal'
+    CustomerListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

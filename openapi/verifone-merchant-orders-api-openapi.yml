@@ -1,0 +1,3281 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Merchant Orders API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Merchant Orders
+  description: Operations to manage merchant orders.
+paths:
+  /orders/merchant:
+    post:
+      tags:
+      - Merchant Orders
+      summary: Create Merchant Order
+      description: Adds a new merchant to the system and optionally allows for ordering hardware and services.
+      operationId: addMerchantDraft
+      parameters:
+      - $ref: '#/components/parameters/saveDraftHeaderParam'
+      - $ref: '#/components/parameters/validateAcquirerHeaderParam'
+      - $ref: '#/components/parameters/validateACHHeaderParam'
+      - $ref: '#/components/parameters/validateCompanyIdentityHeaderParam'
+      - $ref: '#/components/parameters/SimplifiedFlowHeaderParam'
+      requestBody:
+        description: Merchant to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantOrder'
+      responses:
+        '200':
+          description: Create Merchant Order Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantOrderResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+components:
+  schemas:
+    DomesticAccount:
+      title: Domestic Bank Account
+      description: A Domestic Bank Account structure extending the base account.
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - properties:
+          accountName:
+            description: Name of the account as known by the financial institution operating the account.
+            type: string
+          sortCode:
+            description: The UK Sorting Code identifier the sort code is xx xx xx.
+            type: string
+            pattern: ^[0-9]{6,6}$
+          bsb:
+            description: An Australian/New Zealand term for the Bank State Branch indicator. It is a 6 digit value constructed with the first 2 digits identifying the bank.
+            type: string
+            pattern: ^[0-9]{6,6}$
+          routingTransitNumber:
+            type: string
+            description: Routing transit number for the bank account. A routing transit number is a nine-digit number used to identify a bank or financial institution when clearing funds or processing checks. Established by the American Bankers Association (ABA).
+            pattern: ^[0-9]{9,9}$
+          accountNumberType:
+            description: "The type of the `accountNumber` which asserts the format of the number:\n - `BANKGIRIT`: Up to 9 characters (example: 123-4567 or 1234-5678)\n - `PLUSGIROT`: Up to 24 characters; starts with \"SE50\"\n - `DEFAULT`: Format-less value"
+            type: string
+            enum:
+            - BANKGIROT
+            - PLUSGIROT
+            - DEFAULT
+            default: DEFAULT
+          accountNumber:
+            description: The number of the account.
+            type: string
+    AmountSimple:
+      title: Amount Simple Type
+      type: string
+      description: 'The value, which can be anything from:
+
+        - An integer. For currencies that are not typically fractional, such as `JPY`. - A three-place decimal fraction. For currencies that are subdivided into thousandths, such as `TND`.
+
+        *The required number of decimal places for a currency code is according to [ISO 4217](https://wikipedia.org/wiki/ISO_4217). However the following table documents exception to ISO 4217 that is also allowed:*
+
+
+        |Code|Currency|Decimals|Fixed minor units|
+
+        |--------|-----------|---------|-----------|
+
+        |ISK|Iceland Krona|2|.00|
+
+        '
+      maxLength: 32
+      pattern: ^((-?[0-9]+)|(-?([0-9]+)?[.][0-9]+))$
+    TerminalParameters:
+      title: Parameters
+      description: Deprecated - Please use `paymentAppParameters`.
+      type: object
+      deprecated: true
+      properties:
+        transactionOptions:
+          $ref: '#/components/schemas/TransactionOptions'
+        limits:
+          $ref: '#/components/schemas/TransactionLimits'
+        receiptOptions:
+          $ref: '#/components/schemas/ReceiptOptions'
+        tipOptions:
+          $ref: '#/components/schemas/TipOptions'
+    EmailAddress:
+      title: Email Address
+      maxLength: 254
+      minLength: 3
+      type: string
+      format: email
+      pattern: ^[a-zA-Z0-9!#$%&'*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+[.].+$
+      description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+    SigningInformation:
+      description: Information on the signing request.
+      type: object
+      properties:
+        provider:
+          type: string
+          description: Signing Provider used
+          enum:
+          - SIGNICAT
+          - ADOBE
+          - DOKOBIT
+        providerRef:
+          type: string
+          description: Signing Provider reference to the signing request
+        signedFileUrl:
+          type: string
+          description: URL to the signed file
+        signingRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignersInformation'
+      required:
+      - provider
+      - providerRef
+    httpError500:
+      title: HTTP 500 Error
+      type: object
+      description: Unexpected Server Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '500'
+            default: '500'
+          title:
+            type: string
+            enum:
+            - Internal Server Error
+            default: Internal Server Error
+          message:
+            type: string
+            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    ContactTypeEnum:
+      title: Contact Type
+      description: 'An indicator for the type of contact.
+
+
+        |Value|Description|
+
+        |----|-----------|
+
+        |BUSINESS|Generic business contact information, e.g. info@example.com|
+
+        |DISPUTE_HANDLING|Generic contact information specific to dispute handling, e.g. disputes@example.com|
+
+        |OWNER|Individual contact information of the owner of the Entity, e.g. ben.jerry@example.com|
+
+        |PERSONAL|Personal contact information of the person representing the Entity, e.g. bjerr83@example-personal-email-domain.com|'
+      type: string
+      enum:
+      - BUSINESS
+      - DISPUTE_HANDLING
+      - OWNER
+      - PERSONAL
+      default: BUSINESS
+    OrderId:
+      description: Verifone allocated ID for the Order.
+      type: string
+      format: uuid
+    ExternalOnboarding:
+      description: External merchant onboarding details
+      type: object
+      discriminator:
+        propertyName: provider
+        mapping:
+          BANKAXEPT: '#/components/schemas/BankAxeptExternalOnboarding'
+      properties:
+        provider:
+          title: External Onboarding Provider
+          description: The third-party provider used for merchant onboarding.
+          type: string
+          enum:
+          - BANKAXEPT
+          default: BANKAXEPT
+        agreementId:
+          type: string
+          format: uuid
+          description: 'Agreement or onboarding order identifier returned by the third-party provider when onboarding is initiated.
+
+            '
+        agreementStatus:
+          type: string
+          description: 'Latest onboarding or agreement status received from the third-party provider.
+
+            '
+    PackageBundleId:
+      description: The Verifone allocated ID for the package bundle.
+      type: string
+      pattern: ^[A-Za-z0-9_-]*$
+      maxLength: 100
+    MerchantOrderResponse:
+      allOf:
+      - $ref: '#/components/schemas/MerchantOrder'
+      - properties:
+          orderId:
+            $ref: '#/components/schemas/OrderId'
+          status:
+            $ref: '#/components/schemas/OrderStatusEnum'
+          createdUserUid:
+            $ref: '#/components/schemas/CreatedUserId'
+          createdBy:
+            $ref: '#/components/schemas/UserName'
+          createdDate:
+            type: string
+            description: The created date for this order.
+            format: date-time
+          modifiedUserUid:
+            description: The assigned User_ID corresponding to the Order Modified By.
+            type: string
+            format: uuid
+          modifiedBy:
+            $ref: '#/components/schemas/UserName'
+          modifiedDate:
+            type: string
+            description: The last modified date for this order.
+            format: date-time
+          orderType:
+            type: string
+            default: MerchantOrder
+          entityUid:
+            $ref: '#/components/schemas/EntityUid'
+          merchantCompanyEntityUid:
+            $ref: '#/components/schemas/MerchantCompanyEntityUid'
+          merchantCompanyGroupEntityUid:
+            description: For Group Feature, `entityType = MERCHANT_COMPANY_GROUP``.
+            type: string
+            format: uuid
+          internal:
+            $ref: '#/components/schemas/InternalAllocatedInformationNewCompanyAndSite'
+      required:
+      - orderId
+      - status
+      - orderType
+      - entityUid
+      - merchantCompanyEntityUid
+    CardProductSurcharge:
+      description: Surcharging settings
+      type: object
+      properties:
+        ProductId:
+          type: string
+          description: Link to the card product which this surcharge applies to. Contact Verifone for card products applicable to your estate.
+          pattern: ^.*$
+          minLength: 0
+          maxLength: 150
+        SurchargeType:
+          description: 'Surcharge Type (Domestic)
+
+
+            0 - Not configured
+
+
+            1 - Fixed Amount
+
+
+            2 - Percentage'
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-2]'
+        SurchargeValue:
+          description: Specifies the value of the surcharge depending on the surcharge type. Can be a fixed value (eg 2.5 = $2.50) or a percentage (eg 1.2 = 1.2%).
+          type: string
+          minLength: 1
+          maxLength: 150
+          pattern: ^[0-9]+(\.[0-9]{1,2})?$
+        MaxSurchargeAdjAmount:
+          description: Applicable only when Surcharge Type is Percentage. Amount is in default Terminal currency, represented as a decimal number. Specifies the maximum surcharge amount; if the calculated surcharge is above this value, the Surcharge Max Adjustment amount will be applied instead.
+          type: string
+          minLength: 1
+          maxLength: 15
+          pattern: ^[0-9]+(\.[0-9]{1,2})?$
+          default: '0'
+        MinSurchargeAdjAmount:
+          description: Applicable only when Surcharge Type is Percentage. Amount is in default Terminal currency, represented as a decimal number. Specifies the minimum surcharge amount; if the calculated surcharge is below this value, the Surcharge Min Adjustment amount will be applied instead.
+          type: string
+          minLength: 1
+          maxLength: 15
+          pattern: ^[0-9]+(\.[0-9]{1,2})?$
+          default: '0'
+        MaxSurchargeableAmount:
+          description: Amount is in default Terminal currency, represented as a decimal number. When the transaction amount is above this maximum, no surcharge will be applied.
+          type: string
+          minLength: 1
+          maxLength: 15
+          pattern: ^[0-9]+(\.[0-9]{1,2})?$
+          default: '0'
+        MinSurchargeableAmount:
+          description: Amount is in default Terminal currency, represented as a decimal number. When the transaction amount is below this minimum, no surcharge will be applied.
+          type: string
+          minLength: 1
+          maxLength: 15
+          pattern: ^[0-9]+(\.[0-9]{1,2})?$
+          default: '0'
+        UseDomesticConfigForInternational:
+          description: When enabled (true), surcharging of transactions that utilize international payment methods follows the surcharge parameter settings and rules as defined for domestic payment methods; and the international configuration variants are ignored. When disabled (false), unique International configuration parameters will control surcharging of transactions that utilize international payment methods.
+          type: string
+          default: '1'
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+      required:
+      - ProductId
+      - SurchargeType
+      - SurchargeValue
+    Phone:
+      title: Phone number
+      description: A simple Phone Number
+      type: object
+      additionalProperties: false
+      properties:
+        callingCode:
+          description: Country Calling Code. Mapped to PARTY_PHONE.CALLING_CODE or VENUE_PHONE.CALLING_CODE
+          type: string
+        value:
+          description: The actual phone number less country code and/or extension.
+          type: string
+          minLength: 5
+        extension:
+          description: The internal extension number where applicable or known.
+          type: string
+        isPrimary:
+          description: Indicates that the phone is a the primary phone. Mapped to PARTY_PHONE_PRIMARY
+          type: boolean
+          default: false
+        phoneType:
+          $ref: '#/components/schemas/PhoneTypeEnum'
+      required:
+      - value
+      - phoneType
+    httpError504:
+      title: HTTP 504 Error
+      type: object
+      description: Gateway Timeout Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '504'
+            default: '504'
+          title:
+            type: string
+            enum:
+            - Gateway Timeout
+            default: Gateway Timeout
+          message:
+            type: string
+            default: The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    MerchantContract:
+      type: object
+      properties:
+        brokerId:
+          type: string
+          maxLength: 100
+          description: ID of the broker, if one is being used
+        legalStructure:
+          type: string
+          description: Legal Structure
+          enum:
+          - PROPRIETOR_OWN_BEHALF
+          - PROPRIETOR_NOT_OWN_BEHALF
+          - SHARED_LESS_25_PERC_EACH
+        contacts:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/ContactAddressType'
+        settlementAccount:
+          $ref: '#/components/schemas/SettlementAccount'
+        domesticSettlementAccount:
+          $ref: '#/components/schemas/DomesticSettlementAccount'
+        serviceStartDate:
+          type: string
+          description: The requested date for this service to start.
+          format: date-time
+        terminalRentalStartDate:
+          type: string
+          format: date-time
+          description: 'The date until which terminal rental is exempt for this contract (also labelled "Rent Exemption Until" / DE: "Mietfreiheit bis zum"). If not set, consumers should fall back to serviceStartDate.
+
+            '
+        proprietorAct:
+          type: boolean
+          description: Is proprietor is acting on its own behalf (true) or is not acting on own behalf (false)
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantDocument'
+        replacementAgreement:
+          $ref: '#/components/schemas/ReplacementAgreement'
+      description: Used if merchant contract is to be processed
+    IBANIdentifier:
+      title: IBAN
+      description: "International Bank Account Number (ISO 13616-1:2007).\n The use of an IBAN is mandated for all SEPA transactions.\nThere are 66 countries that support this format. The length will vary by country. Norway has the shortest format, 15 characters, currently Malta is the longest with 31 characters.\n"
+      type: string
+      pattern: ^[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}$
+    Notification:
+      description: Object containing the sent date-time and template used for the notification.
+      type: object
+      properties:
+        sentDateTime:
+          description: Date and Time when the notification was sent.
+          type: string
+          format: date-time
+        template:
+          description: Template name used for the notification.
+          type: string
+        responseReferenceId:
+          description: An ID from Messaging Service's response.
+          type: string
+    InternalAllocatedInformationNewCompanyAndSite:
+      description: Internally allocated identifiers. This is for verifone use only and is subject to change.
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/InternalAllocatedInformation'
+      - properties:
+          ecomSiteEntityUid:
+            type: string
+            format: uuid
+            description: Entity uid of the ecom site.
+    PrintOptionsEnum:
+      title: Receipt Printing Option
+      description: 'Defines the receipt print options. - Possible values are: <br />Never Print - NEVER<br />Prompt for print - PROMPT<br />Always Print - ALWAYS<br />Always Print when Signature is Captured - ALWAYS_WITH_SIGNATURE'
+      type: string
+      enum:
+      - NEVER
+      - PROMPT
+      - ALWAYS
+      - ALWAYS_WITH_SIGNATURE
+    MerchantOrder:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseOrderData'
+      - properties:
+          packageDetails:
+            $ref: '#/components/schemas/PackageDetails'
+          contract:
+            $ref: '#/components/schemas/MerchantContract'
+          merchant:
+            $ref: '#/components/schemas/BaseMerchant'
+      required:
+      - merchant
+    BaseProcessorParameters:
+      description: Payment Processor Parameters related to Merchant onboarding.
+      type: object
+      properties:
+        processor:
+          title: Payment Provider ContractType Processor Acquirer Type
+          description: A type indicator for the contract that is being processed.
+          type: string
+          enum:
+          - ABS_ISO
+          - ABS_PDM
+          - ABS_WEB
+          - AMEX
+          - BANKAXEPT
+          - BANQUE_CHABRIERES
+          - BARCLAYS
+          - BFCOI
+          - BNPP_ATC
+          - BNP_PARIBAS
+          - BNPP_VERS_ATOS
+          - BRED
+          - CAISSE_D_EPARGNE
+          - CBA
+          - CEDICAM
+          - CIC
+          - CM_ARKEA
+          - CREDIT_AGRICOLE
+          - CREDIT_DU_NORD_VERS_ATOS
+          - CREDIT_DU_NORD_VERS_NATIXIS
+          - CREDIT_MUTUEL
+          - CREDITGUARD
+          - DANKORT
+          - EFTPOS_NZ
+          - ELAVON
+          - FDRC
+          - FIRSTDATA
+          - GICC
+          - GIVEX
+          - GLOBALPAY
+          - GPP2
+          - HSBC
+          - IKANO
+          - INTERCARD
+          - ISRACARD
+          - LA_BANQUE_POSTAL
+          - LCL
+          - LES_BANQUES_POPULAIRES
+          - LLOYDS_CARDNET
+          - MAESTRO
+          - MOBILEPAY
+          - NETS
+          - OTHER
+          - PAYPAL
+          - PAYPAL_ECOM
+          - PELECARD
+          - RESURS_BANK
+          - RTS
+          - SG
+          - SIMULATOR
+          - SWEDBANK_PAY
+          - SWISH
+          - TIETO_EVRY
+          - VERIFONE_AU
+          - VIPPS
+          - WESTPAC
+          - WORLDPAY
+          - WPAY_AU
+          - FISERV_AU
+          - CUSCAL_AU
+          - CHASE_US
+          - ELAVON_US
+          - FISERV_US
+          - TSYS_US
+          - GLOBALPAYMENTS_US
+          - VANTIV_US
+          - HEARTLAND_US
+          - TELECHECK_US
+          - SC_AMEX
+          - SC_EVRY
+          - SC_LUOTTOKUNTA
+          - SC_NETS_DK
+          - SC_NETS_NO
+          - SC_SWEDBANK_SE
+          - SVS_US
+          - SVS_UK
+          - VALUELINK_US
+          - VALUELINK_CA
+          - VALUTEC_US
+          - UNIFY_GIVEX
+          default: TSYS_US
+        tidList:
+          description: A pool of terminal IDs issued by the Acquiring Institution. This pool is intended to be used for the POIs that's capable of initiating multiple payment requests in parallel (e.g. Checkout Page and Virtual Terminal)
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+      discriminator:
+        propertyName: processor
+        mapping:
+          GIVEX: '#/components/schemas/ProcessorParametersGivex'
+          GLOBALPAYMENTS_US: '#/components/schemas/ProcessorParametersUSGPEAST'
+          TSYS_US: '#/components/schemas/ProcessorParametersUSTSYS'
+          CHASE_US: '#/components/schemas/ProcessorParametersUSCHASE'
+          ELAVON_US: '#/components/schemas/ProcessorParametersUSELAVON'
+          FISERV_US: '#/components/schemas/ProcessorParametersUSFIRSTDATA'
+          VANTIV_US: '#/components/schemas/ProcessorParametersUSVANTIV'
+          HEARTLAND_US: '#/components/schemas/ProcessorParametersUSHeartland'
+          TELECHECK_US: '#/components/schemas/ProcessorParametersUSTelecheck'
+          FISERV_AU: '#/components/schemas/ProcessorParametersFiservAU'
+          CUSCAL_AU: '#/components/schemas/ProcessorParametersCuscalAU'
+          WPAY_AU: '#/components/schemas/ProcessorParametersWpayAU'
+          SVS_UK: '#/components/schemas/ProcessorParametersSVS'
+          SVS_US: '#/components/schemas/ProcessorParametersSVS'
+          VALUELINK_US: '#/components/schemas/ProcessorParametersValuelink'
+          VALUELINK_CA: '#/components/schemas/ProcessorParametersValuelink'
+          VALUTEC_US: '#/components/schemas/ProcessorParametersValutecUS'
+          VERIFONE_AU: '#/components/schemas/ProcessorParametersVerifoneAU'
+          SC_AMEX: '#/components/schemas/ProcessorParametersSC'
+          SC_EVRY: '#/components/schemas/ProcessorParametersSC'
+          SC_LUOTTOKUNTA: '#/components/schemas/ProcessorParametersSC'
+          SC_NETS_DK: '#/components/schemas/ProcessorParametersSC'
+          SC_NETS_NO: '#/components/schemas/ProcessorParametersSC'
+          SC_SWEDBANK_SE: '#/components/schemas/ProcessorParametersSC'
+          OTHER: '#/components/schemas/ProcessorParametersOTHER'
+          UNIFY_GIVEX: '#/components/schemas/ProcessorParametersUnifyGivex'
+      required:
+      - processor
+    OrderReference:
+      description: Client reference for the Order.
+      type: string
+      minLength: 1
+    LastChangeTime:
+      description: Time status detailed status last changed.
+      type: string
+      format: date-time
+    httpError429:
+      title: HTTP 429 Error
+      type: object
+      description: The resource exists the number of requests has exceeded the specified quota.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '429'
+            default: '429'
+          title:
+            type: string
+            enum:
+            - Too Many Requests
+            default: Too Many Requests
+          message:
+            type: string
+            default: The number of requests from this client is restricted to a specified quota.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - RATE_LIMIT_ERROR
+            default: RATE_LIMIT_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    BaseMerchant:
+      description: details of the merchant
+      type: object
+      properties:
+        merchantType:
+          type: string
+        merchantName:
+          $ref: '#/components/schemas/MerchantName'
+        merchantId:
+          maxLength: 75
+          pattern: ^[a-zA-Z0-9]+$
+          type: string
+          description: The identifier assigned to this Merchant Entity.
+        merchantLogoUrl:
+          pattern: ^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]
+          type: string
+          description: Valid merchant logo url
+        altVfiEntityId:
+          $ref: '#/components/schemas/AltVfiEntityId'
+        parentEntityUid:
+          type: string
+          format: uuid
+          description: If specified this will add the merchant company or site under a specific entity within Verifone systems.
+        industry:
+          $ref: '#/components/schemas/Industry'
+        primaryContact:
+          $ref: '#/components/schemas/ContactType'
+        requestedDateOfShipment:
+          $ref: '#/components/schemas/RequestedDateOfShipment'
+        mcc:
+          $ref: '#/components/schemas/MCC'
+        parameters:
+          $ref: '#/components/schemas/TerminalParameters'
+        paymentAppParameters:
+          $ref: '#/components/schemas/PaymentAppParameters'
+        settlement:
+          $ref: '#/components/schemas/SettlementDetails'
+        entityUid:
+          $ref: '#/components/schemas/EntityUidDeprecated'
+        tradingAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        shippingAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        billingAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        companyLabels:
+          type: array
+          description: Free form labels/tags that can be attached to an entity to enable grouping and searching
+          maxLength: 10
+          items:
+            type: string
+            description: Logical grouping of companies. A tag or label which is meaningful to the customer which groups merchant company legal entities, e.g Restaurants, Retail, Timezone etc.
+            maxLength: 30
+        siteLabels:
+          type: array
+          description: Free form labels/tags that can be attached to an entity to enable grouping and searching
+          maxLength: 10
+          items:
+            type: string
+            description: Logical grouping of sites. A tag or label which is meaningful to the customer which groups merchant sites, e.g Area, Timezone etc.
+            maxLength: 30
+      discriminator:
+        propertyName: merchantType
+        mapping:
+          NewCompanyAndSite: '#/components/schemas/SmallMerchant'
+          ExistingCompanyNewSite: '#/components/schemas/ExistingCompanyNewSite'
+          SmallMerchant: '#/components/schemas/SmallMerchant'
+      required:
+      - contacts
+      - mcc
+      - merchantType
+      - tradingAddress
+      - primaryContact
+    NotificationReminders:
+      description: A container for all supported notification reminders.
+      type: object
+      properties:
+        econtract:
+          $ref: '#/components/schemas/NotificationReminder'
+        draft:
+          $ref: '#/components/schemas/NotificationReminder'
+        docRequired:
+          $ref: '#/components/schemas/NotificationReminder'
+      additionalProperties: false
+    VmssSchemeStatus:
+      description: Scheme Status
+      type: string
+      enum:
+      - 'NA '
+      - PENDING
+      - ERROR
+      - COMPLETE
+    PaymentAppParameters:
+      title: Base Parameters
+      description: Payment Parameters - these can be specified per merchant and/or overridden at the poi level. If no values are specified then default template values will be applied.
+      type: object
+      properties:
+        AccountVerifyEnabled:
+          description: Enable Account verification for this merchant
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        AllowDisableMerchantPreferredAppSelection:
+          description: Display the option to disable merchant preferred app selection in the 'Prompt For Card' screen
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PurchaseEnabled:
+          description: Enable Purchase transactions for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PurchaseAndCashoutEnabled:
+          description: Enable prompting for a cashout amount as part of a purchase transaction.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ManualPurchaseAndCashoutEnabled:
+          description: Enable Manual Card Entry for Purchase with Cashout.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PurchaseSurchargeEnabled:
+          description: 'Enables surcharging for Purchase (+ Cash + Tip)
+
+            transactions. Surchargeable amount - this is the amount in
+
+            the transaction where a surcharge can be applied to.
+
+            Purchase only - surchargeable amount is the purchase
+
+            amount. Purchase + Cash - surchargeable amount is the
+
+            purchase amount only. Purchase + Cash + Tip -
+
+            surchargeable amount is the purchase amount only. Purchase
+
+            + Tip - surchargeable amount is the purchase amount only.'
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ContactlessSurchargeEnabled:
+          description: Enable contactless surcharging.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        CashOutOnlySurchargeEnabled:
+          description: Enables surcharging for Cashout only transactions.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PreauthCompletionSurchargeType:
+          description: '0 - Disabled: Pre-Auth/Completion transactions are not subject to surcharge
+
+
+            1 - Pre-Auth: Surcharge is applied to Pre-Auth (initial) transaction
+
+
+            2 - Completion: Surcharge is applied to Completion transaction'
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-2]'
+        MotoSurchargeEnabled:
+          description: 'Enables surcharging for mail and telephone order (MOTO)
+
+            transactions.'
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ManualPurchaseEnabled:
+          description: Enable Manual Card Entry for Purchase.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ManualRefundEnabled:
+          description: Manual Refund Enabled.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ManualPreAuthEnabled:
+          description: Enable Manual Card Entry for PreAuth.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        CashoutOnlyEnabled:
+          description: Enable Cashout only transactions for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ManualCashoutOnlyEnabled:
+          description: Enable Manual Card Entry for Cashout transactions without a purchase.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        RefundEnabled:
+          description: Enable Refund transactions as such for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        LimitRefundAmountEnabled:
+          description: Enable limit refund amount with MaxCashierRefundAmount and MaxManagerRefundAmount.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        EbtEnabled:
+          description: Allow EBT (Electronic benefit transfer) payment type.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        VoidEnabled:
+          description: Enable void transaction for magnetic stripe and chip cards for this product
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ManualVoidEnabled:
+          description: Enable Manual Card Entry for Void
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        SplitPaymentsEnabled:
+          description: Allow the total to be paid with multiple payments.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PreAuthEnabled:
+          description: Enable Pre-Auth transactions for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PostAuthEnabled:
+          description: Enable Post-Auth transactions for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        PreAuthCtlsEnabled:
+          description: Enable Pre Authorization transaction for contactless payment methods for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        BalanceEnquiryEnabled:
+          description: Enable Balance Enquiry transactions for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        MotoPaymentEnabled:
+          description: Enable mail and telephone order (MOTO) payments.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        MotoTipEnabled:
+          description: Enable tip for moto payments for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        MotoRefundEnabled:
+          description: Enable moto refunds for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        MotoPreAuthEnabled:
+          description: Enable moto PreAuth for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        MotoSeparationEnabled:
+          description: Determines whether to present separate options for mail and telephone orders (MOTO).
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        CashbackAmounts:
+          description: Predefined cashout amounts presented at the cashout selection in the local currency. Maximum of 4 comma separated amounts e.g. 10.00,20.00,40.00.
+          type: string
+          maxLength: 150
+          minLength: 0
+          pattern: ^(\d+\.?\d*,){0,3}(\d+\.?\d*)$
+        MaxPurchaseAmount:
+          description: Represents the maximum purchase amount allowed in the currency supported by the terminal. The value should be in a decimal format, e.g. $40 = 40.00. Maximal amount supported by the payment application is 9,999,999,999.99.
+          type: string
+          maxLength: 13
+          minLength: 0
+          pattern: ^[0-9]{1,10}(\.[0-9]{2})?$
+        MaxCashierRefundAmount:
+          description: Maximum refund amount allowed by the cashier, in the currency supported by the terminal. The value should be in a decimal format, e.g. $40 = 40.00
+          type: string
+          maxLength: 15
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        MaxManagerRefundAmount:
+          description: Maximum refund amount allowed by the manager, in the currency supported by the terminal. The value should be in a decimal format, e.g. $40 = 40.00
+          type: string
+          maxLength: 15
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        MaxRefundTotalAmountPerSettlement:
+          description: Maximum refund amount allowed per settlement period, in the currency supported by the terminal. This value should be in a decimal format, e.g. $40 = 40.00
+          type: string
+          maxLength: 15
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        MaxAmountRefundPerDay:
+          description: Used to determine the maximum total amount of refunds for merchant per day, in the currency of related virtual terminal. This value should be in a decimal format, e.g. $40 = 40.00.
+          type: string
+          maxLength: 15
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        MaxCountRefundPerDay:
+          description: Used to determine the maximum total number of refunds for merchant per day
+          type: string
+          maxLength: 3
+          minLength: 0
+          pattern: ^[0-9]{1,3}$
+        ForceOfflineEnabled:
+          description: Indicates if the force offline operation is enabled for the merchant
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        CashbackCeiling:
+          description: Maximum cashout amount allowed, in the currency supported by the terminal. The value should be in a decimal format,                  e.g. $40 = 40.00 - where the currency symbol depends on the region.
+          type: string
+          maxLength: 150
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        PrintMerchantReceipt:
+          description: 'Defines the merchant receipt print options.
+
+
+            0-Never Print
+
+
+            1-Prompt for print
+
+
+            2-Always Print
+
+
+            3-Always Print when Signature is Captured'
+          type: string
+        PrintCustomerReceipt:
+          description: 'Defines the customer receipt print options.
+
+
+            0-Never Print
+
+
+            1-Prompt for print
+
+
+            2-Always Print'
+          type: string
+        ShowEmailReceiptOption:
+          description: Show e-mail option for customer receipts.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ShowEmailTermsAndConditions:
+          description: Determines if the device displays the Terms and Conditions text when a customer elects to receive an email receipt.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ReceiptGreeting:
+          description: Placeholder for greeting text on the receipt.
+          type: string
+          maxLength: 10000
+          minLength: 0
+          pattern: ^(.|\n)*$
+        ReceiptFooter:
+          description: Receipt placeholder for footer text.
+          type: string
+          maxLength: 10000
+          minLength: 0
+          pattern: ^(.|\n)*$
+        TipEnabled:
+          description: Enable purchase with tip transaction for this product
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        TipAdjustmentEnabled:
+          description: Enable tip adjustment. When enabled the device can support tip adjustment flow.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        TipCustomOptionEnabled:
+          description: Enable Custom option on the Tip screen for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        TipCustomOptionEntryMethod:
+          description: 'Specifies how the customer enters a custom tip amount. Additional Tip Amount - customer enters the tip amount to be added to the total (default). Total Amount Including Tip - customer enters the total transaction amount and tip is calculated automatically, used in markets where a round-up tip strategy is common. - Possible values are: Tip Amount-0,Total Amount including Tip-1.'
+          type: string
+        TipLimit:
+          description: Defines the maximum percentage of the transaction amount that can be added as a tip. If this is exceeded, a warning is prompted.
+          type: string
+          maxLength: 150
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        TipLimitAmount:
+          description: Defines the maximum amount that can added to the transaction as a tip. When the tip amount exceeds this limit, a warning is displayed. Any tip amount is allowed when TipLimitAmount set to 0.
+          type: string
+          maxLength: 150
+          minLength: 0
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        TipOverLimitAllowed:
+          description: When enabled, the tip that is higher than defined by limit parameters, TipLimit (percentage) and TipLimitAmount (amount), will be allowed after confirmation.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        TipPercentages:
+          description: 'Pre-Defines up to 4 tip percentage options for customers to choose from, after entering the purchase amount for a transaction, e.g. 10, 15, 20, 25% = 10%, 15%, 20%, 25% respectively.                 Note that the TipEnabled parameter must be enabled, and that only whole numbers are accepted as percentage values, e.g. 10% (not 10.5%).    Note also some terminal solutions only support 3 pre-defined limits.                 '
+          type: string
+          maxLength: 150
+          minLength: 0
+          pattern: ^(\d{1,2},){0,3}(\d{1,2})$
+        AutoSettlementEnabled:
+          description: Settlement runs on a schedule.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        AutoSettlementTime:
+          description: Settlement runs at this time everyday.
+          type: string
+          maxLength: 5
+          minLength: 4
+          pattern: ^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$
+        SAFEnabled:
+          description: Whether SAF (offline approval when device cannot go online or reach host/gateway), 1-Enabled, 0-Not enabled
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        MaxSAFAccumulativeAmount:
+          description: Maximum amount of all pending SAF transactions that are allowed. Once this limit is reached, the terminal cannot approve anymore transaction as SAF
+          type: string
+          minLength: 1
+          maxLength: 15
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        MaxSAFTransactionAmount:
+          description: Maximum amount for a single transaction to be put into SAF. This overrides card scheme settings.
+          type: string
+          minLength: 1
+          maxLength: 15
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        MerchantSurcharge:
+          description: Surcharging options for different card products
+          type: array
+          items:
+            $ref: '#/components/schemas/CardProductSurcharge'
+        RegionalParameters:
+          $ref: '#/components/schemas/BaseRegionalParameters'
+        CardHolderPresent:
+          description: Select if card holder is present (Always/Prompt/Never)
+          type: string
+          enum:
+          - Always
+          - Prompt
+          - Never
+        MaxContactlessTransactionAmount:
+          description: Maximum limit for contact less payments
+          type: string
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        CommsFailFloorLimit:
+          description: Maximum limit allowed by terminal when communications fail
+          type: number
+          format: decimal
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+          deprecated: true
+        VoiceAuthRefferalLimit:
+          description: Maximum limit allowed for voice referral
+          type: number
+          format: decimal
+          pattern: ^[0-9]+(\.[0-9]{2})?$
+        VoiceAuthRefferalCode:
+          description: Voice Referral floor limit authorisation code
+          type: string
+        CommerceTriggersEnabled:
+          description: Enable commerce triggers.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        ContactlessCvmRequiredLimit:
+          description: The contactless limit which CVM is required. If this is set it will override any defaults set for card brands in the EMV config - unless these defaults are more restrictive.
+          type: string
+          minLength: 12
+          maxLength: 12
+          pattern: ^[a-fA-F0-9]*$
+        OfflineFloorLimit:
+          description: The limit which transactions can be approved offline. Generally this is now set to zero (0). If this is set it will override any defaults set for card brands in the EMV config - unless these defaults are more restrictive.
+          type: string
+          minLength: 12
+          maxLength: 12
+          pattern: ^[a-fA-F0-9]*$
+        CashEnabled:
+          description: Enables Cash handling for the terminal.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        DualPricingEnabled:
+          description: Enable Dual Pricing for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        DccEnabled:
+          description: Enable Dynamic Currency Conversion for this merchant.
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-1]'
+        DualPricingAdjustmentRate:
+          description: Adjustment rate in dual pricing payment option.
+          type: number
+          format: decimal
+          pattern: ^-?\d+(\.\d+)?$
+        DualPricingTipBasis:
+          description: "0 - When the original subtotal is set 0, the tip suggestions \n    are calculated using the original subtotal requested from the POS.\n\n1 - When the original subtotal is set 1, the tip suggestions are calculated \n    using the adjusted subtotal chosen by the customer from the dual pricing payment options."
+          type: string
+          minLength: 1
+          maxLength: 1
+        TransactionCurrencyCode_5F2A:
+          description: 5F2A Currency Code for the Terminal.
+          type: string
+          maxLength: 4
+          minLength: 4
+          pattern: ^[a-fA-F0-9]*$
+        TransactionCurrencyExponent_5F36:
+          description: 5F36 Currency Exponent based on the country code for the Terminal.
+          type: string
+          maxLength: 2
+          minLength: 2
+          pattern: ^[a-fA-F0-9]*$
+        CustomCurrencySymbol:
+          description: Custom Currency Code symbol for the Terminal based on country.
+          type: string
+          maxLength: 3
+          minLength: 3
+          pattern: ^[A-Z]*$
+        CurrencyCode:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        NumberFormatLocale:
+          description: Locale for number formatting.
+          type: string
+          maxLength: 8
+          minLength: 0
+          pattern: ^[a-zA-Z-]*$
+        SurchargeRefundMethod:
+          description: Surcharge Refund Method 0- Default When Purchase Surcharge is Not Enabled 2- When Purchase Surcharge Enabled
+          type: string
+          minLength: 1
+          maxLength: 1
+          pattern: '[0-2]'
+    SettlementDetails:
+      type: object
+      description: Settlement details needed for onboarding in certain situations e.g. for Payware solutions.
+      properties:
+        settlementTime:
+          type: string
+          pattern: ^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$
+          description: Settlement time in HH:MM format
+    ContactName:
+      allOf:
+      - $ref: '#/components/schemas/Name'
+    Industry:
+      title: Industry Type
+      description: The Industry type applicable to a Merchant.
+      type: string
+      enum:
+      - AIRLINE
+      - DIRECT
+      - VEHICLE_RENTAL
+      - LODGING
+      - MOTO
+      - PETROLEUM
+      - QUICK_SERVICE_RESTAURANT
+      - RESTAURANT
+      - RETAIL
+      - TRANSPORT
+      - RECREATION
+      - MEDICAL
+      - EDUCATIONAL
+      - GOVERNMENT
+      - CASH_ADVANCE
+      - INTERNET
+      - SUPERMARKET
+      - UNKNOWN
+    BusinessTitle:
+      type: string
+      maxLength: 100
+    CancelReasonEnum:
+      description: Reason for order cancellation.
+      type: string
+      enum:
+      - ADMIN_REASON
+      - RELATED_PO_CHANGES
+      - WRONG_PRODUCT
+      - ORDER_LATE
+      - OTHER
+    ReceiptOptions:
+      title: Receipt Options
+      description: Receipt Options
+      type: object
+      properties:
+        printMerchantReceipt:
+          $ref: '#/components/schemas/PrintOptionsEnum'
+        printCustomerReceipt:
+          $ref: '#/components/schemas/PrintOptionsEnum'
+        showEmailReceipts:
+          description: Show e-mail option for customer receipts.
+          type: boolean
+        showEmailTermsAndConditions:
+          description: Determines if the device displays the Terms and Conditions text when a customer elects to receive an email receipt.
+          type: boolean
+        greeting:
+          description: Placeholder for greeting text on the receipt.
+          type: string
+          pattern: ^(.|n)*$
+          maxLength: 10000
+        footer:
+          description: Receipt placeholder for footer text.
+          type: string
+          maxLength: 10000
+          pattern: ^(.|n)*$
+    OrderStatusEnum:
+      type: string
+      enum:
+      - DRAFT
+      - SUBMITTED
+      - INPROGRESS
+      - COMPLETED
+      - CANCELLED
+      - ONHOLD
+    TipOptions:
+      title: Tip Options
+      description: Tip Options
+      type: object
+      additionalProperties: false
+      properties:
+        tipEnabled:
+          description: Enable tipping. When enabled the device presents a tip selection screen during a transaction, showing pre-configured tip amounts and an option for a custom amount.
+          type: boolean
+        tipLimit:
+          description: Defines the maximum percentage of the transaction amount that can be added as a tip. If this is exceeded, a warning is prompted.
+          type: integer
+          format: int64
+        tipPercentages:
+          description: Pre-Defines up to 3 tip percentage options for customers to choose from, after entering the purchase amount for a transaction, e.g. 10, 15, 20 = 10%, 15%, 20%, respectively. Note that the TipEnabled parameter must be enabled, and that only whole numbers are accepted as percentage values, e.g. 10% (not 10.5%).
+          type: string
+          pattern: ([0-9]+,){0,2}([0-9]+)
+          maxLength: 150
+    ReplacementAgreement:
+      title: ReplacementAgreement
+      type: object
+      description: Replacement agreement details for devices covered under this contract.
+      required:
+      - devices
+      properties:
+        contractNumber:
+          type: string
+          maxLength: 255
+          description: Contract number for the replacement agreement.
+        devices:
+          type: array
+          description: List of devices being replaced.
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ReplacedDevice'
+    CreatedUserId:
+      description: The assigned User ID corresponding to the Order Created By.
+      type: string
+      format: uuid
+    NotificationReminder:
+      description: Notification Reminder Sent Details
+      type: object
+      properties:
+        lastNotificationSentDateTime:
+          description: Date and Time of the last notification sent. Defaulted to `createdDateTime` on first saved order.
+          type: string
+          format: date-time
+        notificationCount:
+          description: Number of notifications sent. -1 = Unsubscribed, or 1, 2, 3 as per the notification sent.
+          type: integer
+        templateName:
+          description: NotificationTemplate Name used, e.g. `T650P_WELCOME`
+          type: string
+        notifications:
+          description: List of notifications, each with the date-time sent and the template used.
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+    MerchantDocument:
+      type: object
+      description: Merchant Document Info.
+      allOf:
+      - $ref: '#/components/schemas/RequiredDocument'
+      - properties:
+          uploadedDate:
+            type: string
+            description: The uploaded date for this document.
+            format: date-time
+          modifiedDate:
+            type: string
+            description: The modified date for this document on status change.
+            format: date-time
+    ReplacedDevice:
+      title: ReplacedDevice
+      type: object
+      description: A device being replaced under a replacement agreement.
+      required:
+      - serialNumber
+      - deviceModel
+      properties:
+        serialNumber:
+          type: string
+          minLength: 1
+          maxLength: 12
+          description: Serial number of the replaced device.
+        deviceModel:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Model name of the replaced device.
+    ContactType:
+      description: The details of a Contact.
+      type: object
+      properties:
+        contactType:
+          $ref: '#/components/schemas/ContactTypeEnum'
+        name:
+          $ref: '#/components/schemas/ContactName'
+        phoneNumbers:
+          description: The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.
+          items:
+            $ref: '#/components/schemas/Phone'
+          minItems: 1
+          uniqueItems: true
+          type: array
+        email:
+          $ref: '#/components/schemas/EmailAddress'
+        businessTitle:
+          $ref: '#/components/schemas/BusinessTitle'
+      required:
+      - contactType
+      - name
+    BaseAddress:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      properties:
+        receiverName:
+          type: string
+          minLength: 1
+          description: The receiver name for the address if different to the company/site name.
+        addressLine1:
+          minLength: 1
+          maxLength: 40
+          type: string
+          description: Address Line 1. Should include street and apartment number if required.
+        addressLine2:
+          maxLength: 40
+          type: string
+          description: Address Line 2
+        addressLine3:
+          maxLength: 40
+          type: string
+          description: Address Line 3
+        poBox:
+          type: string
+          description: The PO BOX number.
+        city:
+          minLength: 1
+          maxLength: 28
+          type: string
+          description: Name of a built-up area, with defined boundaries, and a local government. This could be city or town.
+        countrySubdivision:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Identifies a sub-division of a country which may be state, region or county. This follows a similar format to the openbank api.
+        postCode:
+          $ref: '#/components/schemas/PostCode'
+        country:
+          $ref: '#/components/schemas/CountryCode3Enum'
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+    AdjustedPriceType:
+      type: object
+      properties:
+        priceModel:
+          type: string
+          description: Pricing Model
+          enum:
+          - MONTHLY_FEE
+          - MONTHLY_FEE_PER_DEVICE
+          - MINIMUM_AMT_PER_TRX
+          - AMT_PER_TRX
+          - PERC_PER_TRX
+          - ONE_TIME
+          - YEARLY_FEE
+          - QUARTERLY_FEE
+        price:
+          $ref: '#/components/schemas/AmountSimple'
+    CancelAdditionalReason:
+      description: Free-Form reason for order cancellation.
+      type: string
+    PaymentTypeEnum:
+      title: Payment Type
+      description: A type indicator for the payment that is being processed. Value `GIFT` is deprecated.
+      type: string
+      enum:
+      - AFFIRM
+      - AFTERPAY
+      - ALIPAY
+      - AMEX
+      - BAIDU_PAY
+      - BANK
+      - BANKAXEPT
+      - BARTERCARD
+      - BBBY_COB
+      - BBBY_PLCC
+      - BLIK
+      - BP_FUELCARD
+      - CALLIO_GASTRO
+      - CARD
+      - CARDLINK
+      - CARNET
+      - CASH
+      - CB
+      - CHEQUE
+      - CLAVE
+      - CRYPTO
+      - DANKORT
+      - DEBIT
+      - DINERS
+      - DISCOVER
+      - EASYCD
+      - EBT
+      - EBT_WIC_OFFLINE
+      - ECARD
+      - ECARDZ
+      - EDENRED
+      - ELECTRON
+      - EZIPAY
+      - FARMERS_FINANCE
+      - FARMLAND
+      - FARMLANDS
+      - FINNISH_DIRECT_BANKING
+      - FLEETCOR
+      - FLEETONE
+      - FLEXECASH
+      - FORBRUGSFORENINGEN
+      - FPF_GIFT
+      - GARMIN_PAY
+      - GIFT
+      - GIFT_CARD
+      - GIROCARD
+      - IKANO
+      - ISRACARD
+      - ISRAEL_PRIVATE_LABEL
+      - JCB
+      - JD_PAY
+      - KLARNA
+      - KLARNA_ECOM
+      - KLARAN_QR
+      - KLARNA_QR
+      - LANDSBANKINN
+      - MASTERCARD
+      - MAESTRO
+      - MOBILEPAY
+      - MOBILEPAY_ECOM
+      - OP_ONLINE_PAYMENT
+      - PAYPAL
+      - PAYPAL_ECOM
+      - PAYPAL_ECOM_MANAGED
+      - PAYPAL_QR
+      - PIX
+      - PLCC
+      - Q_CARD
+      - RESURS_BANK
+      - RURALCO
+      - SAMSUNG_PAY
+      - SODEXO_GASTRO
+      - SUPERCARD
+      - SWISH
+      - SWISH_ECOM
+      - TEN_PAY
+      - TRANXACTOR
+      - TRUE_REWARDS
+      - TT_CARD
+      - UP_SLOVENSKA
+      - UPI
+      - VENMO
+      - VENMO_ECOM
+      - VENMO_QR
+      - VIPPS
+      - VIPPS_ECOM
+      - VISA
+      - VOYAGER
+      - VPAY
+      - WECHAT
+      - WESTFIELD_GIFTCARD
+      - WESTPAC_DEBIT
+      - WEX
+      - ZELLE
+      - ZIP
+      - OTHER
+    AddressWithoutType:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      required:
+      - addressLine1
+      - city
+      - postCode
+      - country
+      allOf:
+      - $ref: '#/components/schemas/BaseAddressWithoutType'
+    PaymentDetails:
+      description: Details of how the order will be paid, and the further re-occuring billing for services.
+      type: object
+      properties:
+        paymentType:
+          type: string
+          description: Type of payment that can be made.
+          default: CREDIT
+      discriminator:
+        propertyName: paymentType
+        mapping:
+          ACCOUNT: '#/components/schemas/PaymentDetailsAccount'
+          CREDIT: '#/components/schemas/PaymentDetailsCredit'
+          NET: '#/components/schemas/PaymentDetailsNET'
+          EINVOICE: '#/components/schemas/PaymentDetailsEInvoice'
+      required:
+      - paymentType
+    MerchantCompanyEntityUid:
+      description: The Verifone allocated unique ID for this merchant company.
+      type: string
+      format: uuid
+    BaseRegionalParameters:
+      title: Payment Parameters - Regional specific options
+      description: Payment Parameters - Regional specific options
+      type: object
+      properties:
+        parameterSchema:
+          type: string
+      discriminator:
+        propertyName: parameterSchema
+        mapping:
+          ParametersMaverick: '#/components/schemas/ParametersMaverick'
+          ParametersAu: '#/components/schemas/ParametersAu'
+          ParametersUk: '#/components/schemas/ParametersUk'
+          ParametersNordicsCobra: '#/components/schemas/ParametersNordicsCobra'
+    EntityUidDeprecated:
+      description: The Verifone allocated unique id for this site. This is allocated by Verifone when an order is initially received. Please use value returned in OrderResponse.
+      type: string
+      format: uuid
+      deprecated: true
+    httpError503:
+      title: HTTP 503 Error
+      type: object
+      description: Service Unavailable Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '503'
+            default: '503'
+          title:
+            type: string
+            enum:
+            - Service Unavailable
+            default: Service Unavailable
+          message:
+            type: string
+            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    BundleAndPrice:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        price:
+          $ref: '#/components/schemas/AmountSimple'
+      required:
+      - packageBundleId
+    TimeZone:
+      description: A time zone, following the format defined in the IANA tz database (https://www.iana.org/time-zones). Valid examples are America/New_York and Etc/UTC. Do not use ambiguous, non-qualified values such as EST or GB. Before including this type in your interface, please consider whether it is actually appropriate to convey time zone information with your type. It is almost always the case that this should be transformed from UTC at the time of display to the user; this type might therefore be most associated with user-preference APIs.
+      type: string
+      minLength: 1
+      maxLength: 127
+    BundleAndPriceAndData:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        adjustedPrices:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/AdjustedPriceType'
+        additionalPackageData:
+          type: array
+          description: Input data required to configure the package. For example some packages require a merchant ID
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+      required:
+      - packageBundleId
+    DocumentStatusEnum:
+      type: string
+      description: Current status of the document. Rejected documents must be re-uploaded.
+      enum:
+      - PENDING_UPLOAD
+      - UPLOADED
+      - PENDING_SCAN
+      - ACCEPTED_CLEAN
+      - REJECTED_INFECTED
+    ContactAddressType:
+      description: A Contact and their address details.
+      type: object
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContractContactType'
+        addressDetails:
+          $ref: '#/components/schemas/BaseAddress'
+        dateOfBirth:
+          type: string
+          description: Date of Birth
+          format: date
+        placeOfBirth:
+          type: string
+          description: Place of Birth
+        isIDCheckRequired:
+          type: boolean
+          description: Is this contact's ID required to be checked
+          default: false
+        isContractSignatureRequired:
+          type: boolean
+          description: Is this contact's signature required
+          default: false
+        isLegalRepresentative:
+          type: boolean
+          description: Is this contact a legal representative
+          default: false
+        isAuthorizedRepresentative:
+          type: boolean
+          description: Is this contact an authorized representative
+          default: false
+        isBeneficiaryOwner:
+          type: boolean
+          description: Is a beneficiary owner
+          default: false
+        isPoliticallyExposed:
+          type: boolean
+          description: Is this contact a politically exposed person
+          default: false
+        representativeType:
+          type: string
+          description: Type of representative when this contact is legal or authorized rep
+          enum:
+          - GENERAL_COMMERCIAL_POWER
+          - LIMITED_COMMERCIAL_POWER
+          - NOT_APPLICABLE
+      required:
+      - contact
+      - addressDetails
+    SettlementAccount:
+      allOf:
+      - $ref: '#/components/schemas/SepaAccount'
+    AltVfiEntityId:
+      description: 'A friendly ID associated with the merchant site/company. This will be visible/searchable in Verifone central. In many
+
+        cases this will be the same value as merchantId.
+
+
+        <strong>This value is not guaranteed as globally unique within Verifone. That value is the entityUid (uuid) property
+
+        that will be assigned on creation of the Entity and returned on the response.</strong>.'
+      type: string
+      maxLength: 30
+      pattern: ^[a-zA-Z0-9]+$
+    OrderStats:
+      type: object
+      description: Order Statistics
+      properties:
+        minsSinceCreatedToLastUpdate:
+          type: integer
+          description: Number of minutes since last status update and created order time
+          default: 0
+        minsSinceLastStatusUpdate:
+          type: integer
+          description: Number of minutes (if > 0) since last status update
+          default: 0
+    DomesticSettlementAccount:
+      allOf:
+      - $ref: '#/components/schemas/DomesticAccount'
+    Name:
+      title: Name Details
+      description: An object representing the name or component names of a party, person or business. No elements are mandatory due to the different usages, but the business rules need to be applied in the context where name is used.
+      type: object
+      uniqueItems: false
+      properties:
+        firstName:
+          description: The given name of contact.
+          type: string
+          minLength: 1
+          maxLength: 120
+        lastName:
+          description: The surname name or family name of the contact. This is required when the name is for a party or person. Can also include the matronymic or mother's family name where this is customarily used.
+          minLength: 1
+          maxLength: 120
+          type: string
+        prefix:
+          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
+          maxLength: 120
+          type: string
+        alternateFullName:
+          description: The alternate name for the party. This can be a business name or nickname. This should be used where the name of the party cannot be parsed into its constituent parts such as first name or last name. If the party is a business then this should always be present.
+          maxLength: 200
+          type: string
+        middleName:
+          description: The middle name or names for a party or person.
+          maxLength: 120
+          type: string
+        suffix:
+          description: The name suffix for the party.
+          maxLength: 120
+          type: string
+      required:
+      - firstName
+      - lastName
+    CurrencyCodeEnum:
+      title: Currency Code
+      description: 'Three-letter ISO 4217 alphabetical currency code. e.g. USD. Values correspond
+
+        to [ISO 4217](https://wikipedia.org/wiki/ISO_4217).
+
+
+        **Deprecated:** `BYR` (replaced by BYN), `FRF` (replaced by EUR), `LTL` (replaced by EUR), `LVL` (replaced by EUR), `MRO` (replaced by MRU), `STD` (replaced by STN), `USS` (no replacement), `VEF`  (replaced by VES), `ZMK` (replaced by ZMV) and `BTC` (Bitcoin only supported as Crypto Amount).'
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - FRF
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - STN
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - USS
+      - UYI
+      - UYU
+      - UYW
+      - UZS
+      - VEF
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMK
+      - ZMW
+      - ZWL
+      - BTC
+    ContentTypeEnum:
+      type: string
+      description: Supported content type for documents.
+      enum:
+      - application/pdf
+      - image/png
+      - image/jpeg
+      - application/msword
+      - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+      - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      - application/vnd.ms-excel
+    CustomerOrderLink:
+      description: Customer Order Link Sent Details
+      type: object
+      properties:
+        orderLink:
+          description: 'The unique order link sent to the customer to help them navigate directly to the relevant  step in the order process. This link ensures the customer can update their order efficiently.
+
+            '
+          type: string
+          format: uri
+        linkInitiatorUserUid:
+          description: The unique User ID of the user who generated the order link.
+          type: string
+          format: uuid
+        linkInitiatorUsername:
+          $ref: '#/components/schemas/UserName'
+        linkReceiverUserUid:
+          description: The unique User ID of the customer who received the order link.
+          type: string
+          format: uuid
+        linkReceiverUsername:
+          $ref: '#/components/schemas/UserName'
+        linkSendTime:
+          description: 'Date and time when the order link was sent to the customer.  This represents when the system triggered the link delivery.
+
+            '
+          type: string
+          format: date-time
+        linkOpendByCustomerTime:
+          description: 'Date and time when the order link was opened by the customer.
+
+            '
+          type: string
+          format: date-time
+        customerUpdateTime:
+          description: 'Date and time when the customer last updated their order after using the order link.
+
+            '
+          type: string
+          format: date-time
+    SepaAccount:
+      title: SEPA Bank Account
+      description: A SEPA Account structure extending the base account
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - properties:
+          country:
+            $ref: '#/components/schemas/CountryCode3Enum'
+          accountName:
+            type: string
+            description: Name of the account as known by the financial institution operating the account.
+          iban:
+            $ref: '#/components/schemas/IBANIdentifier'
+          bic:
+            $ref: '#/components/schemas/BICIdentifier'
+    BaseOrderData:
+      type: object
+      properties:
+        orderReference:
+          $ref: '#/components/schemas/OrderReference'
+        customerEntityUid:
+          type: string
+          format: uuid
+          description: Verifone allocated ID for the customer this order is for (packages and bundles are associated with this entity).
+        requestedDate:
+          type: string
+          description: The requested date for this order.
+          format: date-time
+        poRef:
+          type: string
+          description: Purchase Order Reference
+        paymentDetails:
+          $ref: '#/components/schemas/PaymentDetails'
+        notes:
+          type: string
+          description: Notes for the Order
+        additionalOrderData:
+          type: array
+          description: Input data which maybe required for the country/business unit to to complete the order. For example some countries require a VAT ID, or different legal forms of business, this will be defined by Verifone if needed for your integration
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+      required:
+      - orderReference
+      - customerEntityUid
+    ServicePackages:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        adjustedPrices:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/AdjustedPriceType'
+        processorParameters:
+          $ref: '#/components/schemas/BaseProcessorParameters'
+        additionalPackageData:
+          type: array
+          description: Input data required to configure the package. For example some packages require a merchant ID.
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+        threeDSMerchantIdentifiers:
+          $ref: '#/components/schemas/ThreeDSecureMerchantIdentifiers'
+      required:
+      - packageBundleId
+    RequiredDocument:
+      type: object
+      description: Merchant Required Document Details
+      properties:
+        documentId:
+          type: string
+          format: uuid
+          description: Unique identifier for the document.
+        documentName:
+          type: string
+          maxLength: 100
+          description: Name of the document.
+        displayName:
+          type: string
+          maxLength: 100
+          description: Display name of the document shown to end user.
+        status:
+          $ref: '#/components/schemas/DocumentStatusEnum'
+          description: Current status of the document.
+        allowedContentTypes:
+          type: array
+          description: List of supported content types.
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ContentTypeEnum'
+        allowedContentLength:
+          type: integer
+          format: int64
+          description: 'Size of the uploaded document in bytes.  Default is 2 MB (2097152 bytes), maximum allowed is 8 MB (8388608 bytes).
+
+            '
+          default: 2097152
+          maximum: 8388608
+        contact:
+          $ref: '#/components/schemas/ContractContactType'
+      required:
+      - documentId
+      - documentName
+      - status
+      - allowedContentTypes
+    EntityUid:
+      description: The Verifone allocated unique id for this site.
+      type: string
+      format: uuid
+    OrderCancellation:
+      type: object
+      properties:
+        cancelReasonEnum:
+          $ref: '#/components/schemas/CancelReasonEnum'
+        cancelAdditionalReason:
+          $ref: '#/components/schemas/CancelAdditionalReason'
+        cancelledUserUid:
+          description: Unique identifier (UUID) of the user who performed the cancellation.
+          type: string
+          format: uuid
+        cancelledBy:
+          $ref: '#/components/schemas/UserName'
+        cancelledDate:
+          type: string
+          description: Date and time when the order was cancelled, in UTC.
+          format: date-time
+      required:
+      - cancelReasonEnum
+    CountryCode3Enum:
+      title: Country Code
+      type: string
+      description: The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+      enum:
+      - ZZZ
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATA
+      - ATF
+      - ATG
+      - AUS
+      - AUT
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BES
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BSB
+      - BRN
+      - BTN
+      - BVT
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HMD
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MOZ
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PSE
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGC
+      - SGP
+      - SHN
+      - SJM
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - UMI
+      - URY
+      - USA
+      - UZB
+      - VAT
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+    ExtendedDetails:
+      description: Detailed Status of the Order
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/DetailedStatusEnum'
+        code:
+          type: string
+          description: Code associated with the status (if applicable)
+        information:
+          type: string
+          description: Extra Information associated with the status (if applicable)
+        lastChangeTime:
+          $ref: '#/components/schemas/LastChangeTime'
+        canCancel:
+          type: boolean
+          description: Can this order be cancelled.
+    ErrorResp:
+      title: Error
+      description: 'A common Error object returned as part of the API layer.
+
+
+        . This is modified to become the base class for all of the derived HTTP Error Responses.'
+      type: object
+      properties:
+        reversalStatus:
+          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
+
+
+            |Value|Description|
+
+            |-|-|
+
+            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
+
+            |REQUIRED|A reversal is required by the client.|
+
+            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+          default: NONE
+      required:
+      - code
+    httpError400:
+      title: HTTP 400 Error
+      type: object
+      description: The request could not be understood by the server due to malformed syntax.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '400'
+            default: '400'
+          title:
+            type: string
+            enum:
+            - Bad Request
+            default: Bad Request
+          message:
+            type: string
+            default: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    TransactionOptions:
+      type: object
+      properties:
+        purchaseEnabled:
+          description: Enable Purchase for this merchant.
+          type: boolean
+        purchaseWithCashoutEnabled:
+          description: Enable Purchase with Cashout for this merchant.
+          type: boolean
+        cashoutEnabled:
+          description: Enable standalone Cashout for this merchant.
+          type: boolean
+        refundEnabled:
+          description: Enable Refund for this merchant.
+          type: boolean
+        preauthEnabled:
+          description: Enable PreAuth for this merchant.
+          type: boolean
+        balanceEnquiryEnabled:
+          description: Enable Balance Enquiry for this merchant.
+          type: boolean
+        motoPaymentEnabled:
+          description: Enable mail and telephone order (MOTO) payments.
+          type: boolean
+        motoTipEnabled:
+          description: Enable tip for moto payments for this merchant.
+          type: boolean
+        motoRefundEnabled:
+          description: Enable mail and telephone order (MOTO) payments.
+          type: boolean
+        motoPreauthEnabled:
+          description: Enable mail and telephone order (MOTO) payments.
+          type: boolean
+        motoSeparationEnabled:
+          description: If enabled, separate options for telephone and mail order will be presented to the user.
+          type: boolean
+        cashoutAmounts:
+          description: Predefined Cashout amounts that user can select from. Comma separated amount e.g. 10.00,20.00,40.00. This is in the currency supported by the terminal. All currency format represents a decimal number. Maximum 3 values will be allowed.
+          type: string
+          pattern: '[0-9]+(,[0-9]+)+'
+          maxLength: 150
+    httpError404:
+      title: HTTP 404 Error
+      type: object
+      description: The server cannot find the requested resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '404'
+            default: '404'
+          title:
+            type: string
+            enum:
+            - Not Found
+            default: Not Found
+          message:
+            type: string
+            default: The server cannot find the requested resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    PackageDetails:
+      description: Select the base package, hardware and additional services for this order.
+      type: object
+      properties:
+        portfolioUid:
+          description: Verifone ID for the Portfolio Selected. If this is not provided then a default portfolio will be used.
+          type: string
+          format: uuid
+        basePackageBundle:
+          $ref: '#/components/schemas/BundleAndPrice'
+        servicePackages:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ServicePackages'
+        deliveryPackage:
+          $ref: '#/components/schemas/BundleAndPriceAndData'
+      required:
+      - basePackageBundle
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+      type: string
+      minLength: 1
+      maxLength: 16
+    UserName:
+      description: The username of the person who's UID is represented, e.g. "John/Jane Smith".
+      type: string
+      minLength: 1
+    InternalAllocatedInformation:
+      description: Internally allocated identifiers. This is for verifone use only and is subject to change.
+      type: object
+      properties:
+        oracleOrderNumber:
+          description: The order number which Oracle allocated as part of the order.
+          type: number
+        oracleShippingTrackingReference:
+          description: The order shipping reference which Oracle allocated as part of the order.
+          type: string
+        kycReportUid:
+          description: KYC report generated for this order.
+          type: string
+          format: uuid
+        tokenScopeUid:
+          description: Token scope generated for this order.
+          type: string
+          format: uuid
+        extendedDetails:
+          $ref: '#/components/schemas/ExtendedDetails'
+        orderStats:
+          $ref: '#/components/schemas/OrderStats'
+        vmssApplication:
+          $ref: '#/components/schemas/VmssApplication'
+        salesforceApplicationId:
+          description: The Application ID allocated by Salesforce.
+          type: string
+        signingInformation:
+          $ref: '#/components/schemas/SigningInformation'
+        econtractNotificationReminder:
+          description: E-Contract Notification Reminder Sent Details.
+          $ref: '#/components/schemas/NotificationReminder'
+        draftNotificationReminder:
+          description: Draft Notification Reminder Sent Details.
+          $ref: '#/components/schemas/NotificationReminder'
+        notificationReminders:
+          description: A container for all supported notification reminders.
+          $ref: '#/components/schemas/NotificationReminders'
+        customerOrderLink:
+          description: Details of Customer Order Link.
+          $ref: '#/components/schemas/CustomerOrderLink'
+        cancellationHistory:
+          type: array
+          description: List of cancellation records for the customer order.
+          items:
+            $ref: '#/components/schemas/OrderCancellation'
+        externalOnboarding:
+          type: object
+          description: External merchant onboarding details
+          $ref: '#/components/schemas/ExternalOnboarding'
+    BaseAddressWithoutType:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseAddress'
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactType'
+        vfiSiteId:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Address/Site identifier known as within Verifone internal systems.
+        storeNumber:
+          type: string
+          description: Store Number or Client/Customer ID in Oracle
+        governmentOwned:
+          type: boolean
+          description: Indicates whether the address is government-owned. E.g. Address can be in Sweden, but can be a US Embassy.
+        governmentCountry:
+          $ref: '#/components/schemas/CountryCode3Enum'
+    httpError401:
+      title: HTTP 401 Error
+      type: object
+      description: The request must be authenticated to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '401'
+            default: '401'
+          title:
+            type: string
+            enum:
+            - Unauthorised
+            default: Unauthorised
+          message:
+            type: string
+            default: The request requires client authentication.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    SignersInformation:
+      description: Information on the signers in the request.
+      type: object
+      properties:
+        providerRef:
+          description: Signing Provider reference to the signers signing request.
+          type: string
+        contact:
+          $ref: '#/components/schemas/ContactType'
+        signed:
+          description: Has the signer signed the contract.
+          type: boolean
+          default: false
+        signedDateTime:
+          description: Date/Time signer signed the request.
+          type: string
+          format: date-time
+        signingLink:
+          description: This is the link used for signing the contract.
+          type: string
+      required:
+      - contact
+    VmssSchemeMatches:
+      description: Number of matches found against the VMSS service.
+      type: number
+    ContractContactType:
+      type: object
+      required:
+      - contactType
+      - name
+      properties:
+        contactType:
+          $ref: '#/components/schemas/ContactTypeEnum'
+        name:
+          $ref: '#/components/schemas/ContactName'
+        phoneNumbers:
+          description: The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.
+          items:
+            $ref: '#/components/schemas/Phone'
+          minItems: 1
+          uniqueItems: true
+          type: array
+        email:
+          $ref: '#/components/schemas/EmailAddress'
+        businessTitle:
+          $ref: '#/components/schemas/BusinessTitle'
+        passportId:
+          type: string
+          description: Passport Identity Identifier.
+          minLength: 1
+          maxLength: 100
+        nationality:
+          type: string
+          description: Nationality
+          minLength: 1
+          maxLength: 100
+        additionalNationalities:
+          type: array
+          description: Additional Nationalities
+          uniqueItems: true
+          maxItems: 20
+          items:
+            type: string
+            minLength: 1
+            maxLength: 100
+        nationalIdentifer:
+          type: string
+          description: Contact's national identity identifier.
+          minLength: 1
+          maxLength: 20
+    RequestedDateOfShipment:
+      description: Requested date of shipment.
+      type: string
+      format: date-time
+    MCC:
+      description: The Merchant Category Code (MCC). A 4 digit Code classifying the type of business being done by the card acceptor or Merchant (in accordance with ISO 18245).
+      type: string
+      minLength: 4
+      maxLength: 4
+      pattern: ^[0-9]{4,4}$
+    MerchantName:
+      description: The primary merchant name, e.g. "McDonalds".
+      type: string
+      pattern: ^(?!\\s*$).+
+      minLength: 1
+      maxLength: 100
+    PhoneTypeEnum:
+      title: Phone Type
+      description: Phone type in PHONE_TYPE_CON. Mapped to PARTY_PHONE.PHONE_TYPE_CON_ID or VENUE_PHONE.PHONE_TYPE_CON_ID
+      type: string
+      enum:
+      - HOME
+      - MOBILE
+      - WORK
+      - FAX
+      - OTHER
+      default: HOME
+    TransactionLimits:
+      type: object
+      properties:
+        maxAmountPurchase:
+          $ref: '#/components/schemas/AmountSimple'
+        maxAmountRefundCashier:
+          $ref: '#/components/schemas/AmountSimple'
+        maxAmountRefundManager:
+          $ref: '#/components/schemas/AmountSimple'
+        maxAmountRefundPerSettlement:
+          $ref: '#/components/schemas/AmountSimple'
+        maxAmountCashout:
+          $ref: '#/components/schemas/AmountSimple'
+    httpError403:
+      title: HTTP 403 Error
+      type: object
+      description: The request must be authorised to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '403'
+            default: '403'
+          title:
+            type: string
+            enum:
+            - Forbidden
+            default: Forbidden
+          message:
+            type: string
+            default: The request requires client authorisation to access resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    DetailedStatusEnum:
+      description: An order will be in one of the following states.
+      type: string
+      enum:
+      - DRAFT
+      - SUBMITTED
+      - INPROGRESS
+      - PENDING_THIRD_PARTY
+      - PENDING_SIGNATURE
+      - UNDER_REVIEW
+      - REQUIRES_ATTENTION
+      - INTERNAL_BOARDING
+      - FULFILMENT_BOOKED
+      - FULFILMENT_PICKED
+      - FULFILMENT_SHIPPED
+      - CANCEL_REQUESTED
+      - CANCEL_INPROGRESS
+      - CANCEL_ERROR
+      - CANCELED_BYUSER
+      - COMPLETED
+      - CANCELLED
+      - DECLINED
+      - ONHOLD
+      - OFFER_SENT
+      - OPENED_BY_CUSTOMER
+      - INPROGRESS_BY_CUSTOMER
+      - DOCS_REQUIRED
+      - DOCS_REQUIRES_ATTENTION
+    ThreeDSecureMerchantIdentifiers:
+      title: Merchant Identifier
+      description: 'Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.
+
+        In cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.
+
+        For example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:
+
+        * One used for SafeKey (3DS authentication) * Another used for authorization via the acquirer or gateway'
+      required:
+      - merchantId
+      - paymentType
+      properties:
+        merchantId:
+          type: string
+          description: "Merchant ID assigned by Acquirer for 3DS flow. Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.\nIn cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.\nFor example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:\n\n  * One used for SafeKey (3DS authentication)\n  * Another used for authorization via the acquirer or gateway"
+          pattern: ^$|^(?!\s*$).+
+          maxLength: 30
+        paymentType:
+          $ref: '#/components/schemas/PaymentTypeEnum'
+    VariableResponseType:
+      description: Variable/Value Pairs.
+      type: object
+      properties:
+        variableName:
+          type: string
+          description: Variable name (this would be provided by Verifone)
+          pattern: ^[A-Za-z0-9_-]*$
+        variableValue:
+          type: string
+          maxLength: 10000
+          description: Value of the variable
+    BICIdentifier:
+      title: Bank Identifier Code
+      type: string
+      description: 'International Bank Identifier Code Format.
+
+        The Bank Identifier Code or SWIFT Code ,this can also be referred to as the CHIPS, NCC, VSC or IFSC depending on your location. Made up of 8 or 11 characters .The 3 main parts include: BankCode(4), Country Code(2) and Location (2).
+
+        Optionally the branch identifier is a 3 character optional element that can supplement the 8 character BIC.
+
+        [ISO 9362](https://www.iso.org/standard/84108.html)'
+      pattern: ^[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}$
+      maxLength: 11
+    Account:
+      title: Account
+      description: 'Unambiguous identification of an account to which credit and debit entries are made.
+
+
+        These entries are based on the Open Banking standards used in various countries - UK, Australia, New Zealand as well as a combination of details from the ISO20022 account properties.'
+      additionalProperties: false
+      properties:
+        currency:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        accountHolderType:
+          type: string
+          enum:
+          - BUSINESS
+          - PERSONAL
+          default: BUSINESS
+        description:
+          description: Specifies the description of the account type.
+          type: string
+          minLength: 1
+          maxLength: 35
+        nickname:
+          description: The nickname of the account, assigned by the account owner in order to provide an additional means of identification of the account.
+          type: string
+          minLength: 1
+          maxLength: 70
+    VmssApplication:
+      type: object
+      properties:
+        visaStatus:
+          $ref: '#/components/schemas/VmssSchemeStatus'
+        visaMatches:
+          $ref: '#/components/schemas/VmssSchemeMatches'
+        mcdStatus:
+          $ref: '#/components/schemas/VmssSchemeStatus'
+        mcdMatches:
+          $ref: '#/components/schemas/VmssSchemeMatches'
+        mcdTransactionReference:
+          type: string
+          description: Reference to the status check to mastercard
+  parameters:
+    saveDraftHeaderParam:
+      name: saveDraft
+      in: header
+      description: An optional header indicating whether to save the order into a DRAFT status. If this value is not specified or set to false then the order will be SUBMITTED immediately.
+      required: false
+      schema:
+        type: boolean
+    SimplifiedFlowHeaderParam:
+      name: X-Use-Simplified-Order-Flow
+      in: header
+      description: An optional header indicating to the client, the new approach delegates more logic to the backend, requiring the API/UI client to supply only the essential data when possible. Our backend now intelligently derives missing fields by leveraging defaults and configurations from the Portfolio Service
+      required: false
+      schema:
+        type: boolean
+    validateAcquirerHeaderParam:
+      name: validateAcquirer
+      in: header
+      description: An optional header indicating whether to validate the acquirer.
+      required: false
+      schema:
+        type: boolean
+    validateACHHeaderParam:
+      name: validateACH
+      in: header
+      description: An optional header indicating whether to validate account details against GIACT.
+      required: false
+      schema:
+        type: boolean
+    validateCompanyIdentityHeaderParam:
+      name: validateCompanyIdentity
+      in: header
+      description: An optional header indicating to the client to validate the merchant details stored in the order against Verifone Identity Service.
+      required: false
+      schema:
+        type: boolean
+  responses:
+    '404':
+      description: Not Found Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError404'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '429':
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError429'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '403':
+      description: Forbidden Request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError403'
+    '503':
+      description: Service Not Available
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError503'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '504':
+      description: Service Timeout
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError504'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '401':
+      description: Unauthorised Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError401'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError400'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '500':
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError500'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

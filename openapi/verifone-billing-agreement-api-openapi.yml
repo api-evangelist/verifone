@@ -1,0 +1,676 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Billing Agreement API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Billing Agreement
+paths:
+  /billingAgreement/{agreementId}:
+    get:
+      tags:
+      - Billing Agreement
+      summary: Get agreement details
+      operationId: getBillingagreementAgreementid
+      parameters:
+      - name: agreementId
+        in: path
+        description: PayPal billing agreement id
+        required: true
+        schema:
+          type: string
+      - name: paymentProviderContract
+        in: query
+        description: PayPal Payment Provider Contract UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model8'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingAgreement/token/{tokenId}:
+    get:
+      tags:
+      - Billing Agreement
+      summary: Show token details
+      operationId: getBillingagreementTokenTokenid
+      parameters:
+      - name: tokenId
+        in: path
+        description: The ID of the agreement token for which to show details.
+        required: true
+        schema:
+          type: string
+      - name: paymentProviderContract
+        in: query
+        description: PayPal Payment Provider Contract UUID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model17'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingAgreement/create:
+    post:
+      tags:
+      - Billing Agreement
+      summary: Create billing agreement using token
+      operationId: postBillingagreementCreate
+      parameters:
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model29'
+        required: false
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model30'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingAgreement/initiate:
+    post:
+      tags:
+      - Billing Agreement
+      summary: Initiate billing agreement
+      operationId: postBillingagreementInitiate
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model32'
+        required: false
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model33'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /billingAgreement/{agreementId}/cancel:
+    post:
+      tags:
+      - Billing Agreement
+      summary: Cancel agreement details
+      operationId: postBillingagreementAgreementidCancel
+      parameters:
+      - name: agreementId
+        in: path
+        description: PayPal billing agreement id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model38'
+        required: false
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+components:
+  schemas:
+    merchant:
+      type: object
+      properties:
+        payeeInfo:
+          $ref: '#/components/schemas/payeeInfo'
+    payerInfo:
+      required:
+      - email
+      - payerId
+      type: object
+      properties:
+        email:
+          type: string
+          description: The payer's email address.
+        suffix:
+          type: string
+          description: The payer's name suffix.
+        firstName:
+          type: string
+          description: The payer's first name.
+        lastName:
+          type: string
+          description: The payer's last name.
+        payerId:
+          type: string
+          description: The PayPal-assigned payer ID.
+        phone:
+          type: string
+          description: The payer's phone number.
+        billingAddress:
+          $ref: '#/components/schemas/billingAddress'
+    allowedCountries:
+      type: array
+      description: An array of legally accepted customer country codes
+      items:
+        maxLength: 2
+        minLength: 2
+        pattern: ^([A-Z]{2}|C2)$
+        type: string
+        description: The two-character ISO 3166-1 code that identifies the country or region.
+    Model29:
+      required:
+      - billingToken
+      - paymentProviderContract
+      type: object
+      properties:
+        billingToken:
+          type: string
+          description: PayPal agreement token
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+    billingAddress:
+      required:
+      - country
+      - postalCode
+      type: object
+      properties:
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+      description: Shipping Address details
+    shippingAddress:
+      required:
+      - addressLine1
+      - city
+      - country
+      - countrySubdivision
+      - postalCode
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: Full Name
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+    payeeInfo:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address that is associated with the payee's PayPal account.
+    Model17:
+      required:
+      - tokenId
+      type: object
+      properties:
+        tokenId:
+          type: string
+          description: The state of the agreement.
+        status:
+          type: string
+          description: The description of the agreement.
+        description:
+          type: string
+          description: The description of the agreement.
+        collectShippingAddress:
+          type: boolean
+          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
+        enableAddressChange:
+          type: boolean
+          description: Indicates whether to show the shipping address but prevent the customer from editing it.
+        payerInfo:
+          $ref: '#/components/schemas/payerInfo'
+        redirectUrls:
+          $ref: '#/components/schemas/redirectUrls'
+        experienceId:
+          type: string
+          description: The ID of the experience profile to apply during the agreement approval UI flow.
+        externalSelectedFundingInstrumentType:
+          type: string
+          description: The type of financial instrument (FI) that the merchant wants to promote.
+          enum:
+          - CREDIT
+          - PAY_UPON_INVOICE
+    payer:
+      type: object
+      properties:
+        payerInfo:
+          $ref: '#/components/schemas/payerInfo'
+    Model30:
+      required:
+      - createTime
+      - id
+      - state
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the agreement.
+        state:
+          type: string
+          description: The state of the agreement.
+        description:
+          type: string
+          description: The description of the agreement.
+        merchant:
+          $ref: '#/components/schemas/merchant'
+        payer:
+          $ref: '#/components/schemas/payer'
+        plan:
+          $ref: '#/components/schemas/plan'
+        createTime:
+          type: string
+          description: The date and time when the agreement was created.
+        updateTime:
+          type: string
+          description: The date and time when the agreement was updated.
+    Model33:
+      required:
+      - approvalUrl
+      - billingToken
+      type: object
+      properties:
+        approvalUrl:
+          type: string
+          description: PayPal approval URL
+        billingToken:
+          type: string
+          description: Billing token
+    details:
+      type: object
+    Model31:
+      required:
+      - addressLine1
+      - city
+      - country
+      - countrySubdivision
+      - postalCode
+      type: object
+      properties:
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+      description: Shipping Address details
+    Model5:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date
+    Model8:
+      required:
+      - createTime
+      - id
+      - state
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the agreement.
+        state:
+          type: string
+          description: The state of the agreement.
+        description:
+          type: string
+          description: The description of the agreement.
+        merchant:
+          $ref: '#/components/schemas/merchant'
+        payer:
+          $ref: '#/components/schemas/payer'
+        shippingAddress:
+          $ref: '#/components/schemas/shippingAddress'
+        plan:
+          $ref: '#/components/schemas/plan'
+        createTime:
+          type: string
+          description: The date and time when the agreement was created.
+        updateTime:
+          type: string
+          description: The date and time when the agreement was updated.
+    Model32:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        description:
+          type: string
+          description: Agreement description
+        shippingAddress:
+          $ref: '#/components/schemas/Model31'
+        enableAddressChange:
+          type: boolean
+          description: Indicates whether to show the shipping address but prevent the customer from editing it.
+        collectShippingAddress:
+          type: boolean
+          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
+        allowedCountries:
+          $ref: '#/components/schemas/allowedCountries'
+        experienceId:
+          type: string
+          description: The ID of the experience profile to apply during the agreement approval UI flow.
+        externalSelectedFundingInstrumentType:
+          type: string
+          description: The type of financial instrument (FI) that the merchant wants to promote.
+          enum:
+          - CREDIT
+          - PAY_UPON_INVOICE
+        returnUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer approves the payment
+        cancelUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer cancels the payment
+    redirectUrls:
+      type: object
+      properties:
+        returnUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer approves the payment
+        cancelUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer cancels the payment
+    merchantPreferences:
+      type: object
+      properties:
+        collectShippingAddress:
+          type: string
+          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
+        enableAddressChange:
+          type: string
+          description: Indicates whether to show the shipping address but prevent the customer from editing it.
+        experienceId:
+          type: string
+          description: The ID of the experience profile to apply during the agreement approval UI flow.
+        externalSelectedFundingInstrumentType:
+          type: string
+          description: The type of financial instrument (FI) that the merchant wants to promote.
+        allowedCountries:
+          $ref: '#/components/schemas/allowedCountries'
+    plan:
+      type: object
+      properties:
+        merchantPreferences:
+          $ref: '#/components/schemas/merchantPreferences'
+    Model38:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

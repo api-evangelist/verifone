@@ -1,0 +1,1983 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Hardware Orders API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Hardware Orders
+paths:
+  /orders/hardware:
+    post:
+      tags:
+      - Hardware Orders
+      summary: Create Hardware Order
+      description: Adds a new hardware order to the system.
+      operationId: addHardwareOrder
+      parameters:
+      - $ref: '#/components/parameters/saveDraftHeaderParam'
+      - $ref: '#/components/parameters/SimplifiedFlowHeaderParam'
+      requestBody:
+        description: Hardware to add
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HardwareOrder'
+      responses:
+        '200':
+          description: Create Hardware Order Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HardwareOrderResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+        '504':
+          $ref: '#/components/responses/504'
+components:
+  schemas:
+    AmountSimple:
+      title: Amount Simple Type
+      type: string
+      description: 'The value, which can be anything from:
+
+        - An integer. For currencies that are not typically fractional, such as `JPY`. - A three-place decimal fraction. For currencies that are subdivided into thousandths, such as `TND`.
+
+        *The required number of decimal places for a currency code is according to [ISO 4217](https://wikipedia.org/wiki/ISO_4217). However the following table documents exception to ISO 4217 that is also allowed:*
+
+
+        |Code|Currency|Decimals|Fixed minor units|
+
+        |--------|-----------|---------|-----------|
+
+        |ISK|Iceland Krona|2|.00|
+
+        '
+      maxLength: 32
+      pattern: ^((-?[0-9]+)|(-?([0-9]+)?[.][0-9]+))$
+    SigningInformation:
+      description: Information on the signing request.
+      type: object
+      properties:
+        provider:
+          type: string
+          description: Signing Provider used
+          enum:
+          - SIGNICAT
+          - ADOBE
+          - DOKOBIT
+        providerRef:
+          type: string
+          description: Signing Provider reference to the signing request
+        signedFileUrl:
+          type: string
+          description: URL to the signed file
+        signingRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/SignersInformation'
+      required:
+      - provider
+      - providerRef
+    EmailAddress:
+      title: Email Address
+      maxLength: 254
+      minLength: 3
+      type: string
+      format: email
+      pattern: ^[a-zA-Z0-9!#$%&'*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+[.].+$
+      description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+    httpError500:
+      title: HTTP 500 Error
+      type: object
+      description: Unexpected Server Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '500'
+            default: '500'
+          title:
+            type: string
+            enum:
+            - Internal Server Error
+            default: Internal Server Error
+          message:
+            type: string
+            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    HardwareOrderResponse:
+      allOf:
+      - $ref: '#/components/schemas/HardwareOrder'
+      - properties:
+          orderId:
+            $ref: '#/components/schemas/OrderId'
+          status:
+            $ref: '#/components/schemas/OrderStatusEnum'
+          createdUserUid:
+            $ref: '#/components/schemas/CreatedUserId'
+          createdBy:
+            $ref: '#/components/schemas/UserName'
+          createdDate:
+            type: string
+            description: The created date for this order.
+            format: date-time
+          modifiedUserUid:
+            description: The assigned User_ID corresponding to the Order Modified By.
+            type: string
+            format: uuid
+          modifiedBy:
+            $ref: '#/components/schemas/UserName'
+          modifiedDate:
+            type: string
+            description: The last modified date for this order.
+            format: date-time
+          orderType:
+            type: string
+            default: HardwareOrder
+          internal:
+            $ref: '#/components/schemas/InternalAllocatedInformation'
+      required:
+      - orderId
+      - status
+      - orderType
+      - merchantCompanyEntityUid
+    ContactTypeEnum:
+      title: Contact Type
+      description: 'An indicator for the type of contact.
+
+
+        |Value|Description|
+
+        |----|-----------|
+
+        |BUSINESS|Generic business contact information, e.g. info@example.com|
+
+        |DISPUTE_HANDLING|Generic contact information specific to dispute handling, e.g. disputes@example.com|
+
+        |OWNER|Individual contact information of the owner of the Entity, e.g. ben.jerry@example.com|
+
+        |PERSONAL|Personal contact information of the person representing the Entity, e.g. bjerr83@example-personal-email-domain.com|'
+      type: string
+      enum:
+      - BUSINESS
+      - DISPUTE_HANDLING
+      - OWNER
+      - PERSONAL
+      default: BUSINESS
+    OrderId:
+      description: Verifone allocated ID for the Order.
+      type: string
+      format: uuid
+    ExternalOnboarding:
+      description: External merchant onboarding details
+      type: object
+      discriminator:
+        propertyName: provider
+        mapping:
+          BANKAXEPT: '#/components/schemas/BankAxeptExternalOnboarding'
+      properties:
+        provider:
+          title: External Onboarding Provider
+          description: The third-party provider used for merchant onboarding.
+          type: string
+          enum:
+          - BANKAXEPT
+          default: BANKAXEPT
+        agreementId:
+          type: string
+          format: uuid
+          description: 'Agreement or onboarding order identifier returned by the third-party provider when onboarding is initiated.
+
+            '
+        agreementStatus:
+          type: string
+          description: 'Latest onboarding or agreement status received from the third-party provider.
+
+            '
+    HardwareOrder:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/HardwareOrderData'
+      - type: object
+        properties:
+          packageDetails:
+            $ref: '#/components/schemas/PackageDetails'
+          merchant:
+            $ref: '#/components/schemas/HardwareMerchant'
+        required:
+        - merchant
+    PackageBundleId:
+      description: The Verifone allocated ID for the package bundle.
+      type: string
+      pattern: ^[A-Za-z0-9_-]*$
+      maxLength: 100
+    Phone:
+      title: Phone number
+      description: A simple Phone Number
+      type: object
+      additionalProperties: false
+      properties:
+        callingCode:
+          description: Country Calling Code. Mapped to PARTY_PHONE.CALLING_CODE or VENUE_PHONE.CALLING_CODE
+          type: string
+        value:
+          description: The actual phone number less country code and/or extension.
+          type: string
+          minLength: 5
+        extension:
+          description: The internal extension number where applicable or known.
+          type: string
+        isPrimary:
+          description: Indicates that the phone is a the primary phone. Mapped to PARTY_PHONE_PRIMARY
+          type: boolean
+          default: false
+        phoneType:
+          $ref: '#/components/schemas/PhoneTypeEnum'
+      required:
+      - value
+      - phoneType
+    httpError504:
+      title: HTTP 504 Error
+      type: object
+      description: Gateway Timeout Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '504'
+            default: '504'
+          title:
+            type: string
+            enum:
+            - Gateway Timeout
+            default: Gateway Timeout
+          message:
+            type: string
+            default: The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    Notification:
+      description: Object containing the sent date-time and template used for the notification.
+      type: object
+      properties:
+        sentDateTime:
+          description: Date and Time when the notification was sent.
+          type: string
+          format: date-time
+        template:
+          description: Template name used for the notification.
+          type: string
+        responseReferenceId:
+          description: An ID from Messaging Service's response.
+          type: string
+    LastChangeTime:
+      description: Time status detailed status last changed.
+      type: string
+      format: date-time
+    BaseProcessorParameters:
+      description: Payment Processor Parameters related to Merchant onboarding.
+      type: object
+      properties:
+        processor:
+          title: Payment Provider ContractType Processor Acquirer Type
+          description: A type indicator for the contract that is being processed.
+          type: string
+          enum:
+          - ABS_ISO
+          - ABS_PDM
+          - ABS_WEB
+          - AMEX
+          - BANKAXEPT
+          - BANQUE_CHABRIERES
+          - BARCLAYS
+          - BFCOI
+          - BNPP_ATC
+          - BNP_PARIBAS
+          - BNPP_VERS_ATOS
+          - BRED
+          - CAISSE_D_EPARGNE
+          - CBA
+          - CEDICAM
+          - CIC
+          - CM_ARKEA
+          - CREDIT_AGRICOLE
+          - CREDIT_DU_NORD_VERS_ATOS
+          - CREDIT_DU_NORD_VERS_NATIXIS
+          - CREDIT_MUTUEL
+          - CREDITGUARD
+          - DANKORT
+          - EFTPOS_NZ
+          - ELAVON
+          - FDRC
+          - FIRSTDATA
+          - GICC
+          - GIVEX
+          - GLOBALPAY
+          - GPP2
+          - HSBC
+          - IKANO
+          - INTERCARD
+          - ISRACARD
+          - LA_BANQUE_POSTAL
+          - LCL
+          - LES_BANQUES_POPULAIRES
+          - LLOYDS_CARDNET
+          - MAESTRO
+          - MOBILEPAY
+          - NETS
+          - OTHER
+          - PAYPAL
+          - PAYPAL_ECOM
+          - PELECARD
+          - RESURS_BANK
+          - RTS
+          - SG
+          - SIMULATOR
+          - SWEDBANK_PAY
+          - SWISH
+          - TIETO_EVRY
+          - VERIFONE_AU
+          - VIPPS
+          - WESTPAC
+          - WORLDPAY
+          - WPAY_AU
+          - FISERV_AU
+          - CUSCAL_AU
+          - CHASE_US
+          - ELAVON_US
+          - FISERV_US
+          - TSYS_US
+          - GLOBALPAYMENTS_US
+          - VANTIV_US
+          - HEARTLAND_US
+          - TELECHECK_US
+          - SC_AMEX
+          - SC_EVRY
+          - SC_LUOTTOKUNTA
+          - SC_NETS_DK
+          - SC_NETS_NO
+          - SC_SWEDBANK_SE
+          - SVS_US
+          - SVS_UK
+          - VALUELINK_US
+          - VALUELINK_CA
+          - VALUTEC_US
+          - UNIFY_GIVEX
+          default: TSYS_US
+        tidList:
+          description: A pool of terminal IDs issued by the Acquiring Institution. This pool is intended to be used for the POIs that's capable of initiating multiple payment requests in parallel (e.g. Checkout Page and Virtual Terminal)
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+      discriminator:
+        propertyName: processor
+        mapping:
+          GIVEX: '#/components/schemas/ProcessorParametersGivex'
+          GLOBALPAYMENTS_US: '#/components/schemas/ProcessorParametersUSGPEAST'
+          TSYS_US: '#/components/schemas/ProcessorParametersUSTSYS'
+          CHASE_US: '#/components/schemas/ProcessorParametersUSCHASE'
+          ELAVON_US: '#/components/schemas/ProcessorParametersUSELAVON'
+          FISERV_US: '#/components/schemas/ProcessorParametersUSFIRSTDATA'
+          VANTIV_US: '#/components/schemas/ProcessorParametersUSVANTIV'
+          HEARTLAND_US: '#/components/schemas/ProcessorParametersUSHeartland'
+          TELECHECK_US: '#/components/schemas/ProcessorParametersUSTelecheck'
+          FISERV_AU: '#/components/schemas/ProcessorParametersFiservAU'
+          CUSCAL_AU: '#/components/schemas/ProcessorParametersCuscalAU'
+          WPAY_AU: '#/components/schemas/ProcessorParametersWpayAU'
+          SVS_UK: '#/components/schemas/ProcessorParametersSVS'
+          SVS_US: '#/components/schemas/ProcessorParametersSVS'
+          VALUELINK_US: '#/components/schemas/ProcessorParametersValuelink'
+          VALUELINK_CA: '#/components/schemas/ProcessorParametersValuelink'
+          VALUTEC_US: '#/components/schemas/ProcessorParametersValutecUS'
+          VERIFONE_AU: '#/components/schemas/ProcessorParametersVerifoneAU'
+          SC_AMEX: '#/components/schemas/ProcessorParametersSC'
+          SC_EVRY: '#/components/schemas/ProcessorParametersSC'
+          SC_LUOTTOKUNTA: '#/components/schemas/ProcessorParametersSC'
+          SC_NETS_DK: '#/components/schemas/ProcessorParametersSC'
+          SC_NETS_NO: '#/components/schemas/ProcessorParametersSC'
+          SC_SWEDBANK_SE: '#/components/schemas/ProcessorParametersSC'
+          OTHER: '#/components/schemas/ProcessorParametersOTHER'
+          UNIFY_GIVEX: '#/components/schemas/ProcessorParametersUnifyGivex'
+      required:
+      - processor
+    OrderReference:
+      description: Client reference for the Order.
+      type: string
+      minLength: 1
+    HardwarePoiType:
+      title: Point of Interaction
+      description: The Point of Interaction. This may refer to a number of different entities, but is primarily considered to be the Terminal. This object contains the POI details as they pertain to an individual payment, an instance of POI. This does not attempt to define all the settings or attributes that may be associated to a POI. Also, for a specific Acquirer/Contract combination there may be a different instance of the POI(TID). These different relationships are not part of this object.
+      type: object
+      properties:
+        devicePackage:
+          $ref: '#/components/schemas/BundleAndSerialNumberAndQuantity'
+        additionalDevicePackages:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/BundleAndSerialNumberAndQuantity'
+    httpError429:
+      title: HTTP 429 Error
+      type: object
+      description: The resource exists the number of requests has exceeded the specified quota.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '429'
+            default: '429'
+          title:
+            type: string
+            enum:
+            - Too Many Requests
+            default: Too Many Requests
+          message:
+            type: string
+            default: The number of requests from this client is restricted to a specified quota.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - RATE_LIMIT_ERROR
+            default: RATE_LIMIT_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    NotificationReminders:
+      description: A container for all supported notification reminders.
+      type: object
+      properties:
+        econtract:
+          $ref: '#/components/schemas/NotificationReminder'
+        draft:
+          $ref: '#/components/schemas/NotificationReminder'
+        docRequired:
+          $ref: '#/components/schemas/NotificationReminder'
+      additionalProperties: false
+    VmssSchemeStatus:
+      description: Scheme Status
+      type: string
+      enum:
+      - 'NA '
+      - PENDING
+      - ERROR
+      - COMPLETE
+    ContactName:
+      allOf:
+      - $ref: '#/components/schemas/Name'
+    SiteReferenceId:
+      description: An optional identifier for the Site which can be provided if different to the merchantId.
+      type: string
+      maxLength: 100
+      minLength: 1
+    BusinessTitle:
+      type: string
+      maxLength: 100
+    CancelReasonEnum:
+      description: Reason for order cancellation.
+      type: string
+      enum:
+      - ADMIN_REASON
+      - RELATED_PO_CHANGES
+      - WRONG_PRODUCT
+      - ORDER_LATE
+      - OTHER
+    OrderStatusEnum:
+      type: string
+      enum:
+      - DRAFT
+      - SUBMITTED
+      - INPROGRESS
+      - COMPLETED
+      - CANCELLED
+      - ONHOLD
+    CreatedUserId:
+      description: The assigned User ID corresponding to the Order Created By.
+      type: string
+      format: uuid
+    NotificationReminder:
+      description: Notification Reminder Sent Details
+      type: object
+      properties:
+        lastNotificationSentDateTime:
+          description: Date and Time of the last notification sent. Defaulted to `createdDateTime` on first saved order.
+          type: string
+          format: date-time
+        notificationCount:
+          description: Number of notifications sent. -1 = Unsubscribed, or 1, 2, 3 as per the notification sent.
+          type: integer
+        templateName:
+          description: NotificationTemplate Name used, e.g. `T650P_WELCOME`
+          type: string
+        notifications:
+          description: List of notifications, each with the date-time sent and the template used.
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+    ContactType:
+      description: The details of a Contact.
+      type: object
+      properties:
+        contactType:
+          $ref: '#/components/schemas/ContactTypeEnum'
+        name:
+          $ref: '#/components/schemas/ContactName'
+        phoneNumbers:
+          description: The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.
+          items:
+            $ref: '#/components/schemas/Phone'
+          minItems: 1
+          uniqueItems: true
+          type: array
+        email:
+          $ref: '#/components/schemas/EmailAddress'
+        businessTitle:
+          $ref: '#/components/schemas/BusinessTitle'
+      required:
+      - contactType
+      - name
+    HardwareOrderData:
+      type: object
+      properties:
+        orderReference:
+          $ref: '#/components/schemas/OrderReference'
+        customerEntityUid:
+          type: string
+          format: uuid
+          description: Verifone allocated ID for the customer this order is for (packages and bundles are associated with this entity).
+        requestedDate:
+          type: string
+          description: The requested date for this order.
+          format: date-time
+        poRef:
+          type: string
+          description: Purchase Order Reference
+        paymentDetails:
+          $ref: '#/components/schemas/PaymentDetails'
+        notes:
+          type: string
+          description: Notes for the Order
+        additionalOrderData:
+          type: array
+          description: Input data which maybe required for the country/business unit to to complete the order. For example some countries require a VAT ID, or different legal forms of business, this will be defined by Verifone if needed for your integration
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+      required:
+      - orderReference
+      - customerEntityUid
+    BaseAddress:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      properties:
+        receiverName:
+          type: string
+          minLength: 1
+          description: The receiver name for the address if different to the company/site name.
+        addressLine1:
+          minLength: 1
+          maxLength: 40
+          type: string
+          description: Address Line 1. Should include street and apartment number if required.
+        addressLine2:
+          maxLength: 40
+          type: string
+          description: Address Line 2
+        addressLine3:
+          maxLength: 40
+          type: string
+          description: Address Line 3
+        poBox:
+          type: string
+          description: The PO BOX number.
+        city:
+          minLength: 1
+          maxLength: 28
+          type: string
+          description: Name of a built-up area, with defined boundaries, and a local government. This could be city or town.
+        countrySubdivision:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Identifies a sub-division of a country which may be state, region or county. This follows a similar format to the openbank api.
+        postCode:
+          $ref: '#/components/schemas/PostCode'
+        country:
+          $ref: '#/components/schemas/CountryCode3Enum'
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+    SiteName:
+      description: The site name, if different to the merchant name.
+      type: string
+      minLength: 1
+    AdjustedPriceType:
+      type: object
+      properties:
+        priceModel:
+          type: string
+          description: Pricing Model
+          enum:
+          - MONTHLY_FEE
+          - MONTHLY_FEE_PER_DEVICE
+          - MINIMUM_AMT_PER_TRX
+          - AMT_PER_TRX
+          - PERC_PER_TRX
+          - ONE_TIME
+          - YEARLY_FEE
+          - QUARTERLY_FEE
+        price:
+          $ref: '#/components/schemas/AmountSimple'
+    CancelAdditionalReason:
+      description: Free-Form reason for order cancellation.
+      type: string
+    PaymentTypeEnum:
+      title: Payment Type
+      description: A type indicator for the payment that is being processed. Value `GIFT` is deprecated.
+      type: string
+      enum:
+      - AFFIRM
+      - AFTERPAY
+      - ALIPAY
+      - AMEX
+      - BAIDU_PAY
+      - BANK
+      - BANKAXEPT
+      - BARTERCARD
+      - BBBY_COB
+      - BBBY_PLCC
+      - BLIK
+      - BP_FUELCARD
+      - CALLIO_GASTRO
+      - CARD
+      - CARDLINK
+      - CARNET
+      - CASH
+      - CB
+      - CHEQUE
+      - CLAVE
+      - CRYPTO
+      - DANKORT
+      - DEBIT
+      - DINERS
+      - DISCOVER
+      - EASYCD
+      - EBT
+      - EBT_WIC_OFFLINE
+      - ECARD
+      - ECARDZ
+      - EDENRED
+      - ELECTRON
+      - EZIPAY
+      - FARMERS_FINANCE
+      - FARMLAND
+      - FARMLANDS
+      - FINNISH_DIRECT_BANKING
+      - FLEETCOR
+      - FLEETONE
+      - FLEXECASH
+      - FORBRUGSFORENINGEN
+      - FPF_GIFT
+      - GARMIN_PAY
+      - GIFT
+      - GIFT_CARD
+      - GIROCARD
+      - IKANO
+      - ISRACARD
+      - ISRAEL_PRIVATE_LABEL
+      - JCB
+      - JD_PAY
+      - KLARNA
+      - KLARNA_ECOM
+      - KLARAN_QR
+      - KLARNA_QR
+      - LANDSBANKINN
+      - MASTERCARD
+      - MAESTRO
+      - MOBILEPAY
+      - MOBILEPAY_ECOM
+      - OP_ONLINE_PAYMENT
+      - PAYPAL
+      - PAYPAL_ECOM
+      - PAYPAL_ECOM_MANAGED
+      - PAYPAL_QR
+      - PIX
+      - PLCC
+      - Q_CARD
+      - RESURS_BANK
+      - RURALCO
+      - SAMSUNG_PAY
+      - SODEXO_GASTRO
+      - SUPERCARD
+      - SWISH
+      - SWISH_ECOM
+      - TEN_PAY
+      - TRANXACTOR
+      - TRUE_REWARDS
+      - TT_CARD
+      - UP_SLOVENSKA
+      - UPI
+      - VENMO
+      - VENMO_ECOM
+      - VENMO_QR
+      - VIPPS
+      - VIPPS_ECOM
+      - VISA
+      - VOYAGER
+      - VPAY
+      - WECHAT
+      - WESTFIELD_GIFTCARD
+      - WESTPAC_DEBIT
+      - WEX
+      - ZELLE
+      - ZIP
+      - OTHER
+    AddressWithoutType:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      required:
+      - addressLine1
+      - city
+      - postCode
+      - country
+      allOf:
+      - $ref: '#/components/schemas/BaseAddressWithoutType'
+    PaymentDetails:
+      description: Details of how the order will be paid, and the further re-occuring billing for services.
+      type: object
+      properties:
+        paymentType:
+          type: string
+          description: Type of payment that can be made.
+          default: CREDIT
+      discriminator:
+        propertyName: paymentType
+        mapping:
+          ACCOUNT: '#/components/schemas/PaymentDetailsAccount'
+          CREDIT: '#/components/schemas/PaymentDetailsCredit'
+          NET: '#/components/schemas/PaymentDetailsNET'
+          EINVOICE: '#/components/schemas/PaymentDetailsEInvoice'
+      required:
+      - paymentType
+    HardwareMerchant:
+      description: details of the merchant
+      type: object
+      properties:
+        merchantName:
+          $ref: '#/components/schemas/MerchantName'
+        primaryContact:
+          $ref: '#/components/schemas/ContactType'
+        requestedDateOfShipment:
+          $ref: '#/components/schemas/RequestedDateOfShipment'
+        mcc:
+          $ref: '#/components/schemas/MCC'
+        tradingAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        shippingAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        billingAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        companyAddress:
+          $ref: '#/components/schemas/AddressWithoutType'
+        siteReferenceId:
+          $ref: '#/components/schemas/SiteReferenceId'
+        siteName:
+          $ref: '#/components/schemas/SiteName'
+        openingHours:
+          type: array
+          description: The list of opening periods per week day.
+          items:
+            $ref: '#/components/schemas/EntityOpeningHours'
+          minItems: 1
+        pois:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/HardwarePoiType'
+      required:
+      - primaryContact
+    httpError503:
+      title: HTTP 503 Error
+      type: object
+      description: Service Unavailable Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '503'
+            default: '503'
+          title:
+            type: string
+            enum:
+            - Service Unavailable
+            default: Service Unavailable
+          message:
+            type: string
+            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    BundleAndPrice:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        price:
+          $ref: '#/components/schemas/AmountSimple'
+      required:
+      - packageBundleId
+    TimeZone:
+      description: A time zone, following the format defined in the IANA tz database (https://www.iana.org/time-zones). Valid examples are America/New_York and Etc/UTC. Do not use ambiguous, non-qualified values such as EST or GB. Before including this type in your interface, please consider whether it is actually appropriate to convey time zone information with your type. It is almost always the case that this should be transformed from UTC at the time of display to the user; this type might therefore be most associated with user-preference APIs.
+      type: string
+      minLength: 1
+      maxLength: 127
+    BundleAndPriceAndData:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        adjustedPrices:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/AdjustedPriceType'
+        additionalPackageData:
+          type: array
+          description: Input data required to configure the package. For example some packages require a merchant ID
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+      required:
+      - packageBundleId
+    OrderStats:
+      type: object
+      description: Order Statistics
+      properties:
+        minsSinceCreatedToLastUpdate:
+          type: integer
+          description: Number of minutes since last status update and created order time
+          default: 0
+        minsSinceLastStatusUpdate:
+          type: integer
+          description: Number of minutes (if > 0) since last status update
+          default: 0
+    DayOfWeekEnum:
+      title: Day of the Week
+      description: An enumeration specifying the days of the week.
+      type: string
+      enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    Name:
+      title: Name Details
+      description: An object representing the name or component names of a party, person or business. No elements are mandatory due to the different usages, but the business rules need to be applied in the context where name is used.
+      type: object
+      uniqueItems: false
+      properties:
+        firstName:
+          description: The given name of contact.
+          type: string
+          minLength: 1
+          maxLength: 120
+        lastName:
+          description: The surname name or family name of the contact. This is required when the name is for a party or person. Can also include the matronymic or mother's family name where this is customarily used.
+          minLength: 1
+          maxLength: 120
+          type: string
+        prefix:
+          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
+          maxLength: 120
+          type: string
+        alternateFullName:
+          description: The alternate name for the party. This can be a business name or nickname. This should be used where the name of the party cannot be parsed into its constituent parts such as first name or last name. If the party is a business then this should always be present.
+          maxLength: 200
+          type: string
+        middleName:
+          description: The middle name or names for a party or person.
+          maxLength: 120
+          type: string
+        suffix:
+          description: The name suffix for the party.
+          maxLength: 120
+          type: string
+      required:
+      - firstName
+      - lastName
+    CustomerOrderLink:
+      description: Customer Order Link Sent Details
+      type: object
+      properties:
+        orderLink:
+          description: 'The unique order link sent to the customer to help them navigate directly to the relevant  step in the order process. This link ensures the customer can update their order efficiently.
+
+            '
+          type: string
+          format: uri
+        linkInitiatorUserUid:
+          description: The unique User ID of the user who generated the order link.
+          type: string
+          format: uuid
+        linkInitiatorUsername:
+          $ref: '#/components/schemas/UserName'
+        linkReceiverUserUid:
+          description: The unique User ID of the customer who received the order link.
+          type: string
+          format: uuid
+        linkReceiverUsername:
+          $ref: '#/components/schemas/UserName'
+        linkSendTime:
+          description: 'Date and time when the order link was sent to the customer.  This represents when the system triggered the link delivery.
+
+            '
+          type: string
+          format: date-time
+        linkOpendByCustomerTime:
+          description: 'Date and time when the order link was opened by the customer.
+
+            '
+          type: string
+          format: date-time
+        customerUpdateTime:
+          description: 'Date and time when the customer last updated their order after using the order link.
+
+            '
+          type: string
+          format: date-time
+    SerialNumber:
+      description: The serial number of the physical device
+      type: string
+      maxLength: 25
+    ServicePackages:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        adjustedPrices:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/AdjustedPriceType'
+        processorParameters:
+          $ref: '#/components/schemas/BaseProcessorParameters'
+        additionalPackageData:
+          type: array
+          description: Input data required to configure the package. For example some packages require a merchant ID.
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+        threeDSMerchantIdentifiers:
+          $ref: '#/components/schemas/ThreeDSecureMerchantIdentifiers'
+      required:
+      - packageBundleId
+    OrderCancellation:
+      type: object
+      properties:
+        cancelReasonEnum:
+          $ref: '#/components/schemas/CancelReasonEnum'
+        cancelAdditionalReason:
+          $ref: '#/components/schemas/CancelAdditionalReason'
+        cancelledUserUid:
+          description: Unique identifier (UUID) of the user who performed the cancellation.
+          type: string
+          format: uuid
+        cancelledBy:
+          $ref: '#/components/schemas/UserName'
+        cancelledDate:
+          type: string
+          description: Date and time when the order was cancelled, in UTC.
+          format: date-time
+      required:
+      - cancelReasonEnum
+    CountryCode3Enum:
+      title: Country Code
+      type: string
+      description: The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+      enum:
+      - ZZZ
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATA
+      - ATF
+      - ATG
+      - AUS
+      - AUT
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BES
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BSB
+      - BRN
+      - BTN
+      - BVT
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HMD
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MOZ
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PSE
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGC
+      - SGP
+      - SHN
+      - SJM
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - UMI
+      - URY
+      - USA
+      - UZB
+      - VAT
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+    ExtendedDetails:
+      description: Detailed Status of the Order
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/DetailedStatusEnum'
+        code:
+          type: string
+          description: Code associated with the status (if applicable)
+        information:
+          type: string
+          description: Extra Information associated with the status (if applicable)
+        lastChangeTime:
+          $ref: '#/components/schemas/LastChangeTime'
+        canCancel:
+          type: boolean
+          description: Can this order be cancelled.
+    BundleAndSerialNumberAndQuantity:
+      type: object
+      properties:
+        packageBundleId:
+          $ref: '#/components/schemas/PackageBundleId'
+        additionalPackageData:
+          description: Input data required to configure the package. For example some packages require a merchant ID.
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/VariableResponseType'
+        quantity:
+          description: Quantity of the packages being ordered
+          type: integer
+          minimum: 1
+        serialNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SerialNumber'
+      required:
+      - packageBundleId
+    httpError400:
+      title: HTTP 400 Error
+      type: object
+      description: The request could not be understood by the server due to malformed syntax.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '400'
+            default: '400'
+          title:
+            type: string
+            enum:
+            - Bad Request
+            default: Bad Request
+          message:
+            type: string
+            default: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    ErrorResp:
+      title: Error
+      description: 'A common Error object returned as part of the API layer.
+
+
+        . This is modified to become the base class for all of the derived HTTP Error Responses.'
+      type: object
+      properties:
+        reversalStatus:
+          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
+
+
+            |Value|Description|
+
+            |-|-|
+
+            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
+
+            |REQUIRED|A reversal is required by the client.|
+
+            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+          default: NONE
+      required:
+      - code
+    httpError404:
+      title: HTTP 404 Error
+      type: object
+      description: The server cannot find the requested resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '404'
+            default: '404'
+          title:
+            type: string
+            enum:
+            - Not Found
+            default: Not Found
+          message:
+            type: string
+            default: The server cannot find the requested resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    PackageDetails:
+      description: Select the base package, hardware and additional services for this order.
+      type: object
+      properties:
+        portfolioUid:
+          description: Verifone ID for the Portfolio Selected. If this is not provided then a default portfolio will be used.
+          type: string
+          format: uuid
+        basePackageBundle:
+          $ref: '#/components/schemas/BundleAndPrice'
+        servicePackages:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ServicePackages'
+        deliveryPackage:
+          $ref: '#/components/schemas/BundleAndPriceAndData'
+      required:
+      - basePackageBundle
+    EntityOpeningPeriod:
+      title: Opening Period
+      description: The opening and closing hours.
+      properties:
+        start:
+          pattern: ^\d{2}:\d{2}$
+          type: string
+        end:
+          pattern: ^\d{2}:\d{2}$
+          type: string
+      required:
+      - end
+      - start
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+      type: string
+      minLength: 1
+      maxLength: 16
+    UserName:
+      description: The username of the person who's UID is represented, e.g. "John/Jane Smith".
+      type: string
+      minLength: 1
+    InternalAllocatedInformation:
+      description: Internally allocated identifiers. This is for verifone use only and is subject to change.
+      type: object
+      properties:
+        oracleOrderNumber:
+          description: The order number which Oracle allocated as part of the order.
+          type: number
+        oracleShippingTrackingReference:
+          description: The order shipping reference which Oracle allocated as part of the order.
+          type: string
+        kycReportUid:
+          description: KYC report generated for this order.
+          type: string
+          format: uuid
+        tokenScopeUid:
+          description: Token scope generated for this order.
+          type: string
+          format: uuid
+        extendedDetails:
+          $ref: '#/components/schemas/ExtendedDetails'
+        orderStats:
+          $ref: '#/components/schemas/OrderStats'
+        vmssApplication:
+          $ref: '#/components/schemas/VmssApplication'
+        salesforceApplicationId:
+          description: The Application ID allocated by Salesforce.
+          type: string
+        signingInformation:
+          $ref: '#/components/schemas/SigningInformation'
+        econtractNotificationReminder:
+          description: E-Contract Notification Reminder Sent Details.
+          $ref: '#/components/schemas/NotificationReminder'
+        draftNotificationReminder:
+          description: Draft Notification Reminder Sent Details.
+          $ref: '#/components/schemas/NotificationReminder'
+        notificationReminders:
+          description: A container for all supported notification reminders.
+          $ref: '#/components/schemas/NotificationReminders'
+        customerOrderLink:
+          description: Details of Customer Order Link.
+          $ref: '#/components/schemas/CustomerOrderLink'
+        cancellationHistory:
+          type: array
+          description: List of cancellation records for the customer order.
+          items:
+            $ref: '#/components/schemas/OrderCancellation'
+        externalOnboarding:
+          type: object
+          description: External merchant onboarding details
+          $ref: '#/components/schemas/ExternalOnboarding'
+    BaseAddressWithoutType:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BaseAddress'
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactType'
+        vfiSiteId:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Address/Site identifier known as within Verifone internal systems.
+        storeNumber:
+          type: string
+          description: Store Number or Client/Customer ID in Oracle
+        governmentOwned:
+          type: boolean
+          description: Indicates whether the address is government-owned. E.g. Address can be in Sweden, but can be a US Embassy.
+        governmentCountry:
+          $ref: '#/components/schemas/CountryCode3Enum'
+    httpError401:
+      title: HTTP 401 Error
+      type: object
+      description: The request must be authenticated to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '401'
+            default: '401'
+          title:
+            type: string
+            enum:
+            - Unauthorised
+            default: Unauthorised
+          message:
+            type: string
+            default: The request requires client authentication.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    SignersInformation:
+      description: Information on the signers in the request.
+      type: object
+      properties:
+        providerRef:
+          description: Signing Provider reference to the signers signing request.
+          type: string
+        contact:
+          $ref: '#/components/schemas/ContactType'
+        signed:
+          description: Has the signer signed the contract.
+          type: boolean
+          default: false
+        signedDateTime:
+          description: Date/Time signer signed the request.
+          type: string
+          format: date-time
+        signingLink:
+          description: This is the link used for signing the contract.
+          type: string
+      required:
+      - contact
+    VmssSchemeMatches:
+      description: Number of matches found against the VMSS service.
+      type: number
+    RequestedDateOfShipment:
+      description: Requested date of shipment.
+      type: string
+      format: date-time
+    EntityOpeningHours:
+      title: Opening Hours
+      description: An dictionary map of the different opening hours for an Entity
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/DayOfWeekEnum'
+        times:
+          $ref: '#/components/schemas/EntityOpeningPeriod'
+      required:
+      - day
+      - times
+    MCC:
+      description: The Merchant Category Code (MCC). A 4 digit Code classifying the type of business being done by the card acceptor or Merchant (in accordance with ISO 18245).
+      type: string
+      minLength: 4
+      maxLength: 4
+      pattern: ^[0-9]{4,4}$
+    MerchantName:
+      description: The primary merchant name, e.g. "McDonalds".
+      type: string
+      pattern: ^(?!\\s*$).+
+      minLength: 1
+      maxLength: 100
+    PhoneTypeEnum:
+      title: Phone Type
+      description: Phone type in PHONE_TYPE_CON. Mapped to PARTY_PHONE.PHONE_TYPE_CON_ID or VENUE_PHONE.PHONE_TYPE_CON_ID
+      type: string
+      enum:
+      - HOME
+      - MOBILE
+      - WORK
+      - FAX
+      - OTHER
+      default: HOME
+    httpError403:
+      title: HTTP 403 Error
+      type: object
+      description: The request must be authorised to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '403'
+            default: '403'
+          title:
+            type: string
+            enum:
+            - Forbidden
+            default: Forbidden
+          message:
+            type: string
+            default: The request requires client authorisation to access resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    DetailedStatusEnum:
+      description: An order will be in one of the following states.
+      type: string
+      enum:
+      - DRAFT
+      - SUBMITTED
+      - INPROGRESS
+      - PENDING_THIRD_PARTY
+      - PENDING_SIGNATURE
+      - UNDER_REVIEW
+      - REQUIRES_ATTENTION
+      - INTERNAL_BOARDING
+      - FULFILMENT_BOOKED
+      - FULFILMENT_PICKED
+      - FULFILMENT_SHIPPED
+      - CANCEL_REQUESTED
+      - CANCEL_INPROGRESS
+      - CANCEL_ERROR
+      - CANCELED_BYUSER
+      - COMPLETED
+      - CANCELLED
+      - DECLINED
+      - ONHOLD
+      - OFFER_SENT
+      - OPENED_BY_CUSTOMER
+      - INPROGRESS_BY_CUSTOMER
+      - DOCS_REQUIRED
+      - DOCS_REQUIRES_ATTENTION
+    ThreeDSecureMerchantIdentifiers:
+      title: Merchant Identifier
+      description: 'Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.
+
+        In cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.
+
+        For example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:
+
+        * One used for SafeKey (3DS authentication) * Another used for authorization via the acquirer or gateway'
+      required:
+      - merchantId
+      - paymentType
+      properties:
+        merchantId:
+          type: string
+          description: "Merchant ID assigned by Acquirer for 3DS flow. Override the Merchant ID (merchantId) with the default value configured in the payment provider contract (PPC), where applicable.\nIn cases where the acquirer-issued Merchant ID for the authorization flow differs from the one used in the 3DS (SafeKey) flow, ensure the correct ID is applied for each flow.\nFor example, Amex often requires merchants to complete separate onboarding processes for 3DS and authorization, resulting in two distinct Merchant IDs:\n\n  * One used for SafeKey (3DS authentication)\n  * Another used for authorization via the acquirer or gateway"
+          pattern: ^$|^(?!\s*$).+
+          maxLength: 30
+        paymentType:
+          $ref: '#/components/schemas/PaymentTypeEnum'
+    VariableResponseType:
+      description: Variable/Value Pairs.
+      type: object
+      properties:
+        variableName:
+          type: string
+          description: Variable name (this would be provided by Verifone)
+          pattern: ^[A-Za-z0-9_-]*$
+        variableValue:
+          type: string
+          maxLength: 10000
+          description: Value of the variable
+    VmssApplication:
+      type: object
+      properties:
+        visaStatus:
+          $ref: '#/components/schemas/VmssSchemeStatus'
+        visaMatches:
+          $ref: '#/components/schemas/VmssSchemeMatches'
+        mcdStatus:
+          $ref: '#/components/schemas/VmssSchemeStatus'
+        mcdMatches:
+          $ref: '#/components/schemas/VmssSchemeMatches'
+        mcdTransactionReference:
+          type: string
+          description: Reference to the status check to mastercard
+  parameters:
+    saveDraftHeaderParam:
+      name: saveDraft
+      in: header
+      description: An optional header indicating whether to save the order into a DRAFT status. If this value is not specified or set to false then the order will be SUBMITTED immediately.
+      required: false
+      schema:
+        type: boolean
+    SimplifiedFlowHeaderParam:
+      name: X-Use-Simplified-Order-Flow
+      in: header
+      description: An optional header indicating to the client, the new approach delegates more logic to the backend, requiring the API/UI client to supply only the essential data when possible. Our backend now intelligently derives missing fields by leveraging defaults and configurations from the Portfolio Service
+      required: false
+      schema:
+        type: boolean
+  responses:
+    '404':
+      description: Not Found Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError404'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '429':
+      description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError429'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '403':
+      description: Forbidden Request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError403'
+    '503':
+      description: Service Not Available
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError503'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '504':
+      description: Service Timeout
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError504'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '401':
+      description: Unauthorised Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError401'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError400'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '500':
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError500'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

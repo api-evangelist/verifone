@@ -1,0 +1,3015 @@
+openapi: 3.0.1
+info:
+  title: 3D Secure 3DS Authentication Transactions API
+  version: 3.43.0
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+servers:
+- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+  description: EMEA Production
+- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+  description: Americas Production
+- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+  description: New Zealand Production
+- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+  description: Global Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+  description: Americas Sandbox
+security:
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Transactions
+paths:
+  /transactions:
+    post:
+      tags:
+      - Transactions
+      summary: Create transaction
+      operationId: postTransactions
+      parameters:
+      - name: paypalFraudId
+        in: header
+        description: PayPal Fraud Id
+        schema:
+          type: string
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model26'
+        required: false
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model28'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /transactions/{id}:
+    patch:
+      tags:
+      - Transactions
+      summary: Update transaction
+      operationId: patchTransactionsId
+      parameters:
+      - name: id
+        in: path
+        description: Transaction UUID from create transaction API
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/updateTransaction'
+        required: false
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /transactions/risk/context:
+    post:
+      tags:
+      - Transactions
+      summary: Set transaction context
+      operationId: postTransactionsRiskContext
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model44'
+        required: false
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model45'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /transactions/{id}/void:
+    post:
+      tags:
+      - Transactions
+      summary: Cancel authorisation
+      operationId: postTransactionsIdVoid
+      parameters:
+      - name: id
+        in: path
+        description: Transaction UUID from create transaction API
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /transactions/{id}/authorize:
+    post:
+      tags:
+      - Transactions
+      summary: Authorize transaction
+      operationId: postTransactionsIdAuthorize
+      parameters:
+      - name: paypalFraudId
+        in: header
+        description: PayPal Fraud Id
+        schema:
+          type: string
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Transaction UUID from create transaction API
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model46'
+        required: false
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model47'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /transactions/{id}/capture:
+    post:
+      tags:
+      - Transactions
+      summary: Capture transaction
+      operationId: postTransactionsIdCapture
+      parameters:
+      - name: paypalFraudId
+        in: header
+        description: PayPal Fraud Id
+        schema:
+          type: string
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Transaction UUID from create transaction API
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model49'
+        required: false
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model50'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+  /transactions/{id}/refund:
+    post:
+      tags:
+      - Transactions
+      summary: Refund transaction
+      operationId: postTransactionsIdRefund
+      parameters:
+      - name: x-vfi-api-idempotencyKey
+        in: header
+        description: A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: Transaction UUID from create transaction API
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Model52'
+        required: false
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model53'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model5'
+components:
+  schemas:
+    Model28:
+      required:
+      - createdAt
+      - id
+      - instoreReference
+      type: object
+      properties:
+        id:
+          type: string
+          description: Transaction UUID from create transaction API
+        createdAt:
+          type: string
+          description: Transaction creation date (ISO-8601)
+          format: date
+        status:
+          type: string
+          description: Transaction status
+          enum:
+          - INITIATED
+          - AUTHORISED
+        orderId:
+          type: string
+          description: PayPal order identifier
+        instoreReference:
+          type: string
+          description: Reference to the transaction for internal usage for instore
+        approvalUrl:
+          type: string
+          description: The URL where the customer should be redirected to approve the payment
+    identification:
+      required:
+      - taxIdentificationNumber
+      - taxIdentificationType
+      type: object
+      properties:
+        taxIdentificationNumber:
+          maxLength: 14
+          type: string
+          description: Customer tax ID. Supported for the PayPal payment method only. Typically, the tax ID is 11 characters long for individuals and 14 characters long for businesses.
+        taxIdentificationType:
+          type: string
+          description: The customer tax ID type.
+          enum:
+          - BR_CNPJ
+          - BR_CPF
+      description: Customer identification
+    handling:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Handling fee amount
+    billingAddress:
+      required:
+      - country
+      - postalCode
+      type: object
+      properties:
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+      description: Shipping Address details
+    Model45:
+      required:
+      - trackingId
+      type: object
+      properties:
+        trackingId:
+          type: string
+          description: A unique ID to track each transaction
+    Model47:
+      required:
+      - authorizationId
+      - createdAt
+      - id
+      - instoreReference
+      type: object
+      properties:
+        id:
+          type: string
+          description: Transaction UUID from create transaction API
+        authorizationId:
+          type: string
+          description: PayPal authorization identifier
+        createdAt:
+          type: string
+          description: Authorization creation date (ISO-8601)
+          format: date
+        expiresAt:
+          type: string
+          description: Authorization expiration date (ISO-8601)
+          format: date
+        status:
+          type: string
+          description: Transaction status
+          enum:
+          - AUTHORISED
+        payer:
+          $ref: '#/components/schemas/Auth_Payer_Info'
+        instoreReference:
+          type: string
+          description: Reference to the transaction for internal usage for instore
+    Payer_Name:
+      type: object
+      description: The name of the payer.
+      properties:
+        firstName:
+          type: string
+          description: First name
+        lastName:
+          type: string
+          description: Last name
+    Shipping-Address:
+      type: object
+      description: Shipping Address details
+      properties:
+        country:
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+          minLength: 2
+          maxLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+        postalCode:
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+          maxLength: 60
+        countrySubdivision:
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+          maxLength: 300
+        city:
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+          maxLength: 120
+        addressLine2:
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+          maxLength: 300
+        addressLine1:
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+          maxLength: 300
+        fullName:
+          type: string
+          description: The name of the person to whom to ship the items.
+      required:
+      - country
+      - postalCode
+    items:
+      type: array
+      description: Items to purchase
+      items:
+        $ref: '#/components/schemas/Model24'
+    Model51:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Amount to refund. If not provided, full refund will be performed.
+    updateTransaction:
+      type: object
+      properties:
+        intent:
+          type: string
+          description: Intent of this transaction
+          enum:
+          - AUTHORIZE
+          - CAPTURE
+        payer:
+          $ref: '#/components/schemas/customer'
+        merchantReference:
+          type: string
+          description: The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.
+          maxLength: 127
+        description:
+          type: string
+          description: Purchase description
+          maxLength: 127
+        shipping:
+          $ref: '#/components/schemas/shipping'
+        dynamicDescriptor:
+          type: string
+          description: 'If an Order is paid using the "PayPal Wallet" the statement descriptor will appear in following format on the payer card statement:  PAYPAL_prefix+(space)+merchant_descriptor+(space)+dynamicDescriptor.  The PAYPAL prefix uses 8 characters. Only the first 22 characters will be displayed in the statement. <br />  For example, <br/>  * The PayPal prefix toggle is PAYPAL <br/>  * The merchant descriptor in the profile is Janes Gift <br/>  * The soft descriptor is 800-123-1234 </br> Then, the statement descriptor on the card is PAYPAL * Janes Gift 80.'
+          maxLength: 22
+        amount:
+          $ref: '#/components/schemas/Model22'
+        detailedAmount:
+          $ref: '#/components/schemas/detailedAmount'
+    discount:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Discount amount
+    Model26:
+      required:
+      - amount
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: Payment Provider contract
+        amount:
+          $ref: '#/components/schemas/Model22'
+        intent:
+          type: string
+          description: Intent of this transaction
+          default: CAPTURE
+          enum:
+          - AUTHORIZE
+          - CAPTURE
+        customer:
+          $ref: '#/components/schemas/customer'
+        applicationContext:
+          $ref: '#/components/schemas/application_context'
+        shipping:
+          $ref: '#/components/schemas/shipping'
+        items:
+          $ref: '#/components/schemas/items'
+        dynamicDescriptor:
+          maxLength: 22
+          type: string
+          description: 'If an Order is paid using the "PayPal Wallet" the statement descriptor will appear in following format on the payer card statement:  PAYPAL_prefix+(space)+merchant_descriptor+(space)+dynamicDescriptor.  The PAYPAL prefix uses 8 characters. Only the first 22 characters will be displayed in the statement. <br />  For example, <br/>  * The PayPal prefix toggle is PAYPAL <br/>  * The merchant descriptor in the profile is Janes Gift <br/>  * The soft descriptor is 800-123-1234 </br> Then, the statement descriptor on the card is PAYPAL * Janes Gift 80.'
+        merchantReference:
+          maxLength: 127
+          type: string
+          description: The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.
+        description:
+          maxLength: 127
+          type: string
+          description: Purchase description
+        detailedAmount:
+          $ref: '#/components/schemas/detailedAmount'
+    details:
+      type: object
+    Model49:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Model48'
+        description:
+          maxLength: 127
+          type: string
+          description: "An informational note about the capture. Appears in both the payer's transaction history and the\n emails that the payer receives."
+        agreementId:
+          type: string
+          description: Billing Agreement id
+        merchantReference:
+          maxLength: 127
+          type: string
+          description: The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.
+    shipping:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/billingAddress'
+        fullName:
+          type: string
+          description: Full Name
+      description: Shipping details
+    Model48:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Amount to capture. If not provided, full capture will be performed.
+    Model25:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Shipping fee amount
+    detailedAmount:
+      type: object
+      properties:
+        discount:
+          $ref: '#/components/schemas/discount'
+        shippingDiscount:
+          $ref: '#/components/schemas/shippingDiscount'
+        insurance:
+          $ref: '#/components/schemas/insurance'
+        handling:
+          $ref: '#/components/schemas/handling'
+        shipping:
+          $ref: '#/components/schemas/Model25'
+      description: Detailed amount
+    Model22:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Total transaction amount
+    Model24:
+      required:
+      - tax
+      - unitAmount
+      type: object
+      properties:
+        name:
+          maxLength: 127
+          type: string
+          description: Item name
+        unitAmount:
+          $ref: '#/components/schemas/unitAmount'
+        tax:
+          $ref: '#/components/schemas/tax'
+        quantity:
+          type: number
+          description: Item quantity
+        description:
+          maxLength: 127
+          type: string
+          description: Item description
+        sku:
+          maxLength: 127
+          type: string
+          description: The Stock Keeping Unit
+        category:
+          type: string
+          description: Category of Goods
+          enum:
+          - DIGITAL_GOODS
+          - PHYSICAL_GOODS
+    Model5:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date
+    unitAmount:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+      description: Amount for the item
+    Model53:
+      required:
+      - createdAt
+      - id
+      - instoreReference
+      - refundId
+      type: object
+      properties:
+        id:
+          type: string
+          description: Transaction UUID from create transaction API
+        refundId:
+          type: string
+          description: Refund identifier
+        createdAt:
+          type: string
+          description: Refund creation date (ISO-8601)
+          format: date
+        status:
+          type: string
+          description: Transaction status
+          enum:
+          - AUTHORISED
+        instoreReference:
+          type: string
+          description: Reference to the transaction for internal usage for instore
+    address:
+      required:
+      - country
+      - postalCode
+      type: object
+      properties:
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+      description: Customer billing address
+    customer:
+      type: object
+      properties:
+        email:
+          maxLength: 255
+          type: string
+          description: Customer email address
+        payerId:
+          pattern: ^[2-9A-HJ-NP-Z]{13}$
+          type: string
+          description: The PayPal-assigned ID for the payer
+        phoneNumber:
+          $ref: '#/components/schemas/Phone_number'
+        birthDate:
+          type: string
+          description: Date of birth of the customer, 10 characters, ISO-8601 (YYYY-MM-DD)
+          format: date
+        identification:
+          $ref: '#/components/schemas/identification'
+        address:
+          $ref: '#/components/schemas/address'
+        firstName:
+          type: string
+          description: Customer first name
+        lastName:
+          type: string
+          description: Customer last name
+      description: Customer details
+    Auth_Payer_Info:
+      type: object
+      properties:
+        payerId:
+          type: string
+          description: The PayPal-assigned ID for the payer
+          pattern: ^[2-9A-HJ-NP-Z]{13}$
+        name:
+          $ref: '#/components/schemas/Payer_Name'
+        phoneNumber:
+          $ref: '#/components/schemas/Phone_number'
+        email:
+          type: string
+          description: The email address of the payer.
+          maxLength: 255
+        shippingAddress:
+          $ref: '#/components/schemas/Shipping-Address'
+        authorizationStatus:
+          type: string
+          description: 'The status of the authorized payment.
+
+
+            The possible values are:
+
+
+            * CREATED. The authorized payment is created. No captured payments have been made for this authorized payment.
+
+            * PARTIALLY_CREATED. The payment which was authorized for an amount that is less than the originally requested amount.
+
+            * DENIED. PayPal cannot authorize funds for this authorized payment.
+
+            * PENDING. The created authorization is in pending state. A manual review might be pending.'
+    Capture_Payer_Info:
+      type: object
+      properties:
+        payerId:
+          type: string
+          description: The PayPal-assigned ID for the payer
+          pattern: ^[2-9A-HJ-NP-Z]{13}$
+        name:
+          $ref: '#/components/schemas/Payer_Name'
+        phoneNumber:
+          $ref: '#/components/schemas/Phone_number'
+        email:
+          type: string
+          description: The email address of the payer.
+          maxLength: 255
+        shippingAddress:
+          $ref: '#/components/schemas/Shipping-Address'
+        paymentStatus:
+          type: string
+          description: 'The status of the captured payment.
+
+
+            The possible values are:
+
+
+            * COMPLETED. The funds for this captured payment were credited to the payee''s PayPal account.
+
+            * DECLINED. The funds could not be captured.
+
+            * PENDING. The funds for this captured payment was not yet credited to the payee''s PayPal account. A manual review might be pending.
+
+            * FAILED. There was an error while capturing payment.'
+    shippingDiscount:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Shipping discount amount
+    Phone_number:
+      required:
+      - value
+      type: object
+      properties:
+        phoneType:
+          type: string
+          description: Customer phone type
+          enum:
+          - FAX
+          - HOME
+          - MOBILE
+          - OTHER
+          - PAGER
+        value:
+          type: string
+          description: Customer phone number
+      description: Phone number
+    Model44:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: Payment Provider contract
+        trackingId:
+          type: string
+          description: A unique ID to track each transaction
+        data:
+          $ref: '#/components/schemas/details'
+    Model46:
+      type: object
+      properties:
+        agreementId:
+          type: string
+          description: PayPal billing agreement id
+        merchantReference:
+          maxLength: 127
+          type: string
+          description: The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.
+    insurance:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+      description: Insurance fee amount
+    tax:
+      required:
+      - currencyCode
+      - value
+      type: object
+      properties:
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency code (ISO-4217)
+          enum:
+          - AED
+          - AFN
+          - ALL
+          - AMD
+          - ANG
+          - AOA
+          - ARS
+          - AUD
+          - AWG
+          - AZN
+          - BAM
+          - BBD
+          - BDT
+          - BGN
+          - BHD
+          - BIF
+          - BMD
+          - BND
+          - BOB
+          - BOV
+          - BRL
+          - BSD
+          - BTN
+          - BWP
+          - BYN
+          - BZD
+          - CAD
+          - CDF
+          - CHE
+          - CHF
+          - CHW
+          - CLF
+          - CLP
+          - CNY
+          - COP
+          - COU
+          - CRC
+          - CUC
+          - CUP
+          - CVE
+          - CZK
+          - DJF
+          - DKK
+          - DOP
+          - DZD
+          - EGP
+          - ERN
+          - ETB
+          - EUR
+          - FJD
+          - FKP
+          - GBP
+          - GEL
+          - GHS
+          - GIP
+          - GMD
+          - GNF
+          - GTQ
+          - GYD
+          - HKD
+          - HNL
+          - HRK
+          - HTG
+          - HUF
+          - IDR
+          - ILS
+          - INR
+          - IQD
+          - IRR
+          - ISK
+          - JMD
+          - JOD
+          - JPY
+          - KES
+          - KGS
+          - KHR
+          - KMF
+          - KPW
+          - KRW
+          - KWD
+          - KYD
+          - KZT
+          - LAK
+          - LBP
+          - LKR
+          - LRD
+          - LSL
+          - LYD
+          - MAD
+          - MDL
+          - MGA
+          - MKD
+          - MMK
+          - MNT
+          - MOP
+          - MRU
+          - MUR
+          - MVR
+          - MWK
+          - MXN
+          - MXV
+          - MYR
+          - MZN
+          - NAD
+          - NGN
+          - NIO
+          - NOK
+          - NPR
+          - NZD
+          - OMR
+          - PAB
+          - PEN
+          - PGK
+          - PHP
+          - PKR
+          - PLN
+          - PYG
+          - QAR
+          - RON
+          - RSD
+          - RUB
+          - RWF
+          - SAR
+          - SBD
+          - SCR
+          - SDG
+          - SEK
+          - SGD
+          - SHP
+          - SLL
+          - SOS
+          - SRD
+          - SSP
+          - STN
+          - SVC
+          - SYP
+          - SZL
+          - THB
+          - TJS
+          - TMT
+          - TND
+          - TOP
+          - TRY
+          - TTD
+          - TWD
+          - TZS
+          - UAH
+          - UGX
+          - USD
+          - USN
+          - UYI
+          - UYU
+          - UYW
+          - UZS
+          - VES
+          - VND
+          - VUV
+          - WST
+          - XAF
+          - XAG
+          - XAU
+          - XBA
+          - XBB
+          - XBC
+          - XBD
+          - XCD
+          - XDR
+          - XOF
+          - XPD
+          - XPF
+          - XPT
+          - XSU
+          - XTS
+          - XUA
+          - XXX
+          - YER
+          - ZAR
+          - ZMW
+          - ZWL
+        value:
+          type: integer
+          description: Integer amount value (100 is 1.00)
+      description: Tax amount
+    Model52:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Model51'
+        reason:
+          maxLength: 127
+          type: string
+          description: "The reason for the refund. Appears in both the payer's transaction history and the emails that the\n payer receives."
+        merchantReference:
+          maxLength: 127
+          type: string
+          description: The API caller-provided external ID. Used to reconcile client transactions with PayPal transactions. Appears in transaction and settlement reports but is not visible to the payer.
+    Model50:
+      required:
+      - captureId
+      - createdAt
+      - id
+      - instoreReference
+      type: object
+      properties:
+        id:
+          type: string
+          description: Transaction UUID from create transaction API
+        captureId:
+          type: string
+          description: PayPal capture identifier
+        isFinalCapture:
+          type: boolean
+          description: Flag telling if capture is final or not
+        instoreReference:
+          type: string
+          description: Reference to the transaction for internal usage for instore
+        createdAt:
+          type: string
+          description: Capture creation date (ISO-8601)
+          format: date
+        status:
+          type: string
+          description: Transaction status
+          enum:
+          - AUTHORISED
+        payer:
+          $ref: '#/components/schemas/Capture_Payer_Info'
+    application_context:
+      type: object
+      properties:
+        brandName:
+          maxLength: 127
+          type: string
+          description: The label that overrides the business name in the PayPal account on the PayPal site.
+        locale:
+          maxLength: 127
+          type: string
+          description: The BCP 47-formatted locale of pages that the PayPal payment experience shows.   PayPal supports a five-character code.  For example, da-DK, he-IL, id-ID, ja-JP, no-NO, pt-BR, ru-RU, sv-SE, th-TH, zh-CN, zh-HK, or zh-TW.
+        landingPage:
+          type: string
+          description: 'The    type of landing page to show on the PayPal site for customer checkout. default will be NO_PREFERENCE Possible Values: <br />  * BILLING - When the customer clicks PayPal Checkout, the customer is redirected to a page to log in to PayPal and approve the payment. <br />  * LOGIN - When the customer clicks PayPal Checkout, the customer is redirected to a page to enter credit or debit card and other relevant billing information required to complete the purchase. <br />  * NO_PREFERENCE - When the customer clicks PayPal Checkout, the customer is redirected to either a page to log in to PayPal and approve the payment or to a page to enter credit or debit card and other relevant billing information required to complete the purchase, depending on their previous interaction with PayPal. <br />'
+          enum:
+          - BILLING
+          - LOGIN
+          - NO_PREFERENCE
+        shippingPreference:
+          type: string
+          description: 'The shipping preference:
+
+            * Redact the shipping address from the PayPal site. Recommended for digital goods.
+
+            * Use the customer-provided shipping address on the PayPal site.
+
+            * Use the merchant-provided address. The customer cannot change this address on the PayPal site.'
+          enum:
+          - NoShipping
+          - CustomerProvided
+          - MerchantProvided
+        paymentPreference:
+          type: string
+          description: 'The merchant-preferred payment methods:
+
+            * Accepts any type of payment from the customer.
+
+            * Accepts only immediate payment from the customer. For example, credit card, PayPal balance, or instant ACH.'
+          enum:
+          - Any
+          - Immediate
+        shopperAuthorization:
+          type: string
+          description: 'NACHA (the regulatory body governing the ACH network) requires that API callers (merchants, partners) obtain the consumer’s explicit authorization before initiating a transaction. ACH transactions are categorized (using SEC codes) by how you capture authorization from the Receiver (the person whose bank account is being debited or credited). PayPal supports the following SEC codes.
+
+            * <b>TEL.</b> The API caller (merchant/partner) accepts authorization and payment information from a consumer over the telephone.
+
+            * <b>WEB.</b> The API caller (merchant/partner) accepts Debit transactions from a consumer on their website.
+
+            * <b>CCD.</b> Cash concentration and disbursement for corporate debit transaction. Used to disburse or consolidate funds. Entries are usually Optional high-dollar, low-volume, and time-critical. (e.g. intra-company transfers or invoice payments to suppliers).
+
+            * <b>PPD.</b> Prearranged payment and deposit entries. Used for debit payments authorized by a consumer account holder, and usually initiated by a company. These are usually recurring debits (such as insurance premiums).'
+          enum:
+          - TEL
+          - WEB
+          - CCD
+          - PPD
+        returnUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer approves the payment
+        cancelUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer cancels the payment
+      description: Application context details
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'
