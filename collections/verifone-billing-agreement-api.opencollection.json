@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Billing Agreement API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing Agreement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get agreement details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingAgreement/:agreementId",
+            "params": [
+              {
+                "name": "agreementId",
+                "value": "",
+                "type": "path",
+                "description": "PayPal billing agreement id"
+              },
+              {
+                "name": "paymentProviderContract",
+                "value": "",
+                "type": "query",
+                "description": "PayPal Payment Provider Contract UUID"
+              }
+            ]
+          },
+          "docs": "Get agreement details"
+        },
+        {
+          "info": {
+            "name": "Show token details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingAgreement/token/:tokenId",
+            "params": [
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the agreement token for which to show details."
+              },
+              {
+                "name": "paymentProviderContract",
+                "value": "",
+                "type": "query",
+                "description": "PayPal Payment Provider Contract UUID"
+              }
+            ]
+          },
+          "docs": "Show token details"
+        },
+        {
+          "info": {
+            "name": "Create billing agreement using token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingAgreement/create",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create billing agreement using token"
+        },
+        {
+          "info": {
+            "name": "Initiate billing agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingAgreement/initiate"
+          },
+          "docs": "Initiate billing agreement"
+        },
+        {
+          "info": {
+            "name": "Cancel agreement details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingAgreement/:agreementId/cancel",
+            "params": [
+              {
+                "name": "agreementId",
+                "value": "",
+                "type": "path",
+                "description": "PayPal billing agreement id"
+              }
+            ]
+          },
+          "docs": "Cancel agreement details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

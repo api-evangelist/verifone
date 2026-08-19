@@ -1,0 +1,4269 @@
+{
+  "item": [
+    {
+      "id": "b530f731-ea07-48f6-b0c1-e27f653d317e",
+      "name": "3DS Authentication",
+      "description": {
+        "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5dfb92b9-b2da-4140-b533-0225efdaee95",
+          "name": "List ThreeDSAuthentications",
+          "request": {
+            "name": "List ThreeDSAuthentications",
+            "description": {
+              "content": "The API enumerates the ThreeDS Authentication objects, offering\nfiltration criteria to obtain filtered data based on specified parameters. \n\n## Filtering and Searching\n\nFilters can be used to interact with any object. Objects can be queried by appending parameters to\nthe query string of the URL.\n\nSo to get a list of all pares_status = Y in threeds authentication with EUR currency, having an amount equal to or greater than 20,\nwe would use the following URL:\n\n    /v2/3d?_limit=10&amount>=212&currency_code=EUR&authentication.pares_status=Y\n\nParameters with multiple values are also supported. So for example, to query pares_status = Y and pares_status = U,\nyou would use the following URL:\n\n    /v2/3d?authentication.pares_status=Y&authentication.pares_status=U\n\nUse the following syntax to query objects based on parameters and values - in this example querying threeds authentication by the amount.\n\nQuery on one value:\n\n    /v2/3d?amount=7500\n\nQuery on everything but one value:\n\n    /v2/3d?amount!=7500\n\nLess than and equal to:\n\n    /v2/3d?amount<=7500\n\nGreater than and equal to:\n\n    /v2/3d?amount>=7500\n\nRange of values within/outside specified bounds:\n\n    /v2/3d?amount<=7600&amount>=7500\n\nMultiple parameters:\n\n    /v2/3d?amount=7600&currency_code=EUR\n\nLimit the number of results:\n\n    /v2/3d?_limit=50\n\nSort results in descending order:\n\n    /v2/3d?_sort=-amount\n\nSort results in ascending order:\n\n    /v2/3d?_sort=amount\n\n**Query operators:**\n\n| Operator | Description |\n|---|---|\n| `=` | equal |\n| `!` | not equal |\n| `<` | less than or equal to |\n| `>` | greater than or equal to |\n| `~` | pattern matching |\n| `>&<` | multiple-argument (range) search |",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "3d"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_limit",
+                  "value": "2000",
+                  "description": "The maximum number of values that can be sent in the response ( maximum: 10000 )"
+                },
+                {
+                  "disabled": false,
+                  "key": "_skip",
+                  "value": "0",
+                  "description": "_skip query params"
+                },
+                {
+                  "disabled": false,
+                  "key": "_sort",
+                  "value": "<string>",
+                  "description": "_sort query params"
+                },
+                {
+                  "disabled": false,
+                  "key": "_sort",
+                  "value": "<string>",
+                  "description": "_sort query params"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "ThreeDSAuthentication id"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "The amount of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "card",
+                  "value": "<string>",
+                  "description": "The ID of the card that is checked for enrollment."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<date>",
+                  "description": "The time at which the authentication was created."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Alphabetical ISO 4217 currency code for the sale amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "The ID of the entity, which this authentication belongs to."
+                },
+                {
+                  "disabled": false,
+                  "key": "threeds_contract_id",
+                  "value": "<string>",
+                  "description": "The ID of the threeDSContractId used."
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_id",
+                  "value": "<string>",
+                  "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_rendering_type",
+                  "value": "<string>",
+                  "description": "Identifies the UI Type the ACS will use to complete the challenge. NOTE: Only available for App transactions using the Cardinal Mobile SDK and is optional for an Issuer to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_transaction_id",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier assigned by the ACS to identify a single transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_url",
+                  "value": "<string>",
+                  "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction. NOTE: Available if Enrolled = Y"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.authentication_type",
+                  "value": "<string>",
+                  "description": "Indicates the type of authentication that will be used to challenge the card holder. Possible Values: 01 - Static 02 - Dynamic 03 - OOB (Out of Band)"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.authorization_payload",
+                  "value": "<string>",
+                  "description": "The Base64 encoded JSON Payload of CB specific Authorization Values returned in the Frictionless Flow."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.card_brand",
+                  "value": "<string>",
+                  "description": "Card Brand"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cardholder_info",
+                  "value": "<string>",
+                  "description": "Additional text provided by the Issuing Bank to the Cardholder during a Frictionless transaction and was not authenticated by the ACS.  The Issuing Bank can optionally support this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cavv_algorithm",
+                  "value": "<string>",
+                  "description": "Indicates the algorithm used to generate the CAVV value. Possible Values: \n 2 - CVV with ATN 3 - Mastercard SPA algorithm"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cavv",
+                  "value": "<string>",
+                  "description": "Cardholder Authentication Verification Value (CAVV). This value should be appended to the authorization message signifying that the transaction has been successfully authenticated. It will be encoded according to the Merchant's configuration in either Base64 encoding or Hex encoding. A Base64 encoding Merchant configuration will produce values of 28 or 32 characters. A Hex encoding Merchant configuration will produce values of 40 or 48 characters. The value when decoded will either be 20 bytes for CAVV."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.challenge_cancel",
+                  "value": "<string>",
+                  "description": "An indicator as to why the transaction was canceled. Possible Values: \n 01 - Cardholder selected Cancel 02 - Reserved for future EMVCo use (values invalid until defined by EMVCo). 03 - Transaction Timed Out—Decoupled Authentication 04 - Transaction timed out at ACS—other timeouts 05 - Transaction Timed out at ACS - First CReq not received by ACS 06 - Transaction Error 07 - Unknown 08 = Transaction Timed Out at SDK NOTE: Only present when the Consumer cancels the challenge. Decoupled authentication is not supported at this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.challenge_required",
+                  "value": "<string>",
+                  "description": "Indicates whether a challenge is required to complete authentication. For example, regional mandates. Possible Values: Y - Challenge Required N - Challenge Not Required"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.ds_transaction_id",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction. NOTE: Required for Mastercard Identity Check transaction in Authorization -  Only available in EMV 3DS (3DS 2.0) transactions"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.eci_flag",
+                  "value": "<string>",
+                  "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically. This should be passed on the authorization transaction to the Gateway/Processor. Possible Values: 02 or 05 - Fully Authenticated Transaction 01 or 06 - Attempted Authentication Transaction 00 or 07 - Non 3D Secure Transaction Mastercard - 02, 01, 00 VISA - 05, 06, 07 AMEX - 05, 06, 07 JCB - 05, 06, 07 DINERS CLUB - 05, 06, 07 NOTE: 3DS 2.0 field"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.enrolled",
+                  "value": "<string>",
+                  "description": "Status of Authentication eligibility. \n Possible Values: \n Y - Yes, Bank is participating in 3D Secure protocol and will return the ACSUrl \n N - No, Bank is not participating in 3D Secure protocol \n U - Unavailable, The DS or ACS is not available for authentication at the time of the request \n B - Bypass, Merchant authentication rule is triggered to bypass authentication in this use case \n NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.error_desc",
+                  "value": "<string>",
+                  "description": "Application error description for the associated error number(s). NOTE: Multiple error descriptions are separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.error_no",
+                  "value": "<string>",
+                  "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request. NOTE: Multiple error numbers are separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.network_score",
+                  "value": "<string>",
+                  "description": "The global score calculated by the CB Scoring platform."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.order_id",
+                  "value": "<string>",
+                  "description": "3DS server generated order identifier. Used to link multiple actions on a single order to a single identifier. Mod-10 compliant and unique BIN range to 3DS services."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.pares_status",
+                  "value": "<string>",
+                  "description": "Transactions status result identifier. Possible Values: Y - Successful Authentication N - Failed Authentication U - Unable to Complete Authentication A - Successful Attempts Transaction C - Challenge Required for Authentication R - Authentication Rejected (Merchant must not submit for authorization) NOTE: Statuses of C and R only apply to Consumer Authentication 2.0.,"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.payload",
+                  "value": "<string>",
+                  "description": "The encoded payment request generated by Centinel. NOTE: Available if Enrolled = Y"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.reason_code",
+                  "value": "<string>",
+                  "description": "The error code indicating a problem with this transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.reason_desc",
+                  "value": "<string>",
+                  "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.signature_verification",
+                  "value": "<string>",
+                  "description": "Transaction Signature status identifier. Possible Values: Y - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted. N - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.status_reason",
+                  "value": "<string>",
+                  "description": "Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.threeds_version",
+                  "value": "<string>",
+                  "description": "This field contains the 3DS version that was used to process the transaction. \n Possible Values: \n 1.0.2 \n 2.1.0 \n NOTE: Required for Mastercard Identity Check transactions in Authorization"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.xid",
+                  "value": "<string>",
+                  "description": "Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider."
+                },
+                {
+                  "disabled": false,
+                  "key": "encrypted_card",
+                  "value": "<string>",
+                  "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "public_key_alias",
+                  "value": "<string>",
+                  "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "_id!",
+                  "value": "<string>",
+                  "description": "ThreeDSAuthentication id"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount!",
+                  "value": "<number>",
+                  "description": "The amount of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "card!",
+                  "value": "<string>",
+                  "description": "The ID of the card that is checked for enrollment."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at!",
+                  "value": "<date>",
+                  "description": "The time at which the authentication was created."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code!",
+                  "value": "<string>",
+                  "description": "Alphabetical ISO 4217 currency code for the sale amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id!",
+                  "value": "<string>",
+                  "description": "The ID of the entity, which this authentication belongs to."
+                },
+                {
+                  "disabled": false,
+                  "key": "threeds_contract_id!",
+                  "value": "<string>",
+                  "description": "The ID of the threeDSContractId used."
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_id!",
+                  "value": "<string>",
+                  "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_rendering_type!",
+                  "value": "<string>",
+                  "description": "Identifies the UI Type the ACS will use to complete the challenge. NOTE: Only available for App transactions using the Cardinal Mobile SDK and is optional for an Issuer to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_transaction_id!",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier assigned by the ACS to identify a single transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_url!",
+                  "value": "<string>",
+                  "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction. NOTE: Available if Enrolled = Y"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.authentication_type!",
+                  "value": "<string>",
+                  "description": "Indicates the type of authentication that will be used to challenge the card holder. Possible Values: 01 - Static 02 - Dynamic 03 - OOB (Out of Band)"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.authorization_payload!",
+                  "value": "<string>",
+                  "description": "The Base64 encoded JSON Payload of CB specific Authorization Values returned in the Frictionless Flow."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.card_brand!",
+                  "value": "<string>",
+                  "description": "Card Brand"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cardholder_info!",
+                  "value": "<string>",
+                  "description": "Additional text provided by the Issuing Bank to the Cardholder during a Frictionless transaction and was not authenticated by the ACS.  The Issuing Bank can optionally support this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cavv_algorithm!",
+                  "value": "<string>",
+                  "description": "Indicates the algorithm used to generate the CAVV value. Possible Values: \n 2 - CVV with ATN 3 - Mastercard SPA algorithm"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cavv!",
+                  "value": "<string>",
+                  "description": "Cardholder Authentication Verification Value (CAVV). This value should be appended to the authorization message signifying that the transaction has been successfully authenticated. It will be encoded according to the Merchant's configuration in either Base64 encoding or Hex encoding. A Base64 encoding Merchant configuration will produce values of 28 or 32 characters. A Hex encoding Merchant configuration will produce values of 40 or 48 characters. The value when decoded will either be 20 bytes for CAVV."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.challenge_cancel!",
+                  "value": "<string>",
+                  "description": "An indicator as to why the transaction was canceled. Possible Values: \n 01 - Cardholder selected Cancel 02 - Reserved for future EMVCo use (values invalid until defined by EMVCo). 03 - Transaction Timed Out—Decoupled Authentication 04 - Transaction timed out at ACS—other timeouts 05 - Transaction Timed out at ACS - First CReq not received by ACS 06 - Transaction Error 07 - Unknown 08 = Transaction Timed Out at SDK NOTE: Only present when the Consumer cancels the challenge. Decoupled authentication is not supported at this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.challenge_required!",
+                  "value": "<string>",
+                  "description": "Indicates whether a challenge is required to complete authentication. For example, regional mandates. Possible Values: Y - Challenge Required N - Challenge Not Required"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.ds_transaction_id!",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction. NOTE: Required for Mastercard Identity Check transaction in Authorization -  Only available in EMV 3DS (3DS 2.0) transactions"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.eci_flag!",
+                  "value": "<string>",
+                  "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically. This should be passed on the authorization transaction to the Gateway/Processor. Possible Values: 02 or 05 - Fully Authenticated Transaction 01 or 06 - Attempted Authentication Transaction 00 or 07 - Non 3D Secure Transaction Mastercard - 02, 01, 00 VISA - 05, 06, 07 AMEX - 05, 06, 07 JCB - 05, 06, 07 DINERS CLUB - 05, 06, 07 NOTE: 3DS 2.0 field"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.enrolled!",
+                  "value": "<string>",
+                  "description": "Status of Authentication eligibility. \n Possible Values: \n Y - Yes, Bank is participating in 3D Secure protocol and will return the ACSUrl \n N - No, Bank is not participating in 3D Secure protocol \n U - Unavailable, The DS or ACS is not available for authentication at the time of the request \n B - Bypass, Merchant authentication rule is triggered to bypass authentication in this use case \n NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.error_desc!",
+                  "value": "<string>",
+                  "description": "Application error description for the associated error number(s). NOTE: Multiple error descriptions are separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.error_no!",
+                  "value": "<string>",
+                  "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request. NOTE: Multiple error numbers are separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.network_score!",
+                  "value": "<string>",
+                  "description": "The global score calculated by the CB Scoring platform."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.order_id!",
+                  "value": "<string>",
+                  "description": "3DS server generated order identifier. Used to link multiple actions on a single order to a single identifier. Mod-10 compliant and unique BIN range to 3DS services."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.pares_status!",
+                  "value": "<string>",
+                  "description": "Transactions status result identifier. Possible Values: Y - Successful Authentication N - Failed Authentication U - Unable to Complete Authentication A - Successful Attempts Transaction C - Challenge Required for Authentication R - Authentication Rejected (Merchant must not submit for authorization) NOTE: Statuses of C and R only apply to Consumer Authentication 2.0.,"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.payload!",
+                  "value": "<string>",
+                  "description": "The encoded payment request generated by Centinel. NOTE: Available if Enrolled = Y"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.reason_code!",
+                  "value": "<string>",
+                  "description": "The error code indicating a problem with this transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.reason_desc!",
+                  "value": "<string>",
+                  "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.signature_verification!",
+                  "value": "<string>",
+                  "description": "Transaction Signature status identifier. Possible Values: Y - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted. N - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.status_reason!",
+                  "value": "<string>",
+                  "description": "Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.threeds_version!",
+                  "value": "<string>",
+                  "description": "This field contains the 3DS version that was used to process the transaction. \n Possible Values: \n 1.0.2 \n 2.1.0 \n NOTE: Required for Mastercard Identity Check transactions in Authorization"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.xid!",
+                  "value": "<string>",
+                  "description": "Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider."
+                },
+                {
+                  "disabled": false,
+                  "key": "encrypted_card!",
+                  "value": "<string>",
+                  "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "public_key_alias!",
+                  "value": "<string>",
+                  "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "_id~",
+                  "value": "<string>",
+                  "description": "ThreeDSAuthentication id"
+                },
+                {
+                  "disabled": false,
+                  "key": "card~",
+                  "value": "<string>",
+                  "description": "The ID of the card that is checked for enrollment."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code~",
+                  "value": "<string>",
+                  "description": "Alphabetical ISO 4217 currency code for the sale amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id~",
+                  "value": "<string>",
+                  "description": "The ID of the entity, which this authentication belongs to."
+                },
+                {
+                  "disabled": false,
+                  "key": "threeds_contract_id~",
+                  "value": "<string>",
+                  "description": "The ID of the threeDSContractId used."
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_id~",
+                  "value": "<string>",
+                  "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_rendering_type~",
+                  "value": "<string>",
+                  "description": "Identifies the UI Type the ACS will use to complete the challenge. NOTE: Only available for App transactions using the Cardinal Mobile SDK and is optional for an Issuer to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_transaction_id~",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier assigned by the ACS to identify a single transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.acs_url~",
+                  "value": "<string>",
+                  "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction. NOTE: Available if Enrolled = Y"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.authentication_type~",
+                  "value": "<string>",
+                  "description": "Indicates the type of authentication that will be used to challenge the card holder. Possible Values: 01 - Static 02 - Dynamic 03 - OOB (Out of Band)"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.authorization_payload~",
+                  "value": "<string>",
+                  "description": "The Base64 encoded JSON Payload of CB specific Authorization Values returned in the Frictionless Flow."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.card_brand~",
+                  "value": "<string>",
+                  "description": "Card Brand"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cardholder_info~",
+                  "value": "<string>",
+                  "description": "Additional text provided by the Issuing Bank to the Cardholder during a Frictionless transaction and was not authenticated by the ACS.  The Issuing Bank can optionally support this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cavv_algorithm~",
+                  "value": "<string>",
+                  "description": "Indicates the algorithm used to generate the CAVV value. Possible Values: \n 2 - CVV with ATN 3 - Mastercard SPA algorithm"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.cavv~",
+                  "value": "<string>",
+                  "description": "Cardholder Authentication Verification Value (CAVV). This value should be appended to the authorization message signifying that the transaction has been successfully authenticated. It will be encoded according to the Merchant's configuration in either Base64 encoding or Hex encoding. A Base64 encoding Merchant configuration will produce values of 28 or 32 characters. A Hex encoding Merchant configuration will produce values of 40 or 48 characters. The value when decoded will either be 20 bytes for CAVV."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.challenge_cancel~",
+                  "value": "<string>",
+                  "description": "An indicator as to why the transaction was canceled. Possible Values: \n 01 - Cardholder selected Cancel 02 - Reserved for future EMVCo use (values invalid until defined by EMVCo). 03 - Transaction Timed Out—Decoupled Authentication 04 - Transaction timed out at ACS—other timeouts 05 - Transaction Timed out at ACS - First CReq not received by ACS 06 - Transaction Error 07 - Unknown 08 = Transaction Timed Out at SDK NOTE: Only present when the Consumer cancels the challenge. Decoupled authentication is not supported at this time."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.challenge_required~",
+                  "value": "<string>",
+                  "description": "Indicates whether a challenge is required to complete authentication. For example, regional mandates. Possible Values: Y - Challenge Required N - Challenge Not Required"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.ds_transaction_id~",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction. NOTE: Required for Mastercard Identity Check transaction in Authorization -  Only available in EMV 3DS (3DS 2.0) transactions"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.eci_flag~",
+                  "value": "<string>",
+                  "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically. This should be passed on the authorization transaction to the Gateway/Processor. Possible Values: 02 or 05 - Fully Authenticated Transaction 01 or 06 - Attempted Authentication Transaction 00 or 07 - Non 3D Secure Transaction Mastercard - 02, 01, 00 VISA - 05, 06, 07 AMEX - 05, 06, 07 JCB - 05, 06, 07 DINERS CLUB - 05, 06, 07 NOTE: 3DS 2.0 field"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.enrolled~",
+                  "value": "<string>",
+                  "description": "Status of Authentication eligibility. \n Possible Values: \n Y - Yes, Bank is participating in 3D Secure protocol and will return the ACSUrl \n N - No, Bank is not participating in 3D Secure protocol \n U - Unavailable, The DS or ACS is not available for authentication at the time of the request \n B - Bypass, Merchant authentication rule is triggered to bypass authentication in this use case \n NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.error_desc~",
+                  "value": "<string>",
+                  "description": "Application error description for the associated error number(s). NOTE: Multiple error descriptions are separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.error_no~",
+                  "value": "<string>",
+                  "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request. NOTE: Multiple error numbers are separated by a comma."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.network_score~",
+                  "value": "<string>",
+                  "description": "The global score calculated by the CB Scoring platform.."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.order_id~",
+                  "value": "<string>",
+                  "description": "3DS server generated order identifier. Used to link multiple actions on a single order to a single identifier. Mod-10 compliant and unique BIN range to 3DS services."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.pares_status~",
+                  "value": "<string>",
+                  "description": "Transactions status result identifier. Possible Values: Y - Successful Authentication N - Failed Authentication U - Unable to Complete Authentication A - Successful Attempts Transaction C - Challenge Required for Authentication R - Authentication Rejected (Merchant must not submit for authorization) NOTE: Statuses of C and R only apply to Consumer Authentication 2.0.,"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.payload~",
+                  "value": "<string>",
+                  "description": "The encoded payment request generated by Centinel. NOTE: Available if Enrolled = Y"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.reason_code~",
+                  "value": "<string>",
+                  "description": "The error code indicating a problem with this transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.reason_desc~",
+                  "value": "<string>",
+                  "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.signature_verification~",
+                  "value": "<string>",
+                  "description": "Transaction Signature status identifier. Possible Values: Y - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted. N - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.status_reason~",
+                  "value": "<string>",
+                  "description": "Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.threeds_version~",
+                  "value": "<string>",
+                  "description": "This field contains the 3DS version that was used to process the transaction. \n Possible Values: \n 1.0.2 \n 2.1.0 \n NOTE: Required for Mastercard Identity Check transactions in Authorization"
+                },
+                {
+                  "disabled": false,
+                  "key": "authentication.xid~",
+                  "value": "<string>",
+                  "description": "Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider."
+                },
+                {
+                  "disabled": false,
+                  "key": "encrypted_card~",
+                  "value": "<string>",
+                  "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "public_key_alias~",
+                  "value": "<string>",
+                  "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount>",
+                  "value": "<number>",
+                  "description": "The amount of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at>",
+                  "value": "<date>",
+                  "description": "The time at which the authentication was created."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount<",
+                  "value": "<number>",
+                  "description": "The amount of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at<",
+                  "value": "<date>",
+                  "description": "The time at which the authentication was created."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35cb7845-7020-45fc-bff8-26c1be5a0041",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"amount\": 2173279366840731.8,\n    \"threeds_contract_id\": \"string\",\n    \"authentication\": {\n      \"threeds_version\": \"string\",\n      \"enrolled\": \"string\",\n      \"error_desc\": \"string\",\n      \"error_no\": \"string\",\n      \"order_id\": \"string\",\n      \"eci_flag\": \"string\",\n      \"signature_verification\": \"string\",\n      \"ds_transaction_id\": \"string\",\n      \"acs_url\": \"string\",\n      \"card_brand\": \"string\",\n      \"network_score\": \"st\",\n      \"challenge_cancel\": \"03\",\n      \"authorization_payload\": \"ZvLDd67T/+y1iSpRPfxNUZoXrdIBAMy=\",\n      \"cavv\": \"string\",\n      \"cavv_algorithm\": \"string\",\n      \"pares_status\": \"string\",\n      \"payload\": \"string\",\n      \"xid\": \"string\",\n      \"reason_code\": \"string\",\n      \"reason_desc\": \"string\",\n      \"cardholder_info\": \"string\",\n      \"acs_rendering_type\": \"string\",\n      \"acs_transaction_id\": \"string\",\n      \"authentication_type\": \"string\",\n      \"challenge_required\": \"string\",\n      \"status_reason\": \"string\"\n    },\n    \"card\": \"string\",\n    \"currency_code\": \"str\",\n    \"created_at\": \"1947-03-14\",\n    \"entity_id\": \"string\",\n    \"transaction_id\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"amount\": 6777658335666423,\n    \"threeds_contract_id\": \"string\",\n    \"authentication\": {\n      \"threeds_version\": \"string\",\n      \"enrolled\": \"string\",\n      \"error_desc\": \"string\",\n      \"error_no\": \"string\",\n      \"order_id\": \"string\",\n      \"eci_flag\": \"string\",\n      \"signature_verification\": \"string\",\n      \"ds_transaction_id\": \"string\",\n      \"acs_url\": \"string\",\n      \"card_brand\": \"string\",\n      \"network_score\": \"st\",\n      \"challenge_cancel\": \"06\",\n      \"authorization_payload\": \"TKLE2P8iFsJqDxmFR06cR8dKGnRfGIraOU5iNC5VmQ==\",\n      \"cavv\": \"string\",\n      \"cavv_algorithm\": \"string\",\n      \"pares_status\": \"string\",\n      \"payload\": \"string\",\n      \"xid\": \"string\",\n      \"reason_code\": \"string\",\n      \"reason_desc\": \"string\",\n      \"cardholder_info\": \"string\",\n      \"acs_rendering_type\": \"string\",\n      \"acs_transaction_id\": \"string\",\n      \"authentication_type\": \"string\",\n      \"challenge_required\": \"string\",\n      \"status_reason\": \"string\"\n    },\n    \"card\": \"string\",\n    \"currency_code\": \"str\",\n    \"created_at\": \"2009-09-15\",\n    \"entity_id\": \"string\",\n    \"transaction_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "093e3f76-cd0e-4e01-9ab1-790011e48094",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9383.70621251267,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 3371.0251771949283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d564b77d-23ce-40c8-bb74-9552e14e7900",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9383.70621251267,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 3371.0251771949283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc13f111-973f-4d77-b7b1-11a0abf7c69e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9383.70621251267,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 3371.0251771949283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e103c6f1-ca37-47f7-8d98-213dec7d0d7d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9383.70621251267,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 3371.0251771949283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "953ec6bd-7ad0-4b78-954c-3656d53788dc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9383.70621251267,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 3371.0251771949283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69caf82d-7a43-4648-bf58-10702e8db486",
+              "name": "Gateway Time-out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "3d"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_limit",
+                      "value": "2000"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount!",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at!",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "currency_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias!",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "threeds_contract_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_rendering_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.acs_url~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authentication_type~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.authorization_payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.card_brand~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cardholder_info~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv_algorithm~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.cavv~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_cancel~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.challenge_required~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.ds_transaction_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.eci_flag~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.enrolled~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.error_no~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.network_score~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.order_id~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.pares_status~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.payload~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_code~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.reason_desc~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.signature_verification~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.status_reason~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.threeds_version~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "authentication.xid~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "encrypted_card~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "public_key_alias~",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount>",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at>",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "amount<",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at<",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9383.70621251267,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 3371.0251771949283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ed24347-60fd-452f-8cc1-0e1f967f02de",
+    "name": "3D Secure 3DS Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

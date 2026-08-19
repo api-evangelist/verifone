@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "4a8bd896-f3ab-4068-9ddc-62ca25e9ef2a",
+      "name": "POI Maintenance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4cc896a-b14a-4774-be9c-ae4bb72439c3",
+          "name": "Delete a Single POI",
+          "request": {
+            "name": "Delete a Single POI",
+            "description": {
+              "content": "Deletes a POI.\n\n**forceDelete=false (default)**\nDeletion fails with 400 if the POI is ACTIVE. The POI must be\nINACTIVE before calling this endpoint.\n\n**forceDelete=true**\nAn ACTIVE POI is automatically inactivated before deletion. If already\nINACTIVE, deletion proceeds directly.\nReturns 400 if the inactivation step fails; the POI is not deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pois",
+                ":poiUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8b4ce3a-7140-4acb-b8ce-9a6398d27012",
+              "name": "The Poi was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "6282a4f7-be90-b66c-77e9-e354fa3eefe1",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d044606a-41c2-4172-b2df-7c6331da0e0f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"title\": \"Bad Request\",\n  \"message\": \"The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.\",\n  \"type\": \"INVALID_REQUEST_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1983-09-25T16:12:50.757Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f37cee32-df83-4cd3-b1b3-8b834c2912d2",
+              "name": "Unauthorised Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"title\": \"Unauthorised\",\n  \"message\": \"The request requires client authentication.\",\n  \"type\": \"AUTHENTICATION_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"2006-12-06T18:07:42.054Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b238076b-5bc2-4465-ac72-5aec4a885c70",
+              "name": "Forbidden Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"The request requires client authorisation to access resource.\",\n  \"title\": \"Forbidden\",\n  \"type\": \"AUTHENTICATION_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1988-07-23T01:31:24.220Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b09679c2-7c6d-4266-9126-de871e875d70",
+              "name": "Not Found Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"title\": \"Not Found\",\n  \"message\": \"The server cannot find the requested resource.\",\n  \"type\": \"INVALID_REQUEST_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1983-05-14T20:22:21.559Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0106927-e803-41f7-8d64-8a27de625821",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"429\",\n  \"title\": \"Too Many Requests\",\n  \"message\": \"The number of requests from this client is restricted to a specified quota.\",\n  \"type\": \"RATE_LIMIT_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"2009-02-07T02:30:42.785Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90391134-cf04-44cc-bdc5-efba766aca1b",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition which prevented it from fulfilling the request.\",\n  \"type\": \"API_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"2004-04-11T02:18:53.764Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15c449c9-ef21-43e6-8c4d-6f614bf40ef4",
+              "name": "Service Not Available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"503\",\n  \"title\": \"Service Unavailable\",\n  \"message\": \"The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.\",\n  \"type\": \"API_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"2018-09-05T09:36:43.588Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ebee559-7a89-402e-bb16-01b0f59dd027",
+              "name": "Service Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pois",
+                    ":poiUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"504\",\n  \"title\": \"Gateway Timeout\",\n  \"message\": \"The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.\",\n  \"type\": \"API_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1971-12-18T15:16:56.285Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40975ad9-b210-42ad-8aa1-dc44f144e060",
+    "name": "3D Secure 3DS Authentication POI Maintenance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication POI Orders API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "POI Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create POI Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/orders/pois",
+            "headers": [
+              {
+                "name": "saveDraft",
+                "value": ""
+              },
+              {
+                "name": "validateAcquirer",
+                "value": ""
+              },
+              {
+                "name": "X-Use-Simplified-Order-Flow",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds new Point Of Interactions (terminals) to an existing merchant/store and optionally order hardware and services."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

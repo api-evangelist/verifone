@@ -1,0 +1,296 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Payment Modifications API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Modifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Void authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/void",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to cancel / void."
+              }
+            ]
+          },
+          "docs": "Void/Cancel an authorization hold on a payment. Check the documentation in order to verify what payment method allows for this payment modification."
+        },
+        {
+          "info": {
+            "name": "Complete a Klarna payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/klarna_complete",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to complete transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A customer has completed a purchase and want to create the associated order in the system."
+        },
+        {
+          "info": {
+            "name": "Adjust the preauth transaction amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/adjust",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to adjust."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows for the modification of the amount of a previously initiated preauthorization before it is captured."
+        },
+        {
+          "info": {
+            "name": "Capture authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/capture",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to capture."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Capture an authorization hold on a payment. Check the documentation in order to verify what payment method allows for this payment modification."
+        },
+        {
+          "info": {
+            "name": "Refund payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/refund",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to refund."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refund a payment that has previously been captured."
+        },
+        {
+          "info": {
+            "name": "Unmatched refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refund a cardholder with an amount not related to a previous transaction."
+        },
+        {
+          "info": {
+            "name": "Void capture",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/void_capture",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to cancel / void the capture."
+              }
+            ]
+          },
+          "docs": "Cancel a payment that has previously been captured. Void capture can only be done on the full amount of the transaction. Check the documentation to verify what [payment method](https://docs.verifone.com/online-payments/payment-actions) allows for this payment modification."
+        },
+        {
+          "info": {
+            "name": "Reverse Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/reverse",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Allows for technical reversal"
+        },
+        {
+          "info": {
+            "name": "Release PreAuthorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/release",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original preauthorized transaction id to release"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Release the rest of preauthorisation which was not captured. This is a one time operation where all remaining funds are released. No further captures are allowed after that. Rest of amount to be released is automatically calculated internally."
+        },
+        {
+          "info": {
+            "name": "Extend preauthorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/extend",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original preauthorized transaction id to release"
+              }
+            ]
+          },
+          "docs": "Extend the authorization period and confirm the availability of the funds of a previously initiated preauthorization.\nIf supported by the card brand (like Visa) this operation will be handled as a Reauthorization request."
+        },
+        {
+          "info": {
+            "name": "Issuer Instalment Selection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/:id/issuer_instalment_selection",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Original transaction id to apply instalment selection to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirm selection of instalment option where multiple issuer instalment options proposed."
+        },
+        {
+          "info": {
+            "name": "Complete a Affirm payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/affirm_complete",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A customer has completed a purchase and want to create the associated order in the system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

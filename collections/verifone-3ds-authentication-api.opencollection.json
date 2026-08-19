@@ -1,0 +1,715 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "3DS Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ThreeDSAuthentications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/v2/3d",
+            "params": [
+              {
+                "name": "_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of values that can be sent in the response ( maximum: 10000 )"
+              },
+              {
+                "name": "_skip",
+                "value": "",
+                "type": "query",
+                "description": "_skip query params"
+              },
+              {
+                "name": "_sort",
+                "value": "",
+                "type": "query",
+                "description": "_sort query params"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "ThreeDSAuthentication id"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "The amount of the transaction."
+              },
+              {
+                "name": "card",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the card that is checked for enrollment."
+              },
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query",
+                "description": "The time at which the authentication was created."
+              },
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "Alphabetical ISO 4217 currency code for the sale amount."
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the entity, which this authentication belongs to."
+              },
+              {
+                "name": "threeds_contract_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the threeDSContractId used."
+              },
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+              },
+              {
+                "name": "authentication.acs_rendering_type",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the UI Type the ACS will use to complete the challenge. NOTE: Only available for App transactions using the Cardinal Mobile SDK and is optional for an Issuer to return."
+              },
+              {
+                "name": "authentication.acs_transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier assigned by the ACS to identify a single transaction."
+              },
+              {
+                "name": "authentication.acs_url",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction. NOTE: Available if Enrolled = Y"
+              },
+              {
+                "name": "authentication.authentication_type",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the type of authentication that will be used to challenge the card holder. Possible Values: 01 - Static 02 - Dynamic 03 - OOB (Out of Band)"
+              },
+              {
+                "name": "authentication.authorization_payload",
+                "value": "",
+                "type": "query",
+                "description": "The Base64 encoded JSON Payload of CB specific Authorization Values returned in the Frictionless Flow."
+              },
+              {
+                "name": "authentication.card_brand",
+                "value": "",
+                "type": "query",
+                "description": "Card Brand"
+              },
+              {
+                "name": "authentication.cardholder_info",
+                "value": "",
+                "type": "query",
+                "description": "Additional text provided by the Issuing Bank to the Cardholder during a Frictionless transaction and was not authenticated by the ACS.  The Issuing Bank can optionally support this value."
+              },
+              {
+                "name": "authentication.cavv_algorithm",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the algorithm used to generate the CAVV value. Possible Values: \n 2 - CVV with ATN 3 - Mastercard SPA algorithm"
+              },
+              {
+                "name": "authentication.cavv",
+                "value": "",
+                "type": "query",
+                "description": "Cardholder Authentication Verification Value (CAVV). This value should be appended to the authorization message signifying that the transaction has been successfully authenticated. It will be encoded according to the Merchant's configuration in either Base64 encoding or Hex encoding. A Base64 encoding Merchant configuration will produce values of 28 or 32 characters. A Hex encoding Merchant configuration will produce values of 40 or 48 characters. The value when decoded will either be 20 bytes for CAVV."
+              },
+              {
+                "name": "authentication.challenge_cancel",
+                "value": "",
+                "type": "query",
+                "description": "An indicator as to why the transaction was canceled. Possible Values: \n 01 - Cardholder selected Cancel 02 - Reserved for future EMVCo use (values invalid until defined by EMVCo). 03 - Transaction Timed Out—Decoupled Authentication 04 - Transaction timed out at ACS—other timeouts 05 - Transaction Timed out at ACS - First CReq not received by ACS 06 - Transaction Error 07 - Unknown 08 = Transaction Timed Out at SDK NOTE: Only present when the Consumer cancels the challenge. Decoupled authentication is not supported at this time."
+              },
+              {
+                "name": "authentication.challenge_required",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether a challenge is required to complete authentication. For example, regional mandates. Possible Values: Y - Challenge Required N - Challenge Not Required"
+              },
+              {
+                "name": "authentication.ds_transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction. NOTE: Required for Mastercard Identity Check transaction in Authorization -  Only available in EMV 3DS (3DS 2.0) transactions"
+              },
+              {
+                "name": "authentication.eci_flag",
+                "value": "",
+                "type": "query",
+                "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically. This should be passed on the authorization transaction to the Gateway/Processor. Possible Values: 02 or 05 - Fully Authenticated Transaction 01 or 06 - Attempted Authentication Transaction 00 or 07 - Non 3D Secure Transaction Mastercard - 02, 01, 00 VISA - 05, 06, 07 AMEX - 05, 06, 07 JCB - 05, 06, 07 DINERS CLUB - 05, 06, 07 NOTE: 3DS 2.0 field"
+              },
+              {
+                "name": "authentication.enrolled",
+                "value": "",
+                "type": "query",
+                "description": "Status of Authentication eligibility. \n Possible Values: \n Y - Yes, Bank is participating in 3D Secure protocol and will return the ACSUrl \n N - No, Bank is not participating in 3D Secure protocol \n U - Unavailable, The DS or ACS is not available for authentication at the time of the request \n B - Bypass, Merchant authentication rule is triggered to bypass authentication in this use case \n NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+              },
+              {
+                "name": "authentication.error_desc",
+                "value": "",
+                "type": "query",
+                "description": "Application error description for the associated error number(s). NOTE: Multiple error descriptions are separated by a comma."
+              },
+              {
+                "name": "authentication.error_no",
+                "value": "",
+                "type": "query",
+                "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request. NOTE: Multiple error numbers are separated by a comma."
+              },
+              {
+                "name": "authentication.network_score",
+                "value": "",
+                "type": "query",
+                "description": "The global score calculated by the CB Scoring platform."
+              },
+              {
+                "name": "authentication.order_id",
+                "value": "",
+                "type": "query",
+                "description": "3DS server generated order identifier. Used to link multiple actions on a single order to a single identifier. Mod-10 compliant and unique BIN range to 3DS services."
+              },
+              {
+                "name": "authentication.pares_status",
+                "value": "",
+                "type": "query",
+                "description": "Transactions status result identifier. Possible Values: Y - Successful Authentication N - Failed Authentication U - Unable to Complete Authentication A - Successful Attempts Transaction C - Challenge Required for Authentication R - Authentication Rejected (Merchant must not submit for authorization) NOTE: Statuses of C and R only apply to Consumer Authentication 2.0.,"
+              },
+              {
+                "name": "authentication.payload",
+                "value": "",
+                "type": "query",
+                "description": "The encoded payment request generated by Centinel. NOTE: Available if Enrolled = Y"
+              },
+              {
+                "name": "authentication.reason_code",
+                "value": "",
+                "type": "query",
+                "description": "The error code indicating a problem with this transaction."
+              },
+              {
+                "name": "authentication.reason_desc",
+                "value": "",
+                "type": "query",
+                "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message"
+              },
+              {
+                "name": "authentication.signature_verification",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Signature status identifier. Possible Values: Y - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted. N - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+              },
+              {
+                "name": "authentication.status_reason",
+                "value": "",
+                "type": "query",
+                "description": "Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+              },
+              {
+                "name": "authentication.threeds_version",
+                "value": "",
+                "type": "query",
+                "description": "This field contains the 3DS version that was used to process the transaction. \n Possible Values: \n 1.0.2 \n 2.1.0 \n NOTE: Required for Mastercard Identity Check transactions in Authorization"
+              },
+              {
+                "name": "authentication.xid",
+                "value": "",
+                "type": "query",
+                "description": "Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider."
+              },
+              {
+                "name": "encrypted_card",
+                "value": "",
+                "type": "query",
+                "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+              },
+              {
+                "name": "public_key_alias",
+                "value": "",
+                "type": "query",
+                "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+              },
+              {
+                "name": "_id!",
+                "value": "",
+                "type": "query",
+                "description": "ThreeDSAuthentication id"
+              },
+              {
+                "name": "amount!",
+                "value": "",
+                "type": "query",
+                "description": "The amount of the transaction."
+              },
+              {
+                "name": "card!",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the card that is checked for enrollment."
+              },
+              {
+                "name": "created_at!",
+                "value": "",
+                "type": "query",
+                "description": "The time at which the authentication was created."
+              },
+              {
+                "name": "currency_code!",
+                "value": "",
+                "type": "query",
+                "description": "Alphabetical ISO 4217 currency code for the sale amount."
+              },
+              {
+                "name": "entity_id!",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the entity, which this authentication belongs to."
+              },
+              {
+                "name": "threeds_contract_id!",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the threeDSContractId used."
+              },
+              {
+                "name": "transaction_id!",
+                "value": "",
+                "type": "query",
+                "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+              },
+              {
+                "name": "authentication.acs_rendering_type!",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the UI Type the ACS will use to complete the challenge. NOTE: Only available for App transactions using the Cardinal Mobile SDK and is optional for an Issuer to return."
+              },
+              {
+                "name": "authentication.acs_transaction_id!",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier assigned by the ACS to identify a single transaction."
+              },
+              {
+                "name": "authentication.acs_url!",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction. NOTE: Available if Enrolled = Y"
+              },
+              {
+                "name": "authentication.authentication_type!",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the type of authentication that will be used to challenge the card holder. Possible Values: 01 - Static 02 - Dynamic 03 - OOB (Out of Band)"
+              },
+              {
+                "name": "authentication.authorization_payload!",
+                "value": "",
+                "type": "query",
+                "description": "The Base64 encoded JSON Payload of CB specific Authorization Values returned in the Frictionless Flow."
+              },
+              {
+                "name": "authentication.card_brand!",
+                "value": "",
+                "type": "query",
+                "description": "Card Brand"
+              },
+              {
+                "name": "authentication.cardholder_info!",
+                "value": "",
+                "type": "query",
+                "description": "Additional text provided by the Issuing Bank to the Cardholder during a Frictionless transaction and was not authenticated by the ACS.  The Issuing Bank can optionally support this value."
+              },
+              {
+                "name": "authentication.cavv_algorithm!",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the algorithm used to generate the CAVV value. Possible Values: \n 2 - CVV with ATN 3 - Mastercard SPA algorithm"
+              },
+              {
+                "name": "authentication.cavv!",
+                "value": "",
+                "type": "query",
+                "description": "Cardholder Authentication Verification Value (CAVV). This value should be appended to the authorization message signifying that the transaction has been successfully authenticated. It will be encoded according to the Merchant's configuration in either Base64 encoding or Hex encoding. A Base64 encoding Merchant configuration will produce values of 28 or 32 characters. A Hex encoding Merchant configuration will produce values of 40 or 48 characters. The value when decoded will either be 20 bytes for CAVV."
+              },
+              {
+                "name": "authentication.challenge_cancel!",
+                "value": "",
+                "type": "query",
+                "description": "An indicator as to why the transaction was canceled. Possible Values: \n 01 - Cardholder selected Cancel 02 - Reserved for future EMVCo use (values invalid until defined by EMVCo). 03 - Transaction Timed Out—Decoupled Authentication 04 - Transaction timed out at ACS—other timeouts 05 - Transaction Timed out at ACS - First CReq not received by ACS 06 - Transaction Error 07 - Unknown 08 = Transaction Timed Out at SDK NOTE: Only present when the Consumer cancels the challenge. Decoupled authentication is not supported at this time."
+              },
+              {
+                "name": "authentication.challenge_required!",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether a challenge is required to complete authentication. For example, regional mandates. Possible Values: Y - Challenge Required N - Challenge Not Required"
+              },
+              {
+                "name": "authentication.ds_transaction_id!",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction. NOTE: Required for Mastercard Identity Check transaction in Authorization -  Only available in EMV 3DS (3DS 2.0) transactions"
+              },
+              {
+                "name": "authentication.eci_flag!",
+                "value": "",
+                "type": "query",
+                "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically. This should be passed on the authorization transaction to the Gateway/Processor. Possible Values: 02 or 05 - Fully Authenticated Transaction 01 or 06 - Attempted Authentication Transaction 00 or 07 - Non 3D Secure Transaction Mastercard - 02, 01, 00 VISA - 05, 06, 07 AMEX - 05, 06, 07 JCB - 05, 06, 07 DINERS CLUB - 05, 06, 07 NOTE: 3DS 2.0 field"
+              },
+              {
+                "name": "authentication.enrolled!",
+                "value": "",
+                "type": "query",
+                "description": "Status of Authentication eligibility. \n Possible Values: \n Y - Yes, Bank is participating in 3D Secure protocol and will return the ACSUrl \n N - No, Bank is not participating in 3D Secure protocol \n U - Unavailable, The DS or ACS is not available for authentication at the time of the request \n B - Bypass, Merchant authentication rule is triggered to bypass authentication in this use case \n NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+              },
+              {
+                "name": "authentication.error_desc!",
+                "value": "",
+                "type": "query",
+                "description": "Application error description for the associated error number(s). NOTE: Multiple error descriptions are separated by a comma."
+              },
+              {
+                "name": "authentication.error_no!",
+                "value": "",
+                "type": "query",
+                "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request. NOTE: Multiple error numbers are separated by a comma."
+              },
+              {
+                "name": "authentication.network_score!",
+                "value": "",
+                "type": "query",
+                "description": "The global score calculated by the CB Scoring platform."
+              },
+              {
+                "name": "authentication.order_id!",
+                "value": "",
+                "type": "query",
+                "description": "3DS server generated order identifier. Used to link multiple actions on a single order to a single identifier. Mod-10 compliant and unique BIN range to 3DS services."
+              },
+              {
+                "name": "authentication.pares_status!",
+                "value": "",
+                "type": "query",
+                "description": "Transactions status result identifier. Possible Values: Y - Successful Authentication N - Failed Authentication U - Unable to Complete Authentication A - Successful Attempts Transaction C - Challenge Required for Authentication R - Authentication Rejected (Merchant must not submit for authorization) NOTE: Statuses of C and R only apply to Consumer Authentication 2.0.,"
+              },
+              {
+                "name": "authentication.payload!",
+                "value": "",
+                "type": "query",
+                "description": "The encoded payment request generated by Centinel. NOTE: Available if Enrolled = Y"
+              },
+              {
+                "name": "authentication.reason_code!",
+                "value": "",
+                "type": "query",
+                "description": "The error code indicating a problem with this transaction."
+              },
+              {
+                "name": "authentication.reason_desc!",
+                "value": "",
+                "type": "query",
+                "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message"
+              },
+              {
+                "name": "authentication.signature_verification!",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Signature status identifier. Possible Values: Y - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted. N - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+              },
+              {
+                "name": "authentication.status_reason!",
+                "value": "",
+                "type": "query",
+                "description": "Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+              },
+              {
+                "name": "authentication.threeds_version!",
+                "value": "",
+                "type": "query",
+                "description": "This field contains the 3DS version that was used to process the transaction. \n Possible Values: \n 1.0.2 \n 2.1.0 \n NOTE: Required for Mastercard Identity Check transactions in Authorization"
+              },
+              {
+                "name": "authentication.xid!",
+                "value": "",
+                "type": "query",
+                "description": "Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider."
+              },
+              {
+                "name": "encrypted_card!",
+                "value": "",
+                "type": "query",
+                "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+              },
+              {
+                "name": "public_key_alias!",
+                "value": "",
+                "type": "query",
+                "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+              },
+              {
+                "name": "_id~",
+                "value": "",
+                "type": "query",
+                "description": "ThreeDSAuthentication id"
+              },
+              {
+                "name": "card~",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the card that is checked for enrollment."
+              },
+              {
+                "name": "currency_code~",
+                "value": "",
+                "type": "query",
+                "description": "Alphabetical ISO 4217 currency code for the sale amount."
+              },
+              {
+                "name": "entity_id~",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the entity, which this authentication belongs to."
+              },
+              {
+                "name": "threeds_contract_id~",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the threeDSContractId used."
+              },
+              {
+                "name": "transaction_id~",
+                "value": "",
+                "type": "query",
+                "description": "To complete the transaction, the value is required to be passed on the Cardinal.Continue()."
+              },
+              {
+                "name": "authentication.acs_rendering_type~",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the UI Type the ACS will use to complete the challenge. NOTE: Only available for App transactions using the Cardinal Mobile SDK and is optional for an Issuer to return."
+              },
+              {
+                "name": "authentication.acs_transaction_id~",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier assigned by the ACS to identify a single transaction."
+              },
+              {
+                "name": "authentication.acs_url~",
+                "value": "",
+                "type": "query",
+                "description": "The fully qualified URL to redirect the Consumer to complete the Consumer Authentication transaction. NOTE: Available if Enrolled = Y"
+              },
+              {
+                "name": "authentication.authentication_type~",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the type of authentication that will be used to challenge the card holder. Possible Values: 01 - Static 02 - Dynamic 03 - OOB (Out of Band)"
+              },
+              {
+                "name": "authentication.authorization_payload~",
+                "value": "",
+                "type": "query",
+                "description": "The Base64 encoded JSON Payload of CB specific Authorization Values returned in the Frictionless Flow."
+              },
+              {
+                "name": "authentication.card_brand~",
+                "value": "",
+                "type": "query",
+                "description": "Card Brand"
+              },
+              {
+                "name": "authentication.cardholder_info~",
+                "value": "",
+                "type": "query",
+                "description": "Additional text provided by the Issuing Bank to the Cardholder during a Frictionless transaction and was not authenticated by the ACS.  The Issuing Bank can optionally support this value."
+              },
+              {
+                "name": "authentication.cavv_algorithm~",
+                "value": "",
+                "type": "query",
+                "description": "Indicates the algorithm used to generate the CAVV value. Possible Values: \n 2 - CVV with ATN 3 - Mastercard SPA algorithm"
+              },
+              {
+                "name": "authentication.cavv~",
+                "value": "",
+                "type": "query",
+                "description": "Cardholder Authentication Verification Value (CAVV). This value should be appended to the authorization message signifying that the transaction has been successfully authenticated. It will be encoded according to the Merchant's configuration in either Base64 encoding or Hex encoding. A Base64 encoding Merchant configuration will produce values of 28 or 32 characters. A Hex encoding Merchant configuration will produce values of 40 or 48 characters. The value when decoded will either be 20 bytes for CAVV."
+              },
+              {
+                "name": "authentication.challenge_cancel~",
+                "value": "",
+                "type": "query",
+                "description": "An indicator as to why the transaction was canceled. Possible Values: \n 01 - Cardholder selected Cancel 02 - Reserved for future EMVCo use (values invalid until defined by EMVCo). 03 - Transaction Timed Out—Decoupled Authentication 04 - Transaction timed out at ACS—other timeouts 05 - Transaction Timed out at ACS - First CReq not received by ACS 06 - Transaction Error 07 - Unknown 08 = Transaction Timed Out at SDK NOTE: Only present when the Consumer cancels the challenge. Decoupled authentication is not supported at this time."
+              },
+              {
+                "name": "authentication.challenge_required~",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether a challenge is required to complete authentication. For example, regional mandates. Possible Values: Y - Challenge Required N - Challenge Not Required"
+              },
+              {
+                "name": "authentication.ds_transaction_id~",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction. NOTE: Required for Mastercard Identity Check transaction in Authorization -  Only available in EMV 3DS (3DS 2.0) transactions"
+              },
+              {
+                "name": "authentication.eci_flag~",
+                "value": "",
+                "type": "query",
+                "description": "Electronic Commerce Indicator (ECI). The ECI value is part of the 2 data elements that indicate the transaction was processed electronically. This should be passed on the authorization transaction to the Gateway/Processor. Possible Values: 02 or 05 - Fully Authenticated Transaction 01 or 06 - Attempted Authentication Transaction 00 or 07 - Non 3D Secure Transaction Mastercard - 02, 01, 00 VISA - 05, 06, 07 AMEX - 05, 06, 07 JCB - 05, 06, 07 DINERS CLUB - 05, 06, 07 NOTE: 3DS 2.0 field"
+              },
+              {
+                "name": "authentication.enrolled~",
+                "value": "",
+                "type": "query",
+                "description": "Status of Authentication eligibility. \n Possible Values: \n Y - Yes, Bank is participating in 3D Secure protocol and will return the ACSUrl \n N - No, Bank is not participating in 3D Secure protocol \n U - Unavailable, The DS or ACS is not available for authentication at the time of the request \n B - Bypass, Merchant authentication rule is triggered to bypass authentication in this use case \n NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+              },
+              {
+                "name": "authentication.error_desc~",
+                "value": "",
+                "type": "query",
+                "description": "Application error description for the associated error number(s). NOTE: Multiple error descriptions are separated by a comma."
+              },
+              {
+                "name": "authentication.error_no~",
+                "value": "",
+                "type": "query",
+                "description": "Application error number(s). A non-zero value represents the error encountered while attempting to process the message request. NOTE: Multiple error numbers are separated by a comma."
+              },
+              {
+                "name": "authentication.network_score~",
+                "value": "",
+                "type": "query",
+                "description": "The global score calculated by the CB Scoring platform.."
+              },
+              {
+                "name": "authentication.order_id~",
+                "value": "",
+                "type": "query",
+                "description": "3DS server generated order identifier. Used to link multiple actions on a single order to a single identifier. Mod-10 compliant and unique BIN range to 3DS services."
+              },
+              {
+                "name": "authentication.pares_status~",
+                "value": "",
+                "type": "query",
+                "description": "Transactions status result identifier. Possible Values: Y - Successful Authentication N - Failed Authentication U - Unable to Complete Authentication A - Successful Attempts Transaction C - Challenge Required for Authentication R - Authentication Rejected (Merchant must not submit for authorization) NOTE: Statuses of C and R only apply to Consumer Authentication 2.0.,"
+              },
+              {
+                "name": "authentication.payload~",
+                "value": "",
+                "type": "query",
+                "description": "The encoded payment request generated by Centinel. NOTE: Available if Enrolled = Y"
+              },
+              {
+                "name": "authentication.reason_code~",
+                "value": "",
+                "type": "query",
+                "description": "The error code indicating a problem with this transaction."
+              },
+              {
+                "name": "authentication.reason_desc~",
+                "value": "",
+                "type": "query",
+                "description": "Text and additional detail about the error for this transaction. NOTE: This field concatenates the errorDescription and errorDetail from the authentication response message"
+              },
+              {
+                "name": "authentication.signature_verification~",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Signature status identifier. Possible Values: Y - Indicates that the signature of the PARes has been validated successfully and the message contents can be trusted. N - Indicates that the PARes could not be validated. This result could be for a variety of reasons; tampering, certificate expiration, etc., and the result should not be trusted."
+              },
+              {
+                "name": "authentication.status_reason~",
+                "value": "",
+                "type": "query",
+                "description": "Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response."
+              },
+              {
+                "name": "authentication.threeds_version~",
+                "value": "",
+                "type": "query",
+                "description": "This field contains the 3DS version that was used to process the transaction. \n Possible Values: \n 1.0.2 \n 2.1.0 \n NOTE: Required for Mastercard Identity Check transactions in Authorization"
+              },
+              {
+                "name": "authentication.xid~",
+                "value": "",
+                "type": "query",
+                "description": "Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider."
+              },
+              {
+                "name": "encrypted_card~",
+                "value": "",
+                "type": "query",
+                "description": "Client encrypted cardholder data.  The cardholder data encrypted using the Verifone provided public key.   This needs to be provided in base64 encoded format.  The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName,  startMonth, startYear, expiryMonth, expiryYear, cvv.  Additionally a tag called captureTime must be presenting indicating the time the card was captured in UTC  in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.  Sample JSON to encrypt: \n \n        {\n            \"captureTime\": '2019-08-24T14:15:22Z',\n            \"cardNumber\": '5555555555554444',\n            \"expiryMonth\": 1,\n            \"expiryYear\": 2025,\n            \"cvv\": '123',\n        } \n Note: encrypted_card is required if card or reuse_token is not provided."
+              },
+              {
+                "name": "public_key_alias~",
+                "value": "",
+                "type": "query",
+                "description": "The alias for the public key used to encrypt this card. \n Note: public_key_alias is required if card or reuse_token is not provided."
+              },
+              {
+                "name": "amount>",
+                "value": "",
+                "type": "query",
+                "description": "The amount of the transaction."
+              },
+              {
+                "name": "created_at>",
+                "value": "",
+                "type": "query",
+                "description": "The time at which the authentication was created."
+              },
+              {
+                "name": "amount<",
+                "value": "",
+                "type": "query",
+                "description": "The amount of the transaction."
+              },
+              {
+                "name": "created_at<",
+                "value": "",
+                "type": "query",
+                "description": "The time at which the authentication was created."
+              }
+            ]
+          },
+          "docs": "The API enumerates the ThreeDS Authentication objects, offering\nfiltration criteria to obtain filtered data based on specified parameters. \n\n## Filtering and Searching\n\nFilters can be used to interact with any object. Objects can be queried by appending parameters to\nthe query string of the URL.\n\nSo to get a list of all pares_status = Y in threeds authentication with EUR currency, having an amount equal to or greater than 20,\nwe would use the following URL:\n\n    /v2/3d?_limit=10&amount>=212&curr"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2412 @@
+{
+  "item": [
+    {
+      "id": "fd9d8724-47f8-4d60-98ce-026765c5240a",
+      "name": "Billing Plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68a75bf2-7310-4947-8fef-1892e2ecd58d",
+          "name": "List billing plans",
+          "request": {
+            "name": "List billing plans",
+            "description": {},
+            "url": {
+              "path": [
+                "billingPlans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "paymentProviderContract",
+                  "value": "<string>",
+                  "description": "(Required) PayPal Payment Provider Contract UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<string>",
+                  "description": "Filters the response by a Product ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Filters the response by list of plan IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<number>",
+                  "description": "The number of items to return in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<number>",
+                  "description": "A non-zero integer which is the start index of the entire list of items to return in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "totalRequired",
+                  "value": "<boolean>",
+                  "description": "Indicates whether to show the total count in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32749654-5cad-4acf-865f-3bd794d87b12",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"plans\": [\n    {\n      \"billingCycles\": [\n        {\n          \"frequency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sequence\": 5107.1691571389465,\n          \"tenureType\": \"REGULAR\",\n          \"pricingScheme\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalCycles\": 7854.798728373623\n        }\n      ],\n      \"createTime\": \"1976-10-28\",\n      \"name\": \"string\",\n      \"paymentPreferences\": {\n        \"autoBillOutstanding\": false,\n        \"setupFee\": {\n          \"currencyCode\": \"NPR\",\n          \"value\": 4553\n        },\n        \"setupFeeFailureAction\": \"CANCEL\",\n        \"paymentFailureThreshold\": 986.802180160149\n      },\n      \"id\": \"string\",\n      \"status\": \"INACTIVE\",\n      \"description\": \"string\",\n      \"taxes\": {\n        \"percentage\": \"string\",\n        \"inclusive\": false\n      },\n      \"quantitySupported\": true,\n      \"updateTime\": \"2014-11-30\"\n    },\n    {\n      \"billingCycles\": [\n        {\n          \"frequency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sequence\": 6057.869198888827,\n          \"tenureType\": \"TRIAL\",\n          \"pricingScheme\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalCycles\": 5530.061490839976\n        }\n      ],\n      \"createTime\": \"1967-11-22\",\n      \"name\": \"string\",\n      \"paymentPreferences\": {\n        \"autoBillOutstanding\": false,\n        \"setupFee\": {\n          \"currencyCode\": \"MVR\",\n          \"value\": 9820\n        },\n        \"setupFeeFailureAction\": \"CANCEL\",\n        \"paymentFailureThreshold\": 1084.9578681867279\n      },\n      \"id\": \"string\",\n      \"status\": \"INACTIVE\",\n      \"description\": \"string\",\n      \"taxes\": {\n        \"percentage\": \"string\",\n        \"inclusive\": false\n      },\n      \"quantitySupported\": true,\n      \"updateTime\": \"1948-01-30\"\n    }\n  ],\n  \"totalItems\": 6.302902366854823,\n  \"totalPages\": 2360.4215768474514\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "499c2b9b-df7c-45ca-b3ce-18c9f135960a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec02fb3e-2556-47ae-8ac9-2279cc0ab8b9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f93cc2-cf80-4230-84d1-9971b8a9c072",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c67027cf-a3b5-4c59-8789-217c457ff8e7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b45408b-befc-4588-9a87-766e12890c5a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "totalRequired",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71f51890-9e50-4f95-8fe2-b881a2c469ca",
+          "name": "Activate billing plans",
+          "request": {
+            "name": "Activate billing plans",
+            "description": {},
+            "url": {
+              "path": [
+                "billingPlans",
+                ":planId",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) PayPal billing plan Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "8c14e925-b11e-4681-99ee-043f896039db",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "082153bb-65e6-47fb-adc9-afa8d74b89b0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26070aab-6429-437f-814c-162c1f55d656",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4242260-c751-4e26-8137-806a20d0dff7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "011a2690-d330-4472-a497-19f538101de7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4455c27b-5ab5-43f6-a2f0-96a8bd89c183",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76b93f74-dfc2-4e37-8c09-e9d58b455dcb",
+          "name": "Deactivate billing plans",
+          "request": {
+            "name": "Deactivate billing plans",
+            "description": {},
+            "url": {
+              "path": [
+                "billingPlans",
+                ":planId",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) PayPal billing plan Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "9f1dfec3-3c76-452f-b378-44ea9505e4ba",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a1cfccfc-a659-492d-a31a-993003b56cca",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a85ed8f8-29a1-4efe-ad6d-81c77cad3305",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0622c9e5-2059-4f47-8048-b3b9b396fdf7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c434f4f-4230-44d0-b26b-d832f0ffd930",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "926f206e-bb06-46b2-8b5d-81925bc19474",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "848ba282-4bc4-448e-b2fb-f756f7ea0f08",
+          "name": "Get billing plan",
+          "request": {
+            "name": "Get billing plan",
+            "description": {},
+            "url": {
+              "path": [
+                "billingPlans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "paymentProviderContract",
+                  "value": "<string>",
+                  "description": "(Required) PayPal Payment Provider Contract UUID"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) PayPal billing plan Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "377f0b6e-f53b-44d3-84d3-f4a8f7dba50b",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billingCycles\": [\n    {\n      \"frequency\": {\n        \"intervalUnit\": \"MONTH\",\n        \"intervalCount\": 8862.51890894188\n      },\n      \"sequence\": 3589.6084244368008,\n      \"tenureType\": \"TRIAL\",\n      \"pricingScheme\": {\n        \"version\": 817.1427069772689,\n        \"fixedPrice\": {\n          \"currencyCode\": \"CLP\",\n          \"value\": 4725\n        },\n        \"pricingModel\": \"TIERED\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"totalCycles\": 3731.527442659951\n    }\n  ],\n  \"createTime\": \"1950-03-30\",\n  \"name\": \"string\",\n  \"productId\": \"string\",\n  \"id\": \"string\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": false,\n    \"setupFee\": {\n      \"currencyCode\": \"KWD\",\n      \"value\": 3904\n    },\n    \"setupFeeFailureAction\": \"CANCEL\",\n    \"paymentFailureThreshold\": 7670.333979957978\n  },\n  \"status\": \"ACTIVE\",\n  \"description\": \"string\",\n  \"taxes\": {\n    \"percentage\": \"string\",\n    \"inclusive\": true\n  },\n  \"quantitySupported\": true,\n  \"updateTime\": \"1953-06-26\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf453911-24c2-4822-aa28-d5830961d308",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ca53a92-7598-4f56-ab86-6d28de037b92",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c934fada-e5f5-4fa3-9796-4134aa2f4ecd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b0e8c08-8116-4238-9e93-db19d32e5202",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab1b934-cee7-439d-b5d1-b1d88d284709",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7b8706f-453c-49c3-a30a-c3600c9a142e",
+          "name": "Update billing plans",
+          "request": {
+            "name": "Update billing plans",
+            "description": {},
+            "url": {
+              "path": [
+                "billingPlans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) PayPal billing plan Id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "51688ff4-4e05-4ada-8ba4-3d5ba8a3ed18",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4132c266-cdef-4282-8687-cdb06b4d5de7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b42d0d6-8396-4a46-a2ad-f303a0092e92",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad63c263-039c-41f7-b965-9a21ce130724",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5e2cfba-feac-4d69-8f08-a7e1041161f7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dae82259-2d61-4332-a8cf-c57ba6fc7aac",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) PayPal billing plan Id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0c2e959-3d48-4793-8092-56fa1d3b9785",
+          "name": "Create billing plan",
+          "request": {
+            "name": "Create billing plan",
+            "description": {},
+            "url": {
+              "path": [
+                "billingPlans",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "1d1427c8-3320-47cd-9669-3500e7754ea7",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billingCycles\": [\n    {\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"sequence\": 1824.432877825163,\n      \"tenureType\": \"REGULAR\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"totalCycles\": 7096.068297360237\n    }\n  ],\n  \"createTime\": \"1958-01-30\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"productId\": \"string\",\n  \"status\": \"INACTIVE\",\n  \"description\": \"string\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": true,\n  \"updateTime\": \"1977-03-24\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "715c495e-6a36-4565-816e-ebc37a483205",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a177b88-8087-4453-9d44-152487d9deea",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7367aec-0c9c-4aa4-a45b-cd99da80cfcc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "005f896a-d695-4f03-b85b-7b8f9329f133",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7b1f745-8e79-4c23-b95c-e14ce4e3406d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "billingPlans",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingCycles\": [\n    {\n      \"sequence\": \"<number>\",\n      \"tenureType\": \"<string>\",\n      \"pricingScheme\": {\n        \"version\": \"<number>\",\n        \"fixedPrice\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"pricingModel\": \"<string>\",\n        \"tiers\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"frequency\": {\n        \"intervalUnit\": \"<string>\",\n        \"intervalCount\": \"<number>\"\n      },\n      \"totalCycles\": \"<number>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"paymentProviderContract\": \"<string>\",\n  \"productId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"description\": \"<string>\",\n  \"paymentPreferences\": {\n    \"autoBillOutstanding\": \"<boolean>\",\n    \"setupFee\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"setupFeeFailureAction\": \"<string>\",\n    \"paymentFailureThreshold\": \"<number>\"\n  },\n  \"taxes\": {\n    \"percentage\": \"<string>\",\n    \"inclusive\": \"<boolean>\"\n  },\n  \"quantitySupported\": \"<boolean>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8768.346952111853,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1974-09-06\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ff5074c-f9a4-4f12-bc2c-7d46f4583300",
+    "name": "3D Secure 3DS Authentication Billing Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Ecom Payments API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ecom Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/card",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a card payment or card verification request when amount is set to 0 (zero).\n\n <b>Transactions business models</b>\n\n| Business model | Transaction type | Shopper Interaction | Stored Credential Contract | Stored Credential Processing Model |\n| -------------- | ---------------- | ------------------- | ------------------ | -------------------------- |\n| Online purchase with shopper present | One-off online purchase without storing card payment details for future use.| `ECOMMERCE` | | |\n| O"
+        },
+        {
+          "info": {
+            "name": "Initiate a wallet payment using Google Pay or Apple Pay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/wallet",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a card payment or card verification request when amount is set to 0 (zero).\n\n <b>Transactions business models</b>\n\n| Business model | Transaction type | Shopper Interaction | Stored Credential Contract | Token Preference or Reference | Stored Credential Request Type | Stored Credential Processing Model |\n| ------------------- | ---------------- | ------------------- | ------------------ | ------------------ | ---------------- | -------------------------- |\n| Online purchase with shopper"
+        },
+        {
+          "info": {
+            "name": "Start payment session for Apple Pay wallet transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/apple-pay/validation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a merchant payment session"
+        },
+        {
+          "info": {
+            "name": "Initiate a Vipps payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/vipps",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a Vipps payment."
+        },
+        {
+          "info": {
+            "name": "Initiate a MobilePay payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/mobilepay",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a MobilePay payment."
+        },
+        {
+          "info": {
+            "name": "Initiate a Klarna payment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/klarna",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a Klarna payment."
+        },
+        {
+          "info": {
+            "name": "Initiate a Swish payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/swish",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a Swish payment."
+        },
+        {
+          "info": {
+            "name": "Initiate a OP Online payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/op-online-payment",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a OP Online payment."
+        },
+        {
+          "info": {
+            "name": "Get a list of Banks supported by OP Online Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/get-op-banks"
+          },
+          "docs": "Get a list of Banks supported by OP Online Payment."
+        },
+        {
+          "info": {
+            "name": "Initiate a Affirm payment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/affirm",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With Affirm, you will never owe more than you agree to up front. Instead, you’ll always get a flexible, transparent, and convenient way to pay over time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

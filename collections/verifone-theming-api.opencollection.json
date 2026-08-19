@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Theming API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Theming",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/v2/theme/:themeId",
+            "params": [
+              {
+                "name": "themeId",
+                "value": "",
+                "type": "path",
+                "description": "Parameter that was created within the create theme API call that applies the customizations upon the checkout interface. Read <a target=\"_blank\" href=\"https://docs.verifone.com/online-payments/checkout/theming\">Theming</a> for details."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Theme"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Merchant Orders API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Merchant Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/orders/merchant",
+            "headers": [
+              {
+                "name": "saveDraft",
+                "value": ""
+              },
+              {
+                "name": "validateAcquirer",
+                "value": ""
+              },
+              {
+                "name": "validateACH",
+                "value": ""
+              },
+              {
+                "name": "validateCompanyIdentity",
+                "value": ""
+              },
+              {
+                "name": "X-Use-Simplified-Order-Flow",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new merchant to the system and optionally allows for ordering hardware and services."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

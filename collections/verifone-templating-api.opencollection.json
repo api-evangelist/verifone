@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Templating API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templating",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/v2/template/checkoutDetails/",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter templates using RSQL syntax. Combine expressions with `;` (AND) or `,` (OR).\n\n**Filterable fields:**\n\n| Field | Type | Operators |\n|-------|------|-----------|\n| `name` | string | `==` `!=` `=in=` `=out=` `=regex=` `=contains=` |\n| `created_at` | date | `==` `!=` `=in=` `=out=` `=gt=` `=ge=` `=lt=` `=le=` |\n| `updated_at` | date | `==` `!=` `=in=` `=out=` `=gt=` `=ge=` `=lt=` `=le=` |\n| `entity_id` | string | `==` `!=` `=in=` `=out=` `=regex=` |\n\n**Examples:**\n- `name==MyTemplate;entity_id==a6b45428-0296-4394-8ddd-0b50b5b20aa9`\n- `name==TemplateName`"
+              },
+              {
+                "name": "order_criteria",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by",
+                "value": "",
+                "type": "query",
+                "description": "The ordering sequence of the selected templates If not selected then Descending order is the default order."
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "A filter query in RSQL format to retrieve templates based on page number. If not selected then a default pageNumber is 1."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "A filter query in RSQL format to retrieve templates based on page size. If not selected then a default pageSize is 50"
+              }
+            ]
+          },
+          "docs": "List Templates"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

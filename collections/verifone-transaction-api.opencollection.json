@@ -1,0 +1,324 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Transaction API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transaction/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "transaction id"
+              }
+            ]
+          },
+          "docs": "Get a transaction"
+        },
+        {
+          "info": {
+            "name": "List transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions",
+            "params": [
+              {
+                "name": "acquirer_merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount of the transaction."
+              },
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query",
+                "description": "The time at which the transaction was created."
+              },
+              {
+                "name": "created_start",
+                "value": "",
+                "type": "query",
+                "description": "The start time range for when the transaction was created, specified in UTC. Use this in conjunction with `created_end` to query for a time range. A maximum range of 1 month of transactions can be queried at a time. Note: If this is not specified it will default to the current date/time - 7 days."
+              },
+              {
+                "name": "created_end",
+                "value": "",
+                "type": "query",
+                "description": "The end time range for when a transaction was created, specified in UTC. Use this in conjunction with `created_start` to query for a time range. A maximum range of 1 month of transactions can be queried at a time. Note: If this is not specified it will default to the current date/time."
+              },
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "The country code resolved from the customer's ip address."
+              },
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD."
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a customer."
+              },
+              {
+                "name": "enity_id",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of merchant entity you want to process the transaciton is already processed."
+              },
+              {
+                "name": "invoice_number",
+                "value": "",
+                "type": "query",
+                "description": "The invoice number used to track the order for POS transactions. For Ecommerce, use merchant_reference."
+              },
+              {
+                "name": "merchant_reference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "payment_product_type",
+                "value": "",
+                "type": "query",
+                "description": "Fees applied to the transaction, based on the payment product. e.g. For card transactions - interchange fees"
+              },
+              {
+                "name": "shopper_interaction",
+                "value": "",
+                "type": "query",
+                "description": "Determines the point of sale of a customer."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "_sort",
+                "value": "",
+                "type": "query",
+                "description": "Sorts the results by ascending order according to the provided field. If the field is prefixed with dash (e.g. -created_at), the order is descending."
+              },
+              {
+                "name": "_skip",
+                "value": "",
+                "type": "query",
+                "description": "Skips a number of pages."
+              },
+              {
+                "name": "_limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reason_code",
+                "value": "",
+                "type": "query",
+                "description": "A reason code assigned by the acquiring platform; '00' in case of success."
+              },
+              {
+                "name": "rrn",
+                "value": "",
+                "type": "query",
+                "description": "Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system."
+              },
+              {
+                "name": "pos_device_id",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the POS device used for the transaction."
+              },
+              {
+                "name": "stan",
+                "value": "",
+                "type": "query",
+                "description": "System Trace Audit Number."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the transaction"
+              },
+              {
+                "name": "x-vfi-api-idempotencykey",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier"
+              }
+            ]
+          },
+          "docs": "List of transactions"
+        },
+        {
+          "info": {
+            "name": "Count transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/transactions/count",
+            "params": [
+              {
+                "name": "acquirer_merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor."
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount of the transaction."
+              },
+              {
+                "name": "created_at",
+                "value": "",
+                "type": "query",
+                "description": "The time at which the transaction was created."
+              },
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "The country code resolved from the customer's ip address."
+              },
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD."
+              },
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "The ID of a customer."
+              },
+              {
+                "name": "enity_id",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of merchant entity you want to process the transaciton is already processed."
+              },
+              {
+                "name": "invoice_number",
+                "value": "",
+                "type": "query",
+                "description": "The invoice number used to track the order for POS transactions. For Ecommerce, use merchant_reference."
+              },
+              {
+                "name": "merchant_reference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "payment_product_type",
+                "value": "",
+                "type": "query",
+                "description": "Fees applied to the transaction, based on the payment product. e.g. For card transactions - interchange fees"
+              },
+              {
+                "name": "shopper_interaction",
+                "value": "",
+                "type": "query",
+                "description": "Determines the point of sale of a customer."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "reason_code",
+                "value": "",
+                "type": "query",
+                "description": "A reason code assigned by the acquiring platform; '00' in case of success."
+              },
+              {
+                "name": "rrn",
+                "value": "",
+                "type": "query",
+                "description": "Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system."
+              },
+              {
+                "name": "pos_device_id",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of the POS device used for the transaction."
+              },
+              {
+                "name": "stan",
+                "value": "",
+                "type": "query",
+                "description": "System Trace Audit Number."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the transaction"
+              }
+            ]
+          },
+          "docs": "Count transactions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

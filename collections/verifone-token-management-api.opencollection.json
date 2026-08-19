@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Token Management API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Token Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create/Update Token Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/card",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create/Update a token using the Verifone Tokenisation Service.\n\n If a token exists for the card already, it is updated with the information in the request. Otherwise, a new token is created for the given card."
+        },
+        {
+          "info": {
+            "name": "Get Token Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/card/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Verifone issued reuse token used to represent the previously stored cardholder data."
+              }
+            ]
+          },
+          "docs": "Get the details associated with a Verifone issued reuse token."
+        },
+        {
+          "info": {
+            "name": "Update Token Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/card/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Verifone issued reuse token used to represent the previously stored cardholder data."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the details associated with a Verifone issued reuse token.\n\n If the token needs to be linked to a new PAN, the card property must be present.\n\n It is possible to update only partial details against the same card on file like expiry date, cardholder name or CVV."
+        },
+        {
+          "info": {
+            "name": "Delete Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/card/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Verifone issued reuse token used to represent the previously stored cardholder data."
+              }
+            ]
+          },
+          "docs": "Delete a Verifone issued reuse token. This operation is not reversible."
+        },
+        {
+          "info": {
+            "name": "Suspend Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/card/:id/suspend",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Verifone issued reuse token used to represent the previously stored cardholder data."
+              }
+            ]
+          },
+          "docs": "Suspend a Verifone issued reuse token. This operation is reversible.\n\n The token can be activated again by calling the 'Activate Token' endpoint."
+        },
+        {
+          "info": {
+            "name": "Activate Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/api/v2/card/:id/activate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Verifone issued reuse token used to represent the previously stored cardholder data."
+              }
+            ]
+          },
+          "docs": "Activate a Verifone issued reuse token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

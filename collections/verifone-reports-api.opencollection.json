@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Reports API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the list of all reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/reports",
+            "params": [
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Page number for records."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size for returned records."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The ordering sequence of the selected records.\nIf this parameter is not provided, descending order will be chosen.\n\n|Value|Description|\n|--------|-----------|\n|ASC|Ascending order|\n|DESC| Descending order|"
+              },
+              {
+                "name": "orderCriteria",
+                "value": "",
+                "type": "query",
+                "description": "The ordering criteria of the selected records.\n\nIf this parameter not provided, the result will be ordered by <b>createdOn</b>.\n\n|Value|Description|\n|--------|-----------|\n|createdOn|Date & Time|\n|modifiedOn| Date & Time|\n|status| Report status|\n|mimeType| Mime type|\n|reportType| Report type|\n|reportUid| Report identifier|"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "<b>A filter query in RSQL format.</b>\n\nThe returned reports are limited to those that can be retrieved by the user. Please note that if\n`reportEntityUid` is not provided as a search criteria, only records will be returned for the current\n`reportEntityUid` assigend to that user (and does not include descendants).\n\n|Criteria|Description|Operator Used|\n|--------|-----------|-----------|\n|createdOn|The date and time the report was created (Date & Time)|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|modifiedOn|Date & Time|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|status|Report status|==,=in=,=out=|\n|mimeType|Mime type|==,=in=,=out=|\n|reportType|Report type|==,=in=,=out=|\n|reportUid|Report identifier|==,=regex=,=in=,=out=|\n|reportEntityUid|Report entity UUID|==,=in=|\n|reportParameter.batchUUID|The unique identifier of the settlement batch this report is related to. Mapped to PDSP's `transaction.context.paymentContext.batchUUID`.|==,=in=|\n|reportParameter.settlementBatchFileNumber|The identifier of the settlement batch file this report is related to. Mapped to PDSP's `transaction.settlementContext.settlementBatchFileNumber`.|==,=regex=,=in=,=out=|\n|reportParameter.clearingEntityUid|Clearing entity UUID|==,=in=|\n|reportParameter.clearingAccountUid|clearingAccountUid|==,=in=|\n|reportParameter.clearingDate|clearingDate (Date & Time)|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.clearingMerchantName|clearingMerchantName|==,=regex=,=in=,=out=|\n|reportParameter.clearingUid|clearingUid|==,=in=|\n|reportParameter.clearingBankAccount|clearingBankAccount|==,=in=|\n|reportParameter.bankingPartner|bankingPartner|==,=regex=,=in=,=out=|\n|reportParameter.clearingBankCode|clearingBankCode|==,=regex=,=in=,=out=|\n|reportParameter.clearingMerchantId|clearingMerchantId|==,=regex=,=in=,=out=|\n|reportParameter.clearingReference|clearingReference|==,=regex=,=in=,=out=|\n|reportParameter.generatedOn (deprecated)|generatedOn|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.invoicePeriodFrom|invoicePeriodFrom|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.invoicePeriodTo|invoicePeriodTo|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.invoiceNumber|invoiceNumber|==,=regex=,=in=,=out=|\n|reportParameter.reportDescription|reportDescription|==,=regex=,=in=,=out=|\n|reportParameter.reportableDay|reportableDay|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n\n<b>RSQL Operators</b>\nRSQL Query is composed of one or more expressions, combined to each other with following logical operators:\n\n|Operator|Syntax|\n|--------|------|\n|Logical AND|<b>;</b> or <b>&</b>|\n|Logical OR|<b>,</b>|\n\n\n<b>RSQL Comparators</b>\n\n|Comparator|Description|\n|--------|-----------|\n|==|equal|\n|!=|not equal|\n|=lt=|less than|\n|=le=|less than and equal to|\n|=gt=|greater than|\n|=ge=|greater than and equal to |\n|=regex=|pattern matching|\n|=in=|multiple arguments search|\n|=out=|exclude|\n\n\n<b>Examples</b>\n\n* /reports?search=reportType=in=(MERCHANT_SETTLEMENT_REPORT,DAILY_TRANSACTION_REPORT);createdOn=gt=2020-09-20T00:00:00.000Z\n\n* /reports?search=reportEntityUid=in=(2cbc7ec7-49dd-4e70-be98-dd751cf8640b,0d7e19f7-94d5-49ad-890d-1ce636912fb7,a3ca2522-2810-4db1-b535-6e449c3cea6c)\n\n* /reports?search=reportParameter.clearingReference==12345"
+              }
+            ]
+          },
+          "docs": "By passing in the appropriate options, you can search for reports in the system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

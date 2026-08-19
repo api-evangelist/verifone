@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication POI Maintenance API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "POI Maintenance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete a Single POI",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/pois/:poiUid"
+          },
+          "docs": "Deletes a POI.\n\n**forceDelete=false (default)**\nDeletion fails with 400 if the POI is ACTIVE. The POI must be\nINACTIVE before calling this endpoint.\n\n**forceDelete=true**\nAn ACTIVE POI is automatically inactivated before deletion. If already\nINACTIVE, deletion proceeds directly.\nReturns 400 if the inactivation step fails; the POI is not deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

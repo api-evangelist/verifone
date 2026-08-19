@@ -1,0 +1,2806 @@
+{
+  "item": [
+    {
+      "id": "84c39b3f-25ef-4b77-9b54-a11ee026182e",
+      "name": "Subscriptions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2fe436f2-8ffa-49db-8fd2-43136b33d7e9",
+          "name": "Create subscription",
+          "request": {
+            "name": "Create subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "c2bf0623-17d4-44f0-afc5-d8a9a9adfedb",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approvalUrl\": \"string\",\n  \"id\": \"string\",\n  \"planId\": \"string\",\n  \"planOverridden\": false,\n  \"status\": \"string\",\n  \"statusUpdateTime\": \"2004-12-27\",\n  \"quantity\": \"string\",\n  \"startTime\": \"1979-05-24\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"createdAt\": \"1980-11-27\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff66476c-ec0e-4ef0-8066-1319bf4f70fc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4028d82-e7a7-4692-918d-0d35f165126b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e21afdd-dc15-4d00-9152-44886df2ceef",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd1973a7-2950-4f57-8522-b3075338ed67",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b50d5d78-4bb0-4a2a-822d-6190ab8f3d51",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"startTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"customId\": \"<string>\",\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5fd64688-26d8-43c8-8c23-f4da3191e7d4",
+          "name": "Subscription Details",
+          "request": {
+            "name": "Subscription Details",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "paymentProviderContract",
+                  "value": "<string>",
+                  "description": "(Required) PayPal Payment Provider Contract UUID"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55385c16-2db3-4c45-9020-c60be7298281",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"id\": \"string\",\n  \"status\": \"EXPIRED\",\n  \"planOverridden\": true,\n  \"statusUpdateTime\": \"1975-10-31\",\n  \"statusChangeNote\": \"string\",\n  \"startTime\": \"1991-01-03\",\n  \"quantity\": 8335,\n  \"customId\": \"?n\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"VND\",\n    \"value\": 7586\n  },\n  \"subscriber\": {\n    \"name\": {\n      \"givenName\": \"<string>\",\n      \"surname\": \"<string>\"\n    },\n    \"payerId\": \"<string>\",\n    \"emailAddress\": \"<string>\",\n    \"phone\": {\n      \"phoneNumber\": {\n        \"nationalNumber\": \"<string>\"\n      },\n      \"phoneType\": \"<string>\"\n    },\n    \"shippingAddress\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    }\n  },\n  \"billingInfo\": {\n    \"failedPaymentsCount\": 873.7237871160908,\n    \"outstandingBalance\": {\n      \"currencyCode\": \"THB\",\n      \"value\": 2732\n    },\n    \"cycleExecutions\": [\n      {\n        \"cyclesCompleted\": 6746,\n        \"sequence\": 3247,\n        \"tenureType\": \"TRIAL\",\n        \"cyclesRemaining\": 6477,\n        \"currentPricingSchemeVersion\": 5645,\n        \"totalCycles\": 170\n      },\n      {\n        \"cyclesCompleted\": 7669,\n        \"sequence\": 9114,\n        \"tenureType\": \"REGULAR\",\n        \"cyclesRemaining\": 2476,\n        \"currentPricingSchemeVersion\": 816,\n        \"totalCycles\": 8501\n      }\n    ],\n    \"lastPayment\": {\n      \"status\": \"string\",\n      \"amount\": {\n        \"currencyCode\": \"KPW\",\n        \"value\": 4396\n      },\n      \"time\": \"2025-02-02\"\n    },\n    \"nextBillingTime\": \"string\",\n    \"finalPaymentTime\": \"string\",\n    \"lastFailedPayment\": {\n      \"amount\": {\n        \"currencyCode\": \"AED\",\n        \"value\": 4365\n      },\n      \"time\": \"1981-08-27\",\n      \"reasonCode\": \"TRANSACTION_RECEIVING_LIMIT_EXCEEDED\",\n      \"nextPaymentRetryTime\": \"2002-10-06\"\n    }\n  },\n  \"createdAt\": \"1949-05-07\",\n  \"updatedAt\": \"2006-07-23\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c0c78c3-d27c-4eb7-8cea-7f23d1d4d188",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0f32dbd-437c-4546-a7b2-970f580f2e86",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16da616d-8314-4e81-99a3-dbfbca19c9ad",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e93ebd28-6179-4ccb-ba76-b8d83319f592",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c64dc3f1-a33c-432c-a5b8-d849d48ac136",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentProviderContract",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d65b673-c079-4910-9cc6-7e91503e9ffd",
+          "name": "Update subscription",
+          "request": {
+            "name": "Update subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "7516c9cc-a370-42d4-a4cb-95813e105f7b",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6b7fcfb-b255-4d4d-9021-c0acad9e20cd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef88b253-b687-484e-a453-847112ad4b00",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb522f72-dad7-47a1-b058-8a7245648228",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b11eb09d-1e12-4a85-a02f-8393db918ba2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c2386c7-c77c-415b-b21f-64d5573cd58e",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"startTime\": {\n    \"op\": \"<string>\",\n    \"value\": \"<date>\"\n  },\n  \"customId\": {\n    \"value\": \"<string>\",\n    \"op\": \"<string>\"\n  },\n  \"planPaymentPreferencesAutoBillOutstanding\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeFixedPrice\": {\n    \"sequence\": \"<integer>\",\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesTotalCycles\": {\n    \"sequence\": \"<integer>\",\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planBillingCyclesPricingSchemeTiers\": {\n    \"sequence\": \"<integer>\",\n    \"op\": \"<string>\",\n    \"value\": [\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      },\n      {\n        \"amount\": {\n          \"currencyCode\": \"<string>\",\n          \"value\": \"<integer>\"\n        },\n        \"startingQuantity\": \"<integer>\",\n        \"endingQuantity\": \"<integer>\"\n      }\n    ]\n  },\n  \"planTaxesPercentage\": {\n    \"value\": \"<integer>\",\n    \"op\": \"<string>\"\n  },\n  \"planTaxesInclusive\": {\n    \"value\": \"<boolean>\",\n    \"op\": \"<string>\"\n  },\n  \"subscriberShippingAddress\": {\n    \"value\": {\n      \"name\": {\n        \"fullName\": \"<string>\"\n      },\n      \"address\": {\n        \"country\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"countrySubdivision\": \"<string>\",\n        \"city\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine1\": \"<string>\"\n      }\n    },\n    \"op\": \"<string>\"\n  },\n  \"billingInfoOutstandingBalance\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  },\n  \"shippingAmount\": {\n    \"value\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"op\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd4480b7-c684-48a6-8d94-4ff9412e9839",
+          "name": "Revise subscription",
+          "request": {
+            "name": "Revise subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id",
+                "revise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "f7115581-7556-4cef-8007-c5998c17c440",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "revise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e4c62c7-c38f-4bff-9655-3beaeef8df16",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "revise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a9d8648-5fd4-4568-8d4f-efe1666d6072",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "revise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fb04907-f404-44f3-8935-b4c694cf9c10",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "revise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2a536d2-1925-44c7-92e3-41c330a49074",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "revise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "226e5817-d13d-4518-825f-a744c8140e53",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "revise"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"planId\": \"<string>\",\n  \"effectiveTime\": \"<date>\",\n  \"quantity\": \"<integer>\",\n  \"shippingAmount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"shippingAddress\": {\n    \"name\": {\n      \"fullName\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    }\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"userAction\": \"<string>\",\n    \"paymentMethod\": {\n      \"payerSelected\": \"<string>\",\n      \"payeePreferred\": \"<string>\"\n    },\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c76a14da-9806-4486-bed3-671f0d875945",
+          "name": "Cancel subscription",
+          "request": {
+            "name": "Cancel subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "472779e7-5648-46c7-a367-91fc7118bb50",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2e394de1-f212-4b84-b1ad-6d4057f74aac",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c144f7c-4820-4131-bb34-b5107389baf9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4e7a53-c0ef-4c19-96f5-7388c27fd739",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46b24287-b512-4644-ab57-3ca63b846819",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac2ea8e8-6cac-48bd-bbf9-f445fd53eb0d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a4ecf38-a94e-4a35-876f-5a0053dd22d2",
+          "name": "Capture authorized payment on subscription",
+          "request": {
+            "name": "Capture authorized payment on subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id",
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "c4399bc2-bff4-4e48-a2fe-da6779cb71c5",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "522d2658-f1f1-4004-a56e-c3a8bf316f82",
+          "name": "Activate subscription",
+          "request": {
+            "name": "Activate subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "50710e21-4e56-4271-8168-ab9e58dc64e0",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5db3a7c3-472e-47aa-94d8-55648519093c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dba2c9e3-f685-45f6-8010-ccf3d5c478af",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2141bbf3-b0bb-40ec-8c17-a7370c2c61cc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e747f4e9-f806-4112-8e32-c3fbe8afcc5e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1370533-a1d8-49ef-bfaa-c0877c3b45dd",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4209485a-4ffd-49ed-895c-1a2372e7556d",
+          "name": "Suspend subscription",
+          "request": {
+            "name": "Suspend subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id",
+                "suspend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "8d693534-6125-45f8-a7df-7f548ff0711d",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19dac8d7-f6e2-4521-8cf5-c8531cc83b3e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9160434c-d53d-49ce-8006-5235d0539915",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54812ecb-0a2a-4ea3-8ce6-e0c990a935bb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94c03894-8dea-46ab-bb23-b8946b19e330",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b65054a1-bceb-4b63-84ed-9f99d8362dc5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id",
+                    "suspend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 506.1787246417393,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1985-08-30\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "57cf5b95-b15a-43bb-8938-d4e3663006db",
+    "name": "3D Secure 3DS Authentication Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

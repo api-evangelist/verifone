@@ -1,0 +1,2357 @@
+{
+  "item": [
+    {
+      "id": "4a2b78c7-e11d-4e4d-bb12-94ee9df24fae",
+      "name": "Transaction",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "01119f5e-35ed-4a99-a340-8b84c4899340",
+          "name": "Read transaction",
+          "request": {
+            "name": "Read transaction",
+            "description": {
+              "content": "Get a transaction",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "transaction",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) transaction id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca26f7c6-400c-414d-ba8f-9887e5ae1961",
+              "name": "Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transaction",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"amount\": \"string\",\n  \"acquirer_authorizing_network_id\": \"string\",\n  \"acquirer_authorizing_network_id_descriptor\": \"string\",\n  \"acquirer_response_code\": \"stri\",\n  \"acquirer_response_message\": \"string\",\n  \"currency_code\": \"ALL\",\n  \"city\": \"string\",\n  \"country_code\": \"string\",\n  \"created_at\": \"string\",\n  \"customer\": \"string\",\n  \"customer_ip\": \"string\",\n  \"dynamic_descriptor\": \"string\",\n  \"geo_location\": [\n    \"string\",\n    \"string\"\n  ],\n  \"payment_product\": \"string\",\n  \"payment_product_type\": \"Unknown\",\n  \"processor_reference\": \"string\",\n  \"status\": \"string\",\n  \"transaction_type\": \"LOAD\",\n  \"transaction_status\": \"APPROVED\",\n  \"parent_id\": \"string\",\n  \"reason_code\": \"stri\",\n  \"card_brand\": \"string\",\n  \"shipping_information\": {\n    \"address\": \"string\",\n    \"city\": \"string\",\n    \"country\": \"st\",\n    \"postal_code\": \"st\",\n    \"email\": \"iP5@MrsMk.pzp\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"phone\": 7577.884500403694,\n    \"state\": \"string\"\n  },\n  \"customer_details\": {\n    \"title\": \"string\",\n    \"first_name\": \"string\",\n    \"middle_name\": \"string\",\n    \"last_name\": \"string\",\n    \"company_name\": \"string\",\n    \"phone_number\": \"string\",\n    \"email_address\": \"sW8GRWy2@V.rnd\",\n    \"shipping\": {\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"st\",\n      \"postal_code\": \"string\",\n      \"email\": \"ylPPmswzqxDy1@pOynerDtRbcaFqwrifyXMwiBTacISNO.qc\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": \"string\",\n      \"state\": \"string\"\n    },\n    \"billing\": {\n      \"address_1\": \"string\",\n      \"address_2\": \"string\",\n      \"address_3\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"TG\",\n      \"phone\": \"string\",\n      \"postal_code\": \"string\",\n      \"state\": \"string\"\n    },\n    \"language\": \"string\"\n  },\n  \"merchant_reference\": \"string\",\n  \"user_agent\": \"string\",\n  \"arn\": \"string\",\n  \"authorization_code\": \"string\",\n  \"avs_result\": \"G\",\n  \"created_by\": \"string\",\n  \"cvv_present\": true,\n  \"cvv_result\": \"1\",\n  \"processor_payer_id\": \"string\",\n  \"pos_device_id\": \"string\",\n  \"rrn\": \"string\",\n  \"shopper_interaction\": \"unknown\",\n  \"stan\": \"string\",\n  \"threed_authentication\": {\n    \"eci_flag\": \"00\",\n    \"enrolled\": \"string\",\n    \"cavv\": \"string\",\n    \"cavv_algorithm\": \"string\",\n    \"pares_status\": \"string\",\n    \"xid\": \"string\",\n    \"ds_transaction_id\": \"string\",\n    \"threeds_version\": \"1.0.2\"\n  },\n  \"masked_card_number\": \"string\",\n  \"promo_code\": \"string\",\n  \"payment_summary\": {\n    \"captured_amount\": \"string\"\n  },\n  \"token_details\": {\n    \"reuse_token_type\": \"INTERNAL\",\n    \"reuse_token\": \"stringstringstring\",\n    \"analytics_token\": \"string\"\n  },\n  \"entity_id\": \"string\",\n  \"acquirer_merchant_id\": \"string\",\n  \"description\": \"string\",\n  \"detailed_amount\": {\n    \"gratuity_amount\": \"string\",\n    \"cashback_amount\": \"string\",\n    \"donation_amount\": \"string\",\n    \"tax_amount\": \"string\",\n    \"surcharge_amount\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "783f6a1d-32b4-4135-884e-a2e0afd8c03c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transaction",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"timestamp\": 7411.032802588695,\n  \"reversal_status\": \"NONE\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6be14be-c6b1-4e9d-bc4f-57e17bc3c8d9",
+              "name": "Unauthorised",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transaction",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).\",\n  \"details\": {\n    \"key_0\": {}\n  },\n  \"timestamp\": 669.8221497739287,\n  \"reversal_status\": \"NONE\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "747191df-a40e-4eac-a532-7d5fc488dfd6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transaction",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"timestamp\": 9066.093084142101,\n  \"reversal_status\": \"NONE\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ccfddec-1837-4dab-8c7d-0ba9fb5f7f6a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transaction",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.\",\n  \"details\": {\n    \"key_0\": {}\n  },\n  \"timestamp\": 1046.638048635855,\n  \"reversal_status\": \"NONE\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d815d097-153c-4425-9549-92755643e89d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transaction",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) transaction id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"timestamp\": 6499.616391337978,\n  \"reversal_status\": \"NONE\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d80d4c3-e3bc-4225-abf7-bef968c53a8a",
+          "name": "List transactions",
+          "request": {
+            "name": "List transactions",
+            "description": {
+              "content": "List of transactions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "acquirer_merchant_id",
+                  "value": "<string>",
+                  "description": "The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "Amount of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<string>",
+                  "description": "The time at which the transaction was created."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_start",
+                  "value": "<string>",
+                  "description": "The start time range for when the transaction was created, specified in UTC. Use this in conjunction with `created_end` to query for a time range. A maximum range of 1 month of transactions can be queried at a time. Note: If this is not specified it will default to the current date/time - 7 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_end",
+                  "value": "<string>",
+                  "description": "The end time range for when a transaction was created, specified in UTC. Use this in conjunction with `created_start` to query for a time range. A maximum range of 1 month of transactions can be queried at a time. Note: If this is not specified it will default to the current date/time."
+                },
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "The country code resolved from the customer's ip address."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "The ID of a customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "enity_id",
+                  "value": "<string>",
+                  "description": "The identifier of merchant entity you want to process the transaciton is already processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_number",
+                  "value": "<string>",
+                  "description": "The invoice number used to track the order for POS transactions. For Ecommerce, use merchant_reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_reference",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_product_type",
+                  "value": "<string>",
+                  "description": "Fees applied to the transaction, based on the payment product. e.g. For card transactions - interchange fees"
+                },
+                {
+                  "disabled": false,
+                  "key": "shopper_interaction",
+                  "value": "<string>",
+                  "description": "Determines the point of sale of a customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "_sort",
+                  "value": "<string>",
+                  "description": "Sorts the results by ascending order according to the provided field. If the field is prefixed with dash (e.g. -created_at), the order is descending."
+                },
+                {
+                  "disabled": false,
+                  "key": "_skip",
+                  "value": "<number>",
+                  "description": "Skips a number of pages."
+                },
+                {
+                  "disabled": false,
+                  "key": "_limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "reason_code",
+                  "value": "<string>",
+                  "description": "A reason code assigned by the acquiring platform; '00' in case of success."
+                },
+                {
+                  "disabled": false,
+                  "key": "rrn",
+                  "value": "<string>",
+                  "description": "Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos_device_id",
+                  "value": "<number>",
+                  "description": "Identifier of the POS device used for the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "stan",
+                  "value": "<number>",
+                  "description": "System Trace Audit Number."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "The ID of the transaction"
+                },
+                {
+                  "disabled": false,
+                  "key": "x-vfi-api-idempotencykey",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6baabd3f-f471-4d32-a8d6-a13bfcd409fd",
+              "name": "Transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-vfi-api-idempotencykey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"amount\": 8212.628767874337,\n    \"acquirer_authorizing_network_id\": \"string\",\n    \"acquirer_authorizing_network_id_descriptor\": \"string\",\n    \"acquirer_response_code\": \"stri\",\n    \"acquirer_response_message\": \"string\",\n    \"currency_code\": \"VEF\",\n    \"city\": \"string\",\n    \"country_code\": \"string\",\n    \"created_at\": \"string\",\n    \"customer\": \"string\",\n    \"customer_ip\": \"string\",\n    \"dynamic_descriptor\": \"string\",\n    \"geo_location\": [\n      \"string\",\n      \"string\"\n    ],\n    \"payment_account_reference\": \"string\",\n    \"payment_product\": \"string\",\n    \"payment_product_type\": \"Unknown\",\n    \"processor_reference\": \"string\",\n    \"status\": \"string\",\n    \"transaction_type\": \"<string>\",\n    \"transaction_status\": \"<string>\",\n    \"parent_id\": \"string\",\n    \"reason_code\": \"stri\",\n    \"card_brand\": \"string\",\n    \"shipping_information\": {\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"st\",\n      \"postal_code\": \"string\",\n      \"email\": \"ZMSKKtz8@RgbPKJyXgXrmqsWReVKsbFBKDRCxxleT.svm\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": 2360.9476719665336,\n      \"state\": \"string\"\n    },\n    \"customer_details\": {\n      \"title\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"company_name\": \"string\",\n      \"phone_number\": \"string\",\n      \"email_address\": \"nGozW@tYPFpBSyxDZgXJ.pkyf\",\n      \"shipping\": {\n        \"address\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"st\",\n        \"postal_code\": \"st\",\n        \"email\": \"Ie8v9@ZdGZnfPrNFxediqkE.xyo\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone\": \"string\",\n        \"state\": \"string\"\n      },\n      \"billing\": {\n        \"address_1\": \"string\",\n        \"address_2\": \"string\",\n        \"address_3\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"GD\",\n        \"phone\": \"string\",\n        \"postal_code\": \"string\",\n        \"state\": \"string\"\n      },\n      \"language\": \"string\"\n    },\n    \"merchant_reference\": \"string\",\n    \"user_agent\": \"string\",\n    \"arn\": \"string\",\n    \"authorization_code\": \"string\",\n    \"avs_result\": \"R\",\n    \"created_by\": \"string\",\n    \"cvv_present\": false,\n    \"cvv_result\": \"2\",\n    \"processor_payer_id\": \"string\",\n    \"pos_device_id\": \"string\",\n    \"rrn\": \"string\",\n    \"shopper_interaction\": \"moto\",\n    \"stan\": \"string\",\n    \"threed_authentication\": {\n      \"eci_flag\": \"04\",\n      \"enrolled\": \"string\",\n      \"cavv\": \"string\",\n      \"cavv_algorithm\": \"string\",\n      \"pares_status\": \"string\",\n      \"xid\": \"string\",\n      \"ds_transaction_id\": \"string\",\n      \"threeds_version\": \"1.0.2\"\n    },\n    \"masked_card_number\": \"string\",\n    \"promo_code\": \"string\",\n    \"payment_summary\": {\n      \"captured_amount\": 8643.422478369452\n    },\n    \"entity_id\": \"string\",\n    \"acquirer_merchant_id\": \"string\",\n    \"description\": \"string\",\n    \"detailed_amount\": {\n      \"gratuity_amount\": \"string\",\n      \"cashback_amount\": \"string\",\n      \"donation_amount\": \"string\",\n      \"tax_amount\": \"string\",\n      \"surcharge_amount\": \"string\"\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"amount\": 9200.100061206213,\n    \"acquirer_authorizing_network_id\": \"string\",\n    \"acquirer_authorizing_network_id_descriptor\": \"string\",\n    \"acquirer_response_code\": \"stri\",\n    \"acquirer_response_message\": \"string\",\n    \"currency_code\": \"MWK\",\n    \"city\": \"string\",\n    \"country_code\": \"string\",\n    \"created_at\": \"string\",\n    \"customer\": \"string\",\n    \"customer_ip\": \"string\",\n    \"dynamic_descriptor\": \"string\",\n    \"geo_location\": [\n      \"string\",\n      \"string\"\n    ],\n    \"payment_account_reference\": \"string\",\n    \"payment_product\": \"string\",\n    \"payment_product_type\": \"Unknown\",\n    \"processor_reference\": \"string\",\n    \"status\": \"string\",\n    \"transaction_type\": \"<string>\",\n    \"transaction_status\": \"<string>\",\n    \"parent_id\": \"string\",\n    \"reason_code\": \"stri\",\n    \"card_brand\": \"string\",\n    \"shipping_information\": {\n      \"address\": \"string\",\n      \"city\": \"string\",\n      \"country\": \"st\",\n      \"postal_code\": \"string\",\n      \"email\": \"hBWn--BpGkf@ZixegSoKbBGWhuUgT.ky\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"phone\": 3362.5405979076527,\n      \"state\": \"string\"\n    },\n    \"customer_details\": {\n      \"title\": \"string\",\n      \"first_name\": \"string\",\n      \"middle_name\": \"string\",\n      \"last_name\": \"string\",\n      \"company_name\": \"string\",\n      \"phone_number\": \"string\",\n      \"email_address\": \"Lg9f8emWKcyFSG@lygRyEQlIoNcwalEkHUfjGpZAFjG.fhh\",\n      \"shipping\": {\n        \"address\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"st\",\n        \"postal_code\": \"string\",\n        \"email\": \"jLYyMYkDYXn6@lTilyqpzKKcQOOCSieefKCgsvZ.tzrr\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone\": \"string\",\n        \"state\": \"string\"\n      },\n      \"billing\": {\n        \"address_1\": \"string\",\n        \"address_2\": \"string\",\n        \"address_3\": \"string\",\n        \"city\": \"string\",\n        \"country\": \"NP\",\n        \"phone\": \"string\",\n        \"postal_code\": \"string\",\n        \"state\": \"string\"\n      },\n      \"language\": \"string\"\n    },\n    \"merchant_reference\": \"string\",\n    \"user_agent\": \"string\",\n    \"arn\": \"string\",\n    \"authorization_code\": \"string\",\n    \"avs_result\": \"C\",\n    \"created_by\": \"string\",\n    \"cvv_present\": true,\n    \"cvv_result\": \"0\",\n    \"processor_payer_id\": \"string\",\n    \"pos_device_id\": \"string\",\n    \"rrn\": \"string\",\n    \"shopper_interaction\": \"unknown\",\n    \"stan\": \"string\",\n    \"threed_authentication\": {\n      \"eci_flag\": \"02\",\n      \"enrolled\": \"string\",\n      \"cavv\": \"string\",\n      \"cavv_algorithm\": \"string\",\n      \"pares_status\": \"string\",\n      \"xid\": \"string\",\n      \"ds_transaction_id\": \"string\",\n      \"threeds_version\": \"2.1.0\"\n    },\n    \"masked_card_number\": \"string\",\n    \"promo_code\": \"string\",\n    \"payment_summary\": {\n      \"captured_amount\": 3972.8505599658592\n    },\n    \"entity_id\": \"string\",\n    \"acquirer_merchant_id\": \"string\",\n    \"description\": \"string\",\n    \"detailed_amount\": {\n      \"gratuity_amount\": \"string\",\n      \"cashback_amount\": \"string\",\n      \"donation_amount\": \"string\",\n      \"tax_amount\": \"string\",\n      \"surcharge_amount\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f0c9582-9bda-4941-9fad-74d869fe35cf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-vfi-api-idempotencykey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"timestamp\": 7411.032802588695,\n  \"reversal_status\": \"NONE\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c38818e-2c2a-4ca5-a344-f3e6a4862f3e",
+              "name": "Unauthorised",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-vfi-api-idempotencykey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).\",\n  \"details\": {\n    \"key_0\": {}\n  },\n  \"timestamp\": 669.8221497739287,\n  \"reversal_status\": \"NONE\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f21f7d5-35da-4253-a898-79e7526864d4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-vfi-api-idempotencykey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"timestamp\": 9066.093084142101,\n  \"reversal_status\": \"NONE\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68d9e854-4e4f-430d-b4f4-b176b34d1943",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-vfi-api-idempotencykey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.\",\n  \"details\": {\n    \"key_0\": {}\n  },\n  \"timestamp\": 1046.638048635855,\n  \"reversal_status\": \"NONE\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe85879a-ad1b-4ec2-be06-9508a1c52f53",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_skip",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "x-vfi-api-idempotencykey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"timestamp\": 6499.616391337978,\n  \"reversal_status\": \"NONE\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2109c94a-6649-4b59-97c4-a5ad0d4b1a32",
+          "name": "Count transactions",
+          "request": {
+            "name": "Count transactions",
+            "description": {
+              "content": "Count transactions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "transactions",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "acquirer_merchant_id",
+                  "value": "<string>",
+                  "description": "The Code identifying the card acceptor as issued by the Acquiring Institution. This may not be unique across institutions. Also referred to as the MID. ISO8583 - DE 42. This field is for the MID used between VF and a 3rd party acquirer or processor."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<number>",
+                  "description": "Amount of the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at",
+                  "value": "<string>",
+                  "description": "The time at which the transaction was created."
+                },
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "The country code resolved from the customer's ip address."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 alphabetical currency code. e.g. USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "The ID of a customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "enity_id",
+                  "value": "<string>",
+                  "description": "The identifier of merchant entity you want to process the transaciton is already processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "invoice_number",
+                  "value": "<string>",
+                  "description": "The invoice number used to track the order for POS transactions. For Ecommerce, use merchant_reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchant_reference",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_product_type",
+                  "value": "<string>",
+                  "description": "Fees applied to the transaction, based on the payment product. e.g. For card transactions - interchange fees"
+                },
+                {
+                  "disabled": false,
+                  "key": "shopper_interaction",
+                  "value": "<string>",
+                  "description": "Determines the point of sale of a customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "reason_code",
+                  "value": "<string>",
+                  "description": "A reason code assigned by the acquiring platform; '00' in case of success."
+                },
+                {
+                  "disabled": false,
+                  "key": "rrn",
+                  "value": "<string>",
+                  "description": "Retrieval Reference Number, is a transaction identifying reference number that is designated by the card acceptor system."
+                },
+                {
+                  "disabled": false,
+                  "key": "pos_device_id",
+                  "value": "<number>",
+                  "description": "Identifier of the POS device used for the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "stan",
+                  "value": "<number>",
+                  "description": "System Trace Audit Number."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "The ID of the transaction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96e18e88-3bbf-45a8-9703-31955797402f",
+              "name": "Count transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 5758.853937995484\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ea9a17a-8822-4a2f-b411-56d72e3bd9aa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"timestamp\": 7411.032802588695,\n  \"reversal_status\": \"NONE\",\n  \"code\": 400\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "991605d6-e52a-4a2d-99aa-497dfa482ab0",
+              "name": "Unauthorised",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).\",\n  \"details\": {\n    \"key_0\": {}\n  },\n  \"timestamp\": 669.8221497739287,\n  \"reversal_status\": \"NONE\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed086ef7-bf54-4516-96c3-e285ab8ef7c0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"timestamp\": 9066.093084142101,\n  \"reversal_status\": \"NONE\",\n  \"code\": 403\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce16d009-ba50-485a-98d1-328462bbb8a8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.\",\n  \"details\": {\n    \"key_0\": {}\n  },\n  \"timestamp\": 1046.638048635855,\n  \"reversal_status\": \"NONE\",\n  \"code\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb82d264-7447-4878-a457-5404219af4c0",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "transactions",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "acquirer_merchant_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_at",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoice_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchant_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_product_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shopper_interaction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "reason_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rrn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pos_device_id",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "stan",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"timestamp\": 6499.616391337978,\n  \"reversal_status\": \"NONE\",\n  \"code\": 500\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f366e53e-ab15-4d90-968b-a903b5c21584",
+    "name": "3D Secure 3DS Authentication Transaction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

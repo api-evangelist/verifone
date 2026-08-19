@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "18331c14-084c-4257-9eb0-9a1e1f26999e",
+      "name": "Templating",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0208572-16b1-4044-ba47-ca6a39740899",
+          "name": "List Templates",
+          "request": {
+            "name": "List Templates",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "template",
+                "checkoutDetails",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter templates using RSQL syntax. Combine expressions with `;` (AND) or `,` (OR).\n\n**Filterable fields:**\n\n| Field | Type | Operators |\n|-------|------|-----------|\n| `name` | string | `==` `!=` `=in=` `=out=` `=regex=` `=contains=` |\n| `created_at` | date | `==` `!=` `=in=` `=out=` `=gt=` `=ge=` `=lt=` `=le=` |\n| `updated_at` | date | `==` `!=` `=in=` `=out=` `=gt=` `=ge=` `=lt=` `=le=` |\n| `entity_id` | string | `==` `!=` `=in=` `=out=` `=regex=` |\n\n**Examples:**\n- `name==MyTemplate;entity_id==a6b45428-0296-4394-8ddd-0b50b5b20aa9`\n- `name==TemplateName`"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_criteria",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_by",
+                  "value": "<string>",
+                  "description": "The ordering sequence of the selected templates If not selected then Descending order is the default order."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "<number>",
+                  "description": "A filter query in RSQL format to retrieve templates based on page number. If not selected then a default pageNumber is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<number>",
+                  "description": "A filter query in RSQL format to retrieve templates based on page size. If not selected then a default pageSize is 50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ce677ed-71c5-46fb-993c-acccfd30c246",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "template",
+                    "checkoutDetails",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_criteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"entity_id\": \"string\",\n    \"billing_is_same_as_shipping\": true,\n    \"shipping_first_billing_second\": false,\n    \"field_settings\": {\n      \"billing\": {\n        \"address_1\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"address_2\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"address_3\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"city\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"country_code\": {\n          \"mode\": \"REQUIRED\"\n        },\n        \"first_name\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"middle_name\": {\n          \"mode\": \"REQUIRED\"\n        },\n        \"last_name\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"phone\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"postal_code\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"state\": {\n          \"mode\": \"READ_ONLY\"\n        }\n      },\n      \"company_name\": {\n        \"mode\": \"HIDDEN\"\n      },\n      \"company_registration_number\": {\n        \"mode\": \"REQUIRED\"\n      },\n      \"email_address\": {\n        \"mode\": \"REQUIRED\"\n      },\n      \"entity_id\": {\n        \"mode\": \"READ_ONLY\"\n      },\n      \"phone_number\": {\n        \"mode\": \"OPTIONAL\"\n      },\n      \"shipping\": {\n        \"address_1\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"address_2\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"address_3\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"city\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"country_code\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"first_name\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"middle_name\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"last_name\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"phone\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"postal_code\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"state\": {\n          \"mode\": \"HIDDEN\"\n        }\n      },\n      \"title\": {\n        \"mode\": \"REQUIRED\"\n      },\n      \"work_phone\": {\n        \"mode\": \"READ_ONLY\"\n      },\n      \"tax\": {\n        \"identifier\": {\n          \"mode\": \"HIDDEN\"\n        }\n      }\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"entity_id\": \"string\",\n    \"billing_is_same_as_shipping\": true,\n    \"shipping_first_billing_second\": false,\n    \"field_settings\": {\n      \"billing\": {\n        \"address_1\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"address_2\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"address_3\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"city\": {\n          \"mode\": \"REQUIRED\"\n        },\n        \"country_code\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"first_name\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"middle_name\": {\n          \"mode\": \"REQUIRED\"\n        },\n        \"last_name\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"phone\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"postal_code\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"state\": {\n          \"mode\": \"REQUIRED\"\n        }\n      },\n      \"company_name\": {\n        \"mode\": \"OPTIONAL\"\n      },\n      \"company_registration_number\": {\n        \"mode\": \"HIDDEN\"\n      },\n      \"email_address\": {\n        \"mode\": \"HIDDEN\"\n      },\n      \"entity_id\": {\n        \"mode\": \"HIDDEN\"\n      },\n      \"phone_number\": {\n        \"mode\": \"OPTIONAL\"\n      },\n      \"shipping\": {\n        \"address_1\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"address_2\": {\n          \"mode\": \"REQUIRED\"\n        },\n        \"address_3\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"city\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"country_code\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"first_name\": {\n          \"mode\": \"REQUIRED\"\n        },\n        \"middle_name\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"last_name\": {\n          \"mode\": \"READ_ONLY\"\n        },\n        \"phone\": {\n          \"mode\": \"OPTIONAL\"\n        },\n        \"postal_code\": {\n          \"mode\": \"HIDDEN\"\n        },\n        \"state\": {\n          \"mode\": \"REQUIRED\"\n        }\n      },\n      \"title\": {\n        \"mode\": \"OPTIONAL\"\n      },\n      \"work_phone\": {\n        \"mode\": \"OPTIONAL\"\n      },\n      \"tax\": {\n        \"identifier\": {\n          \"mode\": \"REQUIRED\"\n        }\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30cc55dc-d337-435c-96b6-9977c6f4b508",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "template",
+                    "checkoutDetails",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_criteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8454.519279330267,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1960-10-13T21:14:09.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f32d73e5-9df4-4319-aa06-75407dac682c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "template",
+                    "checkoutDetails",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_criteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8454.519279330267,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1960-10-13T21:14:09.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afce2aae-d767-4774-9195-73c896a35ae7",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "template",
+                    "checkoutDetails",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_criteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8454.519279330267,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1960-10-13T21:14:09.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37b21c1c-d87b-4522-8f35-e2570eb0c194",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "template",
+                    "checkoutDetails",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_criteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8454.519279330267,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1960-10-13T21:14:09.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5ab02e5b-fd35-4393-9a63-41ef23e718dc",
+    "name": "3D Secure 3DS Authentication Templating API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

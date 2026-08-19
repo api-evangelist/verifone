@@ -1,0 +1,683 @@
+{
+  "item": [
+    {
+      "id": "3410c77f-9236-43af-a397-ecfe4da24496",
+      "name": "Reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1cc2f676-f7cb-4368-b0c9-0ea451958af6",
+          "name": "Get the list of all reports",
+          "request": {
+            "name": "Get the list of all reports",
+            "description": {
+              "content": "By passing in the appropriate options, you can search for reports in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1",
+                  "description": "Page number for records."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Page size for returned records."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "The ordering sequence of the selected records.\nIf this parameter is not provided, descending order will be chosen.\n\n|Value|Description|\n|--------|-----------|\n|ASC|Ascending order|\n|DESC| Descending order|"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderCriteria",
+                  "value": "<string>",
+                  "description": "The ordering criteria of the selected records.\n\nIf this parameter not provided, the result will be ordered by <b>createdOn</b>.\n\n|Value|Description|\n|--------|-----------|\n|createdOn|Date & Time|\n|modifiedOn| Date & Time|\n|status| Report status|\n|mimeType| Mime type|\n|reportType| Report type|\n|reportUid| Report identifier|"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "<b>A filter query in RSQL format.</b>\n\nThe returned reports are limited to those that can be retrieved by the user. Please note that if\n`reportEntityUid` is not provided as a search criteria, only records will be returned for the current\n`reportEntityUid` assigend to that user (and does not include descendants).\n\n|Criteria|Description|Operator Used|\n|--------|-----------|-----------|\n|createdOn|The date and time the report was created (Date & Time)|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|modifiedOn|Date & Time|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|status|Report status|==,=in=,=out=|\n|mimeType|Mime type|==,=in=,=out=|\n|reportType|Report type|==,=in=,=out=|\n|reportUid|Report identifier|==,=regex=,=in=,=out=|\n|reportEntityUid|Report entity UUID|==,=in=|\n|reportParameter.batchUUID|The unique identifier of the settlement batch this report is related to. Mapped to PDSP's `transaction.context.paymentContext.batchUUID`.|==,=in=|\n|reportParameter.settlementBatchFileNumber|The identifier of the settlement batch file this report is related to. Mapped to PDSP's `transaction.settlementContext.settlementBatchFileNumber`.|==,=regex=,=in=,=out=|\n|reportParameter.clearingEntityUid|Clearing entity UUID|==,=in=|\n|reportParameter.clearingAccountUid|clearingAccountUid|==,=in=|\n|reportParameter.clearingDate|clearingDate (Date & Time)|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.clearingMerchantName|clearingMerchantName|==,=regex=,=in=,=out=|\n|reportParameter.clearingUid|clearingUid|==,=in=|\n|reportParameter.clearingBankAccount|clearingBankAccount|==,=in=|\n|reportParameter.bankingPartner|bankingPartner|==,=regex=,=in=,=out=|\n|reportParameter.clearingBankCode|clearingBankCode|==,=regex=,=in=,=out=|\n|reportParameter.clearingMerchantId|clearingMerchantId|==,=regex=,=in=,=out=|\n|reportParameter.clearingReference|clearingReference|==,=regex=,=in=,=out=|\n|reportParameter.generatedOn (deprecated)|generatedOn|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.invoicePeriodFrom|invoicePeriodFrom|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.invoicePeriodTo|invoicePeriodTo|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n|reportParameter.invoiceNumber|invoiceNumber|==,=regex=,=in=,=out=|\n|reportParameter.reportDescription|reportDescription|==,=regex=,=in=,=out=|\n|reportParameter.reportableDay|reportableDay|==,=lt=,=le=,=gt=,=ge=,=in=,=out=|\n\n<b>RSQL Operators</b>\nRSQL Query is composed of one or more expressions, combined to each other with following logical operators:\n\n|Operator|Syntax|\n|--------|------|\n|Logical AND|<b>;</b> or <b>&</b>|\n|Logical OR|<b>,</b>|\n\n\n<b>RSQL Comparators</b>\n\n|Comparator|Description|\n|--------|-----------|\n|==|equal|\n|!=|not equal|\n|=lt=|less than|\n|=le=|less than and equal to|\n|=gt=|greater than|\n|=ge=|greater than and equal to |\n|=regex=|pattern matching|\n|=in=|multiple arguments search|\n|=out=|exclude|\n\n\n<b>Examples</b>\n\n* /reports?search=reportType=in=(MERCHANT_SETTLEMENT_REPORT,DAILY_TRANSACTION_REPORT);createdOn=gt=2020-09-20T00:00:00.000Z\n\n* /reports?search=reportEntityUid=in=(2cbc7ec7-49dd-4e70-be98-dd751cf8640b,0d7e19f7-94d5-49ad-890d-1ce636912fb7,a3ca2522-2810-4db1-b535-6e449c3cea6c)\n\n* /reports?search=reportParameter.clearingReference==12345"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3128e99-6148-4941-9214-b5bca1dbfb80",
+              "name": "search results matching criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totals\": 522,\n  \"reports\": [\n    {\n      \"fileName\": \"string\",\n      \"mimeType\": \"text/csv\",\n      \"reportEntityUid\": \"01876a58-2982-7e99-76a3-d22342aae9ec\",\n      \"reportType\": \"BBX_PARTNER_COMMISSION_REPORT\",\n      \"reportParameter\": {\n        \"batchUUID\": \"b87cc1b2-c6c4-f0b3-671e-c60b8e295688\",\n        \"settlementBatchFileNumber\": \"string\",\n        \"correlationId\": \"d86ed925-bfed-ebee-33a5-3100b56f8ced\",\n        \"clearingEntityUid\": \"e92865ee-abdd-c3ce-b81b-471830564f7b\",\n        \"clearingAccountUid\": \"625a16a4-5280-5fb8-49ce-bd5aaf4f2601\",\n        \"clearingDate\": \"1961-08-14T23:03:11.200Z\",\n        \"clearingMerchantName\": \"string\",\n        \"clearingUid\": \"c3994319-543c-d6ff-e2b9-88fb2717ac61\",\n        \"clearingBankAccount\": \"string\",\n        \"bankingPartner\": \"DESJARDINS\",\n        \"clearingBankCode\": \"string\",\n        \"clearingMerchantId\": \"string\",\n        \"clearingReference\": \"string\",\n        \"generatedOn\": \"1953-05-20T17:08:56.781Z\",\n        \"invoicePeriodFrom\": \"2006-03-04\",\n        \"invoicePeriodTo\": \"1978-12-30\",\n        \"invoiceNumber\": \"string\",\n        \"reportDescription\": \"string\",\n        \"reportableDay\": \"1963-10-04\"\n      },\n      \"reportUid\": \"3d3b4d59-c75e-e582-a499-743869a85f61\",\n      \"createdOn\": \"1948-07-28T22:50:51.243Z\",\n      \"modifiedOn\": \"1988-11-21T21:36:28.298Z\",\n      \"status\": \"INVALID_INPUT_PARAMETERS\"\n    },\n    {\n      \"fileName\": \"string\",\n      \"mimeType\": \"text/csv\",\n      \"reportEntityUid\": \"a1ac98ec-115e-faf8-bb57-1a22b639c9c0\",\n      \"reportType\": \"INTERCARD_INVOICE\",\n      \"reportParameter\": {\n        \"batchUUID\": \"e9858ca0-aa3d-49c3-195f-40401bb7ce5e\",\n        \"settlementBatchFileNumber\": \"string\",\n        \"correlationId\": \"2fc85a64-2052-443f-ea92-73ed03820b05\",\n        \"clearingEntityUid\": \"fc913d1e-48a1-644e-38c2-4029ee64877c\",\n        \"clearingAccountUid\": \"165b6fdd-d3b1-44cb-a2fe-5a8eb099346a\",\n        \"clearingDate\": \"1968-11-10T11:50:28.352Z\",\n        \"clearingMerchantName\": \"string\",\n        \"clearingUid\": \"cc5e1724-8593-0416-58e3-4ca293747c46\",\n        \"clearingBankAccount\": \"string\",\n        \"bankingPartner\": \"IBC\",\n        \"clearingBankCode\": \"string\",\n        \"clearingMerchantId\": \"string\",\n        \"clearingReference\": \"string\",\n        \"generatedOn\": \"1989-03-26T04:45:33.490Z\",\n        \"invoicePeriodFrom\": \"1983-04-23\",\n        \"invoicePeriodTo\": \"2002-01-15\",\n        \"invoiceNumber\": \"string\",\n        \"reportDescription\": \"string\",\n        \"reportableDay\": \"2006-09-25\"\n      },\n      \"reportUid\": \"1f6216dd-df78-4dfb-62f0-08a0b4930caf\",\n      \"createdOn\": \"2019-12-06T13:14:47.884Z\",\n      \"modifiedOn\": \"1952-02-05T08:18:36.104Z\",\n      \"status\": \"INITIATED\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8138d2dc-9937-41a4-912f-1cd8a5ba4146",
+              "name": "Bad Request. Unable to interpret the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"message\": \"The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.\",\n  \"title\": \"Bad Request\",\n  \"type\": \"INVALID_REQUEST_ERROR\",\n  \"timestamp\": \"1966-06-22T21:49:18.550Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d6e029d-e17b-4d37-b8fd-6a22097c1c5a",
+              "name": "Unauthorized. Unable to authenticate client to allow request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"The request requires client authentication.\",\n  \"title\": \"Unauthorised\",\n  \"type\": \"AUTHENTICATION_ERROR\",\n  \"timestamp\": \"1978-09-07T01:32:36.697Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab0b3ed6-28ea-4421-9a86-e290573a3704",
+              "name": "Forbidden. This Feature is not enabled. This feature has not been authorised for the client.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"The request requires client authorisation to access resource.\",\n  \"title\": \"Forbidden\",\n  \"type\": \"AUTHENTICATION_ERROR\",\n  \"timestamp\": \"1957-05-15T12:33:59.529Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0696769b-9385-4016-b4d0-d91fadaa0f51",
+              "name": "Not found. The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"message\": \"The server cannot find the requested resource.\",\n  \"title\": \"Not Found\",\n  \"type\": \"INVALID_REQUEST_ERROR\",\n  \"timestamp\": \"2005-10-29T03:10:18.701Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ef528c2-7d20-41cf-9afa-ba3d61c8822b",
+              "name": "Too many requests. Too many requests from the client hit the API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"429\",\n  \"message\": \"The number of requests from this client is restricted to a specified quota.\",\n  \"title\": \"Too Many Requests\",\n  \"type\": \"RATE_LIMIT_ERROR\",\n  \"timestamp\": \"1993-08-24T11:28:51.736Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5be791b2-2655-464e-a5d9-329991156d8c",
+              "name": "Internal error. There was an error processing the request; try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"message\": \"The server encountered an unexpected condition which prevented it from fulfilling the request.\",\n  \"title\": \"Internal Server Error\",\n  \"type\": \"API_ERROR\",\n  \"timestamp\": \"1996-12-16T22:43:52.052Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1373702-6856-4704-84ba-4324b7597ea8",
+              "name": "Service Unavailable. Unable process requests at this time, please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"503\",\n  \"message\": \"The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.\",\n  \"title\": \"Service Unavailable\",\n  \"type\": \"API_ERROR\",\n  \"timestamp\": \"1958-09-15T23:06:27.728Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f58da07-9946-4ad7-8112-bbe14808f10d",
+              "name": "Service Unavailable. Unable process requests at this time, please try again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderCriteria",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"504\",\n  \"message\": \"The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.\",\n  \"title\": \"Gateway Timeout\",\n  \"type\": \"API_ERROR\",\n  \"timestamp\": \"1957-04-18T08:44:16.440Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df04a596-88aa-476c-a8e0-fa1d0543bcfb",
+    "name": "3D Secure 3DS Authentication Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

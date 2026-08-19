@@ -1,0 +1,2870 @@
+{
+  "item": [
+    {
+      "id": "604bc851-ad00-448d-93d2-1736342c63de",
+      "name": "Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9457a06c-8b3e-406e-808c-05a913bfa508",
+          "name": "Create transaction",
+          "request": {
+            "name": "Create transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "PayPal Fraud Id",
+                "key": "paypalFraudId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "27461e3d-6ec9-4df8-b155-b6c9da2c48a2",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"2001-01-11\",\n  \"id\": \"string\",\n  \"instoreReference\": \"string\",\n  \"status\": \"INITIATED\",\n  \"orderId\": \"string\",\n  \"approvalUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fabec8fd-4749-420a-9da4-d3d51b394e1d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88811084-ba97-4041-b358-a6b2d0e9b456",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "109abdf9-003f-45f1-bde5-17d5f0bf555a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2edaa50-2215-4d75-bb3d-775b901f5727",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33562973-769e-4b00-85f9-08088e6d932f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction. <br/><b>Required</b> when billingAgreementId is passed in the payload",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"paymentProviderContract\": \"<string>\",\n  \"intent\": \"CAPTURE\",\n  \"customer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"applicationContext\": {\n    \"brandName\": \"<string>\",\n    \"locale\": \"<string>\",\n    \"landingPage\": \"<string>\",\n    \"shippingPreference\": \"<string>\",\n    \"paymentPreference\": \"<string>\",\n    \"shopperAuthorization\": \"<string>\",\n    \"returnUrl\": \"<string>\",\n    \"cancelUrl\": \"<string>\"\n  },\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"tax\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"unitAmount\": {\n        \"currencyCode\": \"<string>\",\n        \"value\": \"<integer>\"\n      },\n      \"name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"description\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"dynamicDescriptor\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f19685ff-52f7-4bf9-81dd-7513aefe4d90",
+          "name": "Update transaction",
+          "request": {
+            "name": "Update transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction UUID from create transaction API"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "a6dae524-18fc-4eac-9fff-584fcbaafc08",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "837b2d84-ad0d-43b5-9b96-318922b2e7cc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d74aa7a-c6ce-411c-9d5e-29fd4d428f19",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b603fdce-855f-4045-9df8-d6b4a02c3557",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbe8ef17-cddf-4804-8db6-2d7294a65cbf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc4c9b33-87e6-431e-979c-03a378c2a329",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"intent\": \"<string>\",\n  \"payer\": {\n    \"email\": \"<string>\",\n    \"payerId\": \"<string>\",\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"birthDate\": \"<date>\",\n    \"identification\": {\n      \"taxIdentificationNumber\": \"<string>\",\n      \"taxIdentificationType\": \"<string>\"\n    },\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"shipping\": {\n    \"address\": {\n      \"country\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"countrySubdivision\": \"<string>\",\n      \"city\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine1\": \"<string>\"\n    },\n    \"fullName\": \"<string>\"\n  },\n  \"dynamicDescriptor\": \"<string>\",\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"detailedAmount\": {\n    \"discount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shippingDiscount\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"insurance\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"handling\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    },\n    \"shipping\": {\n      \"currencyCode\": \"<string>\",\n      \"value\": \"<integer>\"\n    }\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3622.9410809298956,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": \"1951-08-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c88e852-c9eb-47ce-822d-670ef9a15b21",
+          "name": "Set transaction context",
+          "request": {
+            "name": "Set transaction context",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                "risk",
+                "context"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "57493c43-29fc-409f-9687-3c36cfd58deb",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "risk",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"trackingId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1d00a6a-5fcb-4f71-82ff-0df844b85660",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "risk",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5c6ff3b-56e4-4ecd-b206-911cbd98db89",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "risk",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "869151d4-0b56-4371-9a79-0b72c16caa4b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "risk",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c97a472-fc47-46b2-9fa0-0ac784dd9a9b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "risk",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "548df86c-de13-4d05-953c-1eea71a164a3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "risk",
+                    "context"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentProviderContract\": \"<string>\",\n  \"trackingId\": \"<string>\",\n  \"data\": \"<object>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88600594-ee60-4661-84c4-3fbc2d17a84f",
+          "name": "Cancel authorisation",
+          "request": {
+            "name": "Cancel authorisation",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction UUID from create transaction API"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7b06c88-963a-426b-b7f1-6baead266368",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "728e9ed6-4183-42c4-bdaa-db0a37c2b452",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8dbbaa5-b7ec-465e-b6ba-7dd4ff5fe29b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42b0adf1-4643-4c6c-b0ac-cb9c9cac9b15",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd3b1c56-d1c3-4b8d-b92a-32a09773e894",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2832b62-d140-4028-a181-e70ddd8dd2cc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a43b21f-2171-42d7-b015-a686f0dc9c9e",
+          "name": "Authorize transaction",
+          "request": {
+            "name": "Authorize transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction UUID from create transaction API"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "PayPal Fraud Id",
+                "key": "paypalFraudId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "5c404765-3fc1-4074-a51d-93f3a8ec7142",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"authorizationId\": \"string\",\n  \"createdAt\": \"2025-12-28\",\n  \"id\": \"string\",\n  \"instoreReference\": \"string\",\n  \"expiresAt\": \"2022-03-26\",\n  \"status\": \"AUTHORISED\",\n  \"payer\": {\n    \"payerId\": \"Z48D37L262SW8\",\n    \"name\": {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\"\n    },\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"email\": \"string\",\n    \"shippingAddress\": {\n      \"country\": \"C2\",\n      \"postalCode\": \"string\",\n      \"countrySubdivision\": \"string\",\n      \"city\": \"string\",\n      \"addressLine2\": \"string\",\n      \"addressLine1\": \"string\",\n      \"fullName\": \"string\"\n    },\n    \"authorizationStatus\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a3cdcc0-ad03-44cd-88ba-1afb7d4fa9b7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acdb8c07-c618-44ed-94f2-fd9f746e232e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "746c8b90-cb30-4ea6-96f1-d8711f86af42",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85f078b4-92fb-4684-b7fe-fd2ee5cbc26d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4246be82-55b2-42d4-83fd-cd3fa0c288c4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "authorize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a774e34-3fd6-4ae6-9b9c-eb25d605c94e",
+          "name": "Capture transaction",
+          "request": {
+            "name": "Capture transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction UUID from create transaction API"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "PayPal Fraud Id",
+                "key": "paypalFraudId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "486a04d2-afb3-4d97-a84e-ed8b909afd36",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"captureId\": \"string\",\n  \"createdAt\": \"1970-06-04\",\n  \"id\": \"string\",\n  \"instoreReference\": \"string\",\n  \"isFinalCapture\": true,\n  \"status\": \"AUTHORISED\",\n  \"payer\": {\n    \"payerId\": \"BBKQZV62EGDK4\",\n    \"name\": {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\"\n    },\n    \"phoneNumber\": {\n      \"value\": \"<string>\",\n      \"phoneType\": \"<string>\"\n    },\n    \"email\": \"string\",\n    \"shippingAddress\": {\n      \"country\": \"SH\",\n      \"postalCode\": \"string\",\n      \"countrySubdivision\": \"string\",\n      \"city\": \"string\",\n      \"addressLine2\": \"string\",\n      \"addressLine1\": \"string\",\n      \"fullName\": \"string\"\n    },\n    \"paymentStatus\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3797e2eb-16c2-4c5a-a069-1fbc6ecde1ac",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "833cf418-d6cd-47b8-b733-7e1411abb692",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "786d595f-6971-466c-853f-b0f76abfde63",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fad562aa-cfdf-4506-aa76-6a7674d9f4e8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "761b31e1-785c-46e7-a75e-0a66598d510d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "PayPal Fraud Id",
+                    "key": "paypalFraudId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"description\": \"<string>\",\n  \"agreementId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cf4fa84-69c8-4624-893a-a2d6a554f9d0",
+          "name": "Refund transaction",
+          "request": {
+            "name": "Refund transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Transaction UUID from create transaction API"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                "key": "x-vfi-api-idempotencyKey",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "915b5cbe-dfcc-42fc-867b-532f007fa1cb",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"2008-02-25\",\n  \"id\": \"string\",\n  \"instoreReference\": \"string\",\n  \"refundId\": \"string\",\n  \"status\": \"AUTHORISED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e788da61-7db1-4674-b3d3-46e0f5cf2f90",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84644dae-8800-484f-83b1-1140eeb17b91",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1630ab4c-9f2a-4645-ac60-d1ee0d2edddc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43a520ac-956d-4b0e-ac41-f9d7bb59c0c6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b00f13da-f97d-48f2-92cf-cf2ad8e7a235",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Transaction UUID from create transaction API"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A value you specify that uniquely identifies the transaction. If you're unsure whether a particular transaction succeeded, you can reattempt it with the same idempotency key without worrying about duplicating the transaction.",
+                    "key": "x-vfi-api-idempotencyKey",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"currencyCode\": \"<string>\",\n    \"value\": \"<integer>\"\n  },\n  \"reason\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6388.466365755276,\n  \"message\": \"string\",\n  \"details\": \"<object>\",\n  \"timestamp\": \"2016-09-18\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7c6e0639-f798-4e6a-b0de-cc6bebedab14",
+    "name": "3D Secure 3DS Authentication Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

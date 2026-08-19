@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Transactions API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions",
+            "headers": [
+              {
+                "name": "paypalFraudId",
+                "value": ""
+              },
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create transaction"
+        },
+        {
+          "info": {
+            "name": "Update transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction UUID from create transaction API"
+              }
+            ]
+          },
+          "docs": "Update transaction"
+        },
+        {
+          "info": {
+            "name": "Set transaction context",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions/risk/context"
+          },
+          "docs": "Set transaction context"
+        },
+        {
+          "info": {
+            "name": "Cancel authorisation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions/:id/void",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction UUID from create transaction API"
+              }
+            ]
+          },
+          "docs": "Cancel authorisation"
+        },
+        {
+          "info": {
+            "name": "Authorize transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions/:id/authorize",
+            "headers": [
+              {
+                "name": "paypalFraudId",
+                "value": ""
+              },
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction UUID from create transaction API"
+              }
+            ]
+          },
+          "docs": "Authorize transaction"
+        },
+        {
+          "info": {
+            "name": "Capture transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions/:id/capture",
+            "headers": [
+              {
+                "name": "paypalFraudId",
+                "value": ""
+              },
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction UUID from create transaction API"
+              }
+            ]
+          },
+          "docs": "Capture transaction"
+        },
+        {
+          "info": {
+            "name": "Refund transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/transactions/:id/refund",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction UUID from create transaction API"
+              }
+            ]
+          },
+          "docs": "Refund transaction"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,454 @@
+{
+  "item": [
+    {
+      "id": "f0dd9148-4d3b-4ef8-aca3-676020ce53a4",
+      "name": "Lookup",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9e79bc4-59f9-4562-84e0-afdcc2cab994",
+          "name": "Cardholder Authentication API for 3DS",
+          "request": {
+            "name": "Cardholder Authentication API for 3DS",
+            "description": {
+              "content": "The Cardholder Authentication API for 3DS authenticates the cardholder and leads to a challenge flow or a frictionless flow adhering to the Strong Customer Authentication (SCA) directive. For further details, refer to  [Server-to-Server Payments with 3D Secure](https://docs.verifone.com/online-payments/api-integration/server-to-server-payments-with-3d-secure-setup-guide/server-to-server-payments-with-3d-secure#step-11b__003a-__0028client__002dside__0029-pares__005fstatus-__003d-__201cc__201d-continue-to-the-a).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44947a9c-b463-4da1-92c0-ad0123869c8e",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"acs_rendering_type\": \"string\",\n  \"acs_transaction_id\": \"string\",\n  \"acs_url\": \"string\",\n  \"authentication_id\": \"string\",\n  \"authentication_type\": \"string\",\n  \"authorization_payload\": \"lFs0kLguoV2ly2v3\",\n  \"cardholder_info\": \"string\",\n  \"cavv\": \"string\",\n  \"cavv_algorithm\": \"string\",\n  \"challenge_required\": \"string\",\n  \"card_brand\": \"string\",\n  \"ds_transaction_id\": \"string\",\n  \"eci_flag\": \"string\",\n  \"enrolled\": \"string\",\n  \"error_desc\": \"string\",\n  \"error_no\": \"string\",\n  \"network_score\": \"st\",\n  \"order_id\": \"string\",\n  \"pares_status\": \"string\",\n  \"payload\": \"string\",\n  \"reason_code\": \"string\",\n  \"reason_desc\": \"string\",\n  \"signature_verification\": \"string\",\n  \"status_reason\": \"string\",\n  \"third_party_token\": \"string\",\n  \"threeds_version\": \"string\",\n  \"token\": \"string\",\n  \"transaction_id\": \"string\",\n  \"xid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84606bba-b8c9-4366-91c9-686602e88eb1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4356.965736876715,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 1955.0044963834557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "123b3e40-c123-4e41-a1f4-f6c75951fa14",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4356.965736876715,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 1955.0044963834557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b48916d-e629-4a41-88a6-cf8694edf6f8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4356.965736876715,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 1955.0044963834557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01d806c0-6b08-45a3-a9a4-3b59f0e1227c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4356.965736876715,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 1955.0044963834557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b85fd9b-4a41-4e95-aa5b-b750c6247560",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4356.965736876715,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 1955.0044963834557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1e613f4-656b-4eac-a229-081e8e4f4c8b",
+              "name": "Gateway Time-out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"billing_address_1\": \"<string>\",\n  \"billing_city\": \"<string>\",\n  \"billing_country_code\": \"<string>\",\n  \"billing_first_name\": \"<string>\",\n  \"billing_last_name\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"device_info_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"merchant_reference\": \"<string>\",\n  \"threeds_contract_id\": \"<string>\",\n  \"account_age_indicator\": \"<string>\",\n  \"account_change_date\": \"<date>\",\n  \"account_change_indicator\": \"<string>\",\n  \"account_create_date\": \"<date>\",\n  \"account_id\": \"<string>\",\n  \"account_purchases\": \"<number>\",\n  \"account_pwd_change_date\": \"<date>\",\n  \"account_pwd_change_indicator\": \"<string>\",\n  \"acs_window_size\": \"<string>\",\n  \"add_card_attempts\": \"<number>\",\n  \"address_match\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"alternate_authentication_data\": \"<string>\",\n  \"alternate_authentication_date\": \"<date>\",\n  \"alternate_authentication_method\": \"<string>\",\n  \"authentication_indicator\": \"<string>\",\n  \"billing_phone\": \"<string>\",\n  \"billing_address_2\": \"<string>\",\n  \"billing_address_3\": \"<string>\",\n  \"billing_postal_code\": \"<string>\",\n  \"billing_state\": \"<string>\",\n  \"card\": \"<string>\",\n  \"encrypted_card\": \"<string>\",\n  \"public_key_alias\": \"<string>\",\n  \"reuse_token\": \"<string>\",\n  \"card_type\": \"<string>\",\n  \"category_code\": \"<number>\",\n  \"challenge_indicator\": \"<string>\",\n  \"delivery_email\": \"<string>\",\n  \"delivery_time_frame\": \"<string>\",\n  \"device_channel\": \"<string>\",\n  \"device_data_info\": {\n    \"browser_java_enabled\": \"<boolean>\",\n    \"browser_header\": \"<string>\",\n    \"browser_language\": \"<string>\",\n    \"browser_color_depth\": \"<string>\",\n    \"browser_screen_height\": \"<string>\",\n    \"browser_screen_width\": \"<string>\",\n    \"browser_time_zone\": \"<string>\",\n    \"user_agent\": \"<string>\",\n    \"ip_address\": \"<string>\",\n    \"browser_javascript_enabled\": \"<boolean>\"\n  },\n  \"fraud_activity\": \"<string>\",\n  \"gift_card_amount\": \"<number>\",\n  \"gift_card_count\": \"<number>\",\n  \"gift_card_currency_code\": \"<string>\",\n  \"installment\": \"<number>\",\n  \"merchant_score\": \"<string>\",\n  \"message_category\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"payment_account_age\": \"<date>\",\n  \"payment_account_indicator\": \"<string>\",\n  \"payment_use_case\": \"<string>\",\n  \"pre_order_date\": \"<date>\",\n  \"pre_order_indicator\": \"<string>\",\n  \"prior_authentication_data\": \"<string>\",\n  \"prior_authentication_method\": \"<string>\",\n  \"prior_authentication_ref\": \"<string>\",\n  \"prior_authentication_time\": \"<date>\",\n  \"product_code\": \"<string>\",\n  \"purchase_date\": \"<date>\",\n  \"recurring_end\": \"<date>\",\n  \"recurring_frequency\": \"<number>\",\n  \"reorder_indicator\": \"<string>\",\n  \"requestor_id\": \"<string>\",\n  \"requestor_name\": \"<string>\",\n  \"sdk_max_timeout\": \"<number>\",\n  \"shipping_address_1\": \"<string>\",\n  \"shipping_address_2\": \"<string>\",\n  \"shipping_address_3\": \"<string>\",\n  \"shipping_address_usage_date\": \"<date>\",\n  \"shipping_address_usage_indicator\": \"<string>\",\n  \"shipping_city\": \"<string>\",\n  \"shipping_country_code\": \"<string>\",\n  \"shipping_method_indicator\": \"<string>\",\n  \"shipping_name_indicator\": \"<string>\",\n  \"shipping_postal_code\": \"<string>\",\n  \"shipping_state\": \"<string>\",\n  \"three_ri_indicator\": \"<string>\",\n  \"threeds_version\": \"<string>\",\n  \"token\": \"<string>\",\n  \"transaction_mode\": \"<string>\",\n  \"transaction_count_day\": \"<number>\",\n  \"transaction_count_year\": \"<number>\",\n  \"total_items\": \"<string>\",\n  \"work_phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4356.965736876715,\n  \"message\": \"string\",\n  \"details\": {},\n  \"timestamp\": 1955.0044963834557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "79c30411-5fb9-44f0-bebd-25baefff1d78",
+    "name": "3D Secure 3DS Authentication Lookup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

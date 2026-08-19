@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Lookup API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cardholder Authentication API for 3DS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/v2/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The Cardholder Authentication API for 3DS authenticates the cardholder and leads to a challenge flow or a frictionless flow adhering to the Strong Customer Authentication (SCA) directive. For further details, refer to  [Server-to-Server Payments with 3D Secure](https://docs.verifone.com/online-payments/api-integration/server-to-server-payments-with-3d-secure-setup-guide/server-to-server-payments-with-3d-secure#step-11b__003a-__0028client__002dside__0029-pares__005fstatus-__003d-__201cc__201d-con"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

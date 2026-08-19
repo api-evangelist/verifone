@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Merchant Maintenance API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Maintenance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Partial Update of a Trading address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/entities/:entityUid/tradingAddress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A partial update of an existing Merchant Entity Address. Only replaces the provided parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,574 @@
+{
+  "item": [
+    {
+      "id": "924b13e1-b044-4905-96f4-3bd36b3b5571",
+      "name": "Merchant Maintenance",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a6aa6cc-cec6-470f-b536-bd002d39f18d",
+          "name": "Partial Update of a Trading address",
+          "request": {
+            "name": "Partial Update of a Trading address",
+            "description": {
+              "content": "A partial update of an existing Merchant Entity Address. Only replaces the provided parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityUid",
+                "tradingAddress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c962006-429a-464d-9e1d-d7a98d54c1c8",
+              "name": "Patch Trading Address Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "orderId",
+                  "value": "dac29756-1c9d-c913-784b-f1ebb87d1029",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contact\": {\n    \"contactType\": \"BUSINESS\",\n    \"name\": {\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"prefix\": \"string\",\n      \"alternateFullName\": \"string\",\n      \"middleName\": \"string\",\n      \"suffix\": \"string\"\n    },\n    \"phoneNumbers\": [\n      {\n        \"value\": \"string\",\n        \"phoneType\": \"HOME\",\n        \"callingCode\": \"string\",\n        \"extension\": \"string\",\n        \"isPrimary\": false\n      }\n    ],\n    \"email\": \"}%NCxs44I3@3OTq.r_G\",\n    \"businessTitle\": \"string\"\n  },\n  \"vfiSiteId\": \"string\",\n  \"storeNumber\": \"string\",\n  \"governmentOwned\": true,\n  \"governmentCountry\": \"<string>\",\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f326a5f5-1444-43a6-ac34-b41dee324c77",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"400\",\n  \"title\": \"Bad Request\",\n  \"message\": \"The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.\",\n  \"type\": \"INVALID_REQUEST_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1971-01-07T02:59:24.500Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e4d0e2e-3908-4edb-9398-2afe243b92cc",
+              "name": "Unauthorised Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"title\": \"Unauthorised\",\n  \"message\": \"The request requires client authentication.\",\n  \"type\": \"AUTHENTICATION_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1966-12-06T22:38:02.814Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f005c1f-9489-4e71-90c3-eb7475ba98e0",
+              "name": "Forbidden Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"The request requires client authorisation to access resource.\",\n  \"title\": \"Forbidden\",\n  \"type\": \"AUTHENTICATION_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1987-10-06T10:59:33.500Z\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aab7960c-1f81-49b0-ac05-a3484391d3bd",
+              "name": "Not Found Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"404\",\n  \"title\": \"Not Found\",\n  \"message\": \"The server cannot find the requested resource.\",\n  \"type\": \"INVALID_REQUEST_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"2005-10-05T12:38:18.108Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f39586cd-e9dc-4254-b552-2aa341d244a1",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"429\",\n  \"title\": \"Too Many Requests\",\n  \"message\": \"The number of requests from this client is restricted to a specified quota.\",\n  \"type\": \"RATE_LIMIT_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1955-11-10T13:29:48.536Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ede93627-b4da-4ba3-91bf-5d265986a3dc",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"500\",\n  \"title\": \"Internal Server Error\",\n  \"message\": \"The server encountered an unexpected condition which prevented it from fulfilling the request.\",\n  \"type\": \"API_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1994-08-21T09:58:50.330Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbdd8dec-dab9-4bd7-8c0c-581b600ef0fa",
+              "name": "Service Not Available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"503\",\n  \"title\": \"Service Unavailable\",\n  \"message\": \"The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.\",\n  \"type\": \"API_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1996-04-25T21:42:51.056Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "117ca3f5-aea2-4eac-b766-e9e44646f108",
+              "name": "Service Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityUid",
+                    "tradingAddress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receiverName\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"addressLine3\": \"<string>\",\n  \"poBox\": \"<string>\",\n  \"city\": \"<string>\",\n  \"countrySubdivision\": \"<string>\",\n  \"postCode\": \"<string>\",\n  \"country\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"504\",\n  \"title\": \"Gateway Timeout\",\n  \"message\": \"The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.\",\n  \"type\": \"API_ERROR\",\n  \"reversalStatus\": \"NONE\",\n  \"timestamp\": \"1957-03-03T02:54:46.815Z\",\n  \"param\": \"string\",\n  \"additionalProperties\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d7b1cf88-e61d-4960-b2eb-8210196900ae",
+    "name": "3D Secure 3DS Authentication Merchant Maintenance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

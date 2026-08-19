@@ -1,0 +1,451 @@
+{
+  "item": [
+    {
+      "id": "84937bbc-d550-4330-aa7e-a2613f0444ba",
+      "name": "Checkout",
+      "description": {
+        "content": "Create, retrieve, update, and manage checkout sessions. A checkout session generates a hosted payment page URL that the customer visits to complete payment.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e6cf4b40-1f5a-41de-9781-8a85fcfad3a8",
+          "name": "Create a checkout",
+          "request": {
+            "name": "Create a checkout",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "checkout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5ee3d821-8c85-4dfa-969e-350a1da39e45",
+              "name": "Successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"url\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "585a003e-8d3f-450d-a292-f6305303e07c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6219.829365202858,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1982-04-25T06:34:37.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa411503-3c4f-46a4-a620-fd91aadd6007",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6219.829365202858,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1982-04-25T06:34:37.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c64e0612-95f4-4a0f-94d2-819a58398cdc",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6219.829365202858,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1982-04-25T06:34:37.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68614772-568b-4e47-a7f7-f254fcfaeada",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6219.829365202858,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1982-04-25T06:34:37.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3576ae8-f480-4bc3-bacc-5ed033ec2dc2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6219.829365202858,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1982-04-25T06:34:37.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e24a229d-8cc3-4d60-bb9b-e2aec68ed59a",
+              "name": "Gateway Time-out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<integer>\",\n  \"configurations\": {\n    \"card\": {\n      \"threed_secure\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"payment_contract_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dynamic_descriptor\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"capture_now\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shopper_interaction\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"account_validation\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"authorization_type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"token_preference\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"credit_term\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instalment\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"stored_credential\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"additional_business_data\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"reuse_token\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"gpp2\": {\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"gift_card\": {\n      \"capture_now\": true,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"pin_required\": false,\n        \"token_preference\": {\n          \"token_scope\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_expiry_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"token_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"paypal\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"description\": \"<string>\",\n      \"application_context\": {\n        \"landing_page\": \"<string>\",\n        \"brand_name\": \"<string>\",\n        \"locale\": \"<string>\"\n      }\n    },\n    \"google_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"apple_pay\": {\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"account_validation\": false,\n      \"card\": {\n        \"payment_contract_id\": \"<string>\",\n        \"sca_compliance_level\": \"NONE\",\n        \"threed_secure\": \"<object>\",\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"shopper_interaction\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"token_preference\": {\n          \"value\": \"reference #/x-alt-definitions/token_preference not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"klarna\": {\n      \"capture_now\": true\n    },\n    \"vipps\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"is_app\": false,\n      \"app_phone_number\": \"<string>\",\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\"\n      }\n    },\n    \"swish\": {\n      \"app_phone_number\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\"\n    },\n    \"mobile_pay\": {\n      \"payment_contract_id\": \"<string>\",\n      \"dynamic_descriptor\": \"<string>\",\n      \"capture_now\": true,\n      \"card\": {\n        \"sca_compliance_level\": \"<string>\",\n        \"threed_secure\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"authorization_type\": \"FINAL_AUTH\",\n        \"encrypted_card\": \"<string>\",\n        \"card_encryption_key_alias\": \"<string>\",\n        \"return_url\": \"<string>\"\n      }\n    },\n    \"bank\": {\n      \"op\": {\n        \"payment_contract_id\": \"<string>\",\n        \"multi_bank_payment_option\": \"<boolean>\"\n      },\n      \"dynamic_descriptor\": \"<string>\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"shopper_interaction\": \"<string>\",\n      \"message_to_customer\": \"<string>\"\n    },\n    \"plcc\": {\n      \"mode\": \"<string>\",\n      \"payment_contract_id\": \"<string>\",\n      \"shopper_interaction\": \"ECOMMERCE\",\n      \"authorization_type\": \"FINAL_AUTH\",\n      \"capture_now\": true\n    }\n  },\n  \"currency_code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"expiry_time\": \"<date>\",\n  \"merchant_reference\": \"<string>\",\n  \"return_url\": \"<string>\",\n  \"shop_url\": \"<string>\",\n  \"i18n\": {\n    \"default_language\": \"en\",\n    \"fallback_language\": \"en\",\n    \"show_language_options\": true\n  },\n  \"interaction_type\": \"HPP\",\n  \"notification_methods\": {\n    \"email\": {\n      \"email_address\": \"<string>\"\n    },\n    \"sms\": {\n      \"phone_number\": \"<string>\"\n    }\n  },\n  \"display_line_items\": true,\n  \"line_items\": [\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"total_amount\": \"<number>\",\n      \"image_url\": \"<string>\",\n      \"item_url\": \"<string>\",\n      \"quantity\": 1,\n      \"unit_price\": \"<number>\",\n      \"unit_price_tax\": \"<number>\",\n      \"tax_rate\": \"<number>\",\n      \"total_tax_amount\": \"<number>\",\n      \"sku\": \"<string>\",\n      \"description\": \"<string>\",\n      \"category\": \"<string>\"\n    }\n  ],\n  \"theme_id\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"sales_description\": \"<string>\",\n  \"sales_channel\": \"<string>\",\n  \"customer_details\": {\n    \"entity_id\": \"<string>\",\n    \"billing\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"company_name\": \"<string>\",\n    \"company_registration_number\": \"<string>\",\n    \"email_address\": \"<string>\",\n    \"phone_number\": \"<string>\",\n    \"shipping\": {\n      \"address_1\": \"<string>\",\n      \"address_2\": \"<string>\",\n      \"address_3\": \"<string>\",\n      \"city\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"middle_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\",\n    \"tax\": {\n      \"identifier\": \"<string>\"\n    }\n  },\n  \"purchase_order_number\": \"<string>\",\n  \"tax_indicator\": \"<string>\",\n  \"tax_amount\": \"<number>\",\n  \"promo_code\": \"<string>\",\n  \"invoice_number\": \"<string>\",\n  \"transaction_type\": \"<string>\",\n  \"allow_customer_inputs\": false,\n  \"checkout_template_id\": \"<string>\",\n  \"redirect_method\": \"<string>\",\n  \"handle_order_confirmation\": false,\n  \"show_confirmation_page\": true,\n  \"promo_financing_details\": {\n    \"promo_financing_type\": \"<string>\",\n    \"promo_plan\": \"<string>\",\n    \"promo_plan_expiry\": \"<date>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6219.829365202858,\n  \"details\": {},\n  \"message\": \"string\",\n  \"timestamp\": \"1982-04-25T06:34:37.603Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://emea.gsc.verifone.cloud/oidc/3ds-service",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fa40f711-fac2-46fa-8a51-c244c0e22bbe",
+    "name": "3D Secure 3DS Authentication Checkout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.",
+      "type": "text/plain"
+    }
+  }
+}

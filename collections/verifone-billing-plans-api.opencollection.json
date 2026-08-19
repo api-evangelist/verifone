@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Billing Plans API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Billing Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List billing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingPlans",
+            "params": [
+              {
+                "name": "paymentProviderContract",
+                "value": "",
+                "type": "query",
+                "description": "PayPal Payment Provider Contract UUID"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Filters the response by a Product ID."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters the response by list of plan IDs."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return in the response."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A non-zero integer which is the start index of the entire list of items to return in the response."
+              },
+              {
+                "name": "totalRequired",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to show the total count in the response."
+              }
+            ]
+          },
+          "docs": "List billing plans"
+        },
+        {
+          "info": {
+            "name": "Activate billing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingPlans/:planId/activate",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "PayPal billing plan Id"
+              }
+            ]
+          },
+          "docs": "Activate billing plans"
+        },
+        {
+          "info": {
+            "name": "Deactivate billing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingPlans/:planId/deactivate",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "PayPal billing plan Id"
+              }
+            ]
+          },
+          "docs": "Deactivate billing plans"
+        },
+        {
+          "info": {
+            "name": "Get billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingPlans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "PayPal billing plan Id"
+              },
+              {
+                "name": "paymentProviderContract",
+                "value": "",
+                "type": "query",
+                "description": "PayPal Payment Provider Contract UUID"
+              }
+            ]
+          },
+          "docs": "Get billing plan"
+        },
+        {
+          "info": {
+            "name": "Update billing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingPlans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "PayPal billing plan Id"
+              }
+            ]
+          },
+          "docs": "Update billing plans"
+        },
+        {
+          "info": {
+            "name": "Create billing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/billingPlans/create",
+            "headers": [
+              {
+                "name": "x-vfi-api-idempotencyKey",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create billing plan"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

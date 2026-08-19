@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "3D Secure 3DS Authentication Batch API",
+    "version": "3.43.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List batches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://emea.gsc.verifone.cloud/oidc/3ds-service/orders/batch",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "query",
+                "description": "Verifone allocated ID for the Order"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Batch status for this request"
+              },
+              {
+                "name": "populateTransactions",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include transactions"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "The field to order by.Supports startTime,endTime,status,customerEntityUid"
+              }
+            ]
+          },
+          "docs": "List batches"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
