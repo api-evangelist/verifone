@@ -26,6 +26,14 @@ modified: '2026-06-13'
 specificationVersion: '0.23'
 tags:
   - Payments
+  - Point-of-Sale
+  - Terminal Management
+  - E-Commerce
+  - Fintech
+  - Payment Processing
+  - Omnichannel
+tags_raw:
+  - Payments
   - POS
   - Terminal Management
   - eCommerce
@@ -43,6 +51,12 @@ apis:
   humanURL: https://docs.verifone.com/api-reference/open-api-references/ecommerce
   baseURL: https://us.gsc.verifone.cloud
   tags:
+  - E-Commerce
+  - Payments
+  - Tokenization
+  - Recurring Billing
+  - Digital Wallet
+  tags_raw:
   - eCommerce
   - Payments
   - Tokenization
@@ -90,6 +104,12 @@ apis:
   - Reporting
   - Analytics
   - Settlement
+  - Transaction
+  - Financial Data
+  tags_raw:
+  - Reporting
+  - Analytics
+  - Settlement
   - Transactions
   - Financial Data
   properties:
@@ -108,6 +128,11 @@ apis:
   humanURL: https://docs.verifone.com/api-reference/open-api-references/paypal-ecom
   baseURL: https://us.gsc.verifone.cloud
   tags:
+  - PayPal
+  - Alternative Payments
+  - Subscription
+  - Billing
+  tags_raw:
   - PayPal
   - Alternative Payments
   - Subscriptions
@@ -233,6 +258,8 @@ apis:
   humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
   baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
   tags:
+  - Customers
+  tags_raw:
   - Customer
   properties:
   - type: OpenAPI
@@ -377,6 +404,8 @@ apis:
   humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
   baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -409,6 +438,8 @@ apis:
   humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
   baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -489,6 +520,8 @@ apis:
   humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
   baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
