@@ -6,6 +6,18 @@ description: >-
   payments, eCommerce, hosted checkout, 3D Secure authentication, customer
   management, device management via VHQ, hardware ordering, and financial
   reporting across EMEA, Americas, and Asia-Pacific regions.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
