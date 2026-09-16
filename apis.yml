@@ -1,11 +1,9 @@
 name: Verifone
-description: >-
-  Verifone is a global payment technology company providing REST APIs for POS
-  terminal management, online payment processing, commerce platform integration,
-  and omnichannel payment acceptance. Their developer platform covers in-person
-  payments, eCommerce, hosted checkout, 3D Secure authentication, customer
-  management, device management via VHQ, hardware ordering, and financial
-  reporting across EMEA, Americas, and Asia-Pacific regions.
+description: Verifone is a global payment technology company providing REST APIs for POS terminal management,
+  online payment processing, commerce platform integration, and omnichannel payment acceptance. Their
+  developer platform covers in-person payments, eCommerce, hosted checkout, 3D Secure authentication,
+  customer management, device management via VHQ, hardware ordering, and financial reporting across EMEA,
+  Americas, and Asia-Pacific regions.
 deliveryModel:
   model: saas
   open_source: false
@@ -35,31 +33,30 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/verifone.png
 url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 tags:
-  - Payments
-  - Point-of-Sale
-  - Terminal Management
-  - E-Commerce
-  - Fintech
-  - Payment Processing
-  - Omnichannel
+- Payments
+- Point-of-Sale
+- Terminal Management
+- E-Commerce
+- Fintech
+- Payment Processing
+- Omnichannel
 tags_raw:
-  - Payments
-  - POS
-  - Terminal Management
-  - eCommerce
-  - FinTech
-  - Payment Processing
-  - Omnichannel
+- Payments
+- POS
+- Terminal Management
+- eCommerce
+- FinTech
+- Payment Processing
+- Omnichannel
 apis:
 - name: Verifone eCommerce API
-  description: >-
-    Global payments, recurring billing, and digital wallets — tokenized and PCI compliant. The eCommerce
-    API handles customer payment info capture and order placement via direct server-to-server API calls,
-    supporting tokenization, alternative payment methods, stored value cards, and BIN lookup across global
-    regions.
+  description: Global payments, recurring billing, and digital wallets — tokenized and PCI compliant.
+    The eCommerce API handles customer payment info capture and order placement via direct server-to-server
+    API calls, supporting tokenization, alternative payment methods, stored value cards, and BIN lookup
+    across global regions.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.verifone.com/api-reference/open-api-references/ecommerce
   baseURL: https://us.gsc.verifone.cloud
@@ -85,10 +82,9 @@ apis:
     url: https://docs.verifone.com
     email: ''
 - name: Verifone 3D Secure API
-  description: >-
-    SCA-compliant cardholder authentication with frictionless and challenge flows. The 3D Secure API provides
-    Strong Customer Authentication (SCA) compliance through JWT-based flows, lookup functionality, and
-    full 3DS authentication supporting both frictionless and challenge user experiences.
+  description: SCA-compliant cardholder authentication with frictionless and challenge flows. The 3D Secure
+    API provides Strong Customer Authentication (SCA) compliance through JWT-based flows, lookup functionality,
+    and full 3DS authentication supporting both frictionless and challenge user experiences.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.verifone.com/api-reference/open-api-references/3d-secure
   baseURL: https://us.gsc.verifone.cloud
@@ -106,10 +102,9 @@ apis:
     url: https://docs.verifone.com
     email: ''
 - name: Verifone Reporting API
-  description: >-
-    Programmatically retrieve and download settlement, transaction, and financial reports from Verifone's
-    cloud platform. The Reporting API provides access to settlement reports, transaction data, and financial
-    reconciliation across all Verifone payment channels and regions.
+  description: Programmatically retrieve and download settlement, transaction, and financial reports from
+    Verifone's cloud platform. The Reporting API provides access to settlement reports, transaction data,
+    and financial reconciliation across all Verifone payment channels and regions.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.verifone.com/api-reference/open-api-references/reporting
   baseURL: https://us.gsc.verifone.cloud/oidc/report-engine/api/v1
@@ -133,10 +128,10 @@ apis:
     url: https://docs.verifone.com
     email: ''
 - name: Verifone PayPal eCommerce API
-  description: >-
-    Process PayPal and alternative payments through a single, globally unified checkout integration. The
-    PayPal eCom API supports PayPal transactions, billing agreements, subscription products, billing plans,
-    recurring subscriptions, and risk context management through a unified Verifone integration layer.
+  description: Process PayPal and alternative payments through a single, globally unified checkout integration.
+    The PayPal eCom API supports PayPal transactions, billing agreements, subscription products, billing
+    plans, recurring subscriptions, and risk context management through a unified Verifone integration
+    layer.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.verifone.com/api-reference/open-api-references/paypal-ecom
   baseURL: https://us.gsc.verifone.cloud
@@ -158,11 +153,10 @@ apis:
     url: https://docs.verifone.com
     email: ''
 - name: Verifone VHQ Device Management API
-  description: >-
-    Remote device control and maintenance for POS terminal estates. The VHQ (VerifoneHQ) API enables automated
-    device management, software deployment, health monitoring, application configuration, and real-time
-    estate management for thousands of payment terminals. Integrates with existing systems to automate
-    VHQ operations including geo-location support.
+  description: Remote device control and maintenance for POS terminal estates. The VHQ (VerifoneHQ) API
+    enables automated device management, software deployment, health monitoring, application configuration,
+    and real-time estate management for thousands of payment terminals. Integrates with existing systems
+    to automate VHQ operations including geo-location support.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.verifone.com/vhq
   baseURL: https://vhq.verifone.com
@@ -183,9 +177,8 @@ apis:
     email: ''
 - aid: verifone:verifone-3ds-authentication-api
   name: Verifone 3DS Authentication API
-  description: >-
-    Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical
-    authentication results filtered by amount, currency, card, status, and more.
+  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to
+    query historical authentication results filtered by amount, currency, card, status, and more.
   humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
   baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
   tags:
@@ -249,9 +242,8 @@ apis:
     url: https://docs.verifone.com/api-reference/open-api-references/order-service
 - aid: verifone:verifone-checkout-api
   name: Verifone Checkout API
-  description: >-
-    Create, retrieve, update, and manage checkout sessions. A checkout session generates a hosted payment
-    page URL that the customer visits to complete payment.
+  description: Create, retrieve, update, and manage checkout sessions. A checkout session generates a
+    hosted payment page URL that the customer visits to complete payment.
   humanURL: https://docs.verifone.com/api-reference/open-api-references/checkout
   baseURL: https://us.gsc.verifone.cloud/oidc/checkout-service
   tags:
@@ -546,33 +538,35 @@ apis:
   - type: Documentation
     url: https://docs.verifone.com/api-reference/open-api-references/order-service
 common:
-  - type: AgenticAccess
-    url: agentic-access/verifone-agentic-access.yml
-  - type: DomainSecurity
-    url: security/verifone-domain-security.yml
-  - type: Authentication
-    url: authentication/verifone-authentication.yml
-  - type: Portal
-    url: https://docs.verifone.com
-  - type: Documentation
-    url: https://docs.verifone.com/docs
-  - type: APIReference
-    url: https://docs.verifone.com/api-reference
-  - type: GettingStarted
-    url: https://docs.verifone.com/online-payments/getting-started
-  - type: Authentication
-    url: https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/api-authentication
-  - type: Sandbox
-    url: https://cst.test-gsc.vfims.com
-  - type: Blog
-    url: https://verifone.cloud/blog
-  - type: Plans
-    url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/plans/plans.yml
-  - type: RateLimits
-    url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/rate-limits/rate-limits.yml
-  - type: FinOps
-    url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/finops/finops.yml
+- type: Website
+  url: https://verifone.com
+- type: AgenticAccess
+  url: agentic-access/verifone-agentic-access.yml
+- type: DomainSecurity
+  url: security/verifone-domain-security.yml
+- type: Authentication
+  url: authentication/verifone-authentication.yml
+- type: Portal
+  url: https://docs.verifone.com
+- type: Documentation
+  url: https://docs.verifone.com/docs
+- type: APIReference
+  url: https://docs.verifone.com/api-reference
+- type: GettingStarted
+  url: https://docs.verifone.com/online-payments/getting-started
+- type: Authentication
+  url: https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/api-authentication
+- type: Sandbox
+  url: https://cst.test-gsc.vfims.com
+- type: Blog
+  url: https://verifone.cloud/blog
+- type: Plans
+  url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/plans/plans.yml
+- type: RateLimits
+  url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/rate-limits/rate-limits.yml
+- type: FinOps
+  url: https://raw.githubusercontent.com/api-evangelist/verifone/refs/heads/main/finops/finops.yml
 maintainers:
-  - FN: API Evangelist
-    url: https://apievangelist.com
-    email: info@apievangelist.com
+- FN: API Evangelist
+  url: https://apievangelist.com
+  email: info@apievangelist.com
