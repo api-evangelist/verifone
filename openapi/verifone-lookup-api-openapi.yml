@@ -1,8 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: 3D Secure 3DS Authentication Lookup API
+  title: 3D Secure Lookup API
   version: 3.43.0
-  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
 servers:
 - url: https://emea.gsc.verifone.cloud/oidc/3ds-service
   description: EMEA Production
@@ -25,7 +24,7 @@ paths:
       tags:
       - Lookup
       summary: Cardholder Authentication API for 3DS
-      description: The Cardholder Authentication API for 3DS authenticates the cardholder and leads to a challenge flow or a frictionless flow adhering to the Strong Customer Authentication (SCA) directive. For further details, refer to  [Server-to-Server Payments with 3D Secure](https://docs.verifone.com/online-payments/api-integration/server-to-server-payments-with-3d-secure-setup-guide/server-to-server-payments-with-3d-secure#step-11b__003a-__0028client__002dside__0029-pares__005fstatus-__003d-__201cc__201d-continue-to-the-a).
+      description: The Cardholder Authentication API for 3DS authenticates the cardholder and leads to a challenge flow or a frictionless flow adhering to the Strong Customer Authentication (SCA) directive. For further details, refer to Server-to-Server Payments with 3D Secure.
       operationId: postV2Lookup
       requestBody:
         content:
@@ -78,6 +77,46 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    DeviceDataInfo:
+      type: object
+      properties:
+        browser_java_enabled:
+          type: boolean
+          description: A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property.
+        browser_header:
+          maxLength: 2048
+          type: string
+          description: 'The exact content of the HTTP accept headers sent from the cardholder''s browser.  Example: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        browser_language:
+          maxLength: 8
+          type: string
+          description: 'Value represents the browser language as defined in IETF BCP47 . Example: en-US'
+        browser_color_depth:
+          maxLength: 2
+          type: string
+          description: 'Value represents the bit depth of the color palette for displaying images, in bits per pixel Example: 24'
+        browser_screen_height:
+          maxLength: 6
+          type: string
+          description: 'Total height of the Cardholder''s screen in pixels. Example: 864'
+        browser_screen_width:
+          maxLength: 6
+          type: string
+          description: 'Total width of the cardholder''s screen in pixels. Example: 1536'
+        browser_time_zone:
+          maxLength: 5
+          type: string
+          description: 'Time difference between UTC time and the cardholder browser local time, in minutes Example: 300'
+        user_agent:
+          maxLength: 2048
+          type: string
+          description: 'The exact content of the HTTP user agent header.  Example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+        ip_address:
+          type: string
+          description: 'The IP address of the Consumer.  NOTE:   IPv4 and IPv6 are supported.  Example:  IPv4 address:  1.12.123.255  IPv6 address: 2011:0db8:85 a3:0101:0101:8a2e:03 70:7334'
+        browser_javascript_enabled:
+          type: boolean
+          description: A Boolean value that represents the ability of the cardholder browser to execute JavaScript.
     LookupRequest:
       required:
       - amount
@@ -556,48 +595,6 @@ components:
           maxLength: 25
           type: string
           description: 'Conditional: Consumer''s work phone number. ITU/E.123 format with international prefix (+PPNNNNNNNNN...)'
-    ErrorDetails:
-      type: object
-    DeviceDataInfo:
-      type: object
-      properties:
-        browser_java_enabled:
-          type: boolean
-          description: A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property.
-        browser_header:
-          maxLength: 2048
-          type: string
-          description: 'The exact content of the HTTP accept headers sent from the cardholder''s browser.  Example: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-        browser_language:
-          maxLength: 8
-          type: string
-          description: 'Value represents the browser language as defined in IETF BCP47 . Example: en-US'
-        browser_color_depth:
-          maxLength: 2
-          type: string
-          description: 'Value represents the bit depth of the color palette for displaying images, in bits per pixel Example: 24'
-        browser_screen_height:
-          maxLength: 6
-          type: string
-          description: 'Total height of the Cardholder''s screen in pixels. Example: 864'
-        browser_screen_width:
-          maxLength: 6
-          type: string
-          description: 'Total width of the cardholder''s screen in pixels. Example: 1536'
-        browser_time_zone:
-          maxLength: 5
-          type: string
-          description: 'Time difference between UTC time and the cardholder browser local time, in minutes Example: 300'
-        user_agent:
-          maxLength: 2048
-          type: string
-          description: 'The exact content of the HTTP user agent header.  Example: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
-        ip_address:
-          type: string
-          description: 'The IP address of the Consumer.  NOTE:   IPv4 and IPv6 are supported.  Example:  IPv4 address:  1.12.123.255  IPv6 address: 2011:0db8:85 a3:0101:0101:8a2e:03 70:7334'
-        browser_javascript_enabled:
-          type: boolean
-          description: A Boolean value that represents the ability of the cardholder browser to execute JavaScript.
     ErrorResponse:
       required:
       - code
@@ -615,6 +612,8 @@ components:
         timestamp:
           type: number
           description: Error timestamp
+    ErrorDetails:
+      type: object
     LookupResponse:
       type: object
       properties:

@@ -1,21 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: 3D Secure 3DS Authentication Payment Modifications API
-  version: 3.43.0
-  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+  title: Verifone eCommerce Payment Modifications API
+  version: 2.38.1
 servers:
-- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+- url: https://emea.gsc.verifone.cloud/oidc
   description: EMEA Production
-- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+- url: https://us.gsc.verifone.cloud/oidc
   description: Americas Production
-- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+- url: https://nz.gsc.verifone.cloud/oidc
   description: New Zealand Production
-- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+- url: https://cst.test-gsc.vfims.com/oidc
   description: Global Sandbox
-- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+- url: https://uscst-gb.gsc.vficloud.net/oidc
   description: Americas Sandbox
 security:
-- BearerAuth: []
 - BasicAuth: []
 tags:
 - name: Payment Modifications
@@ -372,7 +370,7 @@ paths:
     post:
       operationId: voidCapture
       summary: Void capture
-      description: Cancel a payment that has previously been captured. Void capture can only be done on the full amount of the transaction. Check the documentation to verify what [payment method](https://docs.verifone.com/online-payments/payment-actions) allows for this payment modification.
+      description: Cancel a payment that has previously been captured. Void capture can only be done on the full amount of the transaction. Check the documentation to verify what payment method allows for this payment modification.
       parameters:
       - name: id
         required: true
@@ -710,168 +708,6 @@ paths:
                 $ref: '#/components/schemas/InternalErrorV2Docs'
 components:
   schemas:
-    ecomPaymentResponse_issuer_instalment_result:
-      type: object
-      properties:
-        instalment_program:
-          type: string
-          description: The name of special program designated by scheme or issuer.
-          enum:
-          - MCINST
-        payment_option:
-          type: string
-          description: Available payment mode allowed by issuer for the transaction.
-          enum:
-          - FULL
-          - FULL_OR_INSTALMENT
-          - INSTALMENT
-        payment_plan_option:
-          type: array
-          description: The issuer may offer more than one instalment options within certain instalment programs.
-          items:
-            $ref: '#/components/schemas/paymentPlanOption'
-        number_of_instalments:
-          minimum: 0
-          type: integer
-          description: The number of individual parts that the total amount should be paid in.
-        min_number_of_instalments:
-          type: integer
-          description: The minimal number of individual parts that the total amount could be paid in, if choice is available.
-        max_number_of_instalments:
-          type: integer
-          description: The maximal number of individual parts that the total amount could be paid in, if choice is available.
-        interest_rate:
-          type: number
-          description: The interest rate.
-          format: float
-        annual_percentage_rate:
-          type: number
-          description: The interest rate expressed in Annual Percentage Rate.
-          format: float
-        handling_fee:
-          $ref: '#/components/schemas/amountDecimal'
-        down_payment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        instalment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        total_amount_with_cost:
-          $ref: '#/components/schemas/amountDecimal'
-      additionalProperties: false
-      description: Issuer-managed instalment response. May be used to inform on supported instalment options for the transaction in specific programs (e.g., Mastercard Instalment Payment Service).
-    affirmPaymentCompletionRequest:
-      title: Affirm Complete Payment Request
-      type: object
-      properties:
-        merchant_reference:
-          type: string
-          title: merchantReference
-          description: A reference specified by the merchant to identify the transaction
-          maxLength: 50
-        refusal_reason:
-          $ref: '#/components/schemas/RefusalReason'
-    ShippingInformation:
-      type: object
-      properties:
-        address:
-          type: string
-          maxLength: 300
-          description: Street address of the recipient.
-        city:
-          type: string
-          maxLength: 28
-          description: City of the recipient.
-        country:
-          type: string
-          maxLength: 2
-          minLength: 2
-          format: country-code
-          description: A 2-letter ISO3166 alpha-2 country code for the address.
-        postal_code:
-          type: string
-          minLength: 1
-          maxLength: 16
-          description: A postal code for the address.
-        email:
-          type: string
-          title: Email Address
-          minLength: 3
-          maxLength: 254
-          format: email
-          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
-        first_name:
-          type: string
-          maxLength: 100
-          description: First name of the recipient.
-        last_name:
-          type: string
-          maxLength: 100
-          description: Last name of the recipient.
-        phone:
-          type: number
-          maxLength: 15
-          description: Numbers only, no dash or any other separator.
-        state:
-          type: string
-          maxLength: 35
-          description: A region / state / province for the address.
-      required:
-      - address
-      - city
-      - country
-      - postal_code
-    StoredCredential:
-      type: object
-      properties:
-        reference:
-          type: string
-          description: Reference of a successfully processed initial COF transaction. Only used by subsequent COF transactions.
-        stored_credential_type:
-          type: string
-        scheme_reference:
-          type: string
-          description: Scheme Reference Data received from issuer/acquirer.
-        processing_model:
-          type: string
-          enum:
-          - UNSCHEDULED_CREDENTIAL_ON_FILE
-          - CREDENTIAL_ON_FILE
-          - RECURRING
-          - REAUTHORIZATION
-          - NONE
-          description: Processing model to use for COF transaction. Refer to the card integration guide for more information on the usage.
-        details:
-          deprecated: true
-          type: string
-          enum:
-          - UNSCHEDULED_CREDENTIAL_ON_FILE
-          - CREDENTIAL_ON_FILE
-          - RECURRING
-          description: Processing model to use for COF transaction. Refer to the card integration guide for more information on the usage.
-    paymentPlanOption:
-      title: Instalment payment plan option
-      type: object
-      properties:
-        number_of_instalments:
-          minimum: 1
-          type: integer
-          description: The number of individual parts that the total amount should be paid in.
-        first_instalment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        instalment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        interest_rate:
-          type: number
-          description: The interest rate.
-          format: float
-        annual_percentage_rate:
-          type: number
-          description: The interest rate expressed in Annual Percentage Rate.
-          format: float
-        handling_fee:
-          $ref: '#/components/schemas/amountDecimal'
-        total_amount_with_cost:
-          $ref: '#/components/schemas/amountDecimal'
-      description: An instalment plan option available for the transaction. Instalments are managed by the issuer. To the merchant this is just another transaction.
     EcomResponse:
       type: object
       properties:
@@ -1100,7 +936,114 @@ components:
 
 
             The required number of decimal places for a currency code is according to ISO 4217. However the following table takes precedence over ISO 4217:'
-    UnauthorizedV2Docs:
+    MultipleCapturesDto:
+      type: object
+      properties:
+        final_capture:
+          type: boolean
+          description: This flag is used to indicate if this capture is the final capture or not. Must be set to false if there is a need to do addional partial captures in the future.
+        capture_sequence_number:
+          type: number
+          maximum: 99
+          minimum: 1
+          description: "This field is used in indicating the sequence number of one of many partial capture being done. Value can be between 1 & 99. \n\n **Required** If capture_sequence_count number is provided."
+        capture_sequence_count:
+          type: number
+          maximum: 99
+          minimum: 2
+          description: "This field represents the total number of partial captures that will done. Value can be between 2 & 99. \n\n **Required** If capture_sequence_number is provided."
+      required:
+      - final_capture
+    affirmPaymentCompletionResponse:
+      title: Affirm Complete Payment Response
+      type: object
+      properties:
+        id:
+          type: string
+          title: Transaction ID
+          format: uuid-flexible
+          description: The ID of the transaction.
+        authorization_expiration:
+          type: string
+          description: The time when the auth transaction will expire (i.e. before which capture must be made). The value is formatted in RFC 3339.
+        amount:
+          type: integer
+          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        created_at:
+          type: string
+          format: date-time
+          description: The time at which the transaction was created.
+        created_by:
+          description: The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order
+          type: string
+        customer:
+          description: The ID of a customer
+          type: string
+        merchant_reference:
+          type: string
+          title: merchantReference
+          description: A reference specified by the merchant to identify the transaction
+          maxLength: 50
+        processor:
+          type: string
+          description: The name of the processor used for this transaction
+          default: KLARNA
+        payment_product:
+          type: string
+          description: The payment product corresponding to this transaction
+          default: KLARNA
+        payment_product_type:
+          $ref: '#/components/schemas/PaymentProductType'
+        status:
+          type: string
+          description: The outcome of the payment request.
+          title: Ecommerce Transaction Status
+          enum:
+          - INITIATED
+          - AUTHORIZED
+          - AUTHORIZATION_VOIDED
+          - CANCELLED
+          - CUSTOMER_ACCEPTED
+          - REFUNDED
+          - FAILED
+          - PENDING
+          - DECLINED
+          - SETTLEMENT_CANCELLED
+          - SETTLEMENT_REQUESTED
+          - SETTLEMENT_SUBMITTED
+          - SETTLEMENT_COMPLETED
+          - SETTLEMENT_PARTIAL
+          - SETTLEMENT_DECLINED
+          - VOIDED
+          - UNKNOWN
+        status_reason:
+          type: string
+          description: Message provided by the 3rd party service as additional information, when the transaction does not succeed.
+        geo_location:
+          type: array
+          description: The latitude / longitude resolved from the customer's ip address.
+          items:
+            type: number
+        country_code:
+          title: Country Code
+          type: string
+          description: The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+    acquirerResponseMessage:
+      description: The response description generated by the acquirer corresponding to the acquirer response code.
+      type: string
+    ecomPaymentResponse_details:
+      type: object
+      properties:
+        auto_capture:
+          type: boolean
+          description: Indicates whether the transaction would be automatically captured upon authorisation.
+        mid:
+          type: string
+          description: Merchant ID (MID)
+          format: integer
+    NotFoundV2Docs:
       type: object
       properties:
         details:
@@ -1121,15 +1064,135 @@ components:
         code:
           type: number
           enum:
-          - 401
-          default: 401
+          - 404
+          default: 404
         message:
           type: string
           enum:
-          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
-          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
       required:
       - message
+    settlementDate:
+      description: This will reflect either the desired Merchant settlement date or the actual settlement date depending where the transaction request is within the payment lifecycle. A transaction may be assigned an intended settlement date, but it is possible that this date will not occur for technical reasons hence there should be a subsequent event to indicate the actual date of settlement. Format is date only as per RFC 3339.
+      type: string
+      format: date
+    InternalErrorV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 500
+          default: 500
+        message:
+          type: string
+          enum:
+          - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+          default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+      required:
+      - message
+    ReleasePreauthDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'Amount is charged without a decimal place e.g. $1.5 = 150.
+
+            The required number of decimal places for a currency code is according to ISO
+
+            For Account Verification transaction, provide 0 as value for this field.'
+    klarnaPaymentCompletionResponse_authorized_payment_method:
+      type: object
+      properties:
+        days:
+          type: integer
+          description: Indicates whether the transaction would be automatically captured upon authorisation.
+        no_of_installments:
+          type: integer
+          description: No of instalments
+        payment_type:
+          type: string
+          description: Define the type of payment
+          enum:
+          - INVOICE
+          - FIXED_AMOUNT
+          - PIX
+          - BASE_ACCOUNT
+          - DEFERRED_INTEREST
+          - DIRECT_DEBIT
+          - DIRECT_BANK_TRANSFER
+          - B2B_INVOICE
+          - CARD
+          - SLICE_IT_BY_CARD
+          - PAY_LATER_BY_CARD
+    TokenDetailsRequestBody:
+      title: Reuse Token Details
+      type: object
+      properties:
+        expiry_month:
+          maximum: 12
+          type: integer
+          description: A 2 digit value as shown on card. ISO8583 - DE 14.\n\nThis is included as an optional value to be used for some Third-Party reuse token types.
+        expiry_year:
+          maximum: 9999
+          type: integer
+          description: A 4 digit value as shown on card.\n\nThis is included as an optional value to be used for some Third-Party reuse token types.
+      additionalProperties: false
+      description: 'The details related to the token. For Third-Party Reuse tokens, these elements might be required as additional information together with the Reuse token itself.<br>
+
+        **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
+
+        '
+    DetailedAmount:
+      title: Detailed Amount
+      description: A structure that represents a breakdown all of the different amounts that may appear on a single transaction.
+      type: object
+      properties:
+        gratuity_amount:
+          description: 'An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total ''amount'' of the transaction.
+
+
+            Amount is specified without a decimal place e.g. $1.5 = 150.
+
+
+            <i>The required number of decimal places for a currency code is according to ISO 4217.</i>'
+          type: integer
+        tax_amount:
+          title: Tax Amount
+          description: 'An optional value to specify the amount of any tax that was included  within the total amount for the transaction. This should be included  in the total ''amount'' of the transaction.
+
+
+            Amount is specified a decimal place e.g. $1.5 = 150.
+
+
+            <i>The required number of decimal places for a currency code is according to ISO 4217.</i>'
+          type: integer
+        surcharge_amount:
+          title: Surchange Amount
+          description: 'An optional additional amount representing the surcharge associated with a payment. This should be included in the total ''amount'' of the transaction.
+
+
+            Amount is specified without a decimal place e.g. $1.5 = 150.
+
+
+            <i>The required number of decimal places for a currency code is according to ISO 4217.</i>'
+          type: integer
     Details:
       type: object
       properties:
@@ -1139,6 +1202,530 @@ components:
           type: string
           format: integer
           description: Merchant ID (MID)
+    issuerCountryEnum:
+      type: string
+      description: The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+      enum:
+      - ZZZ
+      - ABW
+      - AFG
+      - AGO
+      - AIA
+      - ALA
+      - ALB
+      - AND
+      - ARE
+      - ARG
+      - ARM
+      - ASM
+      - ATA
+      - ATF
+      - ATG
+      - AUS
+      - AUT
+      - AZE
+      - BDI
+      - BEL
+      - BEN
+      - BES
+      - BFA
+      - BGD
+      - BGR
+      - BHR
+      - BHS
+      - BIH
+      - BLM
+      - BLR
+      - BLZ
+      - BMU
+      - BOL
+      - BRA
+      - BRB
+      - BSB
+      - BRN
+      - BTN
+      - BVT
+      - BWA
+      - CAF
+      - CAN
+      - CCK
+      - CHE
+      - CHL
+      - CHN
+      - CIV
+      - CMR
+      - COD
+      - COG
+      - COK
+      - COL
+      - COM
+      - CPV
+      - CRI
+      - CUB
+      - CUW
+      - CXR
+      - CYM
+      - CYP
+      - CZE
+      - DEU
+      - DJI
+      - DMA
+      - DNK
+      - DOM
+      - DZA
+      - ECU
+      - EGY
+      - ERI
+      - ESH
+      - ESP
+      - EST
+      - ETH
+      - FIN
+      - FJI
+      - FLK
+      - FRA
+      - FRO
+      - FSM
+      - GAB
+      - GBR
+      - GEO
+      - GGY
+      - GHA
+      - GIB
+      - GIN
+      - GLP
+      - GMB
+      - GNB
+      - GNQ
+      - GRC
+      - GRD
+      - GRL
+      - GTM
+      - GUF
+      - GUM
+      - GUY
+      - HKG
+      - HMD
+      - HND
+      - HRV
+      - HTI
+      - HUN
+      - IDN
+      - IMN
+      - IND
+      - IOT
+      - IRL
+      - IRN
+      - IRQ
+      - ISL
+      - ISR
+      - ITA
+      - JAM
+      - JEY
+      - JOR
+      - JPN
+      - KAZ
+      - KEN
+      - KGZ
+      - KHM
+      - KIR
+      - KNA
+      - KOR
+      - KWT
+      - LAO
+      - LBN
+      - LBR
+      - LBY
+      - LCA
+      - LIE
+      - LKA
+      - LSO
+      - LTU
+      - LUX
+      - LVA
+      - MAC
+      - MAF
+      - MAR
+      - MCO
+      - MDA
+      - MDG
+      - MDV
+      - MEX
+      - MHL
+      - MKD
+      - MLI
+      - MLT
+      - MMR
+      - MNE
+      - MNG
+      - MNP
+      - MOZ
+      - MRT
+      - MSR
+      - MTQ
+      - MUS
+      - MWI
+      - MYS
+      - MYT
+      - NAM
+      - NCL
+      - NER
+      - NFK
+      - NGA
+      - NIC
+      - NIU
+      - NLD
+      - NOR
+      - NPL
+      - NRU
+      - NZL
+      - OMN
+      - PAK
+      - PAN
+      - PCN
+      - PER
+      - PHL
+      - PLW
+      - PNG
+      - POL
+      - PRI
+      - PRK
+      - PRT
+      - PRY
+      - PSE
+      - PYF
+      - QAT
+      - REU
+      - ROU
+      - RUS
+      - RWA
+      - SAU
+      - SDN
+      - SEN
+      - SGC
+      - SGP
+      - SHN
+      - SJM
+      - SLB
+      - SLE
+      - SLV
+      - SMR
+      - SOM
+      - SPM
+      - SRB
+      - SSD
+      - STP
+      - SUR
+      - SVK
+      - SVN
+      - SWE
+      - SWZ
+      - SXM
+      - SYC
+      - SYR
+      - TCA
+      - TCD
+      - TGO
+      - THA
+      - TJK
+      - TKL
+      - TKM
+      - TLS
+      - TON
+      - TTO
+      - TUN
+      - TUR
+      - TUV
+      - TWN
+      - TZA
+      - UGA
+      - UKR
+      - UMI
+      - URY
+      - USA
+      - UZB
+      - VAT
+      - VCT
+      - VEN
+      - VGB
+      - VIR
+      - VNM
+      - VUT
+      - WLF
+      - WSM
+      - YEM
+      - ZAF
+      - ZMB
+      - ZWE
+    klarnaPaymentCompletionRequest:
+      title: Klarna Complete Payment Request
+      type: object
+      properties:
+        authorization_token:
+          type: string
+          description: Token used for authorizing a payment transaction.
+        refusal_reason:
+          $ref: '#/components/schemas/RefusalReason'
+        merchant_reference:
+          type: string
+          title: Merchant Reference
+          description: A reference specified by the merchant to identify the transaction.
+          maxLength: 50
+    UnmatchedLineItem:
+      title: Ecommerce basket line items
+      description: The description of item(s) that was included in a transaction or purchase.
+      type: object
+      properties:
+        name:
+          type: string
+          description: Descriptive name of the order line item
+          maxLength: 255
+        quantity:
+          type: integer
+          description: Quantity of the order line item
+        unit_price:
+          type: integer
+          description: Unit Price is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
+        unit_price_tax:
+          type: integer
+          description: Unit Price Tax is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
+        tax_rate:
+          type: number
+          description: Item Tax Rate as percentage
+          format: float
+        total_tax_amount:
+          type: integer
+          description: Total tax amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
+        total_amount:
+          type: integer
+          description: Total Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
+        image_url:
+          type: string
+          description: Image URL for the line item
+          maxLength: 2000
+        item_url:
+          type: string
+          description: The line item's product description page URL.
+          maxLength: 2000
+        sku:
+          type: string
+          description: The stock keeping unit (SKU) for the item.
+          maxLength: 127
+        description:
+          type: string
+          description: The detailed item description.
+          maxLength: 127
+        category:
+          type: string
+          description: 'The item category type. <br />  The possible values are: <br />  * DIGITAL_GOODS - Goods that are stored, delivered, and used in their electronic format. This value is not currently supported for API callers that leverage the [PayPal for Commerce Platform](https://www.paypal.com/us/webapps/mpp/commerce-platform) product. <br />  * DIGITAL_GOODS - A tangible item that can be shipped with proof of delivery. <br />'
+          enum:
+          - DIGITAL_GOODS
+          - PHYSICAL_GOODS
+      required:
+      - name
+      - total_amount
+    klarnaPaymentCompletionResponse:
+      title: Klarna Complete Payment Response
+      type: object
+      properties:
+        id:
+          type: string
+          title: Transaction ID
+          format: uuid-flexible
+          description: The ID of the transaction.
+        instore_reference:
+          type: string
+          description: In-store reference for the transaction
+        authorized_payment_method:
+          $ref: '#/components/schemas/klarnaPaymentCompletionResponse_authorized_payment_method'
+        amount:
+          type: integer
+          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
+        blocked:
+          type: boolean
+          description: True if the transaction has been blocked by a ruleset, false otherwise
+        created_at:
+          type: string
+          description: The time at which the transaction was created.
+          format: date-time
+        customer:
+          type: string
+          description: The ID of a customer
+        details:
+          $ref: '#/components/schemas/ecomPaymentResponse_details'
+        merchant_reference:
+          type: string
+          description: A reference specified by the merchant to identify the transaction
+        processor:
+          type: string
+          description: The name of the processor used for this transaction
+          default: KLARNA
+        payment_product:
+          type: string
+          description: The payment product corresponding to this transaction
+          default: KLARNA
+        payment_product_type:
+          $ref: '#/components/schemas/PaymentProductType'
+        shipping_information:
+          allOf:
+          - $ref: '#/components/schemas/ShippingInformation'
+        status:
+          type: string
+          description: The outcome of the payment request.
+          title: Ecommerce Transaction Status
+          enum:
+          - INITIATED
+          - AUTHORIZED
+          - AUTHORIZATION_VOIDED
+          - CANCELLED
+          - CUSTOMER_ACCEPTED
+          - REFUNDED
+          - FAILED
+          - PENDING
+          - DECLINED
+          - SETTLEMENT_CANCELLED
+          - SETTLEMENT_REQUESTED
+          - SETTLEMENT_SUBMITTED
+          - SETTLEMENT_COMPLETED
+          - SETTLEMENT_PARTIAL
+          - SETTLEMENT_DECLINED
+          - VOIDED
+          - UNKNOWN
+        status_reason:
+          type: string
+          description: Message provided by the 3rd party service as additional information, when the transaction does not succeed.
+        created_by:
+          type: string
+          description: The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order
+        shopper_interaction:
+          type: string
+          description: 'Determines the point of sale of a customer. Possible values: pos, moto, mail_order, telephone_order, ecommerce and cont_auth'
+          enum:
+          - ECOMMERCE
+          - MAIL
+          - TELEPHONE
+        geo_location:
+          type: array
+          description: The latitude / longitude resolved from the customer's ip address.
+          items:
+            type: number
+        city:
+          type: string
+          description: The city resolved from the customer's ip address.
+        country_code:
+          title: Country Code
+          type: string
+          description: The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+    affirmPaymentCompletionRequest:
+      title: Affirm Complete Payment Request
+      type: object
+      properties:
+        merchant_reference:
+          type: string
+          title: merchantReference
+          description: A reference specified by the merchant to identify the transaction
+          maxLength: 50
+        refusal_reason:
+          $ref: '#/components/schemas/RefusalReason'
+    paymentPlanOption:
+      title: Instalment payment plan option
+      type: object
+      properties:
+        number_of_instalments:
+          minimum: 1
+          type: integer
+          description: The number of individual parts that the total amount should be paid in.
+        first_instalment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        instalment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        interest_rate:
+          type: number
+          description: The interest rate.
+          format: float
+        annual_percentage_rate:
+          type: number
+          description: The interest rate expressed in Annual Percentage Rate.
+          format: float
+        handling_fee:
+          $ref: '#/components/schemas/amountDecimal'
+        total_amount_with_cost:
+          $ref: '#/components/schemas/amountDecimal'
+      description: An instalment plan option available for the transaction. Instalments are managed by the issuer. To the merchant this is just another transaction.
+    RefusalReason:
+      title: Refusal Reason
+      type: string
+      description: The reason a transaction has been refused within the payment ecosystem by the client/Verifone/acquirer. This needs to be set by the component that is refusing this transaction request.
+      enum:
+      - ACQUIRER_COMMS_FAILURE
+      - ACQUIRER_REFUSED
+      - CARD_BRAND_NOT_ACCEPTED
+      - CARD_EXPIRED
+      - CARD_NOT_ACCEPTED
+      - CARD_NOT_VALID
+      - CARD_PRODUCT_NOT_ACCEPTED
+      - EXTERNAL_FLOW_FAILED
+      - ORIGINAL_TRANSACTION_NOT_FOUND
+      - INVALID_BIN
+      - PARTIAL_AUTH_NOT_ALLOWED
+      - RECEIPT_FAILURE
+      - REFUND_NOT_ACCEPTED
+      - THREEDSECURE_FAILED_ACS
+      - THREEDSECURE_FAILED_AUTH
+      - THREEDSECURE_FAILED_COMMS
+      - UNAPPROVED_OPERATOR
+      - UNKNOWN_REASON
+    amountDecimal:
+      type: number
+      description: Amount including decimal place.
+    ecomPaymentResponse_issuer_instalment_result:
+      type: object
+      properties:
+        instalment_program:
+          type: string
+          description: The name of special program designated by scheme or issuer.
+          enum:
+          - MCINST
+        payment_option:
+          type: string
+          description: Available payment mode allowed by issuer for the transaction.
+          enum:
+          - FULL
+          - FULL_OR_INSTALMENT
+          - INSTALMENT
+        payment_plan_option:
+          type: array
+          description: The issuer may offer more than one instalment options within certain instalment programs.
+          items:
+            $ref: '#/components/schemas/paymentPlanOption'
+        number_of_instalments:
+          minimum: 0
+          type: integer
+          description: The number of individual parts that the total amount should be paid in.
+        min_number_of_instalments:
+          type: integer
+          description: The minimal number of individual parts that the total amount could be paid in, if choice is available.
+        max_number_of_instalments:
+          type: integer
+          description: The maximal number of individual parts that the total amount could be paid in, if choice is available.
+        interest_rate:
+          type: number
+          description: The interest rate.
+          format: float
+        annual_percentage_rate:
+          type: number
+          description: The interest rate expressed in Annual Percentage Rate.
+          format: float
+        handling_fee:
+          $ref: '#/components/schemas/amountDecimal'
+        down_payment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        instalment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        total_amount_with_cost:
+          $ref: '#/components/schemas/amountDecimal'
+      additionalProperties: false
+      description: Issuer-managed instalment response. May be used to inform on supported instalment options for the transaction in specific programs (e.g., Mastercard Instalment Payment Service).
     TokenDetails:
       type: object
       properties:
@@ -1406,189 +1993,76 @@ components:
           - ZMK
           - ZMW
           - BTC
-    settlementDate:
-      description: This will reflect either the desired Merchant settlement date or the actual settlement date depending where the transaction request is within the payment lifecycle. A transaction may be assigned an intended settlement date, but it is possible that this date will not occur for technical reasons hence there should be a subsequent event to indicate the actual date of settlement. Format is date only as per RFC 3339.
-      type: string
-      format: date
-    MultipleCapturesDto:
+    RefundCardTransactionDto:
       type: object
       properties:
-        final_capture:
-          type: boolean
-          description: This flag is used to indicate if this capture is the final capture or not. Must be set to false if there is a need to do addional partial captures in the future.
-        capture_sequence_number:
-          type: number
-          maximum: 99
-          minimum: 1
-          description: "This field is used in indicating the sequence number of one of many partial capture being done. Value can be between 1 & 99. \n\n **Required** If capture_sequence_count number is provided."
-        capture_sequence_count:
-          type: number
-          maximum: 99
-          minimum: 2
-          description: "This field represents the total number of partial captures that will done. Value can be between 2 & 99. \n\n **Required** If capture_sequence_number is provided."
+        amount:
+          type: integer
+          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
+        reason:
+          type: string
+          title: Reason
+          description: The reason of the refund.
+        tax_indicator:
+          title: Tax Indicator
+          description: 'This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided
+
+            '
+          type: string
+          enum:
+          - TAX_PROVIDED
+          - TAX_NOT_PROVIDED
+          - NON_TAXABLE
+          default: TAX_NOT_PROVIDED
+        detailed_amount:
+          $ref: '#/components/schemas/DetailedAmount'
+        promo_code:
+          type: string
+          description: A code defined by the merchant that affects the calculation of the total amount.
+        purchase_order_number:
+          title: Purchase Order Number
+          description: 'The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.
+
+            '
+          type: string
+          maxLength: 17
+        receipt_type:
+          type: string
+          description: Defines the type of receipt to be generated
+          enum:
+          - FULL_RECEIPT
+          - INVOICE
+          - INVOICE_RECEIPT
+          - SIMPLE_RECEIPT
+          - NONE
       required:
-      - final_capture
-    PromoFinancingResults:
-      title: Promo Financing Results
+      - amount
+    PromoFinancingDetails:
+      title: Promo Financing
       type: object
-      description: Details of the special financing offer returned from the issuer.
+      description: Additional details of the special financing offers to customers using private label cards, typically in combination with `promo_code` field.
       properties:
         promoFinancingType:
-          description: Type of special financing information provided. * `PROMO_APR ` - APR information provided only for the duration of the promo period; * `PROMO_AND_AFTER_APR ` - APR information provided for the duration of and after the promo period; * `PROMO_AND_AFTER_APR ` - No promotional financing available; * `ERROR ` - error.
+          description: Type of special financing information requested. Promotional information may be requested for duration of the promo only (`PROMO_APR`) or for during and after promo period (`PROMO_AND_AFTER_APR`).",
           type: string
           enum:
           - PROMO_APR
           - PROMO_AND_AFTER_APR
-          - NO_PROMO
-          - ERROR
-        promoAnnualPercentageRateType:
-          description: The type of APR applicable during promo period.
+        promoPlan:
+          description: The code or name of a promotional financing plan as set up between merchant and issuer.
           type: string
-          enum:
-          - FIXED
-          - VARIABLE
-        promoAnnualPercentageRate:
-          description: The interest rate expressed in Annual Percentage Rate (APR), applicable during the promo period.
-          type: number
-          format: float
-        annualPercentageRateType:
-          description: The type of APR applicable after promo period.
+        promoPlanExpiry:
+          description: Expiry date for the requested promo plan.
           type: string
-          enum:
-          - FIXED
-          - VARIABLE
-        annualPercentageRate:
-          description: The interest rate expressed in Annual Percentage Rate (APR).
-          type: number
-          format: float
-        promoDurationDescription:
-          description: Information or description of the promo period duration, e.g. 6 months
-          type: string
-        promoDescription:
-          description: Description of the promotional financing plan.
-          type: string
-    ForbiddenV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 403
-          default: 403
-        message:
-          type: string
-          enum:
-          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
-          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
-      required:
-      - message
-    klarnaPaymentCompletionResponse:
-      title: Klarna Complete Payment Response
-      type: object
-      properties:
-        id:
-          type: string
-          title: Transaction ID
-          format: uuid-flexible
-          description: The ID of the transaction.
-        instore_reference:
-          type: string
-          description: In-store reference for the transaction
-        authorized_payment_method:
-          $ref: '#/components/schemas/klarnaPaymentCompletionResponse_authorized_payment_method'
-        amount:
-          type: integer
-          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
-        blocked:
-          type: boolean
-          description: True if the transaction has been blocked by a ruleset, false otherwise
-        created_at:
-          type: string
-          description: The time at which the transaction was created.
-          format: date-time
-        customer:
-          type: string
-          description: The ID of a customer
-        details:
-          $ref: '#/components/schemas/ecomPaymentResponse_details'
-        merchant_reference:
-          type: string
-          description: A reference specified by the merchant to identify the transaction
-        processor:
-          type: string
-          description: The name of the processor used for this transaction
-          default: KLARNA
-        payment_product:
-          type: string
-          description: The payment product corresponding to this transaction
-          default: KLARNA
-        payment_product_type:
-          $ref: '#/components/schemas/PaymentProductType'
-        shipping_information:
-          allOf:
-          - $ref: '#/components/schemas/ShippingInformation'
-        status:
-          type: string
-          description: The outcome of the payment request.
-          title: Ecommerce Transaction Status
-          enum:
-          - INITIATED
-          - AUTHORIZED
-          - AUTHORIZATION_VOIDED
-          - CANCELLED
-          - CUSTOMER_ACCEPTED
-          - REFUNDED
-          - FAILED
-          - PENDING
-          - DECLINED
-          - SETTLEMENT_CANCELLED
-          - SETTLEMENT_REQUESTED
-          - SETTLEMENT_SUBMITTED
-          - SETTLEMENT_COMPLETED
-          - SETTLEMENT_PARTIAL
-          - SETTLEMENT_DECLINED
-          - VOIDED
-          - UNKNOWN
-        status_reason:
-          type: string
-          description: Message provided by the 3rd party service as additional information, when the transaction does not succeed.
-        created_by:
-          type: string
-          description: The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order
-        shopper_interaction:
-          type: string
-          description: 'Determines the point of sale of a customer. Possible values: pos, moto, mail_order, telephone_order, ecommerce and cont_auth'
-          enum:
-          - ECOMMERCE
-          - MAIL
-          - TELEPHONE
-        geo_location:
-          type: array
-          description: The latitude / longitude resolved from the customer's ip address.
-          items:
-            type: number
-        city:
-          type: string
-          description: The city resolved from the customer's ip address.
-        country_code:
-          title: Country Code
-          type: string
-          description: The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
+          format: date
+    acquirerAuthorizingNetworkID:
+      description: The Network ID returned in the original authorization response.
+      type: string
+    initiatorTraceId:
+      description: "A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI.\n This value will correspond to **ISO8583 DE11.**\n `Note: Use response.stan value for initiator_trace_id`"
+      type: string
+      maxLength: 40
+      deprecated: true
     AdditionalData:
       type: object
       additionalProperties: false
@@ -1609,155 +2083,55 @@ components:
         issuer_receipt_text:
           type: string
           description: Additional text to print on transaction receipt, which optionally may be provided by the Issuer.
-    amountDecimal:
-      type: number
-      description: Amount including decimal place.
-    initiatorTraceId:
-      description: "A number assigned by a transaction initiator(originator) to assist in identifying a transaction uniquely. The trace identifier remains unchanged for all messages within a two-message exchange, e.g. request/repeat and response. This property can be used to store the System trace audit number (STAN) as used in the ISO8583 specification (DE 11). Note the contents of this field are mandatory in many specifications - ISO8583, AS2805 (DE11) and are often related to the Retrieval Reference Number (RRN) as also specified in ISO8583. Unfortunately due to the usage in these earlier specifications, a STAN was limited to 6 digits which means that it cannot be utilised as a general purpose unique id. In addition, this entry is often printed on the receipt at a POI.\n This value will correspond to **ISO8583 DE11.**\n `Note: Use response.stan value for initiator_trace_id`"
-      type: string
-      maxLength: 40
-      deprecated: true
-    DetailedAmount:
-      title: Detailed Amount
-      description: A structure that represents a breakdown all of the different amounts that may appear on a single transaction.
+    CaptureCardTransactionDto:
       type: object
       properties:
-        gratuity_amount:
-          description: 'An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total ''amount'' of the transaction.
-
-
-            Amount is specified without a decimal place e.g. $1.5 = 150.
-
-
-            <i>The required number of decimal places for a currency code is according to ISO 4217.</i>'
+        amount:
           type: integer
-        tax_amount:
-          title: Tax Amount
-          description: 'An optional value to specify the amount of any tax that was included  within the total amount for the transaction. This should be included  in the total ''amount'' of the transaction.
+          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
+        purchase_order_number:
+          title: Purchase Order Number
+          description: 'The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.
 
+            '
+          type: string
+          maxLength: 17
+        tax_indicator:
+          title: Tax Indicator
+          description: 'This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided
 
-            Amount is specified a decimal place e.g. $1.5 = 150.
-
-
-            <i>The required number of decimal places for a currency code is according to ISO 4217.</i>'
-          type: integer
-        surcharge_amount:
-          title: Surchange Amount
-          description: 'An optional additional amount representing the surcharge associated with a payment. This should be included in the total ''amount'' of the transaction.
-
-
-            Amount is specified without a decimal place e.g. $1.5 = 150.
-
-
-            <i>The required number of decimal places for a currency code is according to ISO 4217.</i>'
-          type: integer
-    PromoFinancingDetails:
-      title: Promo Financing
-      type: object
-      description: Additional details of the special financing offers to customers using private label cards, typically in combination with `promo_code` field.
-      properties:
-        promoFinancingType:
-          description: Type of special financing information requested. Promotional information may be requested for duration of the promo only (`PROMO_APR`) or for during and after promo period (`PROMO_AND_AFTER_APR`).",
+            '
           type: string
           enum:
-          - PROMO_APR
-          - PROMO_AND_AFTER_APR
-        promoPlan:
-          description: The code or name of a promotional financing plan as set up between merchant and issuer.
+          - TAX_PROVIDED
+          - TAX_NOT_PROVIDED
+          - NON_TAXABLE
+          default: TAX_NOT_PROVIDED
+        multiple_captures:
+          allOf:
+          - $ref: '#/components/schemas/MultipleCapturesDto'
+            title: captureAuthorizationRequest_multiple_captures
+            description: This field is mandatory in order to do multiple captures
+        issuer_instalment:
+          $ref: '#/components/schemas/instalment'
+        line_items:
+          type: array
+          description: The array of items being refunded.
+          items:
+            $ref: '#/components/schemas/UnmatchedLineItem'
+        detailed_amount:
+          $ref: '#/components/schemas/DetailedAmount'
+        receipt_type:
           type: string
-        promoPlanExpiry:
-          description: Expiry date for the requested promo plan.
-          type: string
-          format: date
-    acquirerResponseMessage:
-      description: The response description generated by the acquirer corresponding to the acquirer response code.
-      type: string
-    instalment:
+          description: Defines the type of receipt to be generated
+          enum:
+          - FULL_RECEIPT
+          - INVOICE
+          - INVOICE_RECEIPT
+          - SIMPLE_RECEIPT
+          - NONE
       required:
-      - number_of_instalments
-      type: object
-      properties:
-        instalment_program:
-          type: string
-          description: The name of special program designated by scheme or issuer.
-          enum:
-          - MCINST
-        number_of_instalments:
-          minimum: 0
-          type: integer
-          description: The number of individual parts that the total amount should be paid in.
-        down_payment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        first_instalment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        instalment_amount:
-          $ref: '#/components/schemas/amountDecimal'
-        interest_rate:
-          type: number
-          description: The interest rate.
-          format: float
-        annual_percentage_rate:
-          type: number
-          description: The interest rate expressed in Annual Percentage Rate.
-          format: float
-        handling_fee:
-          $ref: '#/components/schemas/amountDecimal'
-        total_amount_with_cost:
-          $ref: '#/components/schemas/amountDecimal'
-      description: The details on the instalment-scheme that should be enacted by the issuer.
-    UnmatchedLineItem:
-      title: Ecommerce basket line items
-      description: The description of item(s) that was included in a transaction or purchase.
-      type: object
-      properties:
-        name:
-          type: string
-          description: Descriptive name of the order line item
-          maxLength: 255
-        quantity:
-          type: integer
-          description: Quantity of the order line item
-        unit_price:
-          type: integer
-          description: Unit Price is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
-        unit_price_tax:
-          type: integer
-          description: Unit Price Tax is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
-        tax_rate:
-          type: number
-          description: Item Tax Rate as percentage
-          format: float
-        total_tax_amount:
-          type: integer
-          description: Total tax amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
-        total_amount:
-          type: integer
-          description: Total Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details.
-        image_url:
-          type: string
-          description: Image URL for the line item
-          maxLength: 2000
-        item_url:
-          type: string
-          description: The line item's product description page URL.
-          maxLength: 2000
-        sku:
-          type: string
-          description: The stock keeping unit (SKU) for the item.
-          maxLength: 127
-        description:
-          type: string
-          description: The detailed item description.
-          maxLength: 127
-        category:
-          type: string
-          description: 'The item category type. <br />  The possible values are: <br />  * DIGITAL_GOODS - Goods that are stored, delivered, and used in their electronic format. This value is not currently supported for API callers that leverage the [PayPal for Commerce Platform](https://www.paypal.com/us/webapps/mpp/commerce-platform) product. <br />  * DIGITAL_GOODS - A tangible item that can be shipped with proof of delivery. <br />'
-          enum:
-          - DIGITAL_GOODS
-          - PHYSICAL_GOODS
-      required:
-      - name
-      - total_amount
+      - amount
     unmatchedRefundEncryptedCardRequest:
       title: Using Encrypted Card
       type: object
@@ -1802,9 +2176,442 @@ components:
         required:
         - encrypted_card
         - public_key_alias
-    acquirerAuthorizingNetworkID:
-      description: The Network ID returned in the original authorization response.
+    ShippingInformation:
+      type: object
+      properties:
+        address:
+          type: string
+          maxLength: 300
+          description: Street address of the recipient.
+        city:
+          type: string
+          maxLength: 28
+          description: City of the recipient.
+        country:
+          type: string
+          maxLength: 2
+          minLength: 2
+          format: country-code
+          description: A 2-letter ISO3166 alpha-2 country code for the address.
+        postal_code:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: A postal code for the address.
+        email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        first_name:
+          type: string
+          maxLength: 100
+          description: First name of the recipient.
+        last_name:
+          type: string
+          maxLength: 100
+          description: Last name of the recipient.
+        phone:
+          type: number
+          maxLength: 15
+          description: Numbers only, no dash or any other separator.
+        state:
+          type: string
+          maxLength: 35
+          description: A region / state / province for the address.
+      required:
+      - address
+      - city
+      - country
+      - postal_code
+    AdjustDto:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, refer to the Currencies documentation for more details. The amount provided determines the type of adjustment. If it is greater than the original pre-authorization amount, it is treated as an increment. If it is less than the original pre-authorization amount, it is treated as a decrement. To fully void a transaction after an increment, set the amount to 0.
+        reason:
+          type: string
+          title: Reason
+          description: The reason of the adjust.
+      required:
+      - amount
+    unmatchedRefundTokenRequest:
+      title: Using Reuse Token
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/unmatchedRefundBaseRequest'
+      - properties:
+          reuse_token:
+            title: Verifone or Third-Party Reuse Token
+            description: 'The Verifone or Third-Party issued reuse token used to represent the previously stored cardholder data.
+
+              Required here if not referenced by providing the stored credential signup reference `stored_credential.reference` in a subsequent charge request.
+
+              '
+            type: string
+            maxLength: 255
+            minLength: 14
+          reuse_token_type:
+            title: Reuse Token Type
+            description: 'The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
+
+              **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
+
+              '
+            type: string
+            enum:
+            - CHASE
+            - INTERNAL
+            - TAVE
+            default: INTERNAL
+          reuse_token_details:
+            $ref: '#/components/schemas/TokenDetailsRequestBody'
+          encrypted_svc_access_code:
+            type: string
+            title: Client encrypted SVC Access Code
+            description: 'The SVC Access Code encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.
+
+
+              The data to encrypt is a JSON with tag svcAccessCode.
+
+
+              Additionally a tag called captureTime must be presenting indicating the time the cvv was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.'
+          public_key_alias:
+            type: string
+            title: Public Key Alias
+            description: The alias for the public key used to encrypt the card/identity card/cvv/svc access code.
+          prefer_fund_transfer:
+            type: boolean
+            description: 'This flag is to be set to true when the merchant would like to use
+
+              fund transfer options like OCT and the Payment provider contract
+
+              is enabled for both fund transfers and unmatched refund.'
+            default: false
+          receipt_type:
+            type: string
+            description: Defines the type of receipt to be generated
+            enum:
+            - FULL_RECEIPT
+            - INVOICE
+            - INVOICE_RECEIPT
+            - SIMPLE_RECEIPT
+            - NONE
+        required:
+        - reuse_token
+    acquirerAuthorizingNetworkIdDescriptor:
+      description: The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.
       type: string
+    ForbiddenV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 403
+          default: 403
+        message:
+          type: string
+          enum:
+          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+      required:
+      - message
+    StoredCredential:
+      type: object
+      properties:
+        reference:
+          type: string
+          description: Reference of a successfully processed initial COF transaction. Only used by subsequent COF transactions.
+        stored_credential_type:
+          type: string
+        scheme_reference:
+          type: string
+          description: Scheme Reference Data received from issuer/acquirer.
+        processing_model:
+          type: string
+          enum:
+          - UNSCHEDULED_CREDENTIAL_ON_FILE
+          - CREDENTIAL_ON_FILE
+          - RECURRING
+          - REAUTHORIZATION
+          - NONE
+          description: Processing model to use for COF transaction. Refer to the card integration guide for more information on the usage.
+        details:
+          deprecated: true
+          type: string
+          enum:
+          - UNSCHEDULED_CREDENTIAL_ON_FILE
+          - CREDENTIAL_ON_FILE
+          - RECURRING
+          description: Processing model to use for COF transaction. Refer to the card integration guide for more information on the usage.
+    PaymentProductType:
+      title: Payment Product Type
+      type: string
+      description: The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product
+      enum:
+      - Affirm
+      - Amex
+      - Crypto
+      - Diners Club International
+      - Discover
+      - JCB
+      - Klarna
+      - Maestro
+      - Mastercard
+      - OP Online Payment
+      - Swish
+      - Unknown
+      - Visa
+      default: Unknown
+    issuerInstalmentSelectionRequest:
+      title: Issuer Instalment Option Selection Request.
+      type: object
+      properties:
+        issuer_instalment:
+          $ref: '#/components/schemas/instalment'
+      additionalProperties: false
+    unmatchedRefundBaseRequest:
+      properties:
+        payment_provider_contract:
+          type: string
+          description: The identifier of payment provider contract you want to process the transaction request with.
+          format: uuid-flexible
+        card_brand:
+          $ref: '#/components/schemas/CardBrand'
+        brand_choice:
+          type: string
+          description: For dual-branded cards identifies whether selection is made by a cardholder or merchant.
+          enum:
+          - MERCHANT
+          - CARDHOLDER
+          default: MERCHANT
+        amount:
+          type: integer
+          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
+        detailed_amount:
+          $ref: '#/components/schemas/DetailedAmount'
+        currency_code:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        customer:
+          title: Customer ID
+          description: The ID of a customer.
+          type: string
+          format: uuid-flexible
+        shopper_interaction:
+          title: Ecommerce Shopper Interaction
+          description: "Determines the sales channel the shopper gives their card details through:\n  * `ECOMMERCE` Online transactions where the cardholder is present.\n  * `MAIL` order transactions where the shopper is in contact with the merchant via email.\n  * `TELEPHONE` order transactions where the shopper is in contact with the merchant via telephone.\n"
+          type: string
+          enum:
+          - ECOMMERCE
+          - MAIL
+          - TELEPHONE
+          default: ECOMMERCE
+        reason:
+          type: string
+          description: The reason for the refund
+        merchant_reference:
+          description: A reference specified by the merchant to identify the transaction.
+          type: string
+          maxLength: 50
+        line_items:
+          type: array
+          description: The array of items being refunded.
+          items:
+            $ref: '#/components/schemas/UnmatchedLineItem'
+        receipt_type:
+          type: string
+          description: Defines the type of receipt to be generated
+          enum:
+          - FULL_RECEIPT
+          - INVOICE
+          - INVOICE_RECEIPT
+          - SIMPLE_RECEIPT
+        tax_indicator:
+          title: Tax Indicator
+          description: 'This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided
+
+            '
+          type: string
+          enum:
+          - TAX_PROVIDED
+          - TAX_NOT_PROVIDED
+          - NON_TAXABLE
+          default: TAX_NOT_PROVIDED
+        purchase_order_number:
+          title: Purchase Order Number
+          description: 'The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.
+
+            '
+          type: string
+          maxLength: 17
+        promo_code:
+          type: string
+          description: A code defined by the merchant that affects the calculation of the total amount.
+        promo_financing_details:
+          $ref: '#/components/schemas/PromoFinancingDetails'
+      required:
+      - payment_provider_contract
+      - amount
+      - currency_code
+    CardBrand:
+      type: string
+      title: The Card Type
+      description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards."
+    UnauthorizedV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 401
+          default: 401
+        message:
+          type: string
+          enum:
+          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+      required:
+      - message
+    PromoFinancingResults:
+      title: Promo Financing Results
+      type: object
+      description: Details of the special financing offer returned from the issuer.
+      properties:
+        promoFinancingType:
+          description: Type of special financing information provided. * `PROMO_APR ` - APR information provided only for the duration of the promo period; * `PROMO_AND_AFTER_APR ` - APR information provided for the duration of and after the promo period; * `PROMO_AND_AFTER_APR ` - No promotional financing available; * `ERROR ` - error.
+          type: string
+          enum:
+          - PROMO_APR
+          - PROMO_AND_AFTER_APR
+          - NO_PROMO
+          - ERROR
+        promoAnnualPercentageRateType:
+          description: The type of APR applicable during promo period.
+          type: string
+          enum:
+          - FIXED
+          - VARIABLE
+        promoAnnualPercentageRate:
+          description: The interest rate expressed in Annual Percentage Rate (APR), applicable during the promo period.
+          type: number
+          format: float
+        annualPercentageRateType:
+          description: The type of APR applicable after promo period.
+          type: string
+          enum:
+          - FIXED
+          - VARIABLE
+        annualPercentageRate:
+          description: The interest rate expressed in Annual Percentage Rate (APR).
+          type: number
+          format: float
+        promoDurationDescription:
+          description: Information or description of the promo period duration, e.g. 6 months
+          type: string
+        promoDescription:
+          description: Description of the promotional financing plan.
+          type: string
+    instalment:
+      required:
+      - number_of_instalments
+      type: object
+      properties:
+        instalment_program:
+          type: string
+          description: The name of special program designated by scheme or issuer.
+          enum:
+          - MCINST
+        number_of_instalments:
+          minimum: 0
+          type: integer
+          description: The number of individual parts that the total amount should be paid in.
+        down_payment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        first_instalment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        instalment_amount:
+          $ref: '#/components/schemas/amountDecimal'
+        interest_rate:
+          type: number
+          description: The interest rate.
+          format: float
+        annual_percentage_rate:
+          type: number
+          description: The interest rate expressed in Annual Percentage Rate.
+          format: float
+        handling_fee:
+          $ref: '#/components/schemas/amountDecimal'
+        total_amount_with_cost:
+          $ref: '#/components/schemas/amountDecimal'
+      description: The details on the instalment-scheme that should be enacted by the issuer.
+    BadRequestV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 400
+          default: 400
+        message:
+          type: string
+          enum:
+          - 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+          default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+      required:
+      - message
+    acquirerResponseCode:
+      description: Acquirer response returned during the authorisation.
+      type: string
+      maxLength: 4
     CurrencyCodeEnum:
       title: Currency Code
       type: string
@@ -1994,272 +2801,6 @@ components:
       - ZAR
       - ZMW
       - ZWL
-    PaymentProductType:
-      title: Payment Product Type
-      type: string
-      description: The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product
-      enum:
-      - Affirm
-      - Amex
-      - Crypto
-      - Diners Club International
-      - Discover
-      - JCB
-      - Klarna
-      - Maestro
-      - Mastercard
-      - OP Online Payment
-      - Swish
-      - Unknown
-      - Visa
-      default: Unknown
-    unmatchedRefundTokenRequest:
-      title: Using Reuse Token
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/unmatchedRefundBaseRequest'
-      - properties:
-          reuse_token:
-            title: Verifone or Third-Party Reuse Token
-            description: 'The Verifone or Third-Party issued reuse token used to represent the previously stored cardholder data.
-
-              Required here if not referenced by providing the stored credential signup reference `stored_credential.reference` in a subsequent charge request.
-
-              '
-            type: string
-            maxLength: 255
-            minLength: 14
-          reuse_token_type:
-            title: Reuse Token Type
-            description: 'The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
-
-              **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
-
-              '
-            type: string
-            enum:
-            - CHASE
-            - INTERNAL
-            - TAVE
-            default: INTERNAL
-          reuse_token_details:
-            $ref: '#/components/schemas/TokenDetailsRequestBody'
-          encrypted_svc_access_code:
-            type: string
-            title: Client encrypted SVC Access Code
-            description: 'The SVC Access Code encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.
-
-
-              The data to encrypt is a JSON with tag svcAccessCode.
-
-
-              Additionally a tag called captureTime must be presenting indicating the time the cvv was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z.'
-          public_key_alias:
-            type: string
-            title: Public Key Alias
-            description: The alias for the public key used to encrypt the card/identity card/cvv/svc access code.
-          prefer_fund_transfer:
-            type: boolean
-            description: 'This flag is to be set to true when the merchant would like to use
-
-              fund transfer options like OCT and the Payment provider contract
-
-              is enabled for both fund transfers and unmatched refund.'
-            default: false
-          receipt_type:
-            type: string
-            description: Defines the type of receipt to be generated
-            enum:
-            - FULL_RECEIPT
-            - INVOICE
-            - INVOICE_RECEIPT
-            - SIMPLE_RECEIPT
-            - NONE
-        required:
-        - reuse_token
-    acquirerAuthorizingNetworkIdDescriptor:
-      description: The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.
-      type: string
-    klarnaPaymentCompletionRequest:
-      title: Klarna Complete Payment Request
-      type: object
-      properties:
-        authorization_token:
-          type: string
-          description: Token used for authorizing a payment transaction.
-        refusal_reason:
-          $ref: '#/components/schemas/RefusalReason'
-        merchant_reference:
-          type: string
-          title: Merchant Reference
-          description: A reference specified by the merchant to identify the transaction.
-          maxLength: 50
-    ReleasePreauthDto:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: 'Amount is charged without a decimal place e.g. $1.5 = 150.
-
-            The required number of decimal places for a currency code is according to ISO
-
-            For Account Verification transaction, provide 0 as value for this field.'
-    CaptureCardTransactionDto:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
-        purchase_order_number:
-          title: Purchase Order Number
-          description: 'The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.
-
-            '
-          type: string
-          maxLength: 17
-        tax_indicator:
-          title: Tax Indicator
-          description: 'This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided
-
-            '
-          type: string
-          enum:
-          - TAX_PROVIDED
-          - TAX_NOT_PROVIDED
-          - NON_TAXABLE
-          default: TAX_NOT_PROVIDED
-        multiple_captures:
-          allOf:
-          - $ref: '#/components/schemas/MultipleCapturesDto'
-            title: captureAuthorizationRequest_multiple_captures
-            description: This field is mandatory in order to do multiple captures
-        issuer_instalment:
-          $ref: '#/components/schemas/instalment'
-        line_items:
-          type: array
-          description: The array of items being refunded.
-          items:
-            $ref: '#/components/schemas/UnmatchedLineItem'
-        detailed_amount:
-          $ref: '#/components/schemas/DetailedAmount'
-        receipt_type:
-          type: string
-          description: Defines the type of receipt to be generated
-          enum:
-          - FULL_RECEIPT
-          - INVOICE
-          - INVOICE_RECEIPT
-          - SIMPLE_RECEIPT
-          - NONE
-      required:
-      - amount
-    klarnaPaymentCompletionResponse_authorized_payment_method:
-      type: object
-      properties:
-        days:
-          type: integer
-          description: Indicates whether the transaction would be automatically captured upon authorisation.
-        no_of_installments:
-          type: integer
-          description: No of instalments
-        payment_type:
-          type: string
-          description: Define the type of payment
-          enum:
-          - INVOICE
-          - FIXED_AMOUNT
-          - PIX
-          - BASE_ACCOUNT
-          - DEFERRED_INTEREST
-          - DIRECT_DEBIT
-          - DIRECT_BANK_TRANSFER
-          - B2B_INVOICE
-          - CARD
-          - SLICE_IT_BY_CARD
-          - PAY_LATER_BY_CARD
-    unmatchedRefundBaseRequest:
-      properties:
-        payment_provider_contract:
-          type: string
-          description: The identifier of payment provider contract you want to process the transaction request with.
-          format: uuid-flexible
-        card_brand:
-          $ref: '#/components/schemas/CardBrand'
-        brand_choice:
-          type: string
-          description: For dual-branded cards identifies whether selection is made by a cardholder or merchant.
-          enum:
-          - MERCHANT
-          - CARDHOLDER
-          default: MERCHANT
-        amount:
-          type: integer
-          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
-        detailed_amount:
-          $ref: '#/components/schemas/DetailedAmount'
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCodeEnum'
-        customer:
-          title: Customer ID
-          description: The ID of a customer.
-          type: string
-          format: uuid-flexible
-        shopper_interaction:
-          title: Ecommerce Shopper Interaction
-          description: "Determines the sales channel the shopper gives their card details through:\n  * `ECOMMERCE` Online transactions where the cardholder is present.\n  * `MAIL` order transactions where the shopper is in contact with the merchant via email.\n  * `TELEPHONE` order transactions where the shopper is in contact with the merchant via telephone.\n"
-          type: string
-          enum:
-          - ECOMMERCE
-          - MAIL
-          - TELEPHONE
-          default: ECOMMERCE
-        reason:
-          type: string
-          description: The reason for the refund
-        merchant_reference:
-          description: A reference specified by the merchant to identify the transaction.
-          type: string
-          maxLength: 50
-        line_items:
-          type: array
-          description: The array of items being refunded.
-          items:
-            $ref: '#/components/schemas/UnmatchedLineItem'
-        receipt_type:
-          type: string
-          description: Defines the type of receipt to be generated
-          enum:
-          - FULL_RECEIPT
-          - INVOICE
-          - INVOICE_RECEIPT
-          - SIMPLE_RECEIPT
-        tax_indicator:
-          title: Tax Indicator
-          description: 'This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided
-
-            '
-          type: string
-          enum:
-          - TAX_PROVIDED
-          - TAX_NOT_PROVIDED
-          - NON_TAXABLE
-          default: TAX_NOT_PROVIDED
-        purchase_order_number:
-          title: Purchase Order Number
-          description: 'The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.
-
-            '
-          type: string
-          maxLength: 17
-        promo_code:
-          type: string
-          description: A code defined by the merchant that affects the calculation of the total amount.
-        promo_financing_details:
-          $ref: '#/components/schemas/PromoFinancingDetails'
-      required:
-      - payment_provider_contract
-      - amount
-      - currency_code
     EcomReverseTransactionResponse:
       type: object
       properties:
@@ -2292,556 +2833,7 @@ components:
       required:
       - id
       - status
-    issuerCountryEnum:
-      type: string
-      description: The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
-      enum:
-      - ZZZ
-      - ABW
-      - AFG
-      - AGO
-      - AIA
-      - ALA
-      - ALB
-      - AND
-      - ARE
-      - ARG
-      - ARM
-      - ASM
-      - ATA
-      - ATF
-      - ATG
-      - AUS
-      - AUT
-      - AZE
-      - BDI
-      - BEL
-      - BEN
-      - BES
-      - BFA
-      - BGD
-      - BGR
-      - BHR
-      - BHS
-      - BIH
-      - BLM
-      - BLR
-      - BLZ
-      - BMU
-      - BOL
-      - BRA
-      - BRB
-      - BSB
-      - BRN
-      - BTN
-      - BVT
-      - BWA
-      - CAF
-      - CAN
-      - CCK
-      - CHE
-      - CHL
-      - CHN
-      - CIV
-      - CMR
-      - COD
-      - COG
-      - COK
-      - COL
-      - COM
-      - CPV
-      - CRI
-      - CUB
-      - CUW
-      - CXR
-      - CYM
-      - CYP
-      - CZE
-      - DEU
-      - DJI
-      - DMA
-      - DNK
-      - DOM
-      - DZA
-      - ECU
-      - EGY
-      - ERI
-      - ESH
-      - ESP
-      - EST
-      - ETH
-      - FIN
-      - FJI
-      - FLK
-      - FRA
-      - FRO
-      - FSM
-      - GAB
-      - GBR
-      - GEO
-      - GGY
-      - GHA
-      - GIB
-      - GIN
-      - GLP
-      - GMB
-      - GNB
-      - GNQ
-      - GRC
-      - GRD
-      - GRL
-      - GTM
-      - GUF
-      - GUM
-      - GUY
-      - HKG
-      - HMD
-      - HND
-      - HRV
-      - HTI
-      - HUN
-      - IDN
-      - IMN
-      - IND
-      - IOT
-      - IRL
-      - IRN
-      - IRQ
-      - ISL
-      - ISR
-      - ITA
-      - JAM
-      - JEY
-      - JOR
-      - JPN
-      - KAZ
-      - KEN
-      - KGZ
-      - KHM
-      - KIR
-      - KNA
-      - KOR
-      - KWT
-      - LAO
-      - LBN
-      - LBR
-      - LBY
-      - LCA
-      - LIE
-      - LKA
-      - LSO
-      - LTU
-      - LUX
-      - LVA
-      - MAC
-      - MAF
-      - MAR
-      - MCO
-      - MDA
-      - MDG
-      - MDV
-      - MEX
-      - MHL
-      - MKD
-      - MLI
-      - MLT
-      - MMR
-      - MNE
-      - MNG
-      - MNP
-      - MOZ
-      - MRT
-      - MSR
-      - MTQ
-      - MUS
-      - MWI
-      - MYS
-      - MYT
-      - NAM
-      - NCL
-      - NER
-      - NFK
-      - NGA
-      - NIC
-      - NIU
-      - NLD
-      - NOR
-      - NPL
-      - NRU
-      - NZL
-      - OMN
-      - PAK
-      - PAN
-      - PCN
-      - PER
-      - PHL
-      - PLW
-      - PNG
-      - POL
-      - PRI
-      - PRK
-      - PRT
-      - PRY
-      - PSE
-      - PYF
-      - QAT
-      - REU
-      - ROU
-      - RUS
-      - RWA
-      - SAU
-      - SDN
-      - SEN
-      - SGC
-      - SGP
-      - SHN
-      - SJM
-      - SLB
-      - SLE
-      - SLV
-      - SMR
-      - SOM
-      - SPM
-      - SRB
-      - SSD
-      - STP
-      - SUR
-      - SVK
-      - SVN
-      - SWE
-      - SWZ
-      - SXM
-      - SYC
-      - SYR
-      - TCA
-      - TCD
-      - TGO
-      - THA
-      - TJK
-      - TKL
-      - TKM
-      - TLS
-      - TON
-      - TTO
-      - TUN
-      - TUR
-      - TUV
-      - TWN
-      - TZA
-      - UGA
-      - UKR
-      - UMI
-      - URY
-      - USA
-      - UZB
-      - VAT
-      - VCT
-      - VEN
-      - VGB
-      - VIR
-      - VNM
-      - VUT
-      - WLF
-      - WSM
-      - YEM
-      - ZAF
-      - ZMB
-      - ZWE
-    ecomPaymentResponse_details:
-      type: object
-      properties:
-        auto_capture:
-          type: boolean
-          description: Indicates whether the transaction would be automatically captured upon authorisation.
-        mid:
-          type: string
-          description: Merchant ID (MID)
-          format: integer
-    NotFoundV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 404
-          default: 404
-        message:
-          type: string
-          enum:
-          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
-          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
-      required:
-      - message
-    affirmPaymentCompletionResponse:
-      title: Affirm Complete Payment Response
-      type: object
-      properties:
-        id:
-          type: string
-          title: Transaction ID
-          format: uuid-flexible
-          description: The ID of the transaction.
-        authorization_expiration:
-          type: string
-          description: The time when the auth transaction will expire (i.e. before which capture must be made). The value is formatted in RFC 3339.
-        amount:
-          type: integer
-          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
-        currency_code:
-          $ref: '#/components/schemas/CurrencyCodeEnum'
-        created_at:
-          type: string
-          format: date-time
-          description: The time at which the transaction was created.
-        created_by:
-          description: The ID of the user who initiated the transaction. Only set when shopper_interaction = moto, mail_order or telephone_order
-          type: string
-        customer:
-          description: The ID of a customer
-          type: string
-        merchant_reference:
-          type: string
-          title: merchantReference
-          description: A reference specified by the merchant to identify the transaction
-          maxLength: 50
-        processor:
-          type: string
-          description: The name of the processor used for this transaction
-          default: KLARNA
-        payment_product:
-          type: string
-          description: The payment product corresponding to this transaction
-          default: KLARNA
-        payment_product_type:
-          $ref: '#/components/schemas/PaymentProductType'
-        status:
-          type: string
-          description: The outcome of the payment request.
-          title: Ecommerce Transaction Status
-          enum:
-          - INITIATED
-          - AUTHORIZED
-          - AUTHORIZATION_VOIDED
-          - CANCELLED
-          - CUSTOMER_ACCEPTED
-          - REFUNDED
-          - FAILED
-          - PENDING
-          - DECLINED
-          - SETTLEMENT_CANCELLED
-          - SETTLEMENT_REQUESTED
-          - SETTLEMENT_SUBMITTED
-          - SETTLEMENT_COMPLETED
-          - SETTLEMENT_PARTIAL
-          - SETTLEMENT_DECLINED
-          - VOIDED
-          - UNKNOWN
-        status_reason:
-          type: string
-          description: Message provided by the 3rd party service as additional information, when the transaction does not succeed.
-        geo_location:
-          type: array
-          description: The latitude / longitude resolved from the customer's ip address.
-          items:
-            type: number
-        country_code:
-          title: Country Code
-          type: string
-          description: The [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
-    issuerInstalmentSelectionRequest:
-      title: Issuer Instalment Option Selection Request.
-      type: object
-      properties:
-        issuer_instalment:
-          $ref: '#/components/schemas/instalment'
-      additionalProperties: false
-    TokenDetailsRequestBody:
-      title: Reuse Token Details
-      type: object
-      properties:
-        expiry_month:
-          maximum: 12
-          type: integer
-          description: A 2 digit value as shown on card. ISO8583 - DE 14.\n\nThis is included as an optional value to be used for some Third-Party reuse token types.
-        expiry_year:
-          maximum: 9999
-          type: integer
-          description: A 4 digit value as shown on card.\n\nThis is included as an optional value to be used for some Third-Party reuse token types.
-      additionalProperties: false
-      description: 'The details related to the token. For Third-Party Reuse tokens, these elements might be required as additional information together with the Reuse token itself.<br>
-
-        **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
-
-        '
-    InternalErrorV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 500
-          default: 500
-        message:
-          type: string
-          enum:
-          - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
-          default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
-      required:
-      - message
-    BadRequestV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 400
-          default: 400
-        message:
-          type: string
-          enum:
-          - 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
-          default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
-      required:
-      - message
-    RefusalReason:
-      title: Refusal Reason
-      type: string
-      description: The reason a transaction has been refused within the payment ecosystem by the client/Verifone/acquirer. This needs to be set by the component that is refusing this transaction request.
-      enum:
-      - ACQUIRER_COMMS_FAILURE
-      - ACQUIRER_REFUSED
-      - CARD_BRAND_NOT_ACCEPTED
-      - CARD_EXPIRED
-      - CARD_NOT_ACCEPTED
-      - CARD_NOT_VALID
-      - CARD_PRODUCT_NOT_ACCEPTED
-      - EXTERNAL_FLOW_FAILED
-      - ORIGINAL_TRANSACTION_NOT_FOUND
-      - INVALID_BIN
-      - PARTIAL_AUTH_NOT_ALLOWED
-      - RECEIPT_FAILURE
-      - REFUND_NOT_ACCEPTED
-      - THREEDSECURE_FAILED_ACS
-      - THREEDSECURE_FAILED_AUTH
-      - THREEDSECURE_FAILED_COMMS
-      - UNAPPROVED_OPERATOR
-      - UNKNOWN_REASON
-    acquirerResponseCode:
-      description: Acquirer response returned during the authorisation.
-      type: string
-      maxLength: 4
-    CardBrand:
-      type: string
-      title: The Card Type
-      description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards."
-    AdjustDto:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, refer to the Currencies documentation for more details. The amount provided determines the type of adjustment. If it is greater than the original pre-authorization amount, it is treated as an increment. If it is less than the original pre-authorization amount, it is treated as a decrement. To fully void a transaction after an increment, set the amount to 0.
-        reason:
-          type: string
-          title: Reason
-          description: The reason of the adjust.
-      required:
-      - amount
-    RefundCardTransactionDto:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: Amount is charged without a decimal place e.g. $1.5 = 150. Currencies can have different decimals/exponentials, see Currencies Section for more details. For Account Verification transactions, provide 0 as value for this field.
-        reason:
-          type: string
-          title: Reason
-          description: The reason of the refund.
-        tax_indicator:
-          title: Tax Indicator
-          description: 'This field indicates the taxable status of the transaction (if any of the purchased items are taxable). This field is part of so-called Level 2 data. If the value `TAX_PROVIDED` is sent, `tax_amount` should also be provided
-
-            '
-          type: string
-          enum:
-          - TAX_PROVIDED
-          - TAX_NOT_PROVIDED
-          - NON_TAXABLE
-          default: TAX_NOT_PROVIDED
-        detailed_amount:
-          $ref: '#/components/schemas/DetailedAmount'
-        promo_code:
-          type: string
-          description: A code defined by the merchant that affects the calculation of the total amount.
-        purchase_order_number:
-          title: Purchase Order Number
-          description: 'The purchase order number. It can be provided in transactions with purchase or procurement cards for the cardholder to get better interchange rates (note that this functionality needs alignment with the acquirer and the scheme). This field is part of so-called Level 2 data.
-
-            '
-          type: string
-          maxLength: 17
-        receipt_type:
-          type: string
-          description: Defines the type of receipt to be generated
-          enum:
-          - FULL_RECEIPT
-          - INVOICE
-          - INVOICE_RECEIPT
-          - SIMPLE_RECEIPT
-          - NONE
-      required:
-      - amount
   securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
     BasicAuth:
       type: http
       scheme: basic
-      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

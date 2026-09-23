@@ -1,21 +1,19 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: 3D Secure 3DS Authentication Transaction API
-  version: 3.43.0
-  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+  title: Verifone eCommerce Transaction API
+  version: 2.38.1
 servers:
-- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
+- url: https://emea.gsc.verifone.cloud/oidc
   description: EMEA Production
-- url: https://us.gsc.verifone.cloud/oidc/3ds-service
+- url: https://us.gsc.verifone.cloud/oidc
   description: Americas Production
-- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
+- url: https://nz.gsc.verifone.cloud/oidc
   description: New Zealand Production
-- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+- url: https://cst.test-gsc.vfims.com/oidc
   description: Global Sandbox
-- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
+- url: https://uscst-gb.gsc.vficloud.net/oidc
   description: Americas Sandbox
 security:
-- BearerAuth: []
 - BasicAuth: []
 tags:
 - name: Transaction
@@ -324,7 +322,6 @@ paths:
     get:
       operationId: countTransactions
       summary: Count transactions
-      description: Count transactions
       parameters:
       - name: acquirer_merchant_id
         required: false
@@ -522,645 +519,8 @@ paths:
       - Transaction
 components:
   schemas:
-    amountString:
-      type: string
-      description: Amount including decimal place.
-    ThreeDSecure:
-      type: object
-      properties:
-        eci_flag:
-          type: string
-          title: Electronic Commerce Indicator.
-          enum:
-          - '00'
-          - '01'
-          - '02'
-          - '03'
-          - '04'
-          - '05'
-          - '06'
-          - '07'
-        enrolled:
-          type: string
-          title: The enrolment response status of Authentication eligibility from the Directory Server.
-          description: "Possible Values:\n    Y - Yes, Bank is participating in 3-D Secure protocol and will return the ACSUrl.\n    N - No, Bank is not participating in 3-D Secure protocol.\n    U - Unavailable, the DS or ACS is not available for authentication at the time of the request.\n    B - Bypass, merchant authentication rule is triggered to bypass authentication in this use case.\n    NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
-        cavv:
-          type: string
-          maxLength: 48
-          title: Cardholder Authentication Verification Value (CAVV)
-          description: Base64-encoded values of 28 or 32 characters. Hex-encoded values of 40 or 48 characters.
-        cavv_algorithm:
-          type: string
-          description: Indicates the algorithm used to generate the CAVV value.Please refer to the integration guide for information on its usage.
-        pares_status:
-          type: string
-          title: Authentication response code.
-          description: "Possible Values:\n      Y - Successful Authentication.\n      U - Unable to Complete Authentication\n      A - Successful Attempts Transaction."
-        xid:
-          type: string
-          description: Transaction identifier resulting from authentication processing.Please refer to the integration guide for information on its usage.
-        ds_transaction_id:
-          type: string
-          title: The unique transaction identifier
-          description: The unique transaction identifier assigned by the Directory Server. Supported for 3D Secure v2 only.
-        threeds_version:
-          type: string
-          title: The 3DS version used to process the transaction.
-          enum:
-          - 1.0.2
-          - 2.1.0
-          - 2.2.0
-    ShippingInformation:
-      type: object
-      properties:
-        address:
-          type: string
-          maxLength: 300
-          description: Street address of the recipient.
-        city:
-          type: string
-          maxLength: 28
-          description: City of the recipient.
-        country:
-          type: string
-          maxLength: 2
-          minLength: 2
-          format: country-code
-          description: A 2-letter ISO3166 alpha-2 country code for the address.
-        postal_code:
-          type: string
-          minLength: 1
-          maxLength: 16
-          description: A postal code for the address.
-        email:
-          type: string
-          title: Email Address
-          minLength: 3
-          maxLength: 254
-          format: email
-          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
-        first_name:
-          type: string
-          maxLength: 100
-          description: First name of the recipient.
-        last_name:
-          type: string
-          maxLength: 100
-          description: Last name of the recipient.
-        phone:
-          type: number
-          maxLength: 15
-          description: Numbers only, no dash or any other separator.
-        state:
-          type: string
-          maxLength: 35
-          description: A region / state / province for the address.
-      required:
-      - address
-      - city
-      - country
-      - postal_code
-    TransactionState:
-      title: Transaction State
-      type: string
-      description: This represents the available states that a transaction may have. At any given point it may only have a single state.
-      enum:
-      - APPROVED
-      - AUTHENTICATING
-      - AUTHORISED
-      - AWAITING_INVOICE
-      - CANCELLED
-      - CONFIRMED
-      - COMPLETED
-      - CUSTOMER_ACCEPTED
-      - DECLINED
-      - DEFERRED
-      - DISPUTED
-      - EXCEPTION
-      - EXPIRED
-      - FAILED
-      - INITIATED
-      - ON_HOLD
-      - PARTIALLY_REFUNDED
-      - RECEIVED
-      - RECONCILED
-      - RECONCILIATION_FAILED
-      - REFUNDED
-      - REJECTED
-      - REPEATING
-      - REVERSED
-      - REVERSE_ERROR
-      - REVERSING
-      - ROUTING
-      - SENT
-      - SETTLED
-      - SETTLEMENT_FAILED
-      - SETTLEMENT_REQUESTED
-      - SUBMITTED
-      - TIMED_OUT
-      - UNMATCHED
-    BillingDto:
-      type: object
-      additionalProperties: false
-      properties:
-        address_1:
-          type: string
-          maxLength: 40
-          description: Customer's primary billing address information.
-        address_2:
-          type: string
-          maxLength: 40
-          description: Customer's secondary billing address information.
-        address_3:
-          type: string
-          maxLength: 40
-          description: Customer's third billing address information.
-        city:
-          type: string
-          maxLength: 28
-          description: Customer's city on their billing address
-        country:
-          type: string
-          title: Country Code
-          description: The ISO 3166-1 alpha-3 country code.
-          enum:
-          - ZZ
-          - AD
-          - AE
-          - AF
-          - AG
-          - AI
-          - AL
-          - AM
-          - AO
-          - AQ
-          - AR
-          - AS
-          - AT
-          - AU
-          - AW
-          - AX
-          - AZ
-          - BA
-          - BB
-          - BD
-          - BE
-          - BF
-          - BG
-          - BH
-          - BI
-          - BJ
-          - BL
-          - BM
-          - BN
-          - BO
-          - BQ
-          - BR
-          - BS
-          - BT
-          - BV
-          - BW
-          - BY
-          - BZ
-          - CA
-          - CC
-          - CD
-          - CF
-          - CG
-          - CH
-          - CI
-          - CK
-          - CL
-          - CM
-          - CN
-          - CO
-          - CR
-          - CU
-          - CV
-          - CW
-          - CX
-          - CY
-          - CZ
-          - DE
-          - DJ
-          - DK
-          - DM
-          - DO
-          - DZ
-          - EC
-          - EE
-          - EG
-          - EH
-          - ER
-          - ES
-          - ET
-          - FI
-          - FJ
-          - FK
-          - FM
-          - FO
-          - FR
-          - GA
-          - GB
-          - GD
-          - GE
-          - GF
-          - GG
-          - GH
-          - GI
-          - GL
-          - GM
-          - GN
-          - GP
-          - GQ
-          - GR
-          - GS
-          - GT
-          - GU
-          - GW
-          - GY
-          - HK
-          - HM
-          - HN
-          - HR
-          - HT
-          - HU
-          - ID
-          - IE
-          - IL
-          - IM
-          - IN
-          - IO
-          - IQ
-          - IR
-          - IS
-          - IT
-          - JE
-          - JM
-          - JO
-          - JP
-          - KE
-          - KG
-          - KH
-          - KI
-          - KM
-          - KN
-          - KP
-          - KR
-          - KW
-          - KY
-          - KZ
-          - LA
-          - LB
-          - LC
-          - LI
-          - LK
-          - LR
-          - LS
-          - LT
-          - LU
-          - LV
-          - LY
-          - MA
-          - MC
-          - MD
-          - ME
-          - MF
-          - MG
-          - MH
-          - MK
-          - ML
-          - MM
-          - MN
-          - MO
-          - MP
-          - MQ
-          - MR
-          - MS
-          - MT
-          - MU
-          - MV
-          - MW
-          - MX
-          - MY
-          - MZ
-          - NA
-          - NC
-          - NE
-          - NF
-          - NG
-          - NI
-          - NL
-          - 'NO'
-          - NP
-          - NR
-          - NU
-          - NZ
-          - OM
-          - PA
-          - PE
-          - PF
-          - PG
-          - PH
-          - PK
-          - PL
-          - PM
-          - PN
-          - PR
-          - PS
-          - PT
-          - PW
-          - PY
-          - QA
-          - RE
-          - RO
-          - RS
-          - RU
-          - RW
-          - SA
-          - SB
-          - SC
-          - SD
-          - SE
-          - SG
-          - SH
-          - SI
-          - SJ
-          - SK
-          - SL
-          - SM
-          - SN
-          - SO
-          - SR
-          - SS
-          - ST
-          - SV
-          - SX
-          - SY
-          - SZ
-          - TC
-          - TD
-          - TF
-          - TG
-          - TH
-          - TJ
-          - TK
-          - TL
-          - TM
-          - TN
-          - TO
-          - TR
-          - TT
-          - TV
-          - TW
-          - TZ
-          - UA
-          - UG
-          - UM
-          - US
-          - UY
-          - UZ
-          - VA
-          - VC
-          - VE
-          - VG
-          - VI
-          - VN
-          - VU
-          - WF
-          - WS
-          - YE
-          - YT
-          - ZA
-          - ZM
-          - ZW
-        phone:
-          type: string
-          maxLength: 25
-          description: Customer's phone number for billing address. This should be un formatted without hyphens. (e.g. 4422345678)
-        postal_code:
-          type: string
-          maxLength: 10
-          description: Customer's postal code of their billing address.
-        state:
-          type: string
-          maxLength: 35
-          description: Customer's state or province of their billing address. (e,g. Ohio = OH, Texas = TX)
-    ListDetailedAmount:
-      title: Detailed Amount
-      description: A structure that represents a breakdown all of the different amounts that may appear on a single transaction.
-      type: object
-      properties:
-        gratuity_amount:
-          title: Gratuity Amount
-          description: An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total 'amount' of the transaction.
-          $ref: '#/components/schemas/amountString'
-        cashback_amount:
-          title: Cashback Amount
-          description: An optional additional amount representing the cashback associated with a payment.
-          $ref: '#/components/schemas/amountString'
-        donation_amount:
-          title: Donation Amount
-          description: An optional additional amount representing the donation associated with a payment. This should be included in the total 'amount' of the transaction.
-          $ref: '#/components/schemas/amountString'
-        tax_amount:
-          title: Tax Amount
-          description: An optional additional amount representing the tax associated with a payment. This should be included in the total 'amount' of the transaction.
-          $ref: '#/components/schemas/amountString'
-        surcharge_amount:
-          title: Surcharge Amount
-          description: An optional additional amount representing the surcharge associated with a payment. This should be included in the total 'amount' of the transaction.
-          $ref: '#/components/schemas/amountString'
-    UnauthorizedV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 401
-          default: 401
-        message:
-          type: string
-          enum:
-          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
-          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
-      required:
-      - message
-    TransactionType:
-      type: string
-      description: A type indicator for the main operation or service that was performed as part of the transaction event.
-      enum:
-      - AUTHORISATION
-      - BALANCE
-      - CANCEL
-      - CAPTURE
-      - CARD_ACTIVATION
-      - CARD_DEACTIVATION
-      - CARD_VERIFICATION
-      - CASH_ADVANCE
-      - CASH_DEPOSIT
-      - DECLINED
-      - DELAYED_CHARGE
-      - EXTEND
-      - ISSUER_INSTALMENT_SELECTION
-      - LOAD
-      - NO_SHOW
-      - NON_FINANCIAL
-      - PREAUTH
-      - PREAUTH_COMPLETION
-      - PREAUTH_INCREMENT
-      - RATE
-      - REAUTHORISATION
-      - REFUND
-      - SALE
-      - UNLOAD
-      - VOID
-    TokenDetailsPartial:
-      type: object
-      properties:
-        reuse_token_type:
-          title: Reuse Token Type
-          description: 'The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.<br>
-
-            **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
-
-            '
-          type: string
-          enum:
-          - CHASE
-          - INTERNAL
-          - TAVE
-          default: INTERNAL
-        reuse_token:
-          type: string
-          description: The Verifone issued reuse token used to represent the previously stored cardholder data.
-          minLength: 14
-          maxLength: 255
-        analytics_token:
-          type: string
-          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
-    ForbiddenV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 403
-          default: 403
-        message:
-          type: string
-          enum:
-          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
-          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
-      required:
-      - message
-    amountDecimal:
-      type: number
-      description: Amount including decimal place.
-    CustomerDetailsDto:
-      type: object
-      title: Customer
-      description: Customer information containing billing and shipping details.
-      additionalProperties: false
-      properties:
-        title:
-          type: string
-          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
-          maxLength: 120
-        first_name:
-          type: string
-          description: The first name of the Customer. This may be a proper name or some form of entity name or nickname.
-          maxLength: 100
-        middle_name:
-          type: string
-          description: The middle name of the Customer. This may be a proper name or some form of entity name or nickname.
-          maxLength: 100
-        last_name:
-          type: string
-          description: The last name or family name of the Customer.
-          maxLength: 100
-        company_name:
-          type: string
-          description: Where the Customer is an organisation or company this name should be used rather than the firstName lastName
-          maxLength: 100
-        phone_number:
-          type: string
-          description: Customers phone number for billing address.
-          maxLength: 25
-        email_address:
-          type: string
-          title: email
-          format: email
-          description: Customer email address, which might be used during refund flow.
-        shipping:
-          allOf:
-          - $ref: '#/components/schemas/CustomerDetailsShippingInformationDto'
-        billing:
-          allOf:
-          - $ref: '#/components/schemas/BillingDto'
-          - description: The address of billing.
-            title: Billing Address
-        language:
-          type: string
-          title: language
-          description: "The BCP-47 language tag. The tag is composed of:\n\n* The ISO-639 alpha-1 or ISO-639 alpha-2 language code\n\n* (Optional) The ISO-15924 script tag\n\n* The ISO-3166 alpha-2 country code\n\n `NOTE:`The value is case-insensitive, so for example \"he\" and \"HE\" should be considered equal."
     acquirerResponseMessage:
       description: The response description generated by the acquirer corresponding to the acquirer response code.
-      type: string
-    acquirerAuthorizingNetworkID:
-      description: The Network ID returned in the original authorization response.
-      type: string
-    PaymentProductType:
-      title: Payment Product Type
-      type: string
-      description: The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product
-      enum:
-      - Affirm
-      - Amex
-      - Crypto
-      - Diners Club International
-      - Discover
-      - JCB
-      - Klarna
-      - Maestro
-      - Mastercard
-      - OP Online Payment
-      - Swish
-      - Unknown
-      - Visa
-      default: Unknown
-    acquirerAuthorizingNetworkIdDescriptor:
-      description: The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.
       type: string
     GatewayTransaction:
       type: object
@@ -1546,6 +906,36 @@ components:
           description: The description/message associated with this transaction. This will contain the refund reason for refunds.
         detailed_amount:
           $ref: '#/components/schemas/ListDetailedAmount'
+    NotFoundV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 404
+          default: 404
+        message:
+          type: string
+          enum:
+          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+      required:
+      - message
     CustomerDetailsShippingInformationDto:
       type: object
       additionalProperties: false
@@ -1599,43 +989,6 @@ components:
       - city
       - country
       - postal_code
-    CountTransactionResponse:
-      type: object
-      properties:
-        count:
-          type: number
-          title: Transaction count
-          description: count of transaction
-    NotFoundV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 404
-          default: 404
-        message:
-          type: string
-          enum:
-          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
-          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
-      required:
-      - message
     InternalErrorV2Docs:
       type: object
       properties:
@@ -1664,6 +1017,654 @@ components:
           enum:
           - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
           default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+      required:
+      - message
+    TransactionType:
+      type: string
+      description: A type indicator for the main operation or service that was performed as part of the transaction event.
+      enum:
+      - AUTHORISATION
+      - BALANCE
+      - CANCEL
+      - CAPTURE
+      - CARD_ACTIVATION
+      - CARD_DEACTIVATION
+      - CARD_VERIFICATION
+      - CASH_ADVANCE
+      - CASH_DEPOSIT
+      - DECLINED
+      - DELAYED_CHARGE
+      - EXTEND
+      - ISSUER_INSTALMENT_SELECTION
+      - LOAD
+      - NO_SHOW
+      - NON_FINANCIAL
+      - PREAUTH
+      - PREAUTH_COMPLETION
+      - PREAUTH_INCREMENT
+      - RATE
+      - REAUTHORISATION
+      - REFUND
+      - SALE
+      - UNLOAD
+      - VOID
+    ListDetailedAmount:
+      title: Detailed Amount
+      description: A structure that represents a breakdown all of the different amounts that may appear on a single transaction.
+      type: object
+      properties:
+        gratuity_amount:
+          title: Gratuity Amount
+          description: An optional additional amount representing the tip or gratuity associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+        cashback_amount:
+          title: Cashback Amount
+          description: An optional additional amount representing the cashback associated with a payment.
+          $ref: '#/components/schemas/amountString'
+        donation_amount:
+          title: Donation Amount
+          description: An optional additional amount representing the donation associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+        tax_amount:
+          title: Tax Amount
+          description: An optional additional amount representing the tax associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+        surcharge_amount:
+          title: Surcharge Amount
+          description: An optional additional amount representing the surcharge associated with a payment. This should be included in the total 'amount' of the transaction.
+          $ref: '#/components/schemas/amountString'
+    TransactionState:
+      title: Transaction State
+      type: string
+      description: This represents the available states that a transaction may have. At any given point it may only have a single state.
+      enum:
+      - APPROVED
+      - AUTHENTICATING
+      - AUTHORISED
+      - AWAITING_INVOICE
+      - CANCELLED
+      - CONFIRMED
+      - COMPLETED
+      - CUSTOMER_ACCEPTED
+      - DECLINED
+      - DEFERRED
+      - DISPUTED
+      - EXCEPTION
+      - EXPIRED
+      - FAILED
+      - INITIATED
+      - ON_HOLD
+      - PARTIALLY_REFUNDED
+      - RECEIVED
+      - RECONCILED
+      - RECONCILIATION_FAILED
+      - REFUNDED
+      - REJECTED
+      - REPEATING
+      - REVERSED
+      - REVERSE_ERROR
+      - REVERSING
+      - ROUTING
+      - SENT
+      - SETTLED
+      - SETTLEMENT_FAILED
+      - SETTLEMENT_REQUESTED
+      - SUBMITTED
+      - TIMED_OUT
+      - UNMATCHED
+    ThreeDSecure:
+      type: object
+      properties:
+        eci_flag:
+          type: string
+          title: Electronic Commerce Indicator.
+          enum:
+          - '00'
+          - '01'
+          - '02'
+          - '03'
+          - '04'
+          - '05'
+          - '06'
+          - '07'
+        enrolled:
+          type: string
+          title: The enrolment response status of Authentication eligibility from the Directory Server.
+          description: "Possible Values:\n    Y - Yes, Bank is participating in 3-D Secure protocol and will return the ACSUrl.\n    N - No, Bank is not participating in 3-D Secure protocol.\n    U - Unavailable, the DS or ACS is not available for authentication at the time of the request.\n    B - Bypass, merchant authentication rule is triggered to bypass authentication in this use case.\n    NOTE: If the Enrolled value is NOT Y, then the Consumer is NOT eligible for Authentication."
+        cavv:
+          type: string
+          maxLength: 48
+          title: Cardholder Authentication Verification Value (CAVV)
+          description: Base64-encoded values of 28 or 32 characters. Hex-encoded values of 40 or 48 characters.
+        cavv_algorithm:
+          type: string
+          description: Indicates the algorithm used to generate the CAVV value.Please refer to the integration guide for information on its usage.
+        pares_status:
+          type: string
+          title: Authentication response code.
+          description: "Possible Values:\n      Y - Successful Authentication.\n      U - Unable to Complete Authentication\n      A - Successful Attempts Transaction."
+        xid:
+          type: string
+          description: Transaction identifier resulting from authentication processing.Please refer to the integration guide for information on its usage.
+        ds_transaction_id:
+          type: string
+          title: The unique transaction identifier
+          description: The unique transaction identifier assigned by the Directory Server. Supported for 3D Secure v2 only.
+        threeds_version:
+          type: string
+          title: The 3DS version used to process the transaction.
+          enum:
+          - 1.0.2
+          - 2.1.0
+          - 2.2.0
+    amountDecimal:
+      type: number
+      description: Amount including decimal place.
+    TokenDetailsPartial:
+      type: object
+      properties:
+        reuse_token_type:
+          title: Reuse Token Type
+          description: 'The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.<br>
+
+            **Note**: `reuse_token_details` is **mandatory** when `reuse_token_type` is set to `TAVE` or `CHASE`.
+
+            '
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+          default: INTERNAL
+        reuse_token:
+          type: string
+          description: The Verifone issued reuse token used to represent the previously stored cardholder data.
+          minLength: 14
+          maxLength: 255
+        analytics_token:
+          type: string
+          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
+    BillingDto:
+      type: object
+      additionalProperties: false
+      properties:
+        address_1:
+          type: string
+          maxLength: 40
+          description: Customer's primary billing address information.
+        address_2:
+          type: string
+          maxLength: 40
+          description: Customer's secondary billing address information.
+        address_3:
+          type: string
+          maxLength: 40
+          description: Customer's third billing address information.
+        city:
+          type: string
+          maxLength: 28
+          description: Customer's city on their billing address
+        country:
+          type: string
+          title: Country Code
+          description: The ISO 3166-1 alpha-3 country code.
+          enum:
+          - ZZ
+          - AD
+          - AE
+          - AF
+          - AG
+          - AI
+          - AL
+          - AM
+          - AO
+          - AQ
+          - AR
+          - AS
+          - AT
+          - AU
+          - AW
+          - AX
+          - AZ
+          - BA
+          - BB
+          - BD
+          - BE
+          - BF
+          - BG
+          - BH
+          - BI
+          - BJ
+          - BL
+          - BM
+          - BN
+          - BO
+          - BQ
+          - BR
+          - BS
+          - BT
+          - BV
+          - BW
+          - BY
+          - BZ
+          - CA
+          - CC
+          - CD
+          - CF
+          - CG
+          - CH
+          - CI
+          - CK
+          - CL
+          - CM
+          - CN
+          - CO
+          - CR
+          - CU
+          - CV
+          - CW
+          - CX
+          - CY
+          - CZ
+          - DE
+          - DJ
+          - DK
+          - DM
+          - DO
+          - DZ
+          - EC
+          - EE
+          - EG
+          - EH
+          - ER
+          - ES
+          - ET
+          - FI
+          - FJ
+          - FK
+          - FM
+          - FO
+          - FR
+          - GA
+          - GB
+          - GD
+          - GE
+          - GF
+          - GG
+          - GH
+          - GI
+          - GL
+          - GM
+          - GN
+          - GP
+          - GQ
+          - GR
+          - GS
+          - GT
+          - GU
+          - GW
+          - GY
+          - HK
+          - HM
+          - HN
+          - HR
+          - HT
+          - HU
+          - ID
+          - IE
+          - IL
+          - IM
+          - IN
+          - IO
+          - IQ
+          - IR
+          - IS
+          - IT
+          - JE
+          - JM
+          - JO
+          - JP
+          - KE
+          - KG
+          - KH
+          - KI
+          - KM
+          - KN
+          - KP
+          - KR
+          - KW
+          - KY
+          - KZ
+          - LA
+          - LB
+          - LC
+          - LI
+          - LK
+          - LR
+          - LS
+          - LT
+          - LU
+          - LV
+          - LY
+          - MA
+          - MC
+          - MD
+          - ME
+          - MF
+          - MG
+          - MH
+          - MK
+          - ML
+          - MM
+          - MN
+          - MO
+          - MP
+          - MQ
+          - MR
+          - MS
+          - MT
+          - MU
+          - MV
+          - MW
+          - MX
+          - MY
+          - MZ
+          - NA
+          - NC
+          - NE
+          - NF
+          - NG
+          - NI
+          - NL
+          - 'NO'
+          - NP
+          - NR
+          - NU
+          - NZ
+          - OM
+          - PA
+          - PE
+          - PF
+          - PG
+          - PH
+          - PK
+          - PL
+          - PM
+          - PN
+          - PR
+          - PS
+          - PT
+          - PW
+          - PY
+          - QA
+          - RE
+          - RO
+          - RS
+          - RU
+          - RW
+          - SA
+          - SB
+          - SC
+          - SD
+          - SE
+          - SG
+          - SH
+          - SI
+          - SJ
+          - SK
+          - SL
+          - SM
+          - SN
+          - SO
+          - SR
+          - SS
+          - ST
+          - SV
+          - SX
+          - SY
+          - SZ
+          - TC
+          - TD
+          - TF
+          - TG
+          - TH
+          - TJ
+          - TK
+          - TL
+          - TM
+          - TN
+          - TO
+          - TR
+          - TT
+          - TV
+          - TW
+          - TZ
+          - UA
+          - UG
+          - UM
+          - US
+          - UY
+          - UZ
+          - VA
+          - VC
+          - VE
+          - VG
+          - VI
+          - VN
+          - VU
+          - WF
+          - WS
+          - YE
+          - YT
+          - ZA
+          - ZM
+          - ZW
+        phone:
+          type: string
+          maxLength: 25
+          description: Customer's phone number for billing address. This should be un formatted without hyphens. (e.g. 4422345678)
+        postal_code:
+          type: string
+          maxLength: 10
+          description: Customer's postal code of their billing address.
+        state:
+          type: string
+          maxLength: 35
+          description: Customer's state or province of their billing address. (e,g. Ohio = OH, Texas = TX)
+    acquirerAuthorizingNetworkID:
+      description: The Network ID returned in the original authorization response.
+      type: string
+    ShippingInformation:
+      type: object
+      properties:
+        address:
+          type: string
+          maxLength: 300
+          description: Street address of the recipient.
+        city:
+          type: string
+          maxLength: 28
+          description: City of the recipient.
+        country:
+          type: string
+          maxLength: 2
+          minLength: 2
+          format: country-code
+          description: A 2-letter ISO3166 alpha-2 country code for the address.
+        postal_code:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: A postal code for the address.
+        email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        first_name:
+          type: string
+          maxLength: 100
+          description: First name of the recipient.
+        last_name:
+          type: string
+          maxLength: 100
+          description: Last name of the recipient.
+        phone:
+          type: number
+          maxLength: 15
+          description: Numbers only, no dash or any other separator.
+        state:
+          type: string
+          maxLength: 35
+          description: A region / state / province for the address.
+      required:
+      - address
+      - city
+      - country
+      - postal_code
+    amountString:
+      type: string
+      description: Amount including decimal place.
+    acquirerAuthorizingNetworkIdDescriptor:
+      description: The name or descriptor that corresponds with the `acquirer_authorizing_network_id`  returned in the original authorization response.
+      type: string
+    ForbiddenV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 403
+          default: 403
+        message:
+          type: string
+          enum:
+          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+      required:
+      - message
+    PaymentProductType:
+      title: Payment Product Type
+      type: string
+      description: The payment product type corresponding to this transaction. Fees applied to the transaction, is based on the payment product
+      enum:
+      - Affirm
+      - Amex
+      - Crypto
+      - Diners Club International
+      - Discover
+      - JCB
+      - Klarna
+      - Maestro
+      - Mastercard
+      - OP Online Payment
+      - Swish
+      - Unknown
+      - Visa
+      default: Unknown
+    CountTransactionResponse:
+      type: object
+      properties:
+        count:
+          type: number
+          title: Transaction count
+          description: count of transaction
+    CustomerDetailsDto:
+      type: object
+      title: Customer
+      description: Customer information containing billing and shipping details.
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
+          maxLength: 120
+        first_name:
+          type: string
+          description: The first name of the Customer. This may be a proper name or some form of entity name or nickname.
+          maxLength: 100
+        middle_name:
+          type: string
+          description: The middle name of the Customer. This may be a proper name or some form of entity name or nickname.
+          maxLength: 100
+        last_name:
+          type: string
+          description: The last name or family name of the Customer.
+          maxLength: 100
+        company_name:
+          type: string
+          description: Where the Customer is an organisation or company this name should be used rather than the firstName lastName
+          maxLength: 100
+        phone_number:
+          type: string
+          description: Customers phone number for billing address.
+          maxLength: 25
+        email_address:
+          type: string
+          title: email
+          format: email
+          description: Customer email address, which might be used during refund flow.
+        shipping:
+          allOf:
+          - $ref: '#/components/schemas/CustomerDetailsShippingInformationDto'
+        billing:
+          allOf:
+          - $ref: '#/components/schemas/BillingDto'
+          - description: The address of billing.
+            title: Billing Address
+        language:
+          type: string
+          title: language
+          description: "The BCP-47 language tag. The tag is composed of:\n\n* The ISO-639 alpha-1 or ISO-639 alpha-2 language code\n\n* (Optional) The ISO-15924 script tag\n\n* The ISO-3166 alpha-2 country code\n\n `NOTE:`The value is case-insensitive, so for example \"he\" and \"HE\" should be considered equal."
+    CardBrand:
+      type: string
+      title: The Card Type
+      description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards."
+    UnauthorizedV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 401
+          default: 401
+        message:
+          type: string
+          enum:
+          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
       required:
       - message
     BadRequestV2Docs:
@@ -1696,6 +1697,10 @@ components:
           default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
       required:
       - message
+    acquirerResponseCode:
+      description: Acquirer response returned during the authorisation.
+      type: string
+      maxLength: 4
     GatewayTransactions:
       type: object
       properties:
@@ -2079,21 +2084,7 @@ components:
           description: The description/message associated with this transaction. This will contain the refund reason for refunds.
         detailed_amount:
           $ref: '#/components/schemas/ListDetailedAmount'
-    acquirerResponseCode:
-      description: Acquirer response returned during the authorisation.
-      type: string
-      maxLength: 4
-    CardBrand:
-      type: string
-      title: The Card Type
-      description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International\nGIFT_CARD|Gift Card (Generic)\nPLCC|Private Label Credit Card\n**Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type. \n**Note**:  1. For gift cards, card brand is mandatory and the value should be GIFT_CARD.\n2. This parameter is mandatory for dual branded cards."
   securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
     BasicAuth:
       type: http
       scheme: basic
-      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

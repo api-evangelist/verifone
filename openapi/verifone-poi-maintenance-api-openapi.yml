@@ -1,22 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: 3D Secure 3DS Authentication POI Maintenance API
-  version: 3.43.0
-  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+  title: Verifone Order POI Maintenance API
+  version: 2.62.1-SNAPSHOT
 servers:
-- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
-  description: EMEA Production
-- url: https://us.gsc.verifone.cloud/oidc/3ds-service
-  description: Americas Production
-- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
-  description: New Zealand Production
-- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
-  description: Global Sandbox
-- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
-  description: Americas Sandbox
-security:
-- BearerAuth: []
-- BasicAuth: []
+- url: https://api.verifone.com
 tags:
 - name: POI Maintenance
 paths:
@@ -70,6 +57,158 @@ paths:
           $ref: '#/components/responses/504'
 components:
   schemas:
+    httpError429:
+      title: HTTP 429 Error
+      type: object
+      description: The resource exists the number of requests has exceeded the specified quota.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '429'
+            default: '429'
+          title:
+            type: string
+            enum:
+            - Too Many Requests
+            default: Too Many Requests
+          message:
+            type: string
+            default: The number of requests from this client is restricted to a specified quota.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - RATE_LIMIT_ERROR
+            default: RATE_LIMIT_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError503:
+      title: HTTP 503 Error
+      type: object
+      description: Service Unavailable Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '503'
+            default: '503'
+          title:
+            type: string
+            enum:
+            - Service Unavailable
+            default: Service Unavailable
+          message:
+            type: string
+            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError504:
+      title: HTTP 504 Error
+      type: object
+      description: Gateway Timeout Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '504'
+            default: '504'
+          title:
+            type: string
+            enum:
+            - Gateway Timeout
+            default: Gateway Timeout
+          message:
+            type: string
+            default: The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError500:
+      title: HTTP 500 Error
+      type: object
+      description: Unexpected Server Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '500'
+            default: '500'
+          title:
+            type: string
+            enum:
+            - Internal Server Error
+            default: Internal Server Error
+          message:
+            type: string
+            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
     httpError401:
       title: HTTP 401 Error
       type: object
@@ -150,120 +289,35 @@ components:
       - message
       - type
       additionalProperties: false
-    httpError503:
-      title: HTTP 503 Error
+    ErrorResp:
+      title: Error
+      description: 'A common Error object returned as part of the API layer.
+
+
+        . This is modified to become the base class for all of the derived HTTP Error Responses.'
       type: object
-      description: Service Unavailable Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '503'
-            default: '503'
-          title:
-            type: string
-            enum:
-            - Service Unavailable
-            default: Service Unavailable
-          message:
-            type: string
-            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
+      properties:
+        reversalStatus:
+          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
+
+
+            |Value|Description|
+
+            |-|-|
+
+            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
+
+            |REQUIRED|A reversal is required by the client.|
+
+            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+          default: NONE
       required:
       - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    httpError429:
-      title: HTTP 429 Error
-      type: object
-      description: The resource exists the number of requests has exceeded the specified quota.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '429'
-            default: '429'
-          title:
-            type: string
-            enum:
-            - Too Many Requests
-            default: Too Many Requests
-          message:
-            type: string
-            default: The number of requests from this client is restricted to a specified quota.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - RATE_LIMIT_ERROR
-            default: RATE_LIMIT_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    httpError500:
-      title: HTTP 500 Error
-      type: object
-      description: Unexpected Server Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '500'
-            default: '500'
-          title:
-            type: string
-            enum:
-            - Internal Server Error
-            default: Internal Server Error
-          message:
-            type: string
-            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
     httpError400:
       title: HTTP 400 Error
       type: object
@@ -302,73 +356,6 @@ components:
       - message
       - type
       additionalProperties: false
-    httpError504:
-      title: HTTP 504 Error
-      type: object
-      description: Gateway Timeout Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '504'
-            default: '504'
-          title:
-            type: string
-            enum:
-            - Gateway Timeout
-            default: Gateway Timeout
-          message:
-            type: string
-            default: The server, while acting as a gateway or proxy, did not get a response in time from the upstream server that it needed in order to complete the request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    ErrorResp:
-      title: Error
-      description: 'A common Error object returned as part of the API layer.
-
-
-        . This is modified to become the base class for all of the derived HTTP Error Responses.'
-      type: object
-      properties:
-        reversalStatus:
-          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
-
-
-            |Value|Description|
-
-            |-|-|
-
-            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
-
-            |REQUIRED|A reversal is required by the client.|
-
-            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
-          type: string
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-          default: NONE
-      required:
-      - code
     httpError403:
       title: HTTP 403 Error
       type: object
@@ -408,6 +395,26 @@ components:
       - type
       additionalProperties: false
   responses:
+    '503':
+      description: Service Not Available
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError503'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
     '401':
       description: Unauthorised Request
       content:
@@ -428,13 +435,13 @@ components:
             - title
             - message
             - type
-    '400':
-      description: Bad Request
+    '500':
+      description: Internal Error
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError400'
+            - $ref: '#/components/schemas/httpError500'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
@@ -488,6 +495,32 @@ components:
             - title
             - message
             - type
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError400'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '403':
+      description: Forbidden Request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError403'
     '504':
       description: Service Timeout
       content:
@@ -508,59 +541,3 @@ components:
             - title
             - message
             - type
-    '500':
-      description: Internal Error
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/httpError500'
-            - properties:
-                param:
-                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-                  type: string
-                additionalProperties:
-                  type: object
-                  additionalProperties:
-                    type: object
-            required:
-            - code
-            - title
-            - message
-            - type
-    '403':
-      description: Forbidden Request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/httpError403'
-    '503':
-      description: Service Not Available
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/httpError503'
-            - properties:
-                param:
-                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-                  type: string
-                additionalProperties:
-                  type: object
-                  additionalProperties:
-                    type: object
-            required:
-            - code
-            - title
-            - message
-            - type
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
-    BasicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'

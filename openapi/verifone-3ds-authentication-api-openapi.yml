@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: 3D Secure 3DS Authentication API
   version: 3.43.0
@@ -26,7 +26,102 @@ paths:
       tags:
       - 3DS Authentication
       summary: List ThreeDSAuthentications
-      description: "The API enumerates the ThreeDS Authentication objects, offering\nfiltration criteria to obtain filtered data based on specified parameters. \n\n## Filtering and Searching\n\nFilters can be used to interact with any object. Objects can be queried by appending parameters to\nthe query string of the URL.\n\nSo to get a list of all pares_status = Y in threeds authentication with EUR currency, having an amount equal to or greater than 20,\nwe would use the following URL:\n\n    /v2/3d?_limit=10&amount>=212&currency_code=EUR&authentication.pares_status=Y\n\nParameters with multiple values are also supported. So for example, to query pares_status = Y and pares_status = U,\nyou would use the following URL:\n\n    /v2/3d?authentication.pares_status=Y&authentication.pares_status=U\n\nUse the following syntax to query objects based on parameters and values - in this example querying threeds authentication by the amount.\n\nQuery on one value:\n\n    /v2/3d?amount=7500\n\nQuery on everything but one value:\n\n    /v2/3d?amount!=7500\n\nLess than and equal to:\n\n    /v2/3d?amount<=7500\n\nGreater than and equal to:\n\n    /v2/3d?amount>=7500\n\nRange of values within/outside specified bounds:\n\n    /v2/3d?amount<=7600&amount>=7500\n\nMultiple parameters:\n\n    /v2/3d?amount=7600&currency_code=EUR\n\nLimit the number of results:\n\n    /v2/3d?_limit=50\n\nSort results in descending order:\n\n    /v2/3d?_sort=-amount\n\nSort results in ascending order:\n\n    /v2/3d?_sort=amount\n\n**Query operators:**\n\n| Operator | Description |\n|---|---|\n| `=` | equal |\n| `!` | not equal |\n| `<` | less than or equal to |\n| `>` | greater than or equal to |\n| `~` | pattern matching |\n| `>&<` | multiple-argument (range) search |"
+      description: 'The API enumerates the ThreeDS Authentication objects, offering
+
+        filtration criteria to obtain filtered data based on specified parameters.
+
+
+        ## Filtering and Searching
+
+
+        Filters can be used to interact with any object. Objects can be queried by appending parameters to
+
+        the query string of the URL.
+
+
+        So to get a list of all pares_status = Y in threeds authentication with EUR currency, having an amount equal to or greater than 20,
+
+        we would use the following URL:
+
+
+        /v2/3d?_limit=10&amount>=212¤cy_code=EUR&authentication.pares_status=Y
+
+
+        Parameters with multiple values are also supported. So for example, to query pares_status = Y and pares_status = U,
+
+        you would use the following URL:
+
+
+        /v2/3d?authentication.pares_status=Y&authentication.pares_status=U
+
+
+        Use the following syntax to query objects based on parameters and values - in this example querying threeds authentication by the amount.
+
+
+        Query on one value:
+
+
+        /v2/3d?amount=7500
+
+
+        Query on everything but one value:
+
+
+        /v2/3d?amount!=7500
+
+
+        Less than and equal to:
+
+
+        /v2/3d?amount=7500
+
+
+        Range of values within/outside specified bounds:
+
+
+        /v2/3d?amount=7500
+
+
+        Multiple parameters:
+
+
+        /v2/3d?amount=7600¤cy_code=EUR
+
+
+        Limit the number of results:
+
+
+        /v2/3d?_limit=50
+
+
+        Sort results in descending order:
+
+
+        /v2/3d?_sort=-amount
+
+
+        Sort results in ascending order:
+
+
+        /v2/3d?_sort=amount
+
+
+        **Query operators:**
+
+
+        | Operator | Description |
+
+        |---|---|
+
+        | `=` | equal |
+
+        | `!` | not equal |
+
+        | `` | greater than or equal to |
+
+        | `~` | pattern matching |
+
+        | `>&<` | multiple-argument (range) search |'
       operationId: getV23d
       parameters:
       - name: _limit
@@ -773,8 +868,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ThreeDSAuthentication'
-    ErrorDetails:
-      type: object
     ThreeDSAuthentication:
       type: object
       properties:
@@ -808,23 +901,6 @@ components:
         transaction_id:
           type: string
           description: To complete the transaction, the value is required to be passed on the Cardinal.Continue().
-    ErrorResponse:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/ErrorDetails'
-        message:
-          type: string
-          description: A description of the error.
-        timestamp:
-          type: number
-          description: Error timestamp
     AuthenticationResult:
       type: object
       properties:
@@ -917,6 +993,25 @@ components:
         status_reason:
           type: string
           description: 'Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response'
+    ErrorResponse:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/ErrorDetails'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: number
+          description: Error timestamp
+    ErrorDetails:
+      type: object
   securitySchemes:
     BearerAuth:
       type: http

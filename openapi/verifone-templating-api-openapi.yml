@@ -1,22 +1,21 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: 3D Secure 3DS Authentication Templating API
-  version: 3.43.0
-  description: Operations for listing and retrieving 3DS authentication records. Use these endpoints to query historical authentication results filtered by amount, currency, card, status, and more.
+  title: Checkout Templating API
+  version: 1.42.4
 servers:
-- url: https://emea.gsc.verifone.cloud/oidc/3ds-service
-  description: EMEA Production
-- url: https://us.gsc.verifone.cloud/oidc/3ds-service
-  description: Americas Production
-- url: https://nz.gsc.verifone.cloud/oidc/3ds-service
-  description: New Zealand Production
-- url: https://cst.test-gsc.vfims.com/oidc/3ds-service
+- url: https://emea.gsc.verifone.cloud/oidc/checkout-service
+  description: EMEA
+- url: https://us.gsc.verifone.cloud/oidc/checkout-service
+  description: Americas
+- url: https://nz.gsc.verifone.cloud/oidc/checkout-service
+  description: New Zealand
+- url: https://cst.test-gsc.vfims.com/oidc/checkout-service
   description: Global Sandbox
-- url: https://uscst-gb.gsc.vficloud.net/oidc/3ds-service
-  description: Americas Sandbox
+- url: https://uscst-gb.gsc.vficloud.net/oidc/checkout-service
+  description: US Sandbox
 security:
-- BearerAuth: []
 - BasicAuth: []
+- BearerAuth: []
 tags:
 - name: Templating
 paths:
@@ -116,31 +115,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    address_details:
-      type: object
-      properties:
-        address_1:
-          $ref: '#/components/schemas/template_field_mode'
-        address_2:
-          $ref: '#/components/schemas/template_field_mode'
-        address_3:
-          $ref: '#/components/schemas/template_field_mode'
-        city:
-          $ref: '#/components/schemas/template_field_mode'
-        country_code:
-          $ref: '#/components/schemas/template_field_mode'
-        first_name:
-          $ref: '#/components/schemas/template_field_mode'
-        middle_name:
-          $ref: '#/components/schemas/template_field_mode'
-        last_name:
-          $ref: '#/components/schemas/template_field_mode'
-        phone:
-          $ref: '#/components/schemas/template_field_mode'
-        postal_code:
-          $ref: '#/components/schemas/template_field_mode'
-        state:
-          $ref: '#/components/schemas/template_field_mode'
     CheckoutTemplate:
       title: CreateTemplateRequest
       required:
@@ -187,10 +161,16 @@ components:
               properties:
                 identifier:
                   $ref: '#/components/schemas/template_field_mode'
-    TemplateList:
-      type: array
-      items:
-        $ref: '#/components/schemas/CheckoutTemplate'
+    template_field_mode:
+      type: object
+      properties:
+        mode:
+          type: string
+          enum:
+          - HIDDEN
+          - READ_ONLY
+          - OPTIONAL
+          - REQUIRED
     ErrorResponse:
       type: object
       properties:
@@ -207,25 +187,44 @@ components:
           type: string
           description: Error timestamp
           format: date-time
+    TemplateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CheckoutTemplate'
     details:
       type: object
-    template_field_mode:
+    address_details:
       type: object
       properties:
-        mode:
-          type: string
-          enum:
-          - HIDDEN
-          - READ_ONLY
-          - OPTIONAL
-          - REQUIRED
+        address_1:
+          $ref: '#/components/schemas/template_field_mode'
+        address_2:
+          $ref: '#/components/schemas/template_field_mode'
+        address_3:
+          $ref: '#/components/schemas/template_field_mode'
+        city:
+          $ref: '#/components/schemas/template_field_mode'
+        country_code:
+          $ref: '#/components/schemas/template_field_mode'
+        first_name:
+          $ref: '#/components/schemas/template_field_mode'
+        middle_name:
+          $ref: '#/components/schemas/template_field_mode'
+        last_name:
+          $ref: '#/components/schemas/template_field_mode'
+        phone:
+          $ref: '#/components/schemas/template_field_mode'
+        postal_code:
+          $ref: '#/components/schemas/template_field_mode'
+        state:
+          $ref: '#/components/schemas/template_field_mode'
   securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using entity credentials (username:password encoded in Base64).
     BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: 'JWT Bearer token. Pass as: `Authorization: Bearer <token>`. The JWT must be signed with your Verifone-provisioned private key and must include `entity_id`, `sub` (user_id), and `roles` claims.'
-    BasicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic authentication. Pass base64-encoded `username:password` as: `Authorization: Basic <credentials>`.'
+      description: OAuth 2.0 Bearer token obtained via the OIDC authentication endpoint.
