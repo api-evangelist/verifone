@@ -51,82 +51,6 @@ paths:
           $ref: '#/components/responses/504'
 components:
   schemas:
-    httpError429:
-      title: HTTP 429 Error
-      type: object
-      description: The resource exists the number of requests has exceeded the specified quota.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '429'
-            default: '429'
-          title:
-            type: string
-            enum:
-            - Too Many Requests
-            default: Too Many Requests
-          message:
-            type: string
-            default: The number of requests from this client is restricted to a specified quota.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - RATE_LIMIT_ERROR
-            default: RATE_LIMIT_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    httpError503:
-      title: HTTP 503 Error
-      type: object
-      description: Service Unavailable Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '503'
-            default: '503'
-          title:
-            type: string
-            enum:
-            - Service Unavailable
-            default: Service Unavailable
-          message:
-            type: string
-            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
     httpError504:
       title: HTTP 504 Error
       type: object
@@ -186,13 +110,40 @@ components:
           description: Indicates whether the address is government-owned. E.g. Address can be in Sweden, but can be a US Embassy.
         governmentCountry:
           $ref: '#/components/schemas/CountryCode3Enum'
-    OrderId:
-      description: Verifone allocated ID for the Order.
+    ErrorResp:
+      title: Error
+      description: 'A common Error object returned as part of the API layer.
+
+
+        . This is modified to become the base class for all of the derived HTTP Error Responses.'
+      type: object
+      properties:
+        reversalStatus:
+          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
+
+
+            |Value|Description|
+
+            |-|-|
+
+            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
+
+            |REQUIRED|A reversal is required by the client.|
+
+            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+          default: NONE
+      required:
+      - code
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
       type: string
-      format: uuid
-    BusinessTitle:
-      type: string
-      maxLength: 100
+      minLength: 1
+      maxLength: 16
     Phone:
       title: Phone number
       description: A simple Phone Number
@@ -218,6 +169,44 @@ components:
       required:
       - value
       - phoneType
+    Name:
+      title: Name Details
+      description: An object representing the name or component names of a party, person or business. No elements are mandatory due to the different usages, but the business rules need to be applied in the context where name is used.
+      type: object
+      uniqueItems: false
+      properties:
+        firstName:
+          description: The given name of contact.
+          type: string
+          minLength: 1
+          maxLength: 120
+        lastName:
+          description: The surname name or family name of the contact. This is required when the name is for a party or person. Can also include the matronymic or mother's family name where this is customarily used.
+          minLength: 1
+          maxLength: 120
+          type: string
+        prefix:
+          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
+          maxLength: 120
+          type: string
+        alternateFullName:
+          description: The alternate name for the party. This can be a business name or nickname. This should be used where the name of the party cannot be parsed into its constituent parts such as first name or last name. If the party is a business then this should always be present.
+          maxLength: 200
+          type: string
+        middleName:
+          description: The middle name or names for a party or person.
+          maxLength: 120
+          type: string
+        suffix:
+          description: The name suffix for the party.
+          maxLength: 120
+          type: string
+      required:
+      - firstName
+      - lastName
+    BusinessTitle:
+      type: string
+      maxLength: 100
     httpError400:
       title: HTTP 400 Error
       type: object
@@ -256,334 +245,6 @@ components:
       - message
       - type
       additionalProperties: false
-    EmailAddress:
-      title: Email Address
-      maxLength: 254
-      minLength: 3
-      type: string
-      format: email
-      pattern: ^[a-zA-Z0-9!#$%&'*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+[.].+$
-      description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
-    httpError500:
-      title: HTTP 500 Error
-      type: object
-      description: Unexpected Server Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '500'
-            default: '500'
-          title:
-            type: string
-            enum:
-            - Internal Server Error
-            default: Internal Server Error
-          message:
-            type: string
-            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    ContactTypeEnum:
-      title: Contact Type
-      description: 'An indicator for the type of contact.
-
-
-        |Value|Description|
-
-        |----|-----------|
-
-        |BUSINESS|Generic business contact information, e.g. info@example.com|
-
-        |DISPUTE_HANDLING|Generic contact information specific to dispute handling, e.g. disputes@example.com|
-
-        |OWNER|Individual contact information of the owner of the Entity, e.g. ben.jerry@example.com|
-
-        |PERSONAL|Personal contact information of the person representing the Entity, e.g. bjerr83@example-personal-email-domain.com|'
-      type: string
-      enum:
-      - BUSINESS
-      - DISPUTE_HANDLING
-      - OWNER
-      - PERSONAL
-      default: BUSINESS
-    httpError404:
-      title: HTTP 404 Error
-      type: object
-      description: The server cannot find the requested resource.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '404'
-            default: '404'
-          title:
-            type: string
-            enum:
-            - Not Found
-            default: Not Found
-          message:
-            type: string
-            default: The server cannot find the requested resource.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - INVALID_REQUEST_ERROR
-            default: INVALID_REQUEST_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    ErrorResp:
-      title: Error
-      description: 'A common Error object returned as part of the API layer.
-
-
-        . This is modified to become the base class for all of the derived HTTP Error Responses.'
-      type: object
-      properties:
-        reversalStatus:
-          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
-
-
-            |Value|Description|
-
-            |-|-|
-
-            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
-
-            |REQUIRED|A reversal is required by the client.|
-
-            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
-          type: string
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-          default: NONE
-      required:
-      - code
-    ContactName:
-      allOf:
-      - $ref: '#/components/schemas/Name'
-    httpError403:
-      title: HTTP 403 Error
-      type: object
-      description: The request must be authorised to access the resource.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '403'
-            default: '403'
-          title:
-            type: string
-            enum:
-            - Forbidden
-            default: Forbidden
-          message:
-            type: string
-            default: The request requires client authorisation to access resource.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - AUTHENTICATION_ERROR
-            default: AUTHENTICATION_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    Name:
-      title: Name Details
-      description: An object representing the name or component names of a party, person or business. No elements are mandatory due to the different usages, but the business rules need to be applied in the context where name is used.
-      type: object
-      uniqueItems: false
-      properties:
-        firstName:
-          description: The given name of contact.
-          type: string
-          minLength: 1
-          maxLength: 120
-        lastName:
-          description: The surname name or family name of the contact. This is required when the name is for a party or person. Can also include the matronymic or mother's family name where this is customarily used.
-          minLength: 1
-          maxLength: 120
-          type: string
-        prefix:
-          description: The prefix to the party name. This is sometimes referred to as a title, salutation or appellation.
-          maxLength: 120
-          type: string
-        alternateFullName:
-          description: The alternate name for the party. This can be a business name or nickname. This should be used where the name of the party cannot be parsed into its constituent parts such as first name or last name. If the party is a business then this should always be present.
-          maxLength: 200
-          type: string
-        middleName:
-          description: The middle name or names for a party or person.
-          maxLength: 120
-          type: string
-        suffix:
-          description: The name suffix for the party.
-          maxLength: 120
-          type: string
-      required:
-      - firstName
-      - lastName
-    BaseAddress:
-      description: An Address following the convention of http://microformats.org/wiki/hcard
-      type: object
-      properties:
-        receiverName:
-          type: string
-          minLength: 1
-          description: The receiver name for the address if different to the company/site name.
-        addressLine1:
-          minLength: 1
-          maxLength: 40
-          type: string
-          description: Address Line 1. Should include street and apartment number if required.
-        addressLine2:
-          maxLength: 40
-          type: string
-          description: Address Line 2
-        addressLine3:
-          maxLength: 40
-          type: string
-          description: Address Line 3
-        poBox:
-          type: string
-          description: The PO BOX number.
-        city:
-          minLength: 1
-          maxLength: 28
-          type: string
-          description: Name of a built-up area, with defined boundaries, and a local government. This could be city or town.
-        countrySubdivision:
-          maxLength: 35
-          minLength: 1
-          type: string
-          description: Identifies a sub-division of a country which may be state, region or county. This follows a similar format to the openbank api.
-        postCode:
-          $ref: '#/components/schemas/PostCode'
-        country:
-          $ref: '#/components/schemas/CountryCode3Enum'
-        timeZone:
-          $ref: '#/components/schemas/TimeZone'
-    PhoneTypeEnum:
-      title: Phone Type
-      description: Phone type in PHONE_TYPE_CON. Mapped to PARTY_PHONE.PHONE_TYPE_CON_ID or VENUE_PHONE.PHONE_TYPE_CON_ID
-      type: string
-      enum:
-      - HOME
-      - MOBILE
-      - WORK
-      - FAX
-      - OTHER
-      default: HOME
-    httpError401:
-      title: HTTP 401 Error
-      type: object
-      description: The request must be authenticated to access the resource.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '401'
-            default: '401'
-          title:
-            type: string
-            enum:
-            - Unauthorised
-            default: Unauthorised
-          message:
-            type: string
-            default: The request requires client authentication.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - AUTHENTICATION_ERROR
-            default: AUTHENTICATION_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    PostCode:
-      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
-      type: string
-      minLength: 1
-      maxLength: 16
-    ContactType:
-      description: The details of a Contact.
-      type: object
-      properties:
-        contactType:
-          $ref: '#/components/schemas/ContactTypeEnum'
-        name:
-          $ref: '#/components/schemas/ContactName'
-        phoneNumbers:
-          description: The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.
-          items:
-            $ref: '#/components/schemas/Phone'
-          minItems: 1
-          uniqueItems: true
-          type: array
-        email:
-          $ref: '#/components/schemas/EmailAddress'
-        businessTitle:
-          $ref: '#/components/schemas/BusinessTitle'
-      required:
-      - contactType
-      - name
     CountryCode3Enum:
       title: Country Code
       type: string
@@ -840,19 +501,358 @@ components:
       - ZAF
       - ZMB
       - ZWE
+    httpError429:
+      title: HTTP 429 Error
+      type: object
+      description: The resource exists the number of requests has exceeded the specified quota.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '429'
+            default: '429'
+          title:
+            type: string
+            enum:
+            - Too Many Requests
+            default: Too Many Requests
+          message:
+            type: string
+            default: The number of requests from this client is restricted to a specified quota.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - RATE_LIMIT_ERROR
+            default: RATE_LIMIT_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    OrderId:
+      description: Verifone allocated ID for the Order.
+      type: string
+      format: uuid
+    httpError401:
+      title: HTTP 401 Error
+      type: object
+      description: The request must be authenticated to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '401'
+            default: '401'
+          title:
+            type: string
+            enum:
+            - Unauthorised
+            default: Unauthorised
+          message:
+            type: string
+            default: The request requires client authentication.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
     TimeZone:
       description: A time zone, following the format defined in the IANA tz database (https://www.iana.org/time-zones). Valid examples are America/New_York and Etc/UTC. Do not use ambiguous, non-qualified values such as EST or GB. Before including this type in your interface, please consider whether it is actually appropriate to convey time zone information with your type. It is almost always the case that this should be transformed from UTC at the time of display to the user; this type might therefore be most associated with user-preference APIs.
       type: string
       minLength: 1
       maxLength: 127
+    EmailAddress:
+      title: Email Address
+      maxLength: 254
+      minLength: 3
+      type: string
+      format: email
+      pattern: ^[a-zA-Z0-9!#$%&'*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+[.].+$
+      description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+    ContactName:
+      allOf:
+      - $ref: '#/components/schemas/Name'
+    PhoneTypeEnum:
+      title: Phone Type
+      description: Phone type in PHONE_TYPE_CON. Mapped to PARTY_PHONE.PHONE_TYPE_CON_ID or VENUE_PHONE.PHONE_TYPE_CON_ID
+      type: string
+      enum:
+      - HOME
+      - MOBILE
+      - WORK
+      - FAX
+      - OTHER
+      default: HOME
+    ContactTypeEnum:
+      title: Contact Type
+      description: 'An indicator for the type of contact.
+
+
+        |Value|Description|
+
+        |----|-----------|
+
+        |BUSINESS|Generic business contact information, e.g. info@example.com|
+
+        |DISPUTE_HANDLING|Generic contact information specific to dispute handling, e.g. disputes@example.com|
+
+        |OWNER|Individual contact information of the owner of the Entity, e.g. ben.jerry@example.com|
+
+        |PERSONAL|Personal contact information of the person representing the Entity, e.g. bjerr83@example-personal-email-domain.com|'
+      type: string
+      enum:
+      - BUSINESS
+      - DISPUTE_HANDLING
+      - OWNER
+      - PERSONAL
+      default: BUSINESS
+    BaseAddress:
+      description: An Address following the convention of http://microformats.org/wiki/hcard
+      type: object
+      properties:
+        receiverName:
+          type: string
+          minLength: 1
+          description: The receiver name for the address if different to the company/site name.
+        addressLine1:
+          minLength: 1
+          maxLength: 40
+          type: string
+          description: Address Line 1. Should include street and apartment number if required.
+        addressLine2:
+          maxLength: 40
+          type: string
+          description: Address Line 2
+        addressLine3:
+          maxLength: 40
+          type: string
+          description: Address Line 3
+        poBox:
+          type: string
+          description: The PO BOX number.
+        city:
+          minLength: 1
+          maxLength: 28
+          type: string
+          description: Name of a built-up area, with defined boundaries, and a local government. This could be city or town.
+        countrySubdivision:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Identifies a sub-division of a country which may be state, region or county. This follows a similar format to the openbank api.
+        postCode:
+          $ref: '#/components/schemas/PostCode'
+        country:
+          $ref: '#/components/schemas/CountryCode3Enum'
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+    httpError403:
+      title: HTTP 403 Error
+      type: object
+      description: The request must be authorised to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '403'
+            default: '403'
+          title:
+            type: string
+            enum:
+            - Forbidden
+            default: Forbidden
+          message:
+            type: string
+            default: The request requires client authorisation to access resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError404:
+      title: HTTP 404 Error
+      type: object
+      description: The server cannot find the requested resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '404'
+            default: '404'
+          title:
+            type: string
+            enum:
+            - Not Found
+            default: Not Found
+          message:
+            type: string
+            default: The server cannot find the requested resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError503:
+      title: HTTP 503 Error
+      type: object
+      description: Service Unavailable Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '503'
+            default: '503'
+          title:
+            type: string
+            enum:
+            - Service Unavailable
+            default: Service Unavailable
+          message:
+            type: string
+            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError500:
+      title: HTTP 500 Error
+      type: object
+      description: Unexpected Server Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '500'
+            default: '500'
+          title:
+            type: string
+            enum:
+            - Internal Server Error
+            default: Internal Server Error
+          message:
+            type: string
+            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    ContactType:
+      description: The details of a Contact.
+      type: object
+      properties:
+        contactType:
+          $ref: '#/components/schemas/ContactTypeEnum'
+        name:
+          $ref: '#/components/schemas/ContactName'
+        phoneNumbers:
+          description: The phone numbers to be used for the Contact. If you include this property there should be at least one phone number.
+          items:
+            $ref: '#/components/schemas/Phone'
+          minItems: 1
+          uniqueItems: true
+          type: array
+        email:
+          $ref: '#/components/schemas/EmailAddress'
+        businessTitle:
+          $ref: '#/components/schemas/BusinessTitle'
+      required:
+      - contactType
+      - name
   responses:
-    '500':
-      description: Internal Error
+    '401':
+      description: Unauthorised Request
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError500'
+            - $ref: '#/components/schemas/httpError401'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
@@ -866,13 +866,33 @@ components:
             - title
             - message
             - type
-    '504':
-      description: Service Timeout
+    '400':
+      description: Bad Request
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError504'
+            - $ref: '#/components/schemas/httpError400'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '500':
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError500'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
@@ -926,26 +946,6 @@ components:
             - title
             - message
             - type
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/httpError400'
-            - properties:
-                param:
-                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-                  type: string
-                additionalProperties:
-                  type: object
-                  additionalProperties:
-                    type: object
-            required:
-            - code
-            - title
-            - message
-            - type
     '503':
       description: Service Not Available
       content:
@@ -966,13 +966,13 @@ components:
             - title
             - message
             - type
-    '401':
-      description: Unauthorised Request
+    '504':
+      description: Service Timeout
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError401'
+            - $ref: '#/components/schemas/httpError504'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.

@@ -77,6 +77,23 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/ErrorDetails'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: number
+          description: Error timestamp
     DeviceDataInfo:
       type: object
       properties:
@@ -595,25 +612,6 @@ components:
           maxLength: 25
           type: string
           description: 'Conditional: Consumer''s work phone number. ITU/E.123 format with international prefix (+PPNNNNNNNNN...)'
-    ErrorResponse:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/ErrorDetails'
-        message:
-          type: string
-          description: A description of the error.
-        timestamp:
-          type: number
-          description: Error timestamp
-    ErrorDetails:
-      type: object
     LookupResponse:
       type: object
       properties:
@@ -706,6 +704,8 @@ components:
         xid:
           type: string
           description: 'Third Party Token that is returned from the token provider after a card number is specified on the request. NOTE: This field is returned if Tokenization is enabled in the Merchant profile setting AND the Merchant is using a third party token provider.'
+    ErrorDetails:
+      type: object
   securitySchemes:
     BearerAuth:
       type: http

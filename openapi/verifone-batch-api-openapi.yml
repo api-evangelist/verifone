@@ -75,82 +75,6 @@ paths:
           $ref: '#/components/responses/504'
 components:
   schemas:
-    httpError429:
-      title: HTTP 429 Error
-      type: object
-      description: The resource exists the number of requests has exceeded the specified quota.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '429'
-            default: '429'
-          title:
-            type: string
-            enum:
-            - Too Many Requests
-            default: Too Many Requests
-          message:
-            type: string
-            default: The number of requests from this client is restricted to a specified quota.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - RATE_LIMIT_ERROR
-            default: RATE_LIMIT_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    httpError503:
-      title: HTTP 503 Error
-      type: object
-      description: Service Unavailable Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '503'
-            default: '503'
-          title:
-            type: string
-            enum:
-            - Service Unavailable
-            default: Service Unavailable
-          message:
-            type: string
-            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
     httpError504:
       title: HTTP 504 Error
       type: object
@@ -207,31 +131,39 @@ components:
       - pageNumber
       - pageSize
       - totalItems
-    OrderId:
-      description: Verifone allocated ID for the Order.
+    ErrorResp:
+      title: Error
+      description: 'A common Error object returned as part of the API layer.
+
+
+        . This is modified to become the base class for all of the derived HTTP Error Responses.'
+      type: object
+      properties:
+        reversalStatus:
+          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
+
+
+            |Value|Description|
+
+            |-|-|
+
+            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
+
+            |REQUIRED|A reversal is required by the client.|
+
+            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+          default: NONE
+      required:
+      - code
+    BatchId:
+      description: Idenitifer assigned to the order batch.
       type: string
       format: uuid
-    BatchStatus:
-      type: string
-      enum:
-      - SUCCESS
-      - CORRUPT_FILE
-      - DUPLICATE_FILE_NAME
-      - NO_FILES_RECEIVED
-      - INPROGRESS
-      - PENDING
-      - TX_COMPLETED
-      - PARTIAL_SUCCESS
-      - FORCE_STOPPED
-    OrderStatusEnum:
-      type: string
-      enum:
-      - DRAFT
-      - SUBMITTED
-      - INPROGRESS
-      - COMPLETED
-      - CANCELLED
-      - ONHOLD
     httpError400:
       title: HTTP 400 Error
       type: object
@@ -270,228 +202,108 @@ components:
       - message
       - type
       additionalProperties: false
-    BatchId:
-      description: Idenitifer assigned to the order batch.
-      type: string
-      format: uuid
-    BatchSearchResponse:
+    BatchLineItem:
       type: object
       properties:
-        batches:
-          type: array
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/BatchDetails'
-        metadata:
-          $ref: '#/components/schemas/PagingMetadata'
-      required:
-      - batches
-      - metadata
-    httpError500:
-      title: HTTP 500 Error
-      type: object
-      description: Unexpected Server Error
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '500'
-            default: '500'
-          title:
-            type: string
-            enum:
-            - Internal Server Error
-            default: Internal Server Error
-          message:
-            type: string
-            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - API_ERROR
-            default: API_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    PagingTotalItems:
-      description: Total number of records.
-      type: integer
-    httpError404:
-      title: HTTP 404 Error
-      type: object
-      description: The server cannot find the requested resource.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '404'
-            default: '404'
-          title:
-            type: string
-            enum:
-            - Not Found
-            default: Not Found
-          message:
-            type: string
-            default: The server cannot find the requested resource.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - INVALID_REQUEST_ERROR
-            default: INVALID_REQUEST_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    BatchDetails:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BatchDetailsUpdatable'
-      - properties:
-          batchId:
-            $ref: '#/components/schemas/BatchId'
-          fileCreatedDate:
-            description: The date time when the file was created on SFTP.
-            type: string
-            format: date-time
-          filePickupDate:
-            description: The date time when the file was picked up by the batch process.
-            type: string
-            format: date-time
-          fileName:
-            type: string
-            maxLength: 200
-          orderType:
-            $ref: '#/components/schemas/OrderType'
-          retryCount:
-            type: integer
-            minimum: 0
-            maximum: 100
-            default: 0
-          transactions:
-            description: Individual transactions of the batch.
-            type: array
-            items:
-              $ref: '#/components/schemas/BatchLineItem'
-              minItems: 1
-          completionDate:
-            type: string
-            format: date-time
-      required:
-      - batchId
-      - processingStatus
-    ErrorResp:
-      title: Error
-      description: 'A common Error object returned as part of the API layer.
-
-
-        . This is modified to become the base class for all of the derived HTTP Error Responses.'
-      type: object
-      properties:
-        reversalStatus:
-          description: 'Indicates to the API client if a technical reversal is required or has been completed by Verifone.
-
-
-            |Value|Description|
-
-            |-|-|
-
-            |NONE|Reversal status is not set. This indicates the status of reversal processing is not known and the client should implement default reversal processing.|
-
-            |REQUIRED|A reversal is required by the client.|
-
-            |COMPLETED|A reversal has been completed by verifone or a reversal is not required for this transaction.|'
+        orderId:
+          $ref: '#/components/schemas/OrderId'
+        requestId:
+          type: string
+          maxLength: 36
+          description: Unique value per line per file
+        entityType:
           type: string
           enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-          default: NONE
+          - MERCHANT_COMPANY
+          - MERCHANT_SITE
+          - POI
+          description: The type of entity that the operation is performed on
+        operation:
+          type: string
+          enum:
+          - PARTIAL_UPDATE
+          - TRADING_ADDRESS_UPDATE
+          - DELETE
+          description: The operation performed on the entity
+        entityLogicalId:
+          type: string
+          description: The logical identifier of the entity.This could be a MID or a TID
+          maxLength: 30
+        keyValues:
+          type: string
+          description: Operational parameters defined as key-value pairs
+        createdDate:
+          type: string
+          format: date-time
+        status:
+          type: string
+          description: HTTP Status returned by order API
+        response:
+          type: string
+          description: Response from order API
+        orderStatus:
+          description: Status from order API
+          $ref: '#/components/schemas/OrderStatusEnum'
+    httpError429:
+      title: HTTP 429 Error
+      type: object
+      description: The resource exists the number of requests has exceeded the specified quota.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '429'
+            default: '429'
+          title:
+            type: string
+            enum:
+            - Too Many Requests
+            default: Too Many Requests
+          message:
+            type: string
+            default: The number of requests from this client is restricted to a specified quota.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - RATE_LIMIT_ERROR
+            default: RATE_LIMIT_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
       required:
       - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    OrderId:
+      description: Verifone allocated ID for the Order.
+      type: string
+      format: uuid
+    BatchStatus:
+      type: string
+      enum:
+      - SUCCESS
+      - CORRUPT_FILE
+      - DUPLICATE_FILE_NAME
+      - NO_FILES_RECEIVED
+      - INPROGRESS
+      - PENDING
+      - TX_COMPLETED
+      - PARTIAL_SUCCESS
+      - FORCE_STOPPED
     PagingPageSize:
       description: Page size for returned records.
       type: integer
       minimum: 1
       maximum: 100
       default: 50
-    httpError403:
-      title: HTTP 403 Error
-      type: object
-      description: The request must be authorised to access the resource.
-      allOf:
-      - $ref: '#/components/schemas/ErrorResp'
-      - properties:
-          code:
-            type: string
-            enum:
-            - '403'
-            default: '403'
-          title:
-            type: string
-            enum:
-            - Forbidden
-            default: Forbidden
-          message:
-            type: string
-            default: The request requires client authorisation to access resource.
-          timestamp:
-            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
-            type: string
-            format: date-time
-          type:
-            type: string
-            enum:
-            - AUTHENTICATION_ERROR
-            default: AUTHENTICATION_ERROR
-          param:
-            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-            type: string
-      required:
-      - code
-      - title
-      - message
-      - type
-      additionalProperties: false
-    OrderType:
-      type: string
-      enum:
-      - POIOrder
-      - MerchantOrder
-      - POIMaintenanceOrder
-      - MerchantMaintenanceOrder
-      - POIAccessoryOrder
-      - AdditionalServicesOrder
-      - HardwareOrder
-      default: MerchantOrder
-    PagingPageNumber:
-      description: Page number for records.
-      type: integer
-      minimum: 1
-      default: 1
     httpError401:
       title: HTTP 401 Error
       type: object
@@ -542,59 +354,247 @@ components:
         responseFileName:
           type: string
           maxLength: 200
-    BatchLineItem:
+    OrderType:
+      type: string
+      enum:
+      - POIOrder
+      - MerchantOrder
+      - POIMaintenanceOrder
+      - MerchantMaintenanceOrder
+      - POIAccessoryOrder
+      - AdditionalServicesOrder
+      - HardwareOrder
+      default: MerchantOrder
+    BatchSearchResponse:
       type: object
       properties:
-        orderId:
-          $ref: '#/components/schemas/OrderId'
-        requestId:
-          type: string
-          maxLength: 36
-          description: Unique value per line per file
-        entityType:
-          type: string
-          enum:
-          - MERCHANT_COMPANY
-          - MERCHANT_SITE
-          - POI
-          description: The type of entity that the operation is performed on
-        operation:
-          type: string
-          enum:
-          - PARTIAL_UPDATE
-          - TRADING_ADDRESS_UPDATE
-          - DELETE
-          description: The operation performed on the entity
-        entityLogicalId:
-          type: string
-          description: The logical identifier of the entity.This could be a MID or a TID
-          maxLength: 30
-        keyValues:
-          type: string
-          description: Operational parameters defined as key-value pairs
-        createdDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          description: HTTP Status returned by order API
-        response:
-          type: string
-          description: Response from order API
-        orderStatus:
-          description: Status from order API
-          $ref: '#/components/schemas/OrderStatusEnum'
+        batches:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/BatchDetails'
+        metadata:
+          $ref: '#/components/schemas/PagingMetadata'
+      required:
+      - batches
+      - metadata
+    OrderStatusEnum:
+      type: string
+      enum:
+      - DRAFT
+      - SUBMITTED
+      - INPROGRESS
+      - COMPLETED
+      - CANCELLED
+      - ONHOLD
+    BatchDetails:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BatchDetailsUpdatable'
+      - properties:
+          batchId:
+            $ref: '#/components/schemas/BatchId'
+          fileCreatedDate:
+            description: The date time when the file was created on SFTP.
+            type: string
+            format: date-time
+          filePickupDate:
+            description: The date time when the file was picked up by the batch process.
+            type: string
+            format: date-time
+          fileName:
+            type: string
+            maxLength: 200
+          orderType:
+            $ref: '#/components/schemas/OrderType'
+          retryCount:
+            type: integer
+            minimum: 0
+            maximum: 100
+            default: 0
+          transactions:
+            description: Individual transactions of the batch.
+            type: array
+            items:
+              $ref: '#/components/schemas/BatchLineItem'
+              minItems: 1
+          completionDate:
+            type: string
+            format: date-time
+      required:
+      - batchId
+      - processingStatus
+    httpError403:
+      title: HTTP 403 Error
+      type: object
+      description: The request must be authorised to access the resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '403'
+            default: '403'
+          title:
+            type: string
+            enum:
+            - Forbidden
+            default: Forbidden
+          message:
+            type: string
+            default: The request requires client authorisation to access resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - AUTHENTICATION_ERROR
+            default: AUTHENTICATION_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    PagingTotalItems:
+      description: Total number of records.
+      type: integer
+    httpError404:
+      title: HTTP 404 Error
+      type: object
+      description: The server cannot find the requested resource.
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '404'
+            default: '404'
+          title:
+            type: string
+            enum:
+            - Not Found
+            default: Not Found
+          message:
+            type: string
+            default: The server cannot find the requested resource.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - INVALID_REQUEST_ERROR
+            default: INVALID_REQUEST_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError503:
+      title: HTTP 503 Error
+      type: object
+      description: Service Unavailable Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '503'
+            default: '503'
+          title:
+            type: string
+            enum:
+            - Service Unavailable
+            default: Service Unavailable
+          message:
+            type: string
+            default: The server is not ready to handle the request. If specified please check the <strong>Retry-After</strong> for the time period specified for recovery/re-attempt of request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
+    httpError500:
+      title: HTTP 500 Error
+      type: object
+      description: Unexpected Server Error
+      allOf:
+      - $ref: '#/components/schemas/ErrorResp'
+      - properties:
+          code:
+            type: string
+            enum:
+            - '500'
+            default: '500'
+          title:
+            type: string
+            enum:
+            - Internal Server Error
+            default: Internal Server Error
+          message:
+            type: string
+            default: The server encountered an unexpected condition which prevented it from fulfilling the request.
+          timestamp:
+            description: "The time that the error occurred. All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone."
+            type: string
+            format: date-time
+          type:
+            type: string
+            enum:
+            - API_ERROR
+            default: API_ERROR
+          param:
+            description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+            type: string
+      required:
+      - code
+      - title
+      - message
+      - type
+      additionalProperties: false
     PagingTotalPages:
       description: Total pages of records.
       type: integer
+    PagingPageNumber:
+      description: Page number for records.
+      type: integer
+      minimum: 1
+      default: 1
   responses:
-    '500':
-      description: Internal Error
+    '401':
+      description: Unauthorised Request
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError500'
+            - $ref: '#/components/schemas/httpError401'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
@@ -608,13 +608,33 @@ components:
             - title
             - message
             - type
-    '504':
-      description: Service Timeout
+    '400':
+      description: Bad Request
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError504'
+            - $ref: '#/components/schemas/httpError400'
+            - properties:
+                param:
+                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
+                  type: string
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+            required:
+            - code
+            - title
+            - message
+            - type
+    '500':
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/httpError500'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
@@ -668,26 +688,6 @@ components:
             - title
             - message
             - type
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/httpError400'
-            - properties:
-                param:
-                  description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.
-                  type: string
-                additionalProperties:
-                  type: object
-                  additionalProperties:
-                    type: object
-            required:
-            - code
-            - title
-            - message
-            - type
     '503':
       description: Service Not Available
       content:
@@ -708,13 +708,13 @@ components:
             - title
             - message
             - type
-    '401':
-      description: Unauthorised Request
+    '504':
+      description: Service Timeout
       content:
         application/json:
           schema:
             allOf:
-            - $ref: '#/components/schemas/httpError401'
+            - $ref: '#/components/schemas/httpError504'
             - properties:
                 param:
                   description: The parameter the error relates to if the error is parameter-specific. You can use this to display a message near the correct form field, for example.

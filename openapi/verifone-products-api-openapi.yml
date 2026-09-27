@@ -251,40 +251,6 @@ paths:
                 $ref: '#/components/schemas/Model5'
 components:
   schemas:
-    homeUrl:
-      required:
-      - op
-      type: object
-      properties:
-        op:
-          type: string
-          description: The remove operation does not require a value
-          enum:
-          - add
-          - remove
-          - replace
-        value:
-          maxLength: 2000
-          minLength: 1
-          type: string
-          description: The image URL for the product
-    description:
-      required:
-      - op
-      type: object
-      properties:
-        op:
-          type: string
-          description: The remove operation does not require a value
-          enum:
-          - add
-          - remove
-          - replace
-        value:
-          maxLength: 256
-          minLength: 1
-          type: string
-          description: The product description
     Model18:
       required:
       - name
@@ -776,28 +742,71 @@ components:
           minLength: 1
           type: string
           description: The image URL for the product
+    imageUrl:
+      required:
+      - op
+      type: object
+      properties:
+        op:
+          type: string
+          description: The remove operation does not require a value
+          enum:
+          - add
+          - remove
+          - replace
+        value:
+          maxLength: 2000
+          minLength: 1
+          type: string
+          description: The home page URL for the product
     products:
       type: array
       items:
         $ref: '#/components/schemas/Model6'
-    Model5:
+    Model54:
       required:
-      - code
-      - message
+      - paymentProviderContract
       type: object
       properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/details'
-        message:
+        paymentProviderContract:
           type: string
-          description: A description of the error.
-        timestamp:
+          description: PayPal Payment Provider Contract UUID
+        imageUrl:
+          $ref: '#/components/schemas/imageUrl'
+        homeUrl:
+          $ref: '#/components/schemas/homeUrl'
+        category:
+          $ref: '#/components/schemas/category'
+        description:
+          $ref: '#/components/schemas/description'
+    Model7:
+      required:
+      - products
+      type: object
+      properties:
+        totalItems:
+          type: integer
+        totalPages:
+          type: integer
+        products:
+          $ref: '#/components/schemas/products'
+    homeUrl:
+      required:
+      - op
+      type: object
+      properties:
+        op:
           type: string
-          description: Error timestamp
-          format: date
+          description: The remove operation does not require a value
+          enum:
+          - add
+          - remove
+          - replace
+        value:
+          maxLength: 2000
+          minLength: 1
+          type: string
+          description: The image URL for the product
     category:
       required:
       - op
@@ -1259,8 +1268,41 @@ components:
           - WIRE_TRANSFER_AND_MONEY_ORDER
           - WOMEN_ACCESSORY_SPECIALITY
           - WOMEN_CLOTHING
-    details:
+    description:
+      required:
+      - op
       type: object
+      properties:
+        op:
+          type: string
+          description: The remove operation does not require a value
+          enum:
+          - add
+          - remove
+          - replace
+        value:
+          maxLength: 256
+          minLength: 1
+          type: string
+          description: The product description
+    Model5:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date
     Model6:
       required:
       - createdAt
@@ -1758,6 +1800,8 @@ components:
           minLength: 1
           type: string
           description: The image URL for the product
+    details:
+      type: object
     Model10:
       required:
       - createdAt
@@ -2255,50 +2299,6 @@ components:
           type: string
           description: Product last update date (ISO-8601)
           format: date
-    Model7:
-      required:
-      - products
-      type: object
-      properties:
-        totalItems:
-          type: integer
-        totalPages:
-          type: integer
-        products:
-          $ref: '#/components/schemas/products'
-    Model54:
-      required:
-      - paymentProviderContract
-      type: object
-      properties:
-        paymentProviderContract:
-          type: string
-          description: PayPal Payment Provider Contract UUID
-        imageUrl:
-          $ref: '#/components/schemas/imageUrl'
-        homeUrl:
-          $ref: '#/components/schemas/homeUrl'
-        category:
-          $ref: '#/components/schemas/category'
-        description:
-          $ref: '#/components/schemas/description'
-    imageUrl:
-      required:
-      - op
-      type: object
-      properties:
-        op:
-          type: string
-          description: The remove operation does not require a value
-          enum:
-          - add
-          - remove
-          - replace
-        value:
-          maxLength: 2000
-          minLength: 1
-          type: string
-          description: The home page URL for the product
   securitySchemes:
     bearerAuth:
       scheme: bearer

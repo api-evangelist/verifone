@@ -161,16 +161,6 @@ components:
               properties:
                 identifier:
                   $ref: '#/components/schemas/template_field_mode'
-    template_field_mode:
-      type: object
-      properties:
-        mode:
-          type: string
-          enum:
-          - HIDDEN
-          - READ_ONLY
-          - OPTIONAL
-          - REQUIRED
     ErrorResponse:
       type: object
       properties:
@@ -191,8 +181,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CheckoutTemplate'
-    details:
-      type: object
     address_details:
       type: object
       properties:
@@ -218,6 +206,18 @@ components:
           $ref: '#/components/schemas/template_field_mode'
         state:
           $ref: '#/components/schemas/template_field_mode'
+    details:
+      type: object
+    template_field_mode:
+      type: object
+      properties:
+        mode:
+          type: string
+          enum:
+          - HIDDEN
+          - READ_ONLY
+          - OPTIONAL
+          - REQUIRED
   securitySchemes:
     BasicAuth:
       type: http

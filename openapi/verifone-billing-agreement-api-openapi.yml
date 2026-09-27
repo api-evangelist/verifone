@@ -292,106 +292,34 @@ paths:
                 $ref: '#/components/schemas/Model5'
 components:
   schemas:
-    redirectUrls:
-      type: object
-      properties:
-        returnUrl:
-          type: string
-          description: The URL where the customer is redirected after the customer approves the payment
-        cancelUrl:
-          type: string
-          description: The URL where the customer is redirected after the customer cancels the payment
-    Model5:
+    Model30:
       required:
-      - code
-      - message
+      - createTime
+      - id
+      - state
       type: object
       properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/details'
-        message:
+        id:
           type: string
-          description: A description of the error.
-        timestamp:
+          description: The ID of the agreement.
+        state:
           type: string
-          description: Error timestamp
-          format: date
-    Model32:
-      required:
-      - paymentProviderContract
-      type: object
-      properties:
-        paymentProviderContract:
-          type: string
-          description: PayPal Payment Provider Contract UUID
+          description: The state of the agreement.
         description:
           type: string
-          description: Agreement description
-        shippingAddress:
-          $ref: '#/components/schemas/Model31'
-        enableAddressChange:
-          type: boolean
-          description: Indicates whether to show the shipping address but prevent the customer from editing it.
-        collectShippingAddress:
-          type: boolean
-          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
-        allowedCountries:
-          $ref: '#/components/schemas/allowedCountries'
-        experienceId:
+          description: The description of the agreement.
+        merchant:
+          $ref: '#/components/schemas/merchant'
+        payer:
+          $ref: '#/components/schemas/payer'
+        plan:
+          $ref: '#/components/schemas/plan'
+        createTime:
           type: string
-          description: The ID of the experience profile to apply during the agreement approval UI flow.
-        externalSelectedFundingInstrumentType:
+          description: The date and time when the agreement was created.
+        updateTime:
           type: string
-          description: The type of financial instrument (FI) that the merchant wants to promote.
-          enum:
-          - CREDIT
-          - PAY_UPON_INVOICE
-        returnUrl:
-          type: string
-          description: The URL where the customer is redirected after the customer approves the payment
-        cancelUrl:
-          type: string
-          description: The URL where the customer is redirected after the customer cancels the payment
-    payer:
-      type: object
-      properties:
-        payerInfo:
-          $ref: '#/components/schemas/payerInfo'
-    details:
-      type: object
-    merchantPreferences:
-      type: object
-      properties:
-        collectShippingAddress:
-          type: string
-          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
-        enableAddressChange:
-          type: string
-          description: Indicates whether to show the shipping address but prevent the customer from editing it.
-        experienceId:
-          type: string
-          description: The ID of the experience profile to apply during the agreement approval UI flow.
-        externalSelectedFundingInstrumentType:
-          type: string
-          description: The type of financial instrument (FI) that the merchant wants to promote.
-        allowedCountries:
-          $ref: '#/components/schemas/allowedCountries'
-    Model38:
-      required:
-      - paymentProviderContract
-      type: object
-      properties:
-        paymentProviderContract:
-          type: string
-          description: PayPal Payment Provider Contract UUID
-    plan:
-      type: object
-      properties:
-        merchantPreferences:
-          $ref: '#/components/schemas/merchantPreferences'
+          description: The date and time when the agreement was updated.
     payerInfo:
       required:
       - email
@@ -418,82 +346,24 @@ components:
           description: The payer's phone number.
         billingAddress:
           $ref: '#/components/schemas/billingAddress'
-    merchant:
-      type: object
-      properties:
-        payeeInfo:
-          $ref: '#/components/schemas/payeeInfo'
-    Model17:
+    Model5:
       required:
-      - tokenId
+      - code
+      - message
       type: object
       properties:
-        tokenId:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
           type: string
-          description: The state of the agreement.
-        status:
+          description: A description of the error.
+        timestamp:
           type: string
-          description: The description of the agreement.
-        description:
-          type: string
-          description: The description of the agreement.
-        collectShippingAddress:
-          type: boolean
-          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
-        enableAddressChange:
-          type: boolean
-          description: Indicates whether to show the shipping address but prevent the customer from editing it.
-        payerInfo:
-          $ref: '#/components/schemas/payerInfo'
-        redirectUrls:
-          $ref: '#/components/schemas/redirectUrls'
-        experienceId:
-          type: string
-          description: The ID of the experience profile to apply during the agreement approval UI flow.
-        externalSelectedFundingInstrumentType:
-          type: string
-          description: The type of financial instrument (FI) that the merchant wants to promote.
-          enum:
-          - CREDIT
-          - PAY_UPON_INVOICE
-    shippingAddress:
-      required:
-      - addressLine1
-      - city
-      - country
-      - countrySubdivision
-      - postalCode
-      type: object
-      properties:
-        fullName:
-          type: string
-          description: Full Name
-        addressLine1:
-          maxLength: 300
-          type: string
-          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
-        addressLine2:
-          maxLength: 300
-          type: string
-          description: The second line of the address. For example, suite or apartment number.
-        city:
-          maxLength: 120
-          type: string
-          description: A city, town, or village. Smaller than admin_area_level_1
-        countrySubdivision:
-          maxLength: 300
-          type: string
-          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
-        country:
-          maxLength: 2
-          minLength: 2
-          pattern: ^([A-Z]{2}|C2)$
-          type: string
-          description: The two-character ISO 3166-1 code that identifies the country or region.
-        postalCode:
-          maxLength: 60
-          type: string
-          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+          description: Error timestamp
+          format: date
     Model29:
       required:
       - billingToken
@@ -506,57 +376,20 @@ components:
         paymentProviderContract:
           type: string
           description: PayPal Payment Provider Contract UUID
-    Model8:
-      required:
-      - createTime
-      - id
-      - state
+    merchant:
       type: object
       properties:
-        id:
-          type: string
-          description: The ID of the agreement.
-        state:
-          type: string
-          description: The state of the agreement.
-        description:
-          type: string
-          description: The description of the agreement.
-        merchant:
-          $ref: '#/components/schemas/merchant'
-        payer:
-          $ref: '#/components/schemas/payer'
-        shippingAddress:
-          $ref: '#/components/schemas/shippingAddress'
-        plan:
-          $ref: '#/components/schemas/plan'
-        createTime:
-          type: string
-          description: The date and time when the agreement was created.
-        updateTime:
-          type: string
-          description: The date and time when the agreement was updated.
-    Model33:
-      required:
-      - approvalUrl
-      - billingToken
+        payeeInfo:
+          $ref: '#/components/schemas/payeeInfo'
+    redirectUrls:
       type: object
       properties:
-        approvalUrl:
+        returnUrl:
           type: string
-          description: PayPal approval URL
-        billingToken:
+          description: The URL where the customer is redirected after the customer approves the payment
+        cancelUrl:
           type: string
-          description: Billing token
-    allowedCountries:
-      type: array
-      description: An array of legally accepted customer country codes
-      items:
-        maxLength: 2
-        minLength: 2
-        pattern: ^([A-Z]{2}|C2)$
-        type: string
-        description: The two-character ISO 3166-1 code that identifies the country or region.
+          description: The URL where the customer is redirected after the customer cancels the payment
     Model31:
       required:
       - addressLine1
@@ -626,15 +459,139 @@ components:
           type: string
           description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
       description: Shipping Address details
-    payeeInfo:
+    Model38:
       required:
-      - email
+      - paymentProviderContract
       type: object
       properties:
-        email:
+        paymentProviderContract:
           type: string
-          description: The email address that is associated with the payee's PayPal account.
-    Model30:
+          description: PayPal Payment Provider Contract UUID
+    Model33:
+      required:
+      - approvalUrl
+      - billingToken
+      type: object
+      properties:
+        approvalUrl:
+          type: string
+          description: PayPal approval URL
+        billingToken:
+          type: string
+          description: Billing token
+    payer:
+      type: object
+      properties:
+        payerInfo:
+          $ref: '#/components/schemas/payerInfo'
+    Model32:
+      required:
+      - paymentProviderContract
+      type: object
+      properties:
+        paymentProviderContract:
+          type: string
+          description: PayPal Payment Provider Contract UUID
+        description:
+          type: string
+          description: Agreement description
+        shippingAddress:
+          $ref: '#/components/schemas/Model31'
+        enableAddressChange:
+          type: boolean
+          description: Indicates whether to show the shipping address but prevent the customer from editing it.
+        collectShippingAddress:
+          type: boolean
+          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
+        allowedCountries:
+          $ref: '#/components/schemas/allowedCountries'
+        experienceId:
+          type: string
+          description: The ID of the experience profile to apply during the agreement approval UI flow.
+        externalSelectedFundingInstrumentType:
+          type: string
+          description: The type of financial instrument (FI) that the merchant wants to promote.
+          enum:
+          - CREDIT
+          - PAY_UPON_INVOICE
+        returnUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer approves the payment
+        cancelUrl:
+          type: string
+          description: The URL where the customer is redirected after the customer cancels the payment
+    shippingAddress:
+      required:
+      - addressLine1
+      - city
+      - country
+      - countrySubdivision
+      - postalCode
+      type: object
+      properties:
+        fullName:
+          type: string
+          description: Full Name
+        addressLine1:
+          maxLength: 300
+          type: string
+          description: The first line of the address. For example, number or street.  For example, 173 Drury Lane. Required for data entry and compliance and risk checks. Must contain the full address.
+        addressLine2:
+          maxLength: 300
+          type: string
+          description: The second line of the address. For example, suite or apartment number.
+        city:
+          maxLength: 120
+          type: string
+          description: A city, town, or village. Smaller than admin_area_level_1
+        countrySubdivision:
+          maxLength: 300
+          type: string
+          description: The highest level sub-division in a country, which is usually a province, state, or ISO-3166-2 subdivision.
+        country:
+          maxLength: 2
+          minLength: 2
+          pattern: ^([A-Z]{2}|C2)$
+          type: string
+          description: The two-character ISO 3166-1 code that identifies the country or region.
+        postalCode:
+          maxLength: 60
+          type: string
+          description: The postal code, which is the zip code or equivalent.  Typically required for countries with a postal code or an equivalent.
+    details:
+      type: object
+    plan:
+      type: object
+      properties:
+        merchantPreferences:
+          $ref: '#/components/schemas/merchantPreferences'
+    merchantPreferences:
+      type: object
+      properties:
+        collectShippingAddress:
+          type: string
+          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
+        enableAddressChange:
+          type: string
+          description: Indicates whether to show the shipping address but prevent the customer from editing it.
+        experienceId:
+          type: string
+          description: The ID of the experience profile to apply during the agreement approval UI flow.
+        externalSelectedFundingInstrumentType:
+          type: string
+          description: The type of financial instrument (FI) that the merchant wants to promote.
+        allowedCountries:
+          $ref: '#/components/schemas/allowedCountries'
+    allowedCountries:
+      type: array
+      description: An array of legally accepted customer country codes
+      items:
+        maxLength: 2
+        minLength: 2
+        pattern: ^([A-Z]{2}|C2)$
+        type: string
+        description: The two-character ISO 3166-1 code that identifies the country or region.
+    Model8:
       required:
       - createTime
       - id
@@ -654,6 +611,8 @@ components:
           $ref: '#/components/schemas/merchant'
         payer:
           $ref: '#/components/schemas/payer'
+        shippingAddress:
+          $ref: '#/components/schemas/shippingAddress'
         plan:
           $ref: '#/components/schemas/plan'
         createTime:
@@ -662,6 +621,47 @@ components:
         updateTime:
           type: string
           description: The date and time when the agreement was updated.
+    payeeInfo:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address that is associated with the payee's PayPal account.
+    Model17:
+      required:
+      - tokenId
+      type: object
+      properties:
+        tokenId:
+          type: string
+          description: The state of the agreement.
+        status:
+          type: string
+          description: The description of the agreement.
+        description:
+          type: string
+          description: The description of the agreement.
+        collectShippingAddress:
+          type: boolean
+          description: Indicates whether to skip the collection of the shipping address from the customer during the agreement sign-up phase.
+        enableAddressChange:
+          type: boolean
+          description: Indicates whether to show the shipping address but prevent the customer from editing it.
+        payerInfo:
+          $ref: '#/components/schemas/payerInfo'
+        redirectUrls:
+          $ref: '#/components/schemas/redirectUrls'
+        experienceId:
+          type: string
+          description: The ID of the experience profile to apply during the agreement approval UI flow.
+        externalSelectedFundingInstrumentType:
+          type: string
+          description: The type of financial instrument (FI) that the merchant wants to promote.
+          enum:
+          - CREDIT
+          - PAY_UPON_INVOICE
   securitySchemes:
     bearerAuth:
       scheme: bearer
