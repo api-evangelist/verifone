@@ -162,13 +162,6 @@ components:
         config:
           $ref: '#/components/schemas/config'
       description: Theme parameters
-    config:
-      type: object
-      properties:
-        is_default:
-          type: boolean
-          default: false
-          description: Specifies whether the theme is the default theme for the entity. Only one default theme allowed per Entity/Organization.
     ErrorResponse:
       type: object
       properties:
@@ -185,6 +178,13 @@ components:
           type: string
           description: Error timestamp
           format: date-time
+    config:
+      type: object
+      properties:
+        is_default:
+          type: boolean
+          default: false
+          description: Specifies whether the theme is the default theme for the entity. Only one default theme allowed per Entity/Organization.
     Theme:
       required:
       - name

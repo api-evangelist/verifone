@@ -960,23 +960,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ThreeDSAuthentication'
-    ErrorResponse:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/ErrorDetails'
-        message:
-          type: string
-          description: A description of the error.
-        timestamp:
-          type: number
-          description: Error timestamp
     ThreeDSAuthentication:
       type: object
       properties:
@@ -1010,6 +993,23 @@ components:
         transaction_id:
           type: string
           description: To complete the transaction, the value is required to be passed on the Cardinal.Continue().
+    ErrorResponse:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/ErrorDetails'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: number
+          description: Error timestamp
     ErrorDetails:
       type: object
   securitySchemes:
