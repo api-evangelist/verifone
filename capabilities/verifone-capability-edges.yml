@@ -1,0 +1,37 @@
+slug: verifone
+provider: Verifone
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Subscriptions
+  spec_file: verifone-subscriptions-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.85
+  evidence: POST /subscriptions  Create subscription; POST /subscriptions/{id}/activate  Activate subscription;
+    POST /subscriptions/{id}/suspend; POST /subscriptions/{id}/cancel  Cancel subscription; POST /subscriptions/{id}/revise
+  reason: Operations plainly cover the full subscription commercial lifecycle — creation, activation,
+    revision, suspension, cancellation, with billingInfo and plan billing-cycle pricing schemes. L1 only,
+    since the surface spans provisioning, modification and cancellation rather than one sub-capability.
+- tag: Customer
+  spec_file: verifone-customer-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: 'Operations for creating, retrieving, updating, and deleting customer records; schemas: CustomerRequest,
+    CustomerResponse, Billing, Shipping, Tax'
+  reason: Straightforward CRUD over customer master records (billing, shipping, tax attributes) maintained
+    for the merchant. That is customer data management. Moderated confidence because the records exist
+    chiefly to support payment transactions rather than as a golden-record/identity-resolution function.

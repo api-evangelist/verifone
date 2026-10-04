@@ -538,6 +538,9 @@ apis:
   - type: Documentation
     url: https://docs.verifone.com/api-reference/open-api-references/order-service
 common:
+- type: CapabilityMap
+  url: capabilities/verifone-capability-edges.yml
+  name: Verifone Business Capability Map
 - type: Website
   url: https://verifone.com
 - type: AgenticAccess
