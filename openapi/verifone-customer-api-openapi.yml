@@ -314,6 +314,86 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    CustomerResponse:
+      required:
+      - created_at
+      - entity_id
+      - id
+      - updated_at
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Customer UUID.
+        billing:
+          $ref: '#/components/schemas/Billing'
+        company_name:
+          maxLength: 100
+          type: string
+          description: Company name of the customer. **Required** when `billing.first_name` and `billing.last_name` are not provided.
+        company_registration_number:
+          maxLength: 24
+          type: string
+          description: Unique identifier of the company recognised by the government. Known as CoC (Chamber of Commerce) number in some countries.
+        email_address:
+          maxLength: 255
+          type: string
+          format: email
+          description: 'Consumer''s email address.
+
+
+            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
+        entity_id:
+          type: string
+          description: Entity ID on which the customer is created.
+        phone_number:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Cardholder's phone number.
+        shipping:
+          $ref: '#/components/schemas/Shipping'
+        title:
+          pattern: ^[a-zA-Z\-\s.]+$
+          maxLength: 120
+          type: string
+          description: Customer's title (e.g. `Mr`, `Mrs`, `Dr`).
+        work_phone:
+          maxLength: 25
+          pattern: ^[0-9\s\-+().-]+$
+          type: string
+          description: Consumer's work phone number.
+        tax:
+          $ref: '#/components/schemas/Tax'
+        language:
+          type: string
+          description: Customer language preference for Invoice documents. See [Localisation](https://docs.verifone.com/online-payments/checkout/localization) for details.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this customer was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when this customer was last updated.
+    Tax:
+      type: object
+      properties:
+        identifier:
+          pattern: ^[0-9]+$
+          type: string
+          maxLength: 9
+          description: 'An optional identifier of the document recipient:
+
+
+            - Personal ID (for individuals)
+
+            - Tax identification number (for businesses)'
+    CustomerListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerResponse'
     Shipping:
       type: object
       properties:
@@ -504,82 +584,6 @@ components:
           maxLength: 35
           type: string
           description: Customer's state or province for their billing address (e.g. `OH` for Ohio, `TX` for Texas).
-    CustomerResponse:
-      required:
-      - created_at
-      - entity_id
-      - id
-      - updated_at
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Customer UUID.
-        billing:
-          $ref: '#/components/schemas/Billing'
-        company_name:
-          maxLength: 100
-          type: string
-          description: Company name of the customer. **Required** when `billing.first_name` and `billing.last_name` are not provided.
-        company_registration_number:
-          maxLength: 24
-          type: string
-          description: Unique identifier of the company recognised by the government. Known as CoC (Chamber of Commerce) number in some countries.
-        email_address:
-          maxLength: 255
-          type: string
-          format: email
-          description: 'Consumer''s email address.
-
-
-            **Note:** Required for 3DS. Please refer to the 3D Secure API specification for format requirements.'
-        entity_id:
-          type: string
-          description: Entity ID on which the customer is created.
-        phone_number:
-          maxLength: 25
-          pattern: ^[0-9\s\-+().-]+$
-          type: string
-          description: Cardholder's phone number.
-        shipping:
-          $ref: '#/components/schemas/Shipping'
-        title:
-          pattern: ^[a-zA-Z\-\s.]+$
-          maxLength: 120
-          type: string
-          description: Customer's title (e.g. `Mr`, `Mrs`, `Dr`).
-        work_phone:
-          maxLength: 25
-          pattern: ^[0-9\s\-+().-]+$
-          type: string
-          description: Consumer's work phone number.
-        tax:
-          $ref: '#/components/schemas/Tax'
-        language:
-          type: string
-          description: Customer language preference for Invoice documents. See [Localisation](https://docs.verifone.com/online-payments/checkout/localization) for details.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this customer was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when this customer was last updated.
-    Tax:
-      type: object
-      properties:
-        identifier:
-          pattern: ^[0-9]+$
-          type: string
-          maxLength: 9
-          description: 'An optional identifier of the document recipient:
-
-
-            - Personal ID (for individuals)
-
-            - Tax identification number (for businesses)'
     ErrorResponse:
       type: object
       properties:
@@ -595,10 +599,6 @@ components:
         timestamp:
           type: integer
           description: Unix timestamp of when the error occurred.
-    CustomerListResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/CustomerResponse'
   securitySchemes:
     BearerAuth:
       type: http

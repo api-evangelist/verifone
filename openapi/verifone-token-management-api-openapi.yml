@@ -340,105 +340,53 @@ paths:
       - Token Management
 components:
   schemas:
-    UnauthorizedV2Docs:
+    PatchDto:
       type: object
       properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
+        encrypted_card:
           type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 401
-          default: 401
-        message:
+          title: Client encrypted cardholder data
+          description: "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+        cvv:
+          type: string
+          description: The CVV (Card Verification Value) as it appears on the card.
+          maxLength: 30
+        card_holder_name:
+          type: string
+          description: The Card holder name as it appears on the card.
+          maxLength: 30
+        card_holder_email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
+        expiry_month:
+          type: integer
+          description: Card expiry month. A 2 digit value as shown on card. ISO8583 - DE 14.
+          maximum: 12
+          minimum: 1
+        expiry_year:
+          type: integer
+          description: Card expiry year. A 4 digit value as shown on the card.
+          maximum: 9999
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        public_key_alias:
+          type: string
+        scheme_token_action:
+          description: Indicates if the scheme tokens should be created / deleted / suspended. Scheme tokens will be created only if token scope has PAR and/or network token support configured.
           type: string
           enum:
-          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
-          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
-      required:
-      - message
-    BadRequestV2Docs:
+          - ACTIVATE
+          - SUSPEND
+          - DELETE
+    PatchTokenResponse:
       type: object
       properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 400
-          default: 400
-        message:
-          type: string
-          enum:
-          - 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
-          default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
-      required:
-      - message
-    NotFoundV2Docs:
-      type: object
-      properties:
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 404
-          default: 404
-        message:
-          type: string
-          enum:
-          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
-          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
-      required:
-      - message
-    CardResponse:
-      type: object
-      properties:
-        reuse_token:
-          type: string
-          description: The identifier used to represent the Cardholder data.
-        analytics_token:
-          type: string
-          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
         bin:
           type: string
           minLength: 4
@@ -460,8 +408,13 @@ components:
           type: string
           maxLength: 30
           description: The Card holder name as it appears on the card.
-        bin_details:
-          $ref: '#/components/schemas/BinDetails'
+        card_holder_email:
+          type: string
+          title: Email Address
+          minLength: 3
+          maxLength: 254
+          format: email
+          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
         updated_at:
           type: string
           description: The last date token was updated.
@@ -474,18 +427,6 @@ components:
           type: string
           description: When this Token will expire.
           format: date
-        reuse_token_type:
-          title: Reuse Token Type
-          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
-          type: string
-          enum:
-          - CHASE
-          - INTERNAL
-          - TAVE
-        token_scope:
-          type: string
-          description: The token scope under which this token was created.
-          format: uuid
         token_status:
           type: string
           description: The status of the Token.
@@ -494,103 +435,41 @@ components:
           - DELETED
           - ACTIVE
           - SUSPENDED
+        bin_details:
+          $ref: '#/components/schemas/BinDetails'
         currency:
           $ref: '#/components/schemas/CurrencyCodeEnum'
         issuer_country:
           $ref: '#/components/schemas/issuerCountryEnum'
         scheme_token:
-          allOf:
-          - $ref: '#/components/schemas/SchemeToken'
-    SchemeToken:
-      type: object
-      description: This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.
-      properties:
-        network_token:
-          type: string
-          minLength: 12
-          maxLength: 16
-          description: Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account.
-        status:
-          type: string
-          title: Token Status Type
-          enum:
-          - VALID
-          - SUSPENDED
-          - DELETED
-          description: The status of the cardholder data token.
-        expiry_month:
-          type: integer
-          minimum: 12
-          description: 'Network tokens'' expiry date''s month
-
-            . A 2 digit value. ISO8583 - DE 14'
-        expiry_year:
-          type: integer
-          minimum: 9999
-          description: Network tokens' expiry date's year. A 4 digit value.
-        payment_account_reference:
-          type: string
-          maxLength: 50
-          description: Payment Account Reference
-    BinDetails:
-      type: object
-      properties:
-        bin:
-          type: string
-          minLength: 4
-          maxLength: 11
-          description: The Bank Identification Number (also called  IIN - Issuer Identification Number) of this card.
-        brand:
-          type: string
-          description: The brand of this card. eg. VISA, MASTERCARD, AMEX.
-        issuer_country:
-          $ref: '#/components/schemas/issuerCountryEnum'
-        issuer_name:
-          type: string
-          description: The issuer of this card. eg. HSBC, BARCLAYS.
-        last_four:
-          type: string
-          maxLength: 4
-          description: The last 4 digits of the card number.
-        type:
-          type: string
-          description: The type of card application or account selection.
-          enum:
-          - DEBIT
-          - CREDIT
-        variant:
-          type: string
-          description: The variant of the card. eg. NEW_WORLD
-    InternalErrorV2Docs:
-      type: object
-      properties:
-        details:
+          title: Scheme Token Response
+          description: This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.
           type: object
-          additionalProperties:
-            type: object
-        timestamp:
-          type: number
-          description: Error timestamp
-        reversal_status:
-          type: string
-          description: Indicates to the API client if a technical reversal has been completed by Verifone.
-          default: NONE
-          enum:
-          - NONE
-          - REQUIRED
-          - COMPLETED
-        code:
-          type: number
-          enum:
-          - 500
-          default: 500
-        message:
-          type: string
-          enum:
-          - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
-          default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
-      required:
-      - message
+          properties:
+            network_token:
+              description: Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account.
+              type: string
+              minLength: 12
+              maxLength: 16
+            status:
+              description: The status of the cardholder data token.
+              type: string
+              enum:
+              - DELETED
+              - ACTIVE
+              - SUSPENDED
+            expiry_month:
+              description: Network tokens' expiry date's month. A 2 digit value. ISO8583 - DE 14
+              type: integer
+              maximum: 12
+            expiry_year:
+              description: Network tokens' expiry date's year. A 4 digit value.
+              type: integer
+              maximum: 9999
+            payment_account_reference:
+              description: Payment Account Reference
+              type: string
+              maxLength: 29
     issuerCountryEnum:
       type: string
       description: The [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code.<blockquote><strong>Note:</strong> The country code for Great Britain is <code>GB</code> and not <code>UK</code> as is used in that country's top-level domain names.</blockquote>.
@@ -846,7 +725,7 @@ components:
       - ZAF
       - ZMB
       - ZWE
-    ForbiddenV2Docs:
+    BadRequestV2Docs:
       type: object
       properties:
         details:
@@ -867,13 +746,144 @@ components:
         code:
           type: number
           enum:
-          - 403
-          default: 403
+          - 400
+          default: 400
         message:
           type: string
           enum:
-          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
-          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+          - 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+          default: 'At least one parameter is invalid. Examine the details property for more information. Invalid parameters are listed and prefixed accordingly: body for parameters submitted in the requests body, query for parameters appended to the requests URL, and params for templated parameters of the requests URL.'
+      required:
+      - message
+    CardResponse:
+      type: object
+      properties:
+        reuse_token:
+          type: string
+          description: The identifier used to represent the Cardholder data.
+        analytics_token:
+          type: string
+          description: A token that cannot be reversed to Card Holder data. This is included in a Payment for auditing and tracking purposes.
+        bin:
+          type: string
+          minLength: 4
+          maxLength: 11
+          description: The Bank Identification Number (also called IIN - Issuer Identification Number) of this card.
+        expiry_month:
+          type: integer
+          maximum: 12
+          description: A 2 digit value as shown on card. ISO8583 - DE 14
+        expiry_year:
+          type: integer
+          maximum: 9999
+          description: A 4 digit value as shown on card.
+        last_four:
+          type: string
+          maxLength: 4
+          description: The last 4 digits of the card number.
+        card_holder_name:
+          type: string
+          maxLength: 30
+          description: The Card holder name as it appears on the card.
+        bin_details:
+          $ref: '#/components/schemas/BinDetails'
+        updated_at:
+          type: string
+          description: The last date token was updated.
+          format: date
+        created_at:
+          type: string
+          description: The last date token was created.
+          format: date
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        reuse_token_type:
+          title: Reuse Token Type
+          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+        token_scope:
+          type: string
+          description: The token scope under which this token was created.
+          format: uuid
+        token_status:
+          type: string
+          description: The status of the Token.
+          title: Token Status Type
+          enum:
+          - DELETED
+          - ACTIVE
+          - SUSPENDED
+        currency:
+          $ref: '#/components/schemas/CurrencyCodeEnum'
+        issuer_country:
+          $ref: '#/components/schemas/issuerCountryEnum'
+        scheme_token:
+          allOf:
+          - $ref: '#/components/schemas/SchemeToken'
+    NotFoundV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 404
+          default: 404
+        message:
+          type: string
+          enum:
+          - The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+          default: The requested resource, or one of its sub-resources, can't be found. If the submitted query is valid, this error is likely to be caused by a problem with a nested resource that has been deleted or modified. Check the details property for additional insights.
+      required:
+      - message
+    UnauthorizedV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 401
+          default: 401
+        message:
+          type: string
+          enum:
+          - Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
+          default: Access is restricted to authenticated users only. The query can't be made without a valid JWT token (check the Authorization header of your request).
       required:
       - message
     CurrencyCodeEnum:
@@ -1065,6 +1075,126 @@ components:
       - ZAR
       - ZMW
       - ZWL
+    SchemeToken:
+      type: object
+      description: This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.
+      properties:
+        network_token:
+          type: string
+          minLength: 12
+          maxLength: 16
+          description: Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account.
+        status:
+          type: string
+          title: Token Status Type
+          enum:
+          - VALID
+          - SUSPENDED
+          - DELETED
+          description: The status of the cardholder data token.
+        expiry_month:
+          type: integer
+          minimum: 12
+          description: 'Network tokens'' expiry date''s month
+
+            . A 2 digit value. ISO8583 - DE 14'
+        expiry_year:
+          type: integer
+          minimum: 9999
+          description: Network tokens' expiry date's year. A 4 digit value.
+        payment_account_reference:
+          type: string
+          maxLength: 50
+          description: Payment Account Reference
+    InternalErrorV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 500
+          default: 500
+        message:
+          type: string
+          enum:
+          - 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+          default: 'Unexpected error: if the error persists, please contact an administrator, quoting the code and timestamp of this error'
+      required:
+      - message
+    ForbiddenV2Docs:
+      type: object
+      properties:
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        timestamp:
+          type: number
+          description: Error timestamp
+        reversal_status:
+          type: string
+          description: Indicates to the API client if a technical reversal has been completed by Verifone.
+          default: NONE
+          enum:
+          - NONE
+          - REQUIRED
+          - COMPLETED
+        code:
+          type: number
+          enum:
+          - 403
+          default: 403
+        message:
+          type: string
+          enum:
+          - Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+          default: Insufficient permissions. Your current user roles don't allow you to perform this query. Should you believe this error to be incorrect, please contact an administrator.
+      required:
+      - message
+    BinDetails:
+      type: object
+      properties:
+        bin:
+          type: string
+          minLength: 4
+          maxLength: 11
+          description: The Bank Identification Number (also called  IIN - Issuer Identification Number) of this card.
+        brand:
+          type: string
+          description: The brand of this card. eg. VISA, MASTERCARD, AMEX.
+        issuer_country:
+          $ref: '#/components/schemas/issuerCountryEnum'
+        issuer_name:
+          type: string
+          description: The issuer of this card. eg. HSBC, BARCLAYS.
+        last_four:
+          type: string
+          maxLength: 4
+          description: The last 4 digits of the card number.
+        type:
+          type: string
+          description: The type of card application or account selection.
+          enum:
+          - DEBIT
+          - CREDIT
+        variant:
+          type: string
+          description: The variant of the card. eg. NEW_WORLD
     TokenContextDto:
       type: object
       title: token_context
@@ -1078,6 +1208,53 @@ components:
           type: string
           format: uuid-flexible
           description: The identifier of payment provider contract you want to process this request with. Relevant only for external Third-party tokens.
+    PutDto:
+      type: object
+      properties:
+        token_scope:
+          type: string
+          title: Token Scope
+          description: The token scope under which this token was created.
+          format: uuid
+        encrypted_card:
+          type: string
+          title: Client encrypted cardholder data
+          description: "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
+        card_brand:
+          type: string
+          title: The Card Type
+          description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International \n\n **Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type."
+        token_type:
+          type: string
+          title: Token Type
+          description: Token type
+          enum:
+          - REUSE
+          - ANALYTICS
+          - REUSE_AND_ANALYTICS
+          default: REUSE
+        reuse_token_type:
+          title: Reuse Token Type
+          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
+          type: string
+          enum:
+          - CHASE
+          - INTERNAL
+          - TAVE
+          default: INTERNAL
+        token_expiry_date:
+          type: string
+          description: When this Token will expire.
+          format: date
+        public_key_alias:
+          type: string
+        token_context:
+          allOf:
+          - $ref: '#/components/schemas/TokenContextDto'
+      required:
+      - token_scope
+      - encrypted_card
+      - public_key_alias
     TokenResponse:
       type: object
       properties:
@@ -1349,183 +1526,6 @@ components:
         scheme_token:
           allOf:
           - $ref: '#/components/schemas/SchemeToken'
-    PatchTokenResponse:
-      type: object
-      properties:
-        bin:
-          type: string
-          minLength: 4
-          maxLength: 11
-          description: The Bank Identification Number (also called IIN - Issuer Identification Number) of this card.
-        expiry_month:
-          type: integer
-          maximum: 12
-          description: A 2 digit value as shown on card. ISO8583 - DE 14
-        expiry_year:
-          type: integer
-          maximum: 9999
-          description: A 4 digit value as shown on card.
-        last_four:
-          type: string
-          maxLength: 4
-          description: The last 4 digits of the card number.
-        card_holder_name:
-          type: string
-          maxLength: 30
-          description: The Card holder name as it appears on the card.
-        card_holder_email:
-          type: string
-          title: Email Address
-          minLength: 3
-          maxLength: 254
-          format: email
-          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
-        updated_at:
-          type: string
-          description: The last date token was updated.
-          format: date
-        created_at:
-          type: string
-          description: The last date token was created.
-          format: date
-        token_expiry_date:
-          type: string
-          description: When this Token will expire.
-          format: date
-        token_status:
-          type: string
-          description: The status of the Token.
-          title: Token Status Type
-          enum:
-          - DELETED
-          - ACTIVE
-          - SUSPENDED
-        bin_details:
-          $ref: '#/components/schemas/BinDetails'
-        currency:
-          $ref: '#/components/schemas/CurrencyCodeEnum'
-        issuer_country:
-          $ref: '#/components/schemas/issuerCountryEnum'
-        scheme_token:
-          title: Scheme Token Response
-          description: This object is returned only if scheme_tokens were created already or scheme_token_action indicated creation (ACTIVATE) of new or suspension (SUSPEND) or deletion () of existing scheme tokens. Scheme token details are provided only if the token requestor is the Merchant, otherwise just the scheme_token_status is returned.
-          type: object
-          properties:
-            network_token:
-              description: Card scheme token. Will be received only if a valid Token Requestor ID is stored on your account.
-              type: string
-              minLength: 12
-              maxLength: 16
-            status:
-              description: The status of the cardholder data token.
-              type: string
-              enum:
-              - DELETED
-              - ACTIVE
-              - SUSPENDED
-            expiry_month:
-              description: Network tokens' expiry date's month. A 2 digit value. ISO8583 - DE 14
-              type: integer
-              maximum: 12
-            expiry_year:
-              description: Network tokens' expiry date's year. A 4 digit value.
-              type: integer
-              maximum: 9999
-            payment_account_reference:
-              description: Payment Account Reference
-              type: string
-              maxLength: 29
-    PutDto:
-      type: object
-      properties:
-        token_scope:
-          type: string
-          title: Token Scope
-          description: The token scope under which this token was created.
-          format: uuid
-        encrypted_card:
-          type: string
-          title: Client encrypted cardholder data
-          description: "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
-        card_brand:
-          type: string
-          title: The Card Type
-          description: "Represents a Card type or brand. It should correspond to a consistent name, the list of standard names is as follows:\n\nValue |  Description\n------|-------------\nAMEX|American Express\nCB|Carte Bancaires\nDINERS|Diners Club International\nDISCOVER|Diners Club Discover\nJCB|Japan Credit Bureau\nMAESTRO|Multi-national Debit (MasterCard)\nMASTERCARD|MasterCard\nVISA|Visa\nUPI|Union Pay International \n\n **Other local schemes as applicable**. Enter a pre-defined name to represent the scheme or type."
-        token_type:
-          type: string
-          title: Token Type
-          description: Token type
-          enum:
-          - REUSE
-          - ANALYTICS
-          - REUSE_AND_ANALYTICS
-          default: REUSE
-        reuse_token_type:
-          title: Reuse Token Type
-          description: The type of Reuse Token. This indicates if the reuse token is an internal Verifone type or an external Third-Party type.
-          type: string
-          enum:
-          - CHASE
-          - INTERNAL
-          - TAVE
-          default: INTERNAL
-        token_expiry_date:
-          type: string
-          description: When this Token will expire.
-          format: date
-        public_key_alias:
-          type: string
-        token_context:
-          allOf:
-          - $ref: '#/components/schemas/TokenContextDto'
-      required:
-      - token_scope
-      - encrypted_card
-      - public_key_alias
-    PatchDto:
-      type: object
-      properties:
-        encrypted_card:
-          type: string
-          title: Client encrypted cardholder data
-          description: "The cardholder data encrypted using the Verifone provided public key. This can be obtained using either Verifone.JS solution or Verifone Checkout in capture mode.\n\n The data to encrypt is a JSON with possible tags being cardNumber, sequenceNumber, cardholderName, startMonth, startYear, expiryMonth, expiryYear, cvv. This should be a single JSON line and should not contain any spaces. Read <a target=\"_blank\" style=\"color:blue;\" href=\"https://docs.verifone.com/online-payments/api-integration-methods-auth-and-endpoints/secure-card-capture-key\">Secure card capture key</a> for details.\n\n Additionally, a tag called captureTime must be presenting indicating the time the card was captured in UTC in format RFC 3339, section 5.6. eg. 2019-08-24T14:15:22Z. Encrypted card is valid for only 15 minutes."
-        cvv:
-          type: string
-          description: The CVV (Card Verification Value) as it appears on the card.
-          maxLength: 30
-        card_holder_name:
-          type: string
-          description: The Card holder name as it appears on the card.
-          maxLength: 30
-        card_holder_email:
-          type: string
-          title: Email Address
-          minLength: 3
-          maxLength: 254
-          format: email
-          description: A valid internationalized email address, as defined by RFC 5322, RFC 6530, and other RFCs. Due to RFC 5321, an email address can be up to 254 characters long even though up to 64 characters are allowed before and 255 characters are allowed after the @ sign. This pattern verifies only that the string contains an unquoted @ sign. See https://tools.ietf.org/html/rfc5322#section-3.4.1.
-        expiry_month:
-          type: integer
-          description: Card expiry month. A 2 digit value as shown on card. ISO8583 - DE 14.
-          maximum: 12
-          minimum: 1
-        expiry_year:
-          type: integer
-          description: Card expiry year. A 4 digit value as shown on the card.
-          maximum: 9999
-        token_expiry_date:
-          type: string
-          description: When this Token will expire.
-          format: date
-        public_key_alias:
-          type: string
-        scheme_token_action:
-          description: Indicates if the scheme tokens should be created / deleted / suspended. Scheme tokens will be created only if token scope has PAR and/or network token support configured.
-          type: string
-          enum:
-          - ACTIVATE
-          - SUSPEND
-          - DELETE
   securitySchemes:
     BasicAuth:
       type: http

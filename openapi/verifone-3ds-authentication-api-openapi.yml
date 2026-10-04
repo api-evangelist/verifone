@@ -864,6 +864,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorDetails:
+      type: object
     AuthenticationResult:
       type: object
       properties:
@@ -956,10 +958,6 @@ components:
         status_reason:
           type: string
           description: 'Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response'
-    ThreeDSAuthenticationList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ThreeDSAuthentication'
     ThreeDSAuthentication:
       type: object
       properties:
@@ -993,6 +991,10 @@ components:
         transaction_id:
           type: string
           description: To complete the transaction, the value is required to be passed on the Cardinal.Continue().
+    ThreeDSAuthenticationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThreeDSAuthentication'
     ErrorResponse:
       required:
       - code
@@ -1010,8 +1012,6 @@ components:
         timestamp:
           type: number
           description: Error timestamp
-    ErrorDetails:
-      type: object
   securitySchemes:
     BearerAuth:
       type: http
