@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Verifone API Plans
 description: >-
   Verifone offers transaction-based pricing through its 2Checkout platform
@@ -80,3 +84,34 @@ plans:
       - In-person payment terminal integration
       - SLA guarantees
       - Priority support
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: 2Sell
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: 2Subscribe
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: 2Monetize
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
