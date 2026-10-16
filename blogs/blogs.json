@@ -2,10 +2,10 @@
   "repo": "verifone",
   "feeds": [
     {
-      "source": "https://cst.test-gsc.vfims.com",
+      "source": "https://verifone.cloud/blog",
       "error": "HTTPError"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 0
 }
