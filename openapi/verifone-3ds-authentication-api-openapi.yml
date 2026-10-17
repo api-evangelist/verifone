@@ -864,8 +864,62 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ThreeDSAuthentication:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ThreeDSAuthentication id
+        amount:
+          maximum: 9007199254740991
+          type: number
+          description: The amount of the transaction.
+        threeds_contract_id:
+          type: string
+          description: The ID of the threeDSContractId used.
+        authentication:
+          $ref: '#/components/schemas/AuthenticationResult'
+        card:
+          type: string
+          description: The ID of the card that is checked for enrollment.
+        currency_code:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Alphabetical ISO 4217 currency code for the sale amount.
+        created_at:
+          type: string
+          description: The time at which the authentication was created.
+          format: date
+        entity_id:
+          type: string
+          description: The ID of the entity, which this authentication belongs to.
+        transaction_id:
+          type: string
+          description: To complete the transaction, the value is required to be passed on the Cardinal.Continue().
+    ThreeDSAuthenticationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThreeDSAuthentication'
     ErrorDetails:
       type: object
+    ErrorResponse:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/ErrorDetails'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: number
+          description: Error timestamp
     AuthenticationResult:
       type: object
       properties:
@@ -958,60 +1012,6 @@ components:
         status_reason:
           type: string
           description: 'Provides additional information as to why the PAResStatus has the specific value. NOTE: Required for Payment (e.g. Authentication Indicator equals 01 on Lookup Request) transactions when PAResStatus is equal to N, U, or R in the Lookup Response'
-    ThreeDSAuthentication:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: ThreeDSAuthentication id
-        amount:
-          maximum: 9007199254740991
-          type: number
-          description: The amount of the transaction.
-        threeds_contract_id:
-          type: string
-          description: The ID of the threeDSContractId used.
-        authentication:
-          $ref: '#/components/schemas/AuthenticationResult'
-        card:
-          type: string
-          description: The ID of the card that is checked for enrollment.
-        currency_code:
-          maxLength: 3
-          minLength: 3
-          type: string
-          description: Alphabetical ISO 4217 currency code for the sale amount.
-        created_at:
-          type: string
-          description: The time at which the authentication was created.
-          format: date
-        entity_id:
-          type: string
-          description: The ID of the entity, which this authentication belongs to.
-        transaction_id:
-          type: string
-          description: To complete the transaction, the value is required to be passed on the Cardinal.Continue().
-    ThreeDSAuthenticationList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ThreeDSAuthentication'
-    ErrorResponse:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/ErrorDetails'
-        message:
-          type: string
-          description: A description of the error.
-        timestamp:
-          type: number
-          description: Error timestamp
   securitySchemes:
     BearerAuth:
       type: http

@@ -88,6 +88,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    details:
+      type: object
     UpdateThemeRequest:
       required:
       - name
@@ -169,8 +171,6 @@ components:
           type: boolean
           default: false
           description: Specifies whether the theme is the default theme for the entity. Only one default theme allowed per Entity/Organization.
-    details:
-      type: object
     Theme:
       required:
       - name

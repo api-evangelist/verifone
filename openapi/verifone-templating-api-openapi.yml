@@ -115,37 +115,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    address_details:
+    details:
+      type: object
+    template_field_mode:
       type: object
       properties:
-        address_1:
-          $ref: '#/components/schemas/template_field_mode'
-        address_2:
-          $ref: '#/components/schemas/template_field_mode'
-        address_3:
-          $ref: '#/components/schemas/template_field_mode'
-        city:
-          $ref: '#/components/schemas/template_field_mode'
-        country_code:
-          $ref: '#/components/schemas/template_field_mode'
-        first_name:
-          $ref: '#/components/schemas/template_field_mode'
-        middle_name:
-          $ref: '#/components/schemas/template_field_mode'
-        last_name:
-          $ref: '#/components/schemas/template_field_mode'
-        phone:
-          $ref: '#/components/schemas/template_field_mode'
-        postal_code:
-          $ref: '#/components/schemas/template_field_mode'
-        state:
-          $ref: '#/components/schemas/template_field_mode'
+        mode:
+          type: string
+          enum:
+          - HIDDEN
+          - READ_ONLY
+          - OPTIONAL
+          - REQUIRED
     TemplateList:
       type: array
       items:
         $ref: '#/components/schemas/CheckoutTemplate'
-    details:
-      type: object
     CheckoutTemplate:
       title: CreateTemplateRequest
       required:
@@ -192,16 +177,31 @@ components:
               properties:
                 identifier:
                   $ref: '#/components/schemas/template_field_mode'
-    template_field_mode:
+    address_details:
       type: object
       properties:
-        mode:
-          type: string
-          enum:
-          - HIDDEN
-          - READ_ONLY
-          - OPTIONAL
-          - REQUIRED
+        address_1:
+          $ref: '#/components/schemas/template_field_mode'
+        address_2:
+          $ref: '#/components/schemas/template_field_mode'
+        address_3:
+          $ref: '#/components/schemas/template_field_mode'
+        city:
+          $ref: '#/components/schemas/template_field_mode'
+        country_code:
+          $ref: '#/components/schemas/template_field_mode'
+        first_name:
+          $ref: '#/components/schemas/template_field_mode'
+        middle_name:
+          $ref: '#/components/schemas/template_field_mode'
+        last_name:
+          $ref: '#/components/schemas/template_field_mode'
+        phone:
+          $ref: '#/components/schemas/template_field_mode'
+        postal_code:
+          $ref: '#/components/schemas/template_field_mode'
+        state:
+          $ref: '#/components/schemas/template_field_mode'
     ErrorResponse:
       type: object
       properties:

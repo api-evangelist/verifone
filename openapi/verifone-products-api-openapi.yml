@@ -251,36 +251,41 @@ paths:
                 $ref: '#/components/schemas/Model5'
 components:
   schemas:
-    homeUrl:
+    details:
+      type: object
+    Model18:
       required:
-      - op
+      - name
+      - paymentProviderContract
+      - type
       type: object
       properties:
-        op:
+        paymentProviderContract:
           type: string
-          description: The remove operation does not require a value
-          enum:
-          - add
-          - remove
-          - replace
-        value:
-          maxLength: 2000
+          description: PayPal Payment Provider Contract UUID
+        id:
+          maxLength: 50
+          minLength: 6
+          type: string
+          description: The ID of the product. You can specify the SKU for the product. If you omit the ID, the system generates it. System-generated IDs have the PROD- prefix
+        name:
+          maxLength: 127
           minLength: 1
           type: string
-          description: The image URL for the product
-    category:
-      required:
-      - op
-      type: object
-      properties:
-        op:
+          description: The product name
+        description:
+          maxLength: 256
+          minLength: 1
           type: string
-          description: The remove operation does not require a value
+          description: The product description
+        type:
+          type: string
+          description: The product type. Indicates whether the product is physical or tangible goods, or a service
           enum:
-          - add
-          - remove
-          - replace
-        value:
+          - PHYSICAL
+          - DIGITAL
+          - SERVICE
+        category:
           type: string
           description: The product category
           enum:
@@ -729,7 +734,21 @@ components:
           - WIRE_TRANSFER_AND_MONEY_ORDER
           - WOMEN_ACCESSORY_SPECIALITY
           - WOMEN_CLOTHING
-    imageUrl:
+        imageUrl:
+          maxLength: 2000
+          minLength: 1
+          type: string
+          description: The home page URL for the product
+        homeUrl:
+          maxLength: 2000
+          minLength: 1
+          type: string
+          description: The image URL for the product
+    products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model6'
+    homeUrl:
       required:
       - op
       type: object
@@ -745,23 +764,42 @@ components:
           maxLength: 2000
           minLength: 1
           type: string
-          description: The home page URL for the product
-    Model54:
+          description: The image URL for the product
+    description:
       required:
-      - paymentProviderContract
+      - op
       type: object
       properties:
-        paymentProviderContract:
+        op:
           type: string
-          description: PayPal Payment Provider Contract UUID
-        imageUrl:
-          $ref: '#/components/schemas/imageUrl'
-        homeUrl:
-          $ref: '#/components/schemas/homeUrl'
-        category:
-          $ref: '#/components/schemas/category'
-        description:
-          $ref: '#/components/schemas/description'
+          description: The remove operation does not require a value
+          enum:
+          - add
+          - remove
+          - replace
+        value:
+          maxLength: 256
+          minLength: 1
+          type: string
+          description: The product description
+    Model5:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: number
+          description: A 3-digit code which uniquely identify an error.
+        details:
+          $ref: '#/components/schemas/details'
+        message:
+          type: string
+          description: A description of the error.
+        timestamp:
+          type: string
+          description: Error timestamp
+          format: date
     Model6:
       required:
       - createdAt
@@ -1259,28 +1297,6 @@ components:
           minLength: 1
           type: string
           description: The image URL for the product
-    products:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model6'
-    Model5:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: number
-          description: A 3-digit code which uniquely identify an error.
-        details:
-          $ref: '#/components/schemas/details'
-        message:
-          type: string
-          description: A description of the error.
-        timestamp:
-          type: string
-          description: Error timestamp
-          format: date
     Model10:
       required:
       - createdAt
@@ -1778,39 +1794,36 @@ components:
           type: string
           description: Product last update date (ISO-8601)
           format: date
-    Model18:
+    imageUrl:
       required:
-      - name
-      - paymentProviderContract
-      - type
+      - op
       type: object
       properties:
-        paymentProviderContract:
+        op:
           type: string
-          description: PayPal Payment Provider Contract UUID
-        id:
-          maxLength: 50
-          minLength: 6
-          type: string
-          description: The ID of the product. You can specify the SKU for the product. If you omit the ID, the system generates it. System-generated IDs have the PROD- prefix
-        name:
-          maxLength: 127
-          minLength: 1
-          type: string
-          description: The product name
-        description:
-          maxLength: 256
-          minLength: 1
-          type: string
-          description: The product description
-        type:
-          type: string
-          description: The product type. Indicates whether the product is physical or tangible goods, or a service
+          description: The remove operation does not require a value
           enum:
-          - PHYSICAL
-          - DIGITAL
-          - SERVICE
-        category:
+          - add
+          - remove
+          - replace
+        value:
+          maxLength: 2000
+          minLength: 1
+          type: string
+          description: The home page URL for the product
+    category:
+      required:
+      - op
+      type: object
+      properties:
+        op:
+          type: string
+          description: The remove operation does not require a value
+          enum:
+          - add
+          - remove
+          - replace
+        value:
           type: string
           description: The product category
           enum:
@@ -2259,35 +2272,22 @@ components:
           - WIRE_TRANSFER_AND_MONEY_ORDER
           - WOMEN_ACCESSORY_SPECIALITY
           - WOMEN_CLOTHING
-        imageUrl:
-          maxLength: 2000
-          minLength: 1
-          type: string
-          description: The home page URL for the product
-        homeUrl:
-          maxLength: 2000
-          minLength: 1
-          type: string
-          description: The image URL for the product
-    description:
+    Model54:
       required:
-      - op
+      - paymentProviderContract
       type: object
       properties:
-        op:
+        paymentProviderContract:
           type: string
-          description: The remove operation does not require a value
-          enum:
-          - add
-          - remove
-          - replace
-        value:
-          maxLength: 256
-          minLength: 1
-          type: string
-          description: The product description
-    details:
-      type: object
+          description: PayPal Payment Provider Contract UUID
+        imageUrl:
+          $ref: '#/components/schemas/imageUrl'
+        homeUrl:
+          $ref: '#/components/schemas/homeUrl'
+        category:
+          $ref: '#/components/schemas/category'
+        description:
+          $ref: '#/components/schemas/description'
     Model7:
       required:
       - products
