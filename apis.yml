@@ -91,6 +91,12 @@ apis:
   tags:
   - 3D Secure
   - Authentication
+  - Software Composition Analysis
+  - PSD2
+  - Fraud Prevention
+  tags_raw:
+  - 3D Secure
+  - Authentication
   - SCA
   - PSD2
   - Fraud Prevention
