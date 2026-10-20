@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/verifone/integrations
 - https://n8n.io/integrations/verifone/
@@ -10,7 +10,64 @@ checked:
 - https://monid.ai/tools/verifone
 - https://n8n.io/integrations/verifone/
 - https://zapier.com/apps/verifone/integrations
+- https://listings.pcisecuritystandards.org/assessors_and_solutions
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: PCI Security Standards Council (program listings)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://listings.pcisecuritystandards.org/assessors_and_solutions/payment_software
+  category: Payment security validation
+  contract_reference:
+    register: PCI SSC program listings (listings.pcisecuritystandards.org / pcisecuritystandards.org)
+    spec_file: null
+    standard: PCI SSC
+    role: pci-validated-vendor
+    registered_name: Verifone, Inc.
+    website: www.verifone.com
+    matched_domain: verifone.com
+    matched_by: domain
+    identity_source: the vendor website on the PCI SSC listing (no lookup)
+    certified_products:
+    - product: PCI Secure Software (Validated Secure Software)
+      lapsed: false
+      latest_expiry: '2028-09-22'
+      listed: 27
+    - product: PA-DSS Validated Payment Application
+      lapsed: true
+      latest_expiry: '2022-10-28'
+      listed: 309
+    - product: PCI PTS POI / HSM Approved Device
+      lapsed: false
+      latest_expiry: '2035-04-30'
+      listed: 54
+    - product: PCI P2PE Solution
+      lapsed: false
+      latest_expiry: '2029-03-20'
+      listed: 4
+    - product: PCI P2PE Component
+      lapsed: false
+      latest_expiry: '2029-03-14'
+      listed: 12
+    - product: PCI P2PE Application
+      lapsed: false
+      latest_expiry: '2029-10-07'
+      listed: 100
+    - product: PCI Secure SLC Qualified Vendor
+      lapsed: false
+      latest_expiry: '2029-06-03'
+      listed: 3
+    signal_note: one certified_products entry per PCI SSC program (Secure Software, PA-DSS, P2PE solution / component
+      / application, 3DS SDK, SPoC, CPoC, MPoC, PTS device, Secure SLC); lapsed = every listed product in that program
+      is past its expiry / reassessment date or marked expired; `listed` is context only. List Access Agreement
+      accepted on Kin's instruction 2026-10-20
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
+  detected_by: sweep-compliance-assurance.py
+  first_seen: '2026-10-20'
 templates: []
